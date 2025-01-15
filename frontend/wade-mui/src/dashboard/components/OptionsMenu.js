@@ -1,7 +1,7 @@
-import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Divider, { dividerClasses } from '@mui/material/Divider';
 import Menu from '@mui/material/Menu';
+import Alert from "@mui/material/Alert";
 import MuiMenuItem from '@mui/material/MenuItem';
 import { paperClasses } from '@mui/material/Paper';
 import { listClasses } from '@mui/material/List';
@@ -10,22 +10,38 @@ import ListItemIcon, { listItemIconClasses } from '@mui/material/ListItemIcon';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import MenuButton from './MenuButton';
+import { useAppState } from '../../contexts/AppStateContext';
+import { useLogout } from '../../utils/logout';
+import { useState, Fragment } from "react";
 
 const MenuItem = styled(MuiMenuItem)({
   margin: '2px 0',
 });
 
 export default function OptionsMenu() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const [responseMessage, setResponseMessage] = useState("");
+  const appStateProps = useAppState();
+  const loggedIn = appStateProps.loggedIn;
+  const setLoggedIn = appStateProps.setLoggedIn;
+
+  const logout = useLogout(setResponseMessage);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleLogout = () => {
+    logout();
+    handleClose();
+  }
+
   return (
-    <React.Fragment>
+    <Fragment>
       <MenuButton
         aria-label="Open menu"
         onClick={handleClick}
@@ -60,7 +76,7 @@ export default function OptionsMenu() {
         <MenuItem onClick={handleClose}>Settings</MenuItem>
         <Divider />
         <MenuItem
-          onClick={handleClose}
+          onClick={handleLogout}
           sx={{
             [`& .${listItemIconClasses.root}`]: {
               ml: 'auto',
@@ -74,6 +90,6 @@ export default function OptionsMenu() {
           </ListItemIcon>
         </MenuItem>
       </Menu>
-    </React.Fragment>
+    </Fragment>
   );
 }

@@ -10,6 +10,7 @@ import SelectContent from './SelectContent';
 import MenuContent from './MenuContent';
 import CardAlert from './CardAlert';
 import OptionsMenu from './OptionsMenu';
+import ImprLogo from '../../icons/ImprLogo';
 
 const drawerWidth = 240;
 
@@ -38,11 +39,12 @@ export default function SideMenu() {
       <Box
         sx={{
           display: 'flex',
+          justifyContent: "center",
           mt: 'calc(var(--template-frame-height, 0px) + 4px)',
           p: 1.5,
         }}
       >
-        <SelectContent />
+        <ImprLogo/>
       </Box>
       <Divider />
       <MenuContent />

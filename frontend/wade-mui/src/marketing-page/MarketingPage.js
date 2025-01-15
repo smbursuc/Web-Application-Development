@@ -11,12 +11,17 @@ import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import AppTheme from '../shared-theme/AppTheme';
+import { useAppState } from '../contexts/AppStateContext';
 
 export default function MarketingPage(props) {
+  const appStateProps = useAppState();
+  const loggedIn = appStateProps.loggedIn;
+  const setLoggedIn = appStateProps.setLoggedIn;
+
   return (
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
-      <AppAppBar />
+      <AppAppBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <Hero />
       <div>
         <LogoCollection />

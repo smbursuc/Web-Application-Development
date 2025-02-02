@@ -4,6 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soloproductions.wade.dto.SemanticFetchRequest;
 import com.soloproductions.wade.dto.StandardResponse;
 import com.soloproductions.wade.service.SparqlQueryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.servlet.http.Part;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,11 +38,27 @@ public class DatasetController
     }
 
     @GetMapping("/clusters/json")
+    @Operation(summary = "Retrieve JSON Clusters",
+            description = "Fetches cluster data in JSON format for a specified dataset, formatted for visualization with Plotly. This includes arrays of values, parents, and labels.",
+            tags = {"Clusters"})
+    @ApiResponse(responseCode = "200",
+            description = "JSON cluster data retrieved successfully",
+            content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = StandardResponse.class),
+                    examples = @ExampleObject(name = "SuccessExample",
+                            summary = "Example of a successful JSON cluster retrieval",
+                            value = "{\"status\": \"success\", \"message\": \"Clusters retrieved successfully\", \"data\": {\"values\": [\"Value1\", \"Value2\"], \"parents\": [\"Parent1\", \"Parent2\"], \"labels\": [\"Label1\", \"Label2\"]}}")))
+    @ApiResponse(responseCode = "400", description = "Invalid request parameters")
+    @ApiResponse(responseCode = "500", description = "Internal server error")
     public ResponseEntity<StandardResponse<?>> getClusters(
+            @Parameter(description = "The dataset name for which to retrieve the cluster data", required = true)
             @PathVariable String dataset,
+
+            @Parameter(description = "Semantic fetch request containing additional parameters for data retrieval")
             @ModelAttribute SemanticFetchRequest sfDTO,
-            HttpServletRequest request
-    )
+
+            HttpServletRequest request)
     {
         // this is the servlet under the hood in Flask, JSON data is retrieved from here
         String url = String.format("http://127.0.0.1:5000/api/clusters/%s", dataset);
@@ -53,11 +75,27 @@ public class DatasetController
     }
 
     @GetMapping("/clusters/rdf")
+    @Operation(summary = "Retrieve RDF Clusters",
+            description = "Fetches RDF cluster data for a specified dataset, formatted for visualization with Plotly.",
+            tags = {"Clusters"})
+    @ApiResponse(responseCode = "200",
+            description = "RDF clusters retrieved successfully",
+            content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = StandardResponse.class),
+                    examples = @ExampleObject(name = "SuccessExample",
+                            summary = "Example of a successful response",
+                            value = "{\"status\": \"success\", \"message\": \"Clusters retrieved successfully\", \"data\": {\"values\": [\"Node1\", \"Node2\"], \"parents\": [\"Parent1\", \"Parent2\"], \"labels\": [\"Label1\", \"Label2\"]}}")))
+    @ApiResponse(responseCode = "400", description = "Invalid request parameters")
+    @ApiResponse(responseCode = "500", description = "Internal server error")
     public ResponseEntity<StandardResponse<?>> getClustersRDF(
+            @Parameter(description = "The dataset name for which to retrieve the cluster data", required = true)
             @PathVariable String dataset,
+
+            @Parameter(description = "Semantic fetch request containing filtering and sorting parameters")
             @ModelAttribute SemanticFetchRequest sfDTO,
-            HttpServletRequest request
-    )
+
+            HttpServletRequest request)
     {
         String name = sfDTO.getName();
         String sort = sfDTO.getSort();
@@ -83,11 +121,23 @@ public class DatasetController
     }
 
     @GetMapping("/heatmaps/json")
+    @Operation(summary = "Retrieve JSON Heatmap",
+            description = "Fetches JSON formatted heatmap data for a specified dataset. The data includes arrays of values, parents, and labels suitable for visualization with Plotly.",
+            tags = {"Heatmap"})
+    @ApiResponse(responseCode = "200",
+            description = "JSON heatmap data retrieved successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = StandardResponse.class)))
+    @ApiResponse(responseCode = "400", description = "Invalid request parameters")
+    @ApiResponse(responseCode = "500", description = "Internal server error")
     public ResponseEntity<StandardResponse<?>> getJSONHeatmap(
+            @Parameter(description = "The dataset name for which to retrieve the heatmap data", required = true)
             @PathVariable String dataset,
+
+            @Parameter(description = "Semantic fetch request containing additional parameters for data retrieval")
             @ModelAttribute SemanticFetchRequest sfDTO,
-            HttpServletRequest request
-    )
+
+            HttpServletRequest request)
     {
         // this is the servlet under the hood in Flask, JSON data is retrieved from here
         String url = String.format("http://127.0.0.1:5000/api/correlations/%s", dataset);
@@ -104,8 +154,19 @@ public class DatasetController
     }
 
     @GetMapping("/heatmaps/rdf")
+    @Operation(summary = "Retrieve RDF Heatmap Data",
+            description = "Fetches RDF heatmap data for a specified dataset based on sort and range criteria.",
+            tags = {"Heatmap"})
+    @ApiResponse(responseCode = "200",
+            description = "Heatmap data retrieved successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = StandardResponse.class)))
+    @ApiResponse(responseCode = "400", description = "Invalid request parameters")
+    @ApiResponse(responseCode = "500", description = "Internal server error")
     public ResponseEntity<StandardResponse<?>> getRDFHeatmap(
+            @Parameter(description = "Dataset name for which to retrieve the heatmap data", required = true)
             @PathVariable String dataset,
+            @Parameter(description = "Semantic fetch request containing sorting and range parameters", required = true)
             @ModelAttribute SemanticFetchRequest sfDTO,
             HttpServletRequest request
     ) throws Exception
@@ -134,9 +195,23 @@ public class DatasetController
     }
 
     @GetMapping("/metadata/{dataModel}/{representation}")
+    @Operation(summary = "Retrieve Metadata",
+            description = "Fetches metadata for a specified data model and representation.",
+            tags = {"Metadata"})
+    @ApiResponse(responseCode = "200",
+            description = "Metadata retrieved successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = StandardResponse.class)))
+    @ApiResponse(responseCode = "400", description = "Invalid request parameters")
+    @ApiResponse(responseCode = "500", description = "Internal server error")
     public ResponseEntity<StandardResponse<?>> getMetadata(
+            @Parameter(description = "The data model from which to retrieve metadata (e.g., 'rdf' or 'json')", required = true)
             @PathVariable String dataModel,
+
+            @Parameter(description = "The dataset name relevant to the data model", required = true)
             @PathVariable String dataset,
+
+            @Parameter(description = "The representation type of the data model (e.g., 'clusters' or 'heatmaps')", required = true)
             @PathVariable String representation
     ) throws IOException, InterruptedException
     {

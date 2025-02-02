@@ -7,6 +7,11 @@ import com.soloproductions.wade.dto.ProcessImageRequest;
 import com.soloproductions.wade.dto.StandardResponse;
 import com.soloproductions.wade.json.DeepDetectJsonParser;
 import com.soloproductions.wade.json.ResponseParser;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +30,20 @@ public class ImageProcessingController
     private static final String DEEPDETECT_URL = "http://localhost:8080/predict";
 
     @PostMapping("/process-image")
-    public ResponseEntity<StandardResponse<?>> processImage(@RequestBody ProcessImageRequest piRequest)
+    @Operation(summary = "Process Image",
+            description = "Processes images by sending paths to a deep learning model server and returns the processed data.",
+            tags = {"Image Processing"})
+    @ApiResponse(responseCode = "200",
+            description = "Image processed successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = StandardResponse.class)))
+    @ApiResponse(responseCode = "400", description = "Invalid request parameters",
+            content = @Content(schema = @Schema(implementation = StandardResponse.class)))
+    @ApiResponse(responseCode = "500", description = "Internal server error",
+            content = @Content(schema = @Schema(implementation = StandardResponse.class)))
+    public ResponseEntity<StandardResponse<?>> processImage(
+            @Parameter(description = "Process image request")
+            ProcessImageRequest piRequest)
     {
         try
         {

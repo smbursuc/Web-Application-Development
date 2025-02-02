@@ -1,1 +1,0 @@
-- Give error message if server is not started.

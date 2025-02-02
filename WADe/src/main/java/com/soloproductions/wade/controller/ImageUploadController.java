@@ -1,5 +1,10 @@
 package com.soloproductions.wade.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -24,7 +29,19 @@ public class ImageUploadController
     private static final String UPLOAD_DIR = "bsds300";
 
     @PostMapping("/upload-image")
-    public ResponseEntity<String> uploadImage(@RequestParam("image") MultipartFile file)
+    @Operation(summary = "Upload Image",
+            description = "Uploads an image file to the server and returns the URL to access the uploaded image.",
+            tags = {"Image Upload"})
+    @ApiResponse(responseCode = "200",
+            description = "The URL of the uploaded image",
+            content = @Content(mediaType = "text/plain",
+                    schema = @Schema(type = "string")))
+    @ApiResponse(responseCode = "500", description = "Internal server error",
+            content = @Content(schema = @Schema(type = "string")))
+    public ResponseEntity<String> uploadImage(
+            @Parameter(description = "The file being uploaded")
+            @RequestParam("image") MultipartFile file
+    )
     {
         try
         {
@@ -54,7 +71,19 @@ public class ImageUploadController
     }
 
     @GetMapping("/files/{fileName}")
-    public ResponseEntity<Resource> serveFile(@PathVariable String fileName)
+    @Operation(summary = "Serve File",
+            description = "Returns the requested file if it exists within the server's upload directory.",
+            tags = {"File Serving"})
+    @ApiResponse(responseCode = "200",
+            description = "File retrieved successfully",
+            content = @Content(mediaType = "application/octet-stream",
+                    schema = @Schema(type = "string", format = "binary")))
+    @ApiResponse(responseCode = "404", description = "File not found")
+    @ApiResponse(responseCode = "500", description = "Internal server error")
+    public ResponseEntity<Resource> serveFile(
+            @Parameter(description = "The name of the file to retrieve", required = true)
+            @PathVariable String fileName
+    )
     {
         try
         {

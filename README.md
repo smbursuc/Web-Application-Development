@@ -229,6 +229,8 @@ The second stage involves converting the JSON data to `ttl` format.
 2. Enter the `/dashboard` page.
 3. Use all 3 pages on the side bar at will. For clusters, click on each cluster to see all its elements.
 
+Swagger documentation can be found at: http://localhost:8081/swagger-ui/index.html#/
+
 <!-- Roadmap -->
 ## :compass: Roadmap
 

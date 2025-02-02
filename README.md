@@ -58,14 +58,11 @@ Maybe you can mention me or this repo in the acknowledgements too
   * [Screenshots](#camera-screenshots)
   * [Tech Stack](#space_invader-tech-stack)
   * [Features](#dart-features)
-  * [Color Reference](#art-color-reference)
   * [Environment Variables](#key-environment-variables)
 - [Getting Started](#toolbox-getting-started)
   * [Prerequisites](#bangbang-prerequisites)
   * [Installation](#gear-installation)
-  * [Running Tests](#test_tube-running-tests)
   * [Run Locally](#running-run-locally)
-  * [Deployment](#triangular_flag_on_post-deployment)
 - [Usage](#eyes-usage)
 - [Roadmap](#compass-roadmap)
 - [Contributing](#wave-contributing)
@@ -85,7 +82,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 ### :camera: Screenshots
 
 <div align="center"> 
-  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
+  <img src="readme/page_demo.png" alt="screenshot" />
 </div>
 
 
@@ -95,73 +92,41 @@ Maybe you can mention me or this repo in the acknowledgements too
 <details>
   <summary>Client</summary>
   <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://nextjs.org/">Next.js</a></li>
     <li><a href="https://reactjs.org/">React.js</a></li>
-    <li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
+    <li><a href="https://mui.com/">MUI</a></li>
   </ul>
 </details>
 
 <details>
   <summary>Server</summary>
   <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://expressjs.com/">Express.js</a></li>
-    <li><a href="https://go.dev/">Golang</a></li>
-    <li><a href="https://nestjs.com/">Nest.js</a></li>
-    <li><a href="https://socket.io/">SocketIO</a></li>
-    <li><a href="https://www.prisma.io/">Prisma</a></li>    
-    <li><a href="https://www.apollographql.com/">Apollo</a></li>
-    <li><a href="https://graphql.org/">GraphQL</a></li>
+    <li><a href="https://flask.palletsprojects.com/en/stable//">Flask</a></li>
+    <li><a href="https://spring.io/projects/spring-boot">Spring Boot</a></li>
+    <li><a href="https://jena.apache.org/documentation/fuseki2/">Apache Jena Fuseki</a></li>
   </ul>
 </details>
 
 <details>
 <summary>Database</summary>
   <ul>
-    <li><a href="https://www.mysql.com/">MySQL</a></li>
-    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-    <li><a href="https://redis.io/">Redis</a></li>
-    <li><a href="https://neo4j.com/">Neo4j</a></li>
-    <li><a href="https://www.mongodb.com/">MongoDB</a></li>
-  </ul>
-</details>
-
-<details>
-<summary>DevOps</summary>
-  <ul>
-    <li><a href="https://www.docker.com/">Docker</a></li>
-    <li><a href="https://www.jenkins.io/">Jenkins</a></li>
-    <li><a href="https://circleci.com/">CircleCLI</a></li>
+    <li><a href="https://hibernate.org">Hibernate</a></li>
+    <li><a href="https://www.w3.org/TR/sparql11-query/">SPARQL</a></li>
   </ul>
 </details>
 
 <!-- Features -->
 ### :dart: Features
 
-- Feature 1
-- Feature 2
-- Feature 3
-
-<!-- Color Reference -->
-### :art: Color Reference
-
-| Color             | Hex                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| Primary Color | ![#222831](https://via.placeholder.com/10/222831?text=+) #222831 |
-| Secondary Color | ![#393E46](https://via.placeholder.com/10/393E46?text=+) #393E46 |
-| Accent Color | ![#00ADB5](https://via.placeholder.com/10/00ADB5?text=+) #00ADB5 |
-| Text Color | ![#EEEEEE](https://via.placeholder.com/10/EEEEEE?text=+) #EEEEEE |
-
+- Explore data visually from the <a href="https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/">BSDS300</a> and <a hred="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10</a> datasets.
+- Semantic Clustering done by powerful AI for image datasets.
+- Correlation heatmaps between objects.
+- Data exposed via REST API using JSON and SPARQL data models.
 
 <!-- Env Variables -->
 ### :key: Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file
-
-`API_KEY`
-
-`ANOTHER_API_KEY`
+The project uses JWT. The secret key is defined in `application.properties` but can be set anywhere desired.
+In order to manually add a dataset an API key is needed for Groq, which is used for cluster labeling. Find more about Groq <a href="https://console.groq.com/keys">here</a>.
 
 <!-- Getting Started -->
 ## 	:toolbox: Getting Started
@@ -169,30 +134,51 @@ To run this project, you will need to add the following environment variables to
 <!-- Prerequisites -->
 ### :bangbang: Prerequisites
 
-This project uses Yarn as package manager
-
-```bash
- npm install --global yarn
-```
+This project uses <a href="https://www.npmjs.com">npm</a>, <a href="https://gradle.org">Gradle</a> and <a href="https://pypi.org/project/pip/">pip</a> as package managers.
 
 <!-- Installation -->
 ### :gear: Installation
 
-Install my-project with npm
+Install node modules
 
 ```bash
-  yarn install my-project
-  cd my-project
+  cd frontend/wade-mui
+  npm install
 ```
-   
-<!-- Running Tests -->
-### :test_tube: Running Tests
 
-To run tests, run the following command
+Install all required dependencies for the Flask server. Those include Flask, Flask Cors, Torch, Tensorflow, Groq etc.
+
+Java dependencies are listed in `build.gradle` and will be automatically fetched and installed when deploying the server.
+
+PostgreSQL database is required. Create a database to match the connection parameters in `application.properties`, or modify at will.
+
+Download Apache Jena Fuseki locally and use the Web interface to create a new dataset named `impr`. Choose `Persistent Memory` and upload the files one by one. The following graph names must be provided for each file upload:
+- File: `cluster_data_skos_bsds300` - Graph name: `bsds300_clusters`
+- File: `cluster_data_skos_cifar10` - Graph name: `cifar10_clusters`
+- File: `heatmap_data_skos_bsds300` - Graph name: `bsds300_heatmap`
+- File: `heatmap_data_skos_cifar10` - Graph name: `cifar10_heatmap`
+
+For the image detection service, install <a href="https://www.deepdetect.com/quickstart-server/?source=docker&compute=gpu&gpu=gtx&backend=caffe%2Ctsne%2Cxgboost%2Cncnn&deepdetect=server">DeepDetect</a> dockerized. Create the following service using Postman:
 
 ```bash
-  yarn test test
+  curl -X PUT "http://localhost:8080/services/imageserv" -d '{
+  "mllib":"caffe",
+  "description":"image classification service",
+  "type":"supervised",
+  "parameters":{
+    "input":{
+      "connector":"image"
+    },
+    "mllib":{
+      "nclasses":1000
+    }
+  },
+  "model":{
+    "repository":"/opt/models/ggnet/"
+  }
+}'
 ```
+
 
 <!-- Run Locally -->
 ### :running: Run Locally
@@ -200,87 +186,85 @@ To run tests, run the following command
 Clone the project
 
 ```bash
-  git clone https://github.com/Louis3797/awesome-readme-template.git
+  git clone https://github.com/smbursuc/Web-Application-Development.git
 ```
 
-Go to the project directory
+1. Starting the proxy server (Spring)
+   - Deploy normally using an IDE (preferrably IntelliJ).
+2. Starting the JSON data server
+   - ```bash
+     cd text-classification
+     python app.py
+     ```
+3. Starting the SPARQL server
+   - Open the installation directory in command line and run `fuseki-server`.
+4. Opening the Web client
+   - Visit `localhost:3000`.
 
-```bash
-  cd my-project
-```
+<!-- Dataset setup -->
+### :triangular_flag_on_post: Dataset creation
 
-Install dependencies
+The source files include the necessary setup to create a SPARQL dataset starting from an image dataset.
 
-```bash
-  yarn install
-```
+The first strage is generating the necessary JSON files.
 
-Start the server
+1. Open `text-classification`.
+2. Change `create_json_data.py` parameters to set the input data and output file. 
+3. Run `create_json_data.py`. This should produce a file with the format `processed_data_uri_<dataset_name>.json`
+4. Change `classification.py` `main` function to use the newly created JSON file.
+5. Run `classification.py`. This should produce a file with the format `hierarchial_structure_uri_<dataset_name>.json`.
+6. Run `correlation.py`. Make sure the file path is correct for `filepath` in `correlation`. A file with format `similarity_data_<dataset_name>.json` should be produced.
 
-```bash
-  yarn start
-```
+The second stage involves converting the JSON data to `ttl` format.
 
-
-<!-- Deployment -->
-### :triangular_flag_on_post: Deployment
-
-To deploy this project run
-
-```bash
-  yarn deploy
-```
-
+1. Open `ClusterDataToSKOSConverter.java` and provide the appropiate `hierarchical_structure_uri.json` file path.
+2. Run `main`.
+3. Open `SKOSHeatMapConverterNew.java` and provide the appropiate `similarity_data.json`
+4. Run `main`.
 
 <!-- Usage -->
 ## :eyes: Usage
 
-Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
-
-
-```javascript
-import Component from 'my-project'
-
-function App() {
-  return <Component />
-}
-```
+1. Create an user or sign up.
+2. Enter the `/dashboard` page.
+3. Use all 3 pages on the side bar at will. For clusters, click on each cluster to see all its elements.
 
 <!-- Roadmap -->
 ## :compass: Roadmap
 
-* [x] Todo 1
-* [ ] Todo 2
+* [ ] Finish the user interface.
+* [ ] Add more robust API parameter checking.
+* [ ] Improve exception handling.
+* [ ] Refactor React code `SemanticZoom.js` and `Correlations.js` to reuse more code.
+* [ ] Add security on the proxy server using Sprint Security.
+* [ ] Automate the image detection -> RDF pipeline.
+* [ ] Add user related features: dynamic dataset creation, preference savings etc.
 
 
 <!-- Contributing -->
 ## :wave: Contributing
 
-<a href="https://github.com/Louis3797/awesome-readme-template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Louis3797/awesome-readme-template" />
+*Freaking no one man... ugggggggggggggggggh*
+
+<a href="https://github.com/smbursuc/Web-Application-Development/graphs/contributors">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5JN1SNbtLuUhDcqZSig3b2y3KDxy-KoGumQ&s" />
 </a>
-
-
-Contributions are always welcome!
-
-See `contributing.md` for ways to get started.
-
 
 <!-- Code of Conduct -->
 ### :scroll: Code of Conduct
 
-Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-template/blob/master/CODE_OF_CONDUCT.md)
+Please read the [Code of Conduct](https://github.com/smbursuc/Web-Application-Development/blob/master/CODE_OF_CONDUCT.md)
 
 <!-- FAQ -->
 ## :grey_question: FAQ
 
-- Question 1
+- Is this production ready?
 
-  + Answer 1
+  + No.
 
-- Question 2
+- How much time did you spend on this?
 
-  + Answer 2
+  + A few weeks working fulltime. I'm *tired*.
 
 
 <!-- License -->
@@ -292,18 +276,13 @@ Distributed under the no License. See LICENSE.txt for more information.
 <!-- Contact -->
 ## :handshake: Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+I'd rather not on a public repo...
 
-Project Link: [https://github.com/Louis3797/awesome-readme-template](https://github.com/Louis3797/awesome-readme-template)
+Project Link: [https://github.com/smbursuc/Web-Application-Development](https://github.com/smbursuc/Web-Application-Development)
 
 
 <!-- Acknowledgments -->
 ## :gem: Acknowledgements
 
-Use this section to mention useful resources and libraries that you have used in your projects.
-
- - [Shields.io](https://shields.io/)
- - [Awesome README](https://github.com/matiassingers/awesome-readme)
- - [Emoji Cheat Sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md#travel--places)
- - [Readme Template](https://github.com/othneildrew/Best-README-Template)
+Thanks a lot to Xan Xipiti for providing useful information!
 

@@ -1,0 +1,44 @@
+{"barn": 0, "megalith, megalithic structure": 1, "sorrel": 2, "anemone fish": 3, "tiger, Panthera tigris": 4, "wallaby, brush kangaroo": 5, "promontory, headland, head, foreland": 6, "steel arch bridge": 7, "albatross, mollymawk": 3, "wig": 8, "ladybug, ladybeetle, lady beetle, ladybird, ladybird beetle": 9, "brown bear, bruin, Ursus arctos": 4, "kite": 10, "ski": 11, "totem pole": 1, "maze, labyrinth": 12, "castle": 0, "Arabian camel, dromedary, Camelus dromedarius": 5, "bearskin, busby, shako": 8, "triumphal arch": 7, "brain coral": 3, "vase": 13, "Gila monster, Heloderma suspectum": 4, "stupa, tope": 1, "viaduct": 7, "daisy": 2, "umbrella": 14, "warplane, military plane": 15, "jaguar, panther, Panthera onca, Felis onca": 4, "baboon": 5, "pot, flowerpot": 13, "bonnet, poke bonnet": 8, "cheetah, chetah, Acinonyx jubatus": 4, "bison": 5, "dome": 1, "otter": 5, "leopard, Panthera pardus": 4, "ice bear, polar bear, Ursus Maritimus, Thalarctos maritimus": 4, "ostrich, Struthio camelus": 5, "thatch, thatched roof": 0, "parachute, chute": 10, "lakeside, lakeshore": 6, "greenhouse, nursery, glasshouse": 0, "starfish, sea star": 3, "lion, king of beasts, Panthera leo": 4, "marmot": 5, "sandbar, sand bar": 6, "liner, ocean liner": 15, "shower cap": 14, "groom, bridegroom": 16, "mushroom": 2, "white wolf, Arctic wolf, Canis lupus tundrarum": 4, "great grey owl, great gray owl, Strix nebulosa": 3, "koala, koala bear, kangaroo bear, native bear, Phascolarctos cinereus": 5, "eel": 3, "military uniform": 16, "palace": 0, "mongoose": 5, "goose": 5, "black grouse": 5, "zebra": 5, "bathing cap, swimming cap": 14, "dam, dike, dyke": 6, "dogsled, dog sled, dog sleigh": 11, "hummingbird": 3, "gasmask, respirator, gas helmet": 16, "valley, vale": 6, "alp": 6, "bathing cap, swimming cap": 14}
+
+
+PREFIX ex: <http://example.org/ontology#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?fromLabel ?toLabel ?similarityValue
+WHERE {
+  ?sim ex:fromObject ?from .
+  ?sim ex:toObject ?to .
+  ?sim ex:hasCorrelationValue ?similarityValue .
+  
+  # Retrieve the SKOS concept labels for each object
+  ?from a skos:Concept ;
+        rdfs:label ?fromLabel .
+  ?to   a skos:Concept ;
+        rdfs:label ?toLabel .
+}
+ORDER BY ?fromLabel ?toLabel
+
+PREFIX ex: <http://example.org/ontology#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?clusterLabel ?predictedObjectLabel ?probability ?imageURI
+WHERE {
+  # Start by selecting a cluster
+  ?cluster a skos:Concept ;
+           skos:prefLabel ?clusterLabel ;
+           ex:hasPrediction ?prediction .
+  
+  # Get details of the prediction within this cluster
+  ?prediction ex:hasProbability ?probability ;
+              ex:hasURI ?imageURI ;
+              ex:predictedObject ?predictedObject .
+  
+  # Get the label of the predicted object
+  ?predictedObject skos:prefLabel ?predictedObjectLabel .
+}
+ORDER BY ?clusterLabel ?predictedObjectLabel
+
+
+

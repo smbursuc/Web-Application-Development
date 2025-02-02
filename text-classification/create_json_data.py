@@ -4,10 +4,13 @@ import json
 import sys
 
 # Configurations
-folder_path = "E:\\repos\\Web-Application-Development\\WADe\\uploaded-images"  # Replace with the path to your folder
+
+dataset = "bsds300"
+
+folder_path = f"E:\\repos\\Web-Application-Development\\WADe\\{dataset}"  # Replace with the path to your folder
 base_url = "http://localhost:8081/api/files/"
 api_url = "http://localhost:8081/api/process-image"  # Replace with your processing endpoint
-output_file = "processed_data_uri.json"
+output_file = f"processed_data_uri_{dataset}.json"
 batch_size = 1  # Adjust batch size as needed
 
 # Function to generate file links
@@ -39,7 +42,11 @@ def process_images_in_batches(links, api_url, batch_size):
             if response.status_code == 200:
                 response_data = response.json()
                 if "data" in response_data:
-                    processed_data.extend(response_data["data"])
+                    data = response_data["data"]
+                    parts = data[0].rsplit(" ", 2)
+                    probability = parts[1]
+                    if float(probability) >= 0.7:
+                        processed_data.extend(response_data["data"])
                 else:
                     print(f"Unexpected response format: {response_data}")
             else:

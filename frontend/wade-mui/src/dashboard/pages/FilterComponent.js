@@ -59,8 +59,10 @@ export default function FilterComponent(props) {
   const setRangeStartSliderValue = props.setRangeStartSliderValue;
   const options = props.options;
   const sortType = props?.sortType;
+  let max = props.max;
 
   const [filterOpen, setFilterOpen] = useState(false);
+  const [maxRange, setMaxRange] = useState(0);
 
   const handleRangeSliderChange = (event, newValue) => {
     setRangeSliderValue(newValue);
@@ -81,6 +83,11 @@ export default function FilterComponent(props) {
 
     return sortType;
   }
+
+  useEffect(() => {
+    let diff = max - rangeStartSliderValue;
+    setMaxRange(diff > 50 ? 50 : diff);
+  }, [rangeStartSliderValue])
 
   return (
     <Box>
@@ -145,7 +152,7 @@ export default function FilterComponent(props) {
             onChange={handleRangeSliderChange}
             valueLabelDisplay="auto"
             min={1}
-            max={100}
+            max={maxRange}
           />
         </Box>
 
@@ -157,7 +164,7 @@ export default function FilterComponent(props) {
             onChange={handleRangeStartSliderChange}
             valueLabelDisplay="auto"
             min={1}
-            max={8953}
+            max={max < 50 ? max : 50}
           />
         </Box>
 

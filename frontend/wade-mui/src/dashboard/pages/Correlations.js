@@ -67,45 +67,100 @@ export default function Correlations(props) {
   const [rangeStartSliderValue, setRangeStartSliderValue] = useState(1);
   const [sort, setSort] = useState("highest_probability");
   const [sortType, setSortType] = useState("strongest_pair");
-  const [selectedDataset, setSelectedDataset] = useState("cifar10");
+  const [selectedDataset, setSelectedDataset] = useState("bsds300");
   const [infOpen, setInfOpen] = useState(false);
+
+  const [dataModel, setDataModel] = useState("json");
+  const [maxHeatmap, setMaxHeatmap] = useState(() => {
+      return getFromLocalStorage("maxHeatmap") || {};
+    });
+
+  const handleDataModelChange = (event) => {
+    setDataModel(event.target.value);
+  };
+
+  const dataModels = [
+    {
+      value: "rdf",
+      displayValue: "RDF",
+    },
+    {
+      value: "json",
+      displayValue: "JSON",
+    },
+  ];
 
   const datasets = [
     {
       value: "cifar10",
       displayValue: "CIFAR-10",
     },
+    {
+      value: "bsds300",
+      displayValue: "BSDS300",
+    },
   ];
 
-  const features = [
-    {
-      title: "Description",
-      description:
-        "The CIFAR-10 and CIFAR-100 datasets are labeled subsets of the 80 million tiny images dataset.",
-    },
-    {
-      title: "Image Size",
-      description: "32x32",
-    },
-    {
-      title: "Dataset Size",
-      description: "50.000 images, ~177MB",
-    },
-    {
-      title: "Classes",
-      description:
-        "There are 10 classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck.",
-    },
-    {
-      title: "Prediction Time",
-      description: "~4 hours /w DeepDetect CPU, Ryzen 5 7600x",
-    },
-    {
-      title: "Predictions",
-      description:
-        "For each image of the dataset the best 3 guesses were stored. This explains why so many images are being categorized by one object, it was because the object was present in the top 3 predictions.",
-    },
-  ];
+  const features = {
+    cifar10: [
+      {
+        title: "Description",
+        description:
+          "The CIFAR-10 and CIFAR-100 datasets are labeled subsets of the 80 million tiny images dataset.",
+      },
+      {
+        title: "Image Size",
+        description: "32x32",
+      },
+      {
+        title: "Dataset Size",
+        description: "50.000 images, ~177MB",
+      },
+      {
+        title: "Classes",
+        description:
+          "There are 10 classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck.",
+      },
+      {
+        title: "Prediction Time",
+        description: "~4 hours /w DeepDetect CPU, Ryzen 5 7600x",
+      },
+      {
+        title: "Predictions",
+        description:
+          "For each image of the dataset the best 3 guesses were stored. This explains why so many images are being categorized by one object, it was because the object was present in the top 3 predictions.",
+      },
+    ],
+    bsds300: [
+      {
+        title: "Description",
+        description:
+          "The BSDS300 and CIFAR-100 datasets are labeled subsets of the 80 million tiny images dataset.",
+      },
+      {
+        title: "Image Size",
+        description: "32x32",
+      },
+      {
+        title: "Dataset Size",
+        description: "50.000 images, ~177MB",
+      },
+      {
+        title: "Classes",
+        description:
+          "There are 10 classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck.",
+      },
+      {
+        title: "Prediction Time",
+        description: "~4 hours /w DeepDetect CPU, Ryzen 5 7600x",
+      },
+      {
+        title: "Predictions",
+        description:
+          "For each image of the dataset the best 3 guesses were stored. This explains why so many images are being categorized by one object, it was because the object was present in the top 3 predictions.",
+      },
+    ],
+  };
 
   const options = {
     sort: {
@@ -115,6 +170,17 @@ export default function Correlations(props) {
     sort_type: {
       values: ["average_similarity", "strongest_pair", "no_sort"],
       descriptions: ["Average Similarity", "Strongest Pair", "No Sorting"],
+    },
+  };
+
+  const maxObjects = {
+    json: {
+      cifar10: 50000,
+      bsds300: 91,
+    },
+    rdf: {
+      cifar10: 50000,
+      bsds300: 8190,
     },
   };
 
@@ -133,7 +199,7 @@ export default function Correlations(props) {
     // http://127.0.0.1:5000/api/correlations/cifar10?
     // http://127.0.0.1:8081/api/${selectedDataset}/heatmaps/json?
     const url =
-      `http://127.0.0.1:5000/api/correlations/cifar10?` +
+      `http://127.0.0.1:8081/api/${selectedDataset}/heatmaps/${dataModel}?` +
       queryParams +
       `&range=${rangeSliderValue}&rangeStart=${rangeStartSliderValue}`;
 
@@ -142,19 +208,68 @@ export default function Correlations(props) {
       const data = await response.json();
       setIsLoading(false);
 
-      setObjects(data.objects);
-      setMatrix(data.matrix);
+      if (!data.data) {
+        setObjects(data.objects);
+        setMatrix(data.matrix);
+      } else {
+        setObjects(data.data.objects);
+        setMatrix(data.data.matrix);
+      }
     } catch (error) {
       console.error("Failed to fetch correlation data:", error);
     }
   };
 
+  const fetchMetadata = async (resetParams) => {
+    setIsLoading(true);
+
+    if (resetParams) {
+      setRangeSliderValue(5);
+      setRangeSliderValue(1);
+    }
+    
+    const url = `http://127.0.0.1:8081/api/${selectedDataset}/metadata/${dataModel}/clusters`;
+    const response = await fetch(url);
+    const data = await response.json();
+    const result = data.data;
+
+    // load the metadata cache, update it, and save it back
+    const cache = getFromLocalStorage("maxHeatmap") || {};
+    cache[selectedDataset] = {
+      ...(cache[selectedDataset] || {}), // safeguard for undefined dataset
+      [dataModel]: result.size,
+    };
+
+    saveToLocalStorage("maxHeatmap", cache);
+    setMaxHeatmap(cache);
+    setIsLoading(false);
+  };
+
+  function saveToLocalStorage(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+
+  function getFromLocalStorage(key) {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : null;
+  }
+
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData(true);
+    let cache = getFromLocalStorage("maxHeatmap");
+    if (
+      !cache ||
+      !cache[selectedDataset] ||
+      !cache[selectedDataset][dataModel]
+    ) {
+      fetchMetadata();
+    } else {
+      setMaxHeatmap(cache);
+    }
+  }, [selectedDataset, dataModel]);
 
   const handleApplyFilters = () => {
-    fetchData();
+    fetchData(false);
   };
 
   const handleInfOpen = () => {
@@ -192,6 +307,9 @@ export default function Correlations(props) {
             selectedDataset={selectedDataset}
             setSelectedDataset={setSelectedDataset}
             handleDatasetChange={handleDatasetChange}
+            dataModels={dataModels}
+            dataModel={dataModel}
+            handleDataModelChange={handleDataModelChange}
           />
           <FilterComponent
             handleApplyFilters={handleApplyFilters}
@@ -209,6 +327,7 @@ export default function Correlations(props) {
                 setSortType={setSortType}
               />
             }
+            max={maxObjects[dataModel][selectedDataset]}
           />
           {isLoading ? (
             <p>Loading heatmap data...</p>
@@ -235,7 +354,7 @@ export default function Correlations(props) {
           <InfoModal
             infOpen={infOpen}
             handleInfClose={handleInfClose}
-            features={features}
+            selectedDataset={selectedDataset}
           />
         </Container>
       </Box>

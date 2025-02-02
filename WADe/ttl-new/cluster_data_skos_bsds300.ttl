@@ -1,0 +1,1136 @@
+@prefix ex:   <http://example.org/ontology#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/Prediction/otter_d9dd78a1-d512-4ad3-8e3c-9c5837f6e3b3293>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9779053330421448"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/d9dd78a1-d512-4ad3-8e3c-9c5837f6e3b3_temp_image_293.png" ;
+        ex:predictedObject  <http://example.org/Object/otter> .
+
+<http://example.org/Object/pot,_flowerpot>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "pot, flowerpot" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/6537d8cc-f869-4d8f-9ee9-c46cabbc68ca_temp_image_88.png" ;
+        skos:prefLabel  "pot, flowerpot" .
+
+<http://example.org/Prediction/American_egret,_great_white_heron,_Egretta_albus_72f936d0-935e-44fb-bbb9-8b03754e4cb1122>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.879654049873352"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/72f936d0-935e-44fb-bbb9-8b03754e4cb1_temp_image_122.png" ;
+        ex:predictedObject  <http://example.org/Object/American_egret,_great_white_heron,_Egretta_albus> .
+
+<http://example.org/Prediction/triumphal_arch_be05fbb5-1d7c-41dd-9f90-642a3bd99e9599>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9535090923309326"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/be05fbb5-1d7c-41dd-9f90-642a3bd99e95_temp_image_99.png" ;
+        ex:predictedObject  <http://example.org/Object/triumphal_arch> .
+
+<http://example.org/Object/alp>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "alp" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/fd24dc51-e867-47cc-89bc-9441e1394783_temp_image_246.png" , "http://host.docker.internal:8081/api/files/711ea51f-f994-4828-a6b5-bde387d87e38_temp_image_65.png" ;
+        skos:prefLabel  "alp" .
+
+<http://example.org/Object/white_wolf,_Arctic_wolf,_Canis_lupus_tundrarum>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "white wolf, Arctic wolf, Canis lupus tundrarum" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/bc8a1173-f249-473e-b840-45bfbe6dd871_temp_image_93.png" ;
+        skos:prefLabel  "white wolf, Arctic wolf, Canis lupus tundrarum" .
+
+<http://example.org/Prediction/wig_e205f8a7-18c7-4a1f-ace8-c9305f9ebceb112>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8422291874885559"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/e205f8a7-18c7-4a1f-ace8-c9305f9ebceb_temp_image_112.png" ;
+        ex:predictedObject  <http://example.org/Object/wig> .
+
+<http://example.org/Prediction/alp_fd24dc51-e867-47cc-89bc-9441e1394783246>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7868740558624268"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/fd24dc51-e867-47cc-89bc-9441e1394783_temp_image_246.png" ;
+        ex:predictedObject  <http://example.org/Object/alp> .
+
+<http://example.org/Prediction/albatross,_mollymawk_22f5d2fc-cd13-4c93-8483-738a87cf74c1195>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9195802807807922"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/22f5d2fc-cd13-4c93-8483-738a87cf74c1_temp_image_195.png" ;
+        ex:predictedObject  <http://example.org/Object/albatross,_mollymawk> .
+
+<http://example.org/Prediction/palace_d12a6236-a8ec-4099-a562-258f665bf847277>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8425956964492798"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/d12a6236-a8ec-4099-a562-258f665bf847_temp_image_277.png" ;
+        ex:predictedObject  <http://example.org/Object/palace> .
+
+<http://example.org/Object/dogsled,_dog_sled,_dog_sleigh>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "dogsled, dog sled, dog sleigh" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/f0c5b490-0c7c-4f59-ab67-2b7d860176e3_temp_image_109.png" ;
+        skos:prefLabel  "dogsled, dog sled, dog sleigh" .
+
+<http://example.org/Prediction/barn_000aa946-c81a-416e-a3ac-38e1fd6b0718142>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8358954787254333"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/000aa946-c81a-416e-a3ac-38e1fd6b0718_temp_image_142.png" ;
+        ex:predictedObject  <http://example.org/Object/barn> .
+
+<http://example.org/Prediction/greenhouse,_nursery,_glasshouse_a03e1c55-c8fc-4772-b707-b8a673edfbb6259>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9951836466789246"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/a03e1c55-c8fc-4772-b707-b8a673edfbb6_temp_image_259.png" ;
+        ex:predictedObject  <http://example.org/Object/greenhouse,_nursery,_glasshouse> .
+
+<http://example.org/Prediction/shower_cap_b3526684-d3ac-4ff4-aac2-340c0b29cd0287>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8290801644325256"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/b3526684-d3ac-4ff4-aac2-340c0b29cd02_temp_image_87.png" ;
+        ex:predictedObject  <http://example.org/Object/shower_cap> .
+
+<http://example.org/Prediction/jaguar,_panther,_Panthera_onca,_Felis_onca_589a0d0d-7940-4c67-bb42-7669dd2895fa178>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7352463603019714"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/589a0d0d-7940-4c67-bb42-7669dd2895fa_temp_image_178.png" ;
+        ex:predictedObject  <http://example.org/Object/jaguar,_panther,_Panthera_onca,_Felis_onca> .
+
+<http://example.org/Prediction/ladybug,_ladybeetle,_lady_beetle,_ladybird,_ladybird_beetle_241294f0-77c2-4e1f-b5fb-d3af902c07b845>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9142323136329651"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/241294f0-77c2-4e1f-b5fb-d3af902c07b8_temp_image_45.png" ;
+        ex:predictedObject  <http://example.org/Object/ladybug,_ladybeetle,_lady_beetle,_ladybird,_ladybird_beetle> .
+
+<http://example.org/Prediction/lakeside,_lakeshore_9d96dc50-e1dd-4ef6-94b4-138465e4729c136>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7548578977584839"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/9d96dc50-e1dd-4ef6-94b4-138465e4729c_temp_image_136.png" ;
+        ex:predictedObject  <http://example.org/Object/lakeside,_lakeshore> .
+
+<http://example.org/Prediction/liner,_ocean_liner_af71e9e0-6321-450a-9a6e-ead10fc22028123>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.993311882019043"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/af71e9e0-6321-450a-9a6e-ead10fc22028_temp_image_123.png" ;
+        ex:predictedObject  <http://example.org/Object/liner,_ocean_liner> .
+
+<http://example.org/Prediction/ski_2ee32400-2a7d-4764-a35c-b2162ec075d35>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9870325326919556"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/2ee32400-2a7d-4764-a35c-b2162ec075d3_temp_image_5.png" ;
+        ex:predictedObject  <http://example.org/Object/ski> .
+
+<http://example.org/Prediction/rapeseed_6f170c49-2174-46b2-b4c8-f126b61824ac101>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7920252084732056"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/6f170c49-2174-46b2-b4c8-f126b61824ac_temp_image_101.png" ;
+        ex:predictedObject  <http://example.org/Object/rapeseed> .
+
+<http://example.org/Cluster/Cluster_7>
+        a                 skos:Concept ;
+        ex:hasPrediction  <http://example.org/Prediction/triumphal_arch_be05fbb5-1d7c-41dd-9f90-642a3bd99e9599> , <http://example.org/Prediction/viaduct_603babc5-0412-4549-936b-eca320a64ebb47> , <http://example.org/Prediction/viaduct_52dd67ac-73c0-448a-8497-26f09a107ffd288> , <http://example.org/Prediction/triumphal_arch_4443fbd7-a549-4bf3-b58b-2bfd40982890249> , <http://example.org/Prediction/steel_arch_bridge_21517e89-bd58-4956-a719-5daedb7f514215> ;
+        skos:prefLabel    "Cluster 7" .
+
+<http://example.org/Prediction/bonnet,_poke_bonnet_73980b44-14f6-4e15-b3e8-c69cf4383c6c98>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8887044787406921"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/73980b44-14f6-4e15-b3e8-c69cf4383c6c_temp_image_98.png" ;
+        ex:predictedObject  <http://example.org/Object/bonnet,_poke_bonnet> .
+
+<http://example.org/Object/totem_pole>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "totem pole" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/35aad9ea-e828-4d35-9ee0-e343efa89b76_temp_image_216.png" ;
+        skos:prefLabel  "totem pole" .
+
+<http://example.org/Object/viaduct>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "viaduct" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/603babc5-0412-4549-936b-eca320a64ebb_temp_image_47.png" , "http://host.docker.internal:8081/api/files/52dd67ac-73c0-448a-8497-26f09a107ffd_temp_image_288.png" ;
+        skos:prefLabel  "viaduct" .
+
+<http://example.org/Cluster/Cluster_15>
+        a                 skos:Concept ;
+        ex:hasPrediction  <http://example.org/Prediction/liner,_ocean_liner_af71e9e0-6321-450a-9a6e-ead10fc22028123> , <http://example.org/Prediction/warplane,_military_plane_55430ba9-b988-4eba-8213-2a35223f3807264> ;
+        skos:prefLabel    "Cluster 15" .
+
+<http://example.org/Prediction/stupa,_tope_4c7a7045-bba6-4f6d-808f-d9808521c227106>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7856278419494629"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/4c7a7045-bba6-4f6d-808f-d9808521c227_temp_image_106.png" ;
+        ex:predictedObject  <http://example.org/Object/stupa,_tope> .
+
+<http://example.org/Prediction/kite_6aa09003-a8b0-4d1e-9d49-772e01eb04bb204>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8970731496810913"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/6aa09003-a8b0-4d1e-9d49-772e01eb04bb_temp_image_204.png" ;
+        ex:predictedObject  <http://example.org/Object/kite> .
+
+<http://example.org/Prediction/otter_7d68a279-a462-42d1-bc3f-5c5d214680d1181>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8132849335670471"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/7d68a279-a462-42d1-bc3f-5c5d214680d1_temp_image_181.png" ;
+        ex:predictedObject  <http://example.org/Object/otter> .
+
+<http://example.org/Prediction/wallaby,_brush_kangaroo_17bb113a-ab02-4868-bc0d-d614d7c789b0299>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9764695763587952"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/17bb113a-ab02-4868-bc0d-d614d7c789b0_temp_image_299.png" ;
+        ex:predictedObject  <http://example.org/Object/wallaby,_brush_kangaroo> .
+
+<http://example.org/Prediction/sorrel_30bcbeb4-3640-4874-b879-8d6a878b1c54145>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9750966429710388"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/30bcbeb4-3640-4874-b879-8d6a878b1c54_temp_image_145.png" ;
+        ex:predictedObject  <http://example.org/Object/sorrel> .
+
+<http://example.org/Object/daisy>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "daisy" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/5314c932-a823-4dc6-b4c2-5078a1fa2b65_temp_image_170.png" ;
+        skos:prefLabel  "daisy" .
+
+<http://example.org/Object/jaguar,_panther,_Panthera_onca,_Felis_onca>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "jaguar, panther, Panthera onca, Felis onca" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/589a0d0d-7940-4c67-bb42-7669dd2895fa_temp_image_178.png" ;
+        skos:prefLabel  "jaguar, panther, Panthera onca, Felis onca" .
+
+<http://example.org/Prediction/great_grey_owl,_great_gray_owl,_Strix_nebulosa_bcb32ad3-29e1-47e7-b2ff-a3a5903184a338>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9872233867645264"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/bcb32ad3-29e1-47e7-b2ff-a3a5903184a3_temp_image_38.png" ;
+        ex:predictedObject  <http://example.org/Object/great_grey_owl,_great_gray_owl,_Strix_nebulosa> .
+
+<http://example.org/Prediction/dogsled,_dog_sled,_dog_sleigh_f0c5b490-0c7c-4f59-ab67-2b7d860176e3109>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7473315596580505"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/f0c5b490-0c7c-4f59-ab67-2b7d860176e3_temp_image_109.png" ;
+        ex:predictedObject  <http://example.org/Object/dogsled,_dog_sled,_dog_sleigh> .
+
+<http://example.org/Prediction/marmot_a9ca03a8-7c01-4301-8c75-6ca747e616fc265>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9951431751251221"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/a9ca03a8-7c01-4301-8c75-6ca747e616fc_temp_image_265.png" ;
+        ex:predictedObject  <http://example.org/Object/marmot> .
+
+<http://example.org/Object/ladybug,_ladybeetle,_lady_beetle,_ladybird,_ladybird_beetle>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "ladybug, ladybeetle, lady beetle, ladybird, ladybird beetle" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/241294f0-77c2-4e1f-b5fb-d3af902c07b8_temp_image_45.png" ;
+        skos:prefLabel  "ladybug, ladybeetle, lady beetle, ladybird, ladybird beetle" .
+
+<http://example.org/Prediction/hummingbird_f83987a6-f4b4-4f50-bf18-f440cb42a17485>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9998340606689453"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/f83987a6-f4b4-4f50-bf18-f440cb42a174_temp_image_85.png" ;
+        ex:predictedObject  <http://example.org/Object/hummingbird> .
+
+<http://example.org/Cluster/Cluster_2>
+        a                 skos:Concept ;
+        ex:hasPrediction  <http://example.org/Prediction/mushroom_baf7a305-5536-4a4a-99ad-c433d4861ad8255> , <http://example.org/Prediction/daisy_5314c932-a823-4dc6-b4c2-5078a1fa2b65170> , <http://example.org/Prediction/sorrel_30bcbeb4-3640-4874-b879-8d6a878b1c54145> , <http://example.org/Prediction/sorrel_0a7d6660-37d2-4a98-910d-b06ccf2ca65f107> ;
+        skos:prefLabel    "Cluster 2" .
+
+<http://example.org/Object/barn>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "barn" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/000aa946-c81a-416e-a3ac-38e1fd6b0718_temp_image_142.png" ;
+        skos:prefLabel  "barn" .
+
+<http://example.org/Object/hummingbird>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "hummingbird" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/f83987a6-f4b4-4f50-bf18-f440cb42a174_temp_image_85.png" ;
+        skos:prefLabel  "hummingbird" .
+
+<http://example.org/Object/umbrella>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "umbrella" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/54d96e39-5151-4cf1-af5d-523c065e26a8_temp_image_193.png" ;
+        skos:prefLabel  "umbrella" .
+
+<http://example.org/Object/promontory,_headland,_head,_foreland>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "promontory, headland, head, foreland" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/201fba5d-50e6-42ba-8463-1f2f15a81715_temp_image_81.png" ;
+        skos:prefLabel  "promontory, headland, head, foreland" .
+
+<http://example.org/Object/mushroom>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "mushroom" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/baf7a305-5536-4a4a-99ad-c433d4861ad8_temp_image_255.png" ;
+        skos:prefLabel  "mushroom" .
+
+<http://example.org/Object/tiger,_Panthera_tigris>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "tiger, Panthera tigris" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/fc743604-c0eb-4f10-976c-14e42c19b1fe_temp_image_268.png" , "http://host.docker.internal:8081/api/files/d3d25f65-08f2-4b74-9a81-19f53af4fabc_temp_image_191.png" , "http://host.docker.internal:8081/api/files/c29c940f-d9bd-4a8c-b7fe-9a0eb033ec20_temp_image_274.png" , "http://host.docker.internal:8081/api/files/69f5a4c4-bab2-4bbd-a4e6-6804ed4714c3_temp_image_236.png" , "http://host.docker.internal:8081/api/files/5d73d509-65bb-422f-8123-b71736e538de_temp_image_70.png" , "http://host.docker.internal:8081/api/files/1731cedf-7811-4888-8586-9a2dbcce30c0_temp_image_36.png" ;
+        skos:prefLabel  "tiger, Panthera tigris" .
+
+<http://example.org/Cluster/Cluster_10>
+        a                 skos:Concept ;
+        ex:hasPrediction  <http://example.org/Prediction/parachute,_chute_96b0484c-05ca-4149-8a32-5d48f46cbfef175> , <http://example.org/Prediction/kite_6aa09003-a8b0-4d1e-9d49-772e01eb04bb204> , <http://example.org/Prediction/kite_28d3a73f-8b03-4e21-8952-889f98ff7abb124> ;
+        skos:prefLabel    "Cluster 10" .
+
+<http://example.org/Prediction/valley,_vale_fbbd31da-13c1-4ddd-ae1e-ca83653a026f281>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8658695816993713"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/fbbd31da-13c1-4ddd-ae1e-ca83653a026f_temp_image_281.png" ;
+        ex:predictedObject  <http://example.org/Object/valley,_vale> .
+
+<http://example.org/Prediction/viaduct_52dd67ac-73c0-448a-8497-26f09a107ffd288>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7299097776412964"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/52dd67ac-73c0-448a-8497-26f09a107ffd_temp_image_288.png" ;
+        ex:predictedObject  <http://example.org/Object/viaduct> .
+
+<http://example.org/Prediction/brown_bear,_bruin,_Ursus_arctos_e35f1818-b3d0-4d60-955e-5fc4e4e5789f139>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9613083004951477"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/e35f1818-b3d0-4d60-955e-5fc4e4e5789f_temp_image_139.png" ;
+        ex:predictedObject  <http://example.org/Object/brown_bear,_bruin,_Ursus_arctos> .
+
+<http://example.org/Prediction/warplane,_military_plane_55430ba9-b988-4eba-8213-2a35223f3807264>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7647982239723206"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/55430ba9-b988-4eba-8213-2a35223f3807_temp_image_264.png" ;
+        ex:predictedObject  <http://example.org/Object/warplane,_military_plane> .
+
+<http://example.org/Prediction/wallaby,_brush_kangaroo_cb7c7f36-95e1-49fb-8bc5-5a2a2975a737239>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9497635364532471"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/cb7c7f36-95e1-49fb-8bc5-5a2a2975a737_temp_image_239.png" ;
+        ex:predictedObject  <http://example.org/Object/wallaby,_brush_kangaroo> .
+
+<http://example.org/Object/goose>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "goose" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/d57ebd0c-4e58-4a4e-80ec-c39807713fe5_temp_image_151.png" ;
+        skos:prefLabel  "goose" .
+
+<http://example.org/Prediction/tiger,_Panthera_tigris_fc743604-c0eb-4f10-976c-14e42c19b1fe268>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8881286978721619"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/fc743604-c0eb-4f10-976c-14e42c19b1fe_temp_image_268.png" ;
+        ex:predictedObject  <http://example.org/Object/tiger,_Panthera_tigris> .
+
+<http://example.org/Prediction/Arabian_camel,_dromedary,_Camelus_dromedarius_40fb28d5-c344-42a3-ad9d-98fe8486e581279>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9895877838134766"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/40fb28d5-c344-42a3-ad9d-98fe8486e581_temp_image_279.png" ;
+        ex:predictedObject  <http://example.org/Object/Arabian_camel,_dromedary,_Camelus_dromedarius> .
+
+<http://example.org/Prediction/daisy_5314c932-a823-4dc6-b4c2-5078a1fa2b65170>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9919595122337341"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/5314c932-a823-4dc6-b4c2-5078a1fa2b65_temp_image_170.png" ;
+        ex:predictedObject  <http://example.org/Object/daisy> .
+
+<http://example.org/Prediction/steel_arch_bridge_21517e89-bd58-4956-a719-5daedb7f514215>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7854819297790527"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/21517e89-bd58-4956-a719-5daedb7f5142_temp_image_15.png" ;
+        ex:predictedObject  <http://example.org/Object/steel_arch_bridge> .
+
+<http://example.org/Object/megalith,_megalithic_structure>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "megalith, megalithic structure" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/d5aa7600-c367-44c5-8bc6-1bf047317718_temp_image_166.png" , "http://host.docker.internal:8081/api/files/0a582037-52ee-47ef-8b42-4b552565c03c_temp_image_283.png" ;
+        skos:prefLabel  "megalith, megalithic structure" .
+
+<http://example.org/Prediction/sorrel_0a7d6660-37d2-4a98-910d-b06ccf2ca65f107>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9909861087799072"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/0a7d6660-37d2-4a98-910d-b06ccf2ca65f_temp_image_107.png" ;
+        ex:predictedObject  <http://example.org/Object/sorrel> .
+
+<http://example.org/Object/ice_bear,_polar_bear,_Ursus_Maritimus,_Thalarctos_maritimus>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "ice bear, polar bear, Ursus Maritimus, Thalarctos maritimus" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/8f04f5a0-1ee3-42be-a371-3c70a30fbb3a_temp_image_102.png" , "http://host.docker.internal:8081/api/files/830e146d-f6fc-476e-9729-80c807d76abd_temp_image_199.png" ;
+        skos:prefLabel  "ice bear, polar bear, Ursus Maritimus, Thalarctos maritimus" .
+
+<http://example.org/Prediction/megalith,_megalithic_structure_d5aa7600-c367-44c5-8bc6-1bf047317718166>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9718252420425415"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/d5aa7600-c367-44c5-8bc6-1bf047317718_temp_image_166.png" ;
+        ex:predictedObject  <http://example.org/Object/megalith,_megalithic_structure> .
+
+<http://example.org/Prediction/castle_3e9fdfb8-473d-40b1-9d2f-ee35ebd3dd52285>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8397825360298157"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/3e9fdfb8-473d-40b1-9d2f-ee35ebd3dd52_temp_image_285.png" ;
+        ex:predictedObject  <http://example.org/Object/castle> .
+
+<http://example.org/Object/lakeside,_lakeshore>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "lakeside, lakeshore" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/9d96dc50-e1dd-4ef6-94b4-138465e4729c_temp_image_136.png" ;
+        skos:prefLabel  "lakeside, lakeshore" .
+
+<http://example.org/Prediction/goose_d57ebd0c-4e58-4a4e-80ec-c39807713fe5151>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.966284990310669"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/d57ebd0c-4e58-4a4e-80ec-c39807713fe5_temp_image_151.png" ;
+        ex:predictedObject  <http://example.org/Object/goose> .
+
+<http://example.org/Prediction/promontory,_headland,_head,_foreland_201fba5d-50e6-42ba-8463-1f2f15a8171581>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7623658776283264"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/201fba5d-50e6-42ba-8463-1f2f15a81715_temp_image_81.png" ;
+        ex:predictedObject  <http://example.org/Object/promontory,_headland,_head,_foreland> .
+
+<http://example.org/Prediction/megalith,_megalithic_structure_0a582037-52ee-47ef-8b42-4b552565c03c283>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7265174388885498"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/0a582037-52ee-47ef-8b42-4b552565c03c_temp_image_283.png" ;
+        ex:predictedObject  <http://example.org/Object/megalith,_megalithic_structure> .
+
+<http://example.org/Object/American_egret,_great_white_heron,_Egretta_albus>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "American egret, great white heron, Egretta albus" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/72f936d0-935e-44fb-bbb9-8b03754e4cb1_temp_image_122.png" ;
+        skos:prefLabel  "American egret, great white heron, Egretta albus" .
+
+<http://example.org/Cluster/Cluster_5>
+        a                 skos:Concept ;
+        ex:hasPrediction  <http://example.org/Prediction/marmot_a9ca03a8-7c01-4301-8c75-6ca747e616fc265> , <http://example.org/Prediction/otter_7d68a279-a462-42d1-bc3f-5c5d214680d1181> , <http://example.org/Prediction/Arabian_camel,_dromedary,_Camelus_dromedarius_40fb28d5-c344-42a3-ad9d-98fe8486e581279> , <http://example.org/Prediction/baboon_6106731b-37eb-4480-a5d0-82712b47db6c96> , <http://example.org/Prediction/wallaby,_brush_kangaroo_cb7c7f36-95e1-49fb-8bc5-5a2a2975a737239> , <http://example.org/Prediction/bison_7830fc7f-d38d-437c-812a-14d4abd42ca1212> , <http://example.org/Prediction/ostrich,_Struthio_camelus_8cbcf6c3-4d95-4fe4-92a4-fc73afcc865e46> , <http://example.org/Prediction/otter_d9dd78a1-d512-4ad3-8e3c-9c5837f6e3b3293> , <http://example.org/Prediction/zebra_e28b0a1a-5a18-4650-8b8f-449e8471fb8e225> , <http://example.org/Prediction/mongoose_d2c9ed03-5a28-43a5-953d-3c49cdab62c269> , <http://example.org/Prediction/koala,_koala_bear,_kangaroo_bear,_native_bear,_Phascolarctos_cinereus_c09d90f0-31db-4dad-afb5-5d72739f8f31248> , <http://example.org/Prediction/black_grouse_db616ea8-9d1e-4897-845b-b2b99f36790b213> , <http://example.org/Prediction/goose_d57ebd0c-4e58-4a4e-80ec-c39807713fe5151> , <http://example.org/Prediction/wallaby,_brush_kangaroo_17bb113a-ab02-4868-bc0d-d614d7c789b0299> ;
+        skos:prefLabel    "Cluster 5" .
+
+<http://example.org/Object/bison>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "bison" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/7830fc7f-d38d-437c-812a-14d4abd42ca1_temp_image_212.png" ;
+        skos:prefLabel  "bison" .
+
+<http://example.org/Prediction/alp_711ea51f-f994-4828-a6b5-bde387d87e3865>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7705184817314148"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/711ea51f-f994-4828-a6b5-bde387d87e38_temp_image_65.png" ;
+        ex:predictedObject  <http://example.org/Object/alp> .
+
+<http://example.org/Object/sandbar,_sand_bar>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "sandbar, sand bar" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/ab6808a0-5776-4989-95db-62a721c48749_temp_image_161.png" ;
+        skos:prefLabel  "sandbar, sand bar" .
+
+<http://example.org/Object/warplane,_military_plane>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "warplane, military plane" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/55430ba9-b988-4eba-8213-2a35223f3807_temp_image_264.png" ;
+        skos:prefLabel  "warplane, military plane" .
+
+<http://example.org/Prediction/dam,_dike,_dyke_eed17356-ec49-4e5b-9402-ffb59e1acb9858>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9186040759086609"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/eed17356-ec49-4e5b-9402-ffb59e1acb98_temp_image_58.png" ;
+        ex:predictedObject  <http://example.org/Object/dam,_dike,_dyke> .
+
+<http://example.org/Object/ostrich,_Struthio_camelus>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "ostrich, Struthio camelus" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/8cbcf6c3-4d95-4fe4-92a4-fc73afcc865e_temp_image_46.png" ;
+        skos:prefLabel  "ostrich, Struthio camelus" .
+
+<http://example.org/Cluster/Cluster_13>
+        a                 skos:Concept ;
+        ex:hasPrediction  <http://example.org/Prediction/pot,_flowerpot_6537d8cc-f869-4d8f-9ee9-c46cabbc68ca88> , <http://example.org/Prediction/vase_4566bbcf-a18b-4d1e-8eca-e666edc7a77c257> ;
+        skos:prefLabel    "Cluster 13" .
+
+<http://example.org/Object/triumphal_arch>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "triumphal arch" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/be05fbb5-1d7c-41dd-9f90-642a3bd99e95_temp_image_99.png" , "http://host.docker.internal:8081/api/files/4443fbd7-a549-4bf3-b58b-2bfd40982890_temp_image_249.png" ;
+        skos:prefLabel  "triumphal arch" .
+
+<http://example.org/Prediction/gasmask,_respirator,_gas_helmet_f9a62275-9694-45eb-a149-2c8cafe1f5ee245>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7057451605796814"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/f9a62275-9694-45eb-a149-2c8cafe1f5ee_temp_image_245.png" ;
+        ex:predictedObject  <http://example.org/Object/gasmask,_respirator,_gas_helmet> .
+
+<http://example.org/Object/wallaby,_brush_kangaroo>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "wallaby, brush kangaroo" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/cb7c7f36-95e1-49fb-8bc5-5a2a2975a737_temp_image_239.png" , "http://host.docker.internal:8081/api/files/17bb113a-ab02-4868-bc0d-d614d7c789b0_temp_image_299.png" ;
+        skos:prefLabel  "wallaby, brush kangaroo" .
+
+<http://example.org/Prediction/Gila_monster,_Heloderma_suspectum_49c52132-9986-401a-a6b4-b3b6a709dd6d198>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9999758005142212"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/49c52132-9986-401a-a6b4-b3b6a709dd6d_temp_image_198.png" ;
+        ex:predictedObject  <http://example.org/Object/Gila_monster,_Heloderma_suspectum> .
+
+<http://example.org/Prediction/tiger,_Panthera_tigris_c29c940f-d9bd-4a8c-b7fe-9a0eb033ec20274>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9427955150604248"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/c29c940f-d9bd-4a8c-b7fe-9a0eb033ec20_temp_image_274.png" ;
+        ex:predictedObject  <http://example.org/Object/tiger,_Panthera_tigris> .
+
+<http://example.org/Object/greenhouse,_nursery,_glasshouse>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "greenhouse, nursery, glasshouse" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/a03e1c55-c8fc-4772-b707-b8a673edfbb6_temp_image_259.png" ;
+        skos:prefLabel  "greenhouse, nursery, glasshouse" .
+
+<http://example.org/Prediction/koala,_koala_bear,_kangaroo_bear,_native_bear,_Phascolarctos_cinereus_c09d90f0-31db-4dad-afb5-5d72739f8f31248>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9997383952140808"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/c09d90f0-31db-4dad-afb5-5d72739f8f31_temp_image_248.png" ;
+        ex:predictedObject  <http://example.org/Object/koala,_koala_bear,_kangaroo_bear,_native_bear,_Phascolarctos_cinereus> .
+
+<http://example.org/Prediction/viaduct_603babc5-0412-4549-936b-eca320a64ebb47>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9998519420623779"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/603babc5-0412-4549-936b-eca320a64ebb_temp_image_47.png" ;
+        ex:predictedObject  <http://example.org/Object/viaduct> .
+
+<http://example.org/Prediction/mushroom_baf7a305-5536-4a4a-99ad-c433d4861ad8255>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7185265421867371"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/baf7a305-5536-4a4a-99ad-c433d4861ad8_temp_image_255.png" ;
+        ex:predictedObject  <http://example.org/Object/mushroom> .
+
+<http://example.org/Cluster/Cluster_0>
+        a                 skos:Concept ;
+        ex:hasPrediction  <http://example.org/Prediction/palace_d12a6236-a8ec-4099-a562-258f665bf847277> , <http://example.org/Prediction/greenhouse,_nursery,_glasshouse_a03e1c55-c8fc-4772-b707-b8a673edfbb6259> , <http://example.org/Prediction/thatch,_thatched_roof_8e30f467-11cb-4370-a0c8-8ea7b6de3bd254> , <http://example.org/Prediction/castle_3e9fdfb8-473d-40b1-9d2f-ee35ebd3dd52285> , <http://example.org/Prediction/barn_000aa946-c81a-416e-a3ac-38e1fd6b0718142> ;
+        skos:prefLabel    "Cluster 0" .
+
+<http://example.org/Object/rapeseed>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "rapeseed" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/6f170c49-2174-46b2-b4c8-f126b61824ac_temp_image_101.png" ;
+        skos:prefLabel  "rapeseed" .
+
+<http://example.org/Prediction/starfish,_sea_star_a527285d-eaf8-45c2-893b-6d53945566a835>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.998221218585968"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/a527285d-eaf8-45c2-893b-6d53945566a8_temp_image_35.png" ;
+        ex:predictedObject  <http://example.org/Object/starfish,_sea_star> .
+
+<http://example.org/Object/baboon>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "baboon" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/6106731b-37eb-4480-a5d0-82712b47db6c_temp_image_96.png" ;
+        skos:prefLabel  "baboon" .
+
+<http://example.org/Object/gasmask,_respirator,_gas_helmet>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "gasmask, respirator, gas helmet" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/f9a62275-9694-45eb-a149-2c8cafe1f5ee_temp_image_245.png" ;
+        skos:prefLabel  "gasmask, respirator, gas helmet" .
+
+<http://example.org/Prediction/dome_7c9b99c5-bf46-4b2c-9b29-4468d5e5a803144>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8564099073410034"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/7c9b99c5-bf46-4b2c-9b29-4468d5e5a803_temp_image_144.png" ;
+        ex:predictedObject  <http://example.org/Object/dome> .
+
+<http://example.org/Prediction/ostrich,_Struthio_camelus_8cbcf6c3-4d95-4fe4-92a4-fc73afcc865e46>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9999959468841553"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/8cbcf6c3-4d95-4fe4-92a4-fc73afcc865e_temp_image_46.png" ;
+        ex:predictedObject  <http://example.org/Object/ostrich,_Struthio_camelus> .
+
+<http://example.org/Cluster/Cluster_8>
+        a                 skos:Concept ;
+        ex:hasPrediction  <http://example.org/Prediction/wig_e205f8a7-18c7-4a1f-ace8-c9305f9ebceb112> , <http://example.org/Prediction/wig_c8073b11-91d1-4780-992d-eb891924847e11> , <http://example.org/Prediction/bonnet,_poke_bonnet_73980b44-14f6-4e15-b3e8-c69cf4383c6c98> , <http://example.org/Prediction/bearskin,_busby,_shako_42255221-8e69-4e58-8461-023210cf717e64> , <http://example.org/Prediction/wig_23723297-9fe7-42a8-8dab-671ec53b9afc33> ;
+        skos:prefLabel    "Cluster 8" .
+
+<http://example.org/Prediction/bearskin,_busby,_shako_42255221-8e69-4e58-8461-023210cf717e64>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7930237650871277"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/42255221-8e69-4e58-8461-023210cf717e_temp_image_64.png" ;
+        ex:predictedObject  <http://example.org/Object/bearskin,_busby,_shako> .
+
+<http://example.org/Prediction/eel_c5c140a2-7ddc-4bf3-b2b4-a636003f444d90>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7305510640144348"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/c5c140a2-7ddc-4bf3-b2b4-a636003f444d_temp_image_90.png" ;
+        ex:predictedObject  <http://example.org/Object/eel> .
+
+<http://example.org/Object/lion,_king_of_beasts,_Panthera_leo>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "lion, king of beasts, Panthera leo" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/eb7b4059-03a9-4ec4-ac3f-7736cbf3b900_temp_image_21.png" , "http://host.docker.internal:8081/api/files/a7e443ca-2102-422b-a5b9-621552d37699_temp_image_62.png" ;
+        skos:prefLabel  "lion, king of beasts, Panthera leo" .
+
+<http://example.org/Cluster/Cluster_16>
+        a                 skos:Concept ;
+        ex:hasPrediction  <http://example.org/Prediction/gasmask,_respirator,_gas_helmet_f9a62275-9694-45eb-a149-2c8cafe1f5ee245> , <http://example.org/Prediction/military_uniform_ca300ccf-06e5-41f6-a379-683eeb43651e53> , <http://example.org/Prediction/groom,_bridegroom_b8357340-8c87-435c-bbb6-26166a91c645103> ;
+        skos:prefLabel    "Cluster 16" .
+
+<http://example.org/Prediction/umbrella_54d96e39-5151-4cf1-af5d-523c065e26a8193>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9194160103797913"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/54d96e39-5151-4cf1-af5d-523c065e26a8_temp_image_193.png" ;
+        ex:predictedObject  <http://example.org/Object/umbrella> .
+
+<http://example.org/Prediction/military_uniform_ca300ccf-06e5-41f6-a379-683eeb43651e53>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9169754385948181"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/ca300ccf-06e5-41f6-a379-683eeb43651e_temp_image_53.png" ;
+        ex:predictedObject  <http://example.org/Object/military_uniform> .
+
+<http://example.org/Prediction/parachute,_chute_96b0484c-05ca-4149-8a32-5d48f46cbfef175>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9999579191207886"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/96b0484c-05ca-4149-8a32-5d48f46cbfef_temp_image_175.png" ;
+        ex:predictedObject  <http://example.org/Object/parachute,_chute> .
+
+<http://example.org/Object/vase>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "vase" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/4566bbcf-a18b-4d1e-8eca-e666edc7a77c_temp_image_257.png" ;
+        skos:prefLabel  "vase" .
+
+<http://example.org/Prediction/black_grouse_db616ea8-9d1e-4897-845b-b2b99f36790b213>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7601495981216431"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/db616ea8-9d1e-4897-845b-b2b99f36790b_temp_image_213.png" ;
+        ex:predictedObject  <http://example.org/Object/black_grouse> .
+
+<http://example.org/Object/maze,_labyrinth>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "maze, labyrinth" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/3b2b37e0-33c9-4fc6-9cea-5b867c6fffd5_temp_image_57.png" ;
+        skos:prefLabel  "maze, labyrinth" .
+
+<http://example.org/Object/otter>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "otter" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/d9dd78a1-d512-4ad3-8e3c-9c5837f6e3b3_temp_image_293.png" , "http://host.docker.internal:8081/api/files/7d68a279-a462-42d1-bc3f-5c5d214680d1_temp_image_181.png" ;
+        skos:prefLabel  "otter" .
+
+<http://example.org/Prediction/brown_bear,_bruin,_Ursus_arctos_2807b6f7-1b60-4758-966f-07cfbd05a19a4>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8094759583473206"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/2807b6f7-1b60-4758-966f-07cfbd05a19a_temp_image_4.png" ;
+        ex:predictedObject  <http://example.org/Object/brown_bear,_bruin,_Ursus_arctos> .
+
+<http://example.org/Prediction/tiger,_Panthera_tigris_1731cedf-7811-4888-8586-9a2dbcce30c036>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9338804483413696"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/1731cedf-7811-4888-8586-9a2dbcce30c0_temp_image_36.png" ;
+        ex:predictedObject  <http://example.org/Object/tiger,_Panthera_tigris> .
+
+<http://example.org/Cluster/Cluster_3>
+        a                 skos:Concept ;
+        ex:hasPrediction  <http://example.org/Prediction/hummingbird_f83987a6-f4b4-4f50-bf18-f440cb42a17485> , <http://example.org/Prediction/eel_c5c140a2-7ddc-4bf3-b2b4-a636003f444d90> , <http://example.org/Prediction/great_grey_owl,_great_gray_owl,_Strix_nebulosa_bcb32ad3-29e1-47e7-b2ff-a3a5903184a338> , <http://example.org/Prediction/starfish,_sea_star_a527285d-eaf8-45c2-893b-6d53945566a835> , <http://example.org/Prediction/brain_coral_4514817a-e118-4c8f-9f75-bea625120a9a10> , <http://example.org/Prediction/albatross,_mollymawk_22f5d2fc-cd13-4c93-8483-738a87cf74c1195> , <http://example.org/Prediction/anemone_fish_133274c8-156d-4d49-b3c3-beeac3e1629d262> ;
+        skos:prefLabel    "Cluster 3" .
+
+<http://example.org/Prediction/anemone_fish_133274c8-156d-4d49-b3c3-beeac3e1629d262>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9936813116073608"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/133274c8-156d-4d49-b3c3-beeac3e1629d_temp_image_262.png" ;
+        ex:predictedObject  <http://example.org/Object/anemone_fish> .
+
+<http://example.org/Object/black_grouse>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "black grouse" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/db616ea8-9d1e-4897-845b-b2b99f36790b_temp_image_213.png" ;
+        skos:prefLabel  "black grouse" .
+
+<http://example.org/Prediction/totem_pole_35aad9ea-e828-4d35-9ee0-e343efa89b76216>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9763946533203125"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/35aad9ea-e828-4d35-9ee0-e343efa89b76_temp_image_216.png" ;
+        ex:predictedObject  <http://example.org/Object/totem_pole> .
+
+<http://example.org/Prediction/tiger,_Panthera_tigris_5d73d509-65bb-422f-8123-b71736e538de70>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9298528432846069"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/5d73d509-65bb-422f-8123-b71736e538de_temp_image_70.png" ;
+        ex:predictedObject  <http://example.org/Object/tiger,_Panthera_tigris> .
+
+<http://example.org/Prediction/lion,_king_of_beasts,_Panthera_leo_eb7b4059-03a9-4ec4-ac3f-7736cbf3b90021>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8959354758262634"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/eb7b4059-03a9-4ec4-ac3f-7736cbf3b900_temp_image_21.png" ;
+        ex:predictedObject  <http://example.org/Object/lion,_king_of_beasts,_Panthera_leo> .
+
+<http://example.org/Cluster/Cluster_11>
+        a                 skos:Concept ;
+        ex:hasPrediction  <http://example.org/Prediction/dogsled,_dog_sled,_dog_sleigh_f0c5b490-0c7c-4f59-ab67-2b7d860176e3109> , <http://example.org/Prediction/ski_2ee32400-2a7d-4764-a35c-b2162ec075d35> ;
+        skos:prefLabel    "Cluster 11" .
+
+<http://example.org/Object/great_grey_owl,_great_gray_owl,_Strix_nebulosa>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "great grey owl, great gray owl, Strix nebulosa" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/bcb32ad3-29e1-47e7-b2ff-a3a5903184a3_temp_image_38.png" ;
+        skos:prefLabel  "great grey owl, great gray owl, Strix nebulosa" .
+
+<http://example.org/Object/African_elephant,_Loxodonta_africana>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "African elephant, Loxodonta africana" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/70705081-0325-4ebb-9252-de4b66565b1c_temp_image_296.png" ;
+        skos:prefLabel  "African elephant, Loxodonta africana" .
+
+<http://example.org/Object/palace>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "palace" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/d12a6236-a8ec-4099-a562-258f665bf847_temp_image_277.png" ;
+        skos:prefLabel  "palace" .
+
+<http://example.org/Object/anemone_fish>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "anemone fish" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/133274c8-156d-4d49-b3c3-beeac3e1629d_temp_image_262.png" ;
+        skos:prefLabel  "anemone fish" .
+
+<http://example.org/Object/wig>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "wig" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/e205f8a7-18c7-4a1f-ace8-c9305f9ebceb_temp_image_112.png" , "http://host.docker.internal:8081/api/files/c8073b11-91d1-4780-992d-eb891924847e_temp_image_11.png" , "http://host.docker.internal:8081/api/files/23723297-9fe7-42a8-8dab-671ec53b9afc_temp_image_33.png" ;
+        skos:prefLabel  "wig" .
+
+<http://example.org/Object/albatross,_mollymawk>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "albatross, mollymawk" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/22f5d2fc-cd13-4c93-8483-738a87cf74c1_temp_image_195.png" ;
+        skos:prefLabel  "albatross, mollymawk" .
+
+<http://example.org/Object/koala,_koala_bear,_kangaroo_bear,_native_bear,_Phascolarctos_cinereus>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "koala, koala bear, kangaroo bear, native bear, Phascolarctos cinereus" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/c09d90f0-31db-4dad-afb5-5d72739f8f31_temp_image_248.png" ;
+        skos:prefLabel  "koala, koala bear, kangaroo bear, native bear, Phascolarctos cinereus" .
+
+<http://example.org/Object/brown_bear,_bruin,_Ursus_arctos>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "brown bear, bruin, Ursus arctos" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/e35f1818-b3d0-4d60-955e-5fc4e4e5789f_temp_image_139.png" , "http://host.docker.internal:8081/api/files/2807b6f7-1b60-4758-966f-07cfbd05a19a_temp_image_4.png" ;
+        skos:prefLabel  "brown bear, bruin, Ursus arctos" .
+
+<http://example.org/Object/marmot>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "marmot" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/a9ca03a8-7c01-4301-8c75-6ca747e616fc_temp_image_265.png" ;
+        skos:prefLabel  "marmot" .
+
+<http://example.org/Prediction/wig_c8073b11-91d1-4780-992d-eb891924847e11>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9590407013893127"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/c8073b11-91d1-4780-992d-eb891924847e_temp_image_11.png" ;
+        ex:predictedObject  <http://example.org/Object/wig> .
+
+<http://example.org/Object/groom,_bridegroom>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "groom, bridegroom" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/b8357340-8c87-435c-bbb6-26166a91c645_temp_image_103.png" ;
+        skos:prefLabel  "groom, bridegroom" .
+
+<http://example.org/Prediction/bathing_cap,_swimming_cap_feec9ca7-f375-4330-84f5-3cd81db051e5186>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7774394154548645"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/feec9ca7-f375-4330-84f5-3cd81db051e5_temp_image_186.png" ;
+        ex:predictedObject  <http://example.org/Object/bathing_cap,_swimming_cap> .
+
+<http://example.org/Prediction/white_wolf,_Arctic_wolf,_Canis_lupus_tundrarum_bc8a1173-f249-473e-b840-45bfbe6dd87193>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9165678024291992"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/bc8a1173-f249-473e-b840-45bfbe6dd871_temp_image_93.png" ;
+        ex:predictedObject  <http://example.org/Object/white_wolf,_Arctic_wolf,_Canis_lupus_tundrarum> .
+
+<http://example.org/Prediction/brain_coral_4514817a-e118-4c8f-9f75-bea625120a9a10>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.92058926820755"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/4514817a-e118-4c8f-9f75-bea625120a9a_temp_image_10.png" ;
+        ex:predictedObject  <http://example.org/Object/brain_coral> .
+
+<http://example.org/Prediction/sandbar,_sand_bar_ab6808a0-5776-4989-95db-62a721c48749161>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8991819024085999"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/ab6808a0-5776-4989-95db-62a721c48749_temp_image_161.png" ;
+        ex:predictedObject  <http://example.org/Object/sandbar,_sand_bar> .
+
+<http://example.org/Prediction/pot,_flowerpot_6537d8cc-f869-4d8f-9ee9-c46cabbc68ca88>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8741388320922852"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/6537d8cc-f869-4d8f-9ee9-c46cabbc68ca_temp_image_88.png" ;
+        ex:predictedObject  <http://example.org/Object/pot,_flowerpot> .
+
+<http://example.org/Prediction/baboon_6106731b-37eb-4480-a5d0-82712b47db6c96>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8819989562034607"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/6106731b-37eb-4480-a5d0-82712b47db6c_temp_image_96.png" ;
+        ex:predictedObject  <http://example.org/Object/baboon> .
+
+<http://example.org/Object/thatch,_thatched_roof>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "thatch, thatched roof" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/8e30f467-11cb-4370-a0c8-8ea7b6de3bd2_temp_image_54.png" ;
+        skos:prefLabel  "thatch, thatched roof" .
+
+<http://example.org/Cluster/Cluster_6>
+        a                 skos:Concept ;
+        ex:hasPrediction  <http://example.org/Prediction/alp_fd24dc51-e867-47cc-89bc-9441e1394783246> , <http://example.org/Prediction/valley,_vale_fbbd31da-13c1-4ddd-ae1e-ca83653a026f281> , <http://example.org/Prediction/dam,_dike,_dyke_eed17356-ec49-4e5b-9402-ffb59e1acb9858> , <http://example.org/Prediction/sandbar,_sand_bar_ab6808a0-5776-4989-95db-62a721c48749161> , <http://example.org/Prediction/lakeside,_lakeshore_9d96dc50-e1dd-4ef6-94b4-138465e4729c136> , <http://example.org/Prediction/alp_711ea51f-f994-4828-a6b5-bde387d87e3865> , <http://example.org/Prediction/promontory,_headland,_head,_foreland_201fba5d-50e6-42ba-8463-1f2f15a8171581> ;
+        skos:prefLabel    "Cluster 6" .
+
+<http://example.org/Object/shower_cap>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "shower cap" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/b3526684-d3ac-4ff4-aac2-340c0b29cd02_temp_image_87.png" ;
+        skos:prefLabel  "shower cap" .
+
+<http://example.org/Cluster/Cluster_14>
+        a                 skos:Concept ;
+        ex:hasPrediction  <http://example.org/Prediction/bathing_cap,_swimming_cap_feec9ca7-f375-4330-84f5-3cd81db051e5186> , <http://example.org/Prediction/bathing_cap,_swimming_cap_e950a4a0-c2e4-429c-acfe-7eb0552d65fe16> , <http://example.org/Prediction/shower_cap_b3526684-d3ac-4ff4-aac2-340c0b29cd0287> , <http://example.org/Prediction/umbrella_54d96e39-5151-4cf1-af5d-523c065e26a8193> ;
+        skos:prefLabel    "Cluster 14" .
+
+<http://example.org/Prediction/maze,_labyrinth_3b2b37e0-33c9-4fc6-9cea-5b867c6fffd557>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8774365186691284"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/3b2b37e0-33c9-4fc6-9cea-5b867c6fffd5_temp_image_57.png" ;
+        ex:predictedObject  <http://example.org/Object/maze,_labyrinth> .
+
+<http://example.org/Prediction/ice_bear,_polar_bear,_Ursus_Maritimus,_Thalarctos_maritimus_8f04f5a0-1ee3-42be-a371-3c70a30fbb3a102>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9999344348907471"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/8f04f5a0-1ee3-42be-a371-3c70a30fbb3a_temp_image_102.png" ;
+        ex:predictedObject  <http://example.org/Object/ice_bear,_polar_bear,_Ursus_Maritimus,_Thalarctos_maritimus> .
+
+<http://example.org/Object/zebra>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "zebra" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/e28b0a1a-5a18-4650-8b8f-449e8471fb8e_temp_image_225.png" ;
+        skos:prefLabel  "zebra" .
+
+<http://example.org/Object/castle>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "castle" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/3e9fdfb8-473d-40b1-9d2f-ee35ebd3dd52_temp_image_285.png" ;
+        skos:prefLabel  "castle" .
+
+<http://example.org/Object/valley,_vale>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "valley, vale" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/fbbd31da-13c1-4ddd-ae1e-ca83653a026f_temp_image_281.png" ;
+        skos:prefLabel  "valley, vale" .
+
+<http://example.org/Prediction/leopard,_Panthera_pardus_81510796-e6f1-4caf-850e-ae856874af9e258>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8151622414588928"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/81510796-e6f1-4caf-850e-ae856874af9e_temp_image_258.png" ;
+        ex:predictedObject  <http://example.org/Object/leopard,_Panthera_pardus> .
+
+<http://example.org/Prediction/cheetah,_chetah,_Acinonyx_jubatus_74b8bd21-1644-45cd-92bf-e4691c0653ac156>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.889481246471405"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/74b8bd21-1644-45cd-92bf-e4691c0653ac_temp_image_156.png" ;
+        ex:predictedObject  <http://example.org/Object/cheetah,_chetah,_Acinonyx_jubatus> .
+
+<http://example.org/Prediction/wig_23723297-9fe7-42a8-8dab-671ec53b9afc33>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7873465418815613"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/23723297-9fe7-42a8-8dab-671ec53b9afc_temp_image_33.png" ;
+        ex:predictedObject  <http://example.org/Object/wig> .
+
+<http://example.org/Prediction/triumphal_arch_4443fbd7-a549-4bf3-b58b-2bfd40982890249>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.99173903465271"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/4443fbd7-a549-4bf3-b58b-2bfd40982890_temp_image_249.png" ;
+        ex:predictedObject  <http://example.org/Object/triumphal_arch> .
+
+<http://example.org/Object/dome>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "dome" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/cf37cf06-d155-4ae0-a78b-fbec7ca485a4_temp_image_131.png" , "http://host.docker.internal:8081/api/files/7c9b99c5-bf46-4b2c-9b29-4468d5e5a803_temp_image_144.png" ;
+        skos:prefLabel  "dome" .
+
+<http://example.org/Object/starfish,_sea_star>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "starfish, sea star" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/a527285d-eaf8-45c2-893b-6d53945566a8_temp_image_35.png" ;
+        skos:prefLabel  "starfish, sea star" .
+
+<http://example.org/Object/leopard,_Panthera_pardus>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "leopard, Panthera pardus" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/81510796-e6f1-4caf-850e-ae856874af9e_temp_image_258.png" ;
+        skos:prefLabel  "leopard, Panthera pardus" .
+
+<http://example.org/Prediction/mongoose_d2c9ed03-5a28-43a5-953d-3c49cdab62c269>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.7389984726905823"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/d2c9ed03-5a28-43a5-953d-3c49cdab62c2_temp_image_69.png" ;
+        ex:predictedObject  <http://example.org/Object/mongoose> .
+
+<http://example.org/Object/mongoose>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "mongoose" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/d2c9ed03-5a28-43a5-953d-3c49cdab62c2_temp_image_69.png" ;
+        skos:prefLabel  "mongoose" .
+
+<http://example.org/Cluster/Cluster_1>
+        a                 skos:Concept ;
+        ex:hasPrediction  <http://example.org/Prediction/megalith,_megalithic_structure_d5aa7600-c367-44c5-8bc6-1bf047317718166> , <http://example.org/Prediction/dome_cf37cf06-d155-4ae0-a78b-fbec7ca485a4131> , <http://example.org/Prediction/dome_7c9b99c5-bf46-4b2c-9b29-4468d5e5a803144> , <http://example.org/Prediction/stupa,_tope_4c7a7045-bba6-4f6d-808f-d9808521c227106> , <http://example.org/Prediction/totem_pole_35aad9ea-e828-4d35-9ee0-e343efa89b76216> , <http://example.org/Prediction/megalith,_megalithic_structure_0a582037-52ee-47ef-8b42-4b552565c03c283> ;
+        skos:prefLabel    "Cluster 1" .
+
+<http://example.org/Prediction/African_elephant,_Loxodonta_africana_70705081-0325-4ebb-9252-de4b66565b1c296>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8228206634521484"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/70705081-0325-4ebb-9252-de4b66565b1c_temp_image_296.png" ;
+        ex:predictedObject  <http://example.org/Object/African_elephant,_Loxodonta_africana> .
+
+<http://example.org/Object/Arabian_camel,_dromedary,_Camelus_dromedarius>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Arabian camel, dromedary, Camelus dromedarius" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/40fb28d5-c344-42a3-ad9d-98fe8486e581_temp_image_279.png" ;
+        skos:prefLabel  "Arabian camel, dromedary, Camelus dromedarius" .
+
+<http://example.org/Object/brain_coral>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "brain coral" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/4514817a-e118-4c8f-9f75-bea625120a9a_temp_image_10.png" ;
+        skos:prefLabel  "brain coral" .
+
+<http://example.org/Prediction/zebra_e28b0a1a-5a18-4650-8b8f-449e8471fb8e225>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.999998927116394"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/e28b0a1a-5a18-4650-8b8f-449e8471fb8e_temp_image_225.png" ;
+        ex:predictedObject  <http://example.org/Object/zebra> .
+
+<http://example.org/Object/dam,_dike,_dyke>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "dam, dike, dyke" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/eed17356-ec49-4e5b-9402-ffb59e1acb98_temp_image_58.png" ;
+        skos:prefLabel  "dam, dike, dyke" .
+
+<http://example.org/Prediction/tiger,_Panthera_tigris_69f5a4c4-bab2-4bbd-a4e6-6804ed4714c3236>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8769185543060303"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/69f5a4c4-bab2-4bbd-a4e6-6804ed4714c3_temp_image_236.png" ;
+        ex:predictedObject  <http://example.org/Object/tiger,_Panthera_tigris> .
+
+<http://example.org/Prediction/tiger,_Panthera_tigris_d3d25f65-08f2-4b74-9a81-19f53af4fabc191>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9186071157455444"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/d3d25f65-08f2-4b74-9a81-19f53af4fabc_temp_image_191.png" ;
+        ex:predictedObject  <http://example.org/Object/tiger,_Panthera_tigris> .
+
+<http://example.org/Cluster/Cluster_9>
+        a                 skos:Concept ;
+        ex:hasPrediction  <http://example.org/Prediction/ladybug,_ladybeetle,_lady_beetle,_ladybird,_ladybird_beetle_241294f0-77c2-4e1f-b5fb-d3af902c07b845> ;
+        skos:prefLabel    "Cluster 9" .
+
+<http://example.org/Prediction/groom,_bridegroom_b8357340-8c87-435c-bbb6-26166a91c645103>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8864408731460571"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/b8357340-8c87-435c-bbb6-26166a91c645_temp_image_103.png" ;
+        ex:predictedObject  <http://example.org/Object/groom,_bridegroom> .
+
+<http://example.org/Prediction/dome_cf37cf06-d155-4ae0-a78b-fbec7ca485a4131>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9418312311172485"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/cf37cf06-d155-4ae0-a78b-fbec7ca485a4_temp_image_131.png" ;
+        ex:predictedObject  <http://example.org/Object/dome> .
+
+<http://example.org/Object/kite>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "kite" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/6aa09003-a8b0-4d1e-9d49-772e01eb04bb_temp_image_204.png" , "http://host.docker.internal:8081/api/files/28d3a73f-8b03-4e21-8952-889f98ff7abb_temp_image_124.png" ;
+        skos:prefLabel  "kite" .
+
+<http://example.org/Cluster/Cluster_17>
+        a                 skos:Concept ;
+        ex:hasPrediction  <http://example.org/Prediction/American_egret,_great_white_heron,_Egretta_albus_72f936d0-935e-44fb-bbb9-8b03754e4cb1122> , <http://example.org/Prediction/African_elephant,_Loxodonta_africana_70705081-0325-4ebb-9252-de4b66565b1c296> , <http://example.org/Prediction/rapeseed_6f170c49-2174-46b2-b4c8-f126b61824ac101> ;
+        skos:prefLabel    "Cluster 17" .
+
+<http://example.org/Object/liner,_ocean_liner>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "liner, ocean liner" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/af71e9e0-6321-450a-9a6e-ead10fc22028_temp_image_123.png" ;
+        skos:prefLabel  "liner, ocean liner" .
+
+<http://example.org/Object/bearskin,_busby,_shako>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "bearskin, busby, shako" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/42255221-8e69-4e58-8461-023210cf717e_temp_image_64.png" ;
+        skos:prefLabel  "bearskin, busby, shako" .
+
+<http://example.org/Prediction/thatch,_thatched_roof_8e30f467-11cb-4370-a0c8-8ea7b6de3bd254>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9990710020065308"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/8e30f467-11cb-4370-a0c8-8ea7b6de3bd2_temp_image_54.png" ;
+        ex:predictedObject  <http://example.org/Object/thatch,_thatched_roof> .
+
+<http://example.org/Object/stupa,_tope>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "stupa, tope" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/4c7a7045-bba6-4f6d-808f-d9808521c227_temp_image_106.png" ;
+        skos:prefLabel  "stupa, tope" .
+
+<http://example.org/Prediction/vase_4566bbcf-a18b-4d1e-8eca-e666edc7a77c257>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.956788957118988"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/4566bbcf-a18b-4d1e-8eca-e666edc7a77c_temp_image_257.png" ;
+        ex:predictedObject  <http://example.org/Object/vase> .
+
+<http://example.org/Prediction/ice_bear,_polar_bear,_Ursus_Maritimus,_Thalarctos_maritimus_830e146d-f6fc-476e-9729-80c807d76abd199>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9980471134185791"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/830e146d-f6fc-476e-9729-80c807d76abd_temp_image_199.png" ;
+        ex:predictedObject  <http://example.org/Object/ice_bear,_polar_bear,_Ursus_Maritimus,_Thalarctos_maritimus> .
+
+<http://example.org/Object/bonnet,_poke_bonnet>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "bonnet, poke bonnet" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/73980b44-14f6-4e15-b3e8-c69cf4383c6c_temp_image_98.png" ;
+        skos:prefLabel  "bonnet, poke bonnet" .
+
+<http://example.org/Object/ski>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "ski" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/2ee32400-2a7d-4764-a35c-b2162ec075d3_temp_image_5.png" ;
+        skos:prefLabel  "ski" .
+
+<http://example.org/Object/eel>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "eel" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/c5c140a2-7ddc-4bf3-b2b4-a636003f444d_temp_image_90.png" ;
+        skos:prefLabel  "eel" .
+
+<http://example.org/Object/bathing_cap,_swimming_cap>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "bathing cap, swimming cap" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/feec9ca7-f375-4330-84f5-3cd81db051e5_temp_image_186.png" , "http://host.docker.internal:8081/api/files/e950a4a0-c2e4-429c-acfe-7eb0552d65fe_temp_image_16.png" ;
+        skos:prefLabel  "bathing cap, swimming cap" .
+
+<http://example.org/Object/parachute,_chute>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "parachute, chute" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/96b0484c-05ca-4149-8a32-5d48f46cbfef_temp_image_175.png" ;
+        skos:prefLabel  "parachute, chute" .
+
+<http://example.org/Prediction/lion,_king_of_beasts,_Panthera_leo_a7e443ca-2102-422b-a5b9-621552d3769962>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8036639094352722"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/a7e443ca-2102-422b-a5b9-621552d37699_temp_image_62.png" ;
+        ex:predictedObject  <http://example.org/Object/lion,_king_of_beasts,_Panthera_leo> .
+
+<http://example.org/Object/cheetah,_chetah,_Acinonyx_jubatus>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "cheetah, chetah, Acinonyx jubatus" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/74b8bd21-1644-45cd-92bf-e4691c0653ac_temp_image_156.png" ;
+        skos:prefLabel  "cheetah, chetah, Acinonyx jubatus" .
+
+<http://example.org/Cluster/Cluster_4>
+        a                 skos:Concept ;
+        ex:hasPrediction  <http://example.org/Prediction/ice_bear,_polar_bear,_Ursus_Maritimus,_Thalarctos_maritimus_830e146d-f6fc-476e-9729-80c807d76abd199> , <http://example.org/Prediction/tiger,_Panthera_tigris_5d73d509-65bb-422f-8123-b71736e538de70> , <http://example.org/Prediction/lion,_king_of_beasts,_Panthera_leo_a7e443ca-2102-422b-a5b9-621552d3769962> , <http://example.org/Prediction/lion,_king_of_beasts,_Panthera_leo_eb7b4059-03a9-4ec4-ac3f-7736cbf3b90021> , <http://example.org/Prediction/jaguar,_panther,_Panthera_onca,_Felis_onca_589a0d0d-7940-4c67-bb42-7669dd2895fa178> , <http://example.org/Prediction/tiger,_Panthera_tigris_d3d25f65-08f2-4b74-9a81-19f53af4fabc191> , <http://example.org/Prediction/brown_bear,_bruin,_Ursus_arctos_e35f1818-b3d0-4d60-955e-5fc4e4e5789f139> , <http://example.org/Prediction/cheetah,_chetah,_Acinonyx_jubatus_74b8bd21-1644-45cd-92bf-e4691c0653ac156> , <http://example.org/Prediction/white_wolf,_Arctic_wolf,_Canis_lupus_tundrarum_bc8a1173-f249-473e-b840-45bfbe6dd87193> , <http://example.org/Prediction/tiger,_Panthera_tigris_fc743604-c0eb-4f10-976c-14e42c19b1fe268> , <http://example.org/Prediction/Gila_monster,_Heloderma_suspectum_49c52132-9986-401a-a6b4-b3b6a709dd6d198> , <http://example.org/Prediction/leopard,_Panthera_pardus_81510796-e6f1-4caf-850e-ae856874af9e258> , <http://example.org/Prediction/ice_bear,_polar_bear,_Ursus_Maritimus,_Thalarctos_maritimus_8f04f5a0-1ee3-42be-a371-3c70a30fbb3a102> , <http://example.org/Prediction/brown_bear,_bruin,_Ursus_arctos_2807b6f7-1b60-4758-966f-07cfbd05a19a4> , <http://example.org/Prediction/tiger,_Panthera_tigris_69f5a4c4-bab2-4bbd-a4e6-6804ed4714c3236> , <http://example.org/Prediction/tiger,_Panthera_tigris_c29c940f-d9bd-4a8c-b7fe-9a0eb033ec20274> , <http://example.org/Prediction/tiger,_Panthera_tigris_1731cedf-7811-4888-8586-9a2dbcce30c036> ;
+        skos:prefLabel    "Cluster 4" .
+
+<http://example.org/Object/military_uniform>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "military uniform" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/ca300ccf-06e5-41f6-a379-683eeb43651e_temp_image_53.png" ;
+        skos:prefLabel  "military uniform" .
+
+<http://example.org/Prediction/kite_28d3a73f-8b03-4e21-8952-889f98ff7abb124>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8592357635498047"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/28d3a73f-8b03-4e21-8952-889f98ff7abb_temp_image_124.png" ;
+        ex:predictedObject  <http://example.org/Object/kite> .
+
+<http://example.org/Prediction/bison_7830fc7f-d38d-437c-812a-14d4abd42ca1212>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.8508018851280212"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/7830fc7f-d38d-437c-812a-14d4abd42ca1_temp_image_212.png" ;
+        ex:predictedObject  <http://example.org/Object/bison> .
+
+<http://example.org/Object/steel_arch_bridge>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "steel arch bridge" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/21517e89-bd58-4956-a719-5daedb7f5142_temp_image_15.png" ;
+        skos:prefLabel  "steel arch bridge" .
+
+<http://example.org/Prediction/bathing_cap,_swimming_cap_e950a4a0-c2e4-429c-acfe-7eb0552d65fe16>
+        a                   skos:Concept ;
+        ex:hasProbability   "0.9279771447181702"^^xsd:double ;
+        ex:hasURI           "http://host.docker.internal:8081/api/files/e950a4a0-c2e4-429c-acfe-7eb0552d65fe_temp_image_16.png" ;
+        ex:predictedObject  <http://example.org/Object/bathing_cap,_swimming_cap> .
+
+<http://example.org/Object/sorrel>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "sorrel" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/30bcbeb4-3640-4874-b879-8d6a878b1c54_temp_image_145.png" , "http://host.docker.internal:8081/api/files/0a7d6660-37d2-4a98-910d-b06ccf2ca65f_temp_image_107.png" ;
+        skos:prefLabel  "sorrel" .
+
+<http://example.org/Object/Gila_monster,_Heloderma_suspectum>
+        a               skos:Concept ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Gila monster, Heloderma suspectum" ;
+        ex:hasURI       "http://host.docker.internal:8081/api/files/49c52132-9986-401a-a6b4-b3b6a709dd6d_temp_image_198.png" ;
+        skos:prefLabel  "Gila monster, Heloderma suspectum" .
+
+<http://example.org/Cluster/Cluster_12>
+        a                 skos:Concept ;
+        ex:hasPrediction  <http://example.org/Prediction/maze,_labyrinth_3b2b37e0-33c9-4fc6-9cea-5b867c6fffd557> ;
+        skos:prefLabel    "Cluster 12" .

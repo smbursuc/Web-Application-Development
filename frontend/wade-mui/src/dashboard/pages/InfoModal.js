@@ -57,7 +57,68 @@ const xThemeComponents = {
 export default function InfoModal(props) {
   const infOpen = props.infOpen;
   const handleInfClose = props.handleInfClose;
-  const features = props.features;
+  const selectedDataset = props.selectedDataset;
+
+  const features = {
+      cifar10: [
+        {
+          title: "Description",
+          description:
+            "The CIFAR-10 and CIFAR-100 datasets are labeled subsets of the 80 million tiny images dataset.",
+        },
+        {
+          title: "Image Size",
+          description: "32x32",
+        },
+        {
+          title: "Dataset Size",
+          description: "50.000 images, ~177MB",
+        },
+        {
+          title: "Classes",
+          description:
+            "There are 10 classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck.",
+        },
+        {
+          title: "Prediction Time",
+          description: "~4 hours /w DeepDetect CPU, Ryzen 5 7600x",
+        },
+        {
+          title: "Predictions",
+          description:
+            "For each image of the dataset the best 3 guesses were stored. This explains why so many images are being categorized by one object, it was because the object was present in the top 3 predictions.",
+        },
+      ],
+      bsds300: [
+        {
+          title: "Description",
+          description:
+            "The BSDS300 and CIFAR-100 datasets are labeled subsets of the 80 million tiny images dataset.",
+        },
+        {
+          title: "Image Size",
+          description: "32x32",
+        },
+        {
+          title: "Dataset Size",
+          description: "50.000 images, ~177MB",
+        },
+        {
+          title: "Classes",
+          description:
+            "There are 10 classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck.",
+        },
+        {
+          title: "Prediction Time",
+          description: "~4 hours /w DeepDetect CPU, Ryzen 5 7600x",
+        },
+        {
+          title: "Predictions",
+          description:
+            "For each image of the dataset the best 3 guesses were stored. This explains why so many images are being categorized by one object, it was because the object was present in the top 3 predictions.",
+        },
+      ],
+    };
 
   return (
     <Modal
@@ -95,7 +156,7 @@ export default function InfoModal(props) {
           </a>
         </Typography>
         <List>
-          {features.map((feature, index) => (
+          {features[selectedDataset].map((feature, index) => (
             <ListItem key={index} alignItems="flex-start" sx={{ gap: 1 }}>
               <ListItemIcon>
                 <CircleIcon color="primary" />

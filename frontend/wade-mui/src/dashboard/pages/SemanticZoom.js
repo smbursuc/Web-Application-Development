@@ -63,39 +63,13 @@ export default function SemanticZoom(props) {
       value: "cifar10",
       displayValue: "CIFAR-10",
     },
-  ];
-
-  const features = [
     {
-      title: "Description",
-      description:
-        "The CIFAR-10 and CIFAR-100 datasets are labeled subsets of the 80 million tiny images dataset.",
-    },
-    {
-      title: "Image Size",
-      description: "32x32",
-    },
-    {
-      title: "Dataset Size",
-      description: "50.000 images, ~177MB",
-    },
-    {
-      title: "Classes",
-      description:
-        "There are 10 classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck.",
-    },
-    {
-      title: "Prediction Time",
-      description: "~4 hours /w DeepDetect CPU, Ryzen 5 7600x",
-    },
-    {
-      title: "Predictions",
-      description:
-        "For each image of the dataset the best 3 guesses were stored. This explains why so many images are being categorized by one object, it was because the object was present in the top 3 predictions.",
+      value: "bsds300",
+      displayValue: "BSDS300",
     },
   ];
 
-  const [selectedDataset, setSelectedDataset] = useState("cifar10"); // Default dataset
+  const [selectedDataset, setSelectedDataset] = useState("bsds300"); // Default dataset
 
   const handleDatasetChange = (event) => {
     setSelectedDataset(event.target.value);
@@ -119,6 +93,26 @@ export default function SemanticZoom(props) {
   const [rangeSliderValue, setRangeSliderValue] = useState(5);
   const [rangeStartSliderValue, setRangeStartSliderValue] = useState(1);
   const [sort, setSort] = useState("highest_probability");
+  const [dataModel, setDataModel] = useState("rdf");
+
+  const [maxClusters, setMaxClusters] = useState(() => {
+    return getFromLocalStorage("maxClusters") || {};
+  });
+
+  const handleDataModelChange = (event) => {
+    setDataModel(event.target.value);
+  };
+
+  const dataModels = [
+    {
+      value: "rdf",
+      displayValue: "RDF",
+    },
+    {
+      value: "json",
+      displayValue: "JSON",
+    },
+  ];
 
   const options = {
     sort: {
@@ -135,7 +129,14 @@ export default function SemanticZoom(props) {
     setInfOpen(false);
   };
 
-  const fetchClusterData = async () => {
+  const fetchClusterData = async (resetParams) => {
+    setIsLoading(true);
+
+    if (resetParams) {
+      setRangeSliderValue(5);
+      setRangeStartSliderValue(1);
+    }
+    
     let queryParams = "";
     if (sort !== "no_sort") {
       queryParams = `sort=${sort}`;
@@ -145,7 +146,8 @@ export default function SemanticZoom(props) {
       queryParams +
       `&range=${rangeSliderValue}&rangeStart=${rangeStartSliderValue}`; // mandatory
     const url =
-      `http://127.0.0.1:8081/api/${selectedDataset}/clusters/rdf?` + queryParams;
+      `http://127.0.0.1:8081/api/${selectedDataset}/clusters/${dataModel}?` +
+      queryParams;
 
     try {
       const response = await fetch(url);
@@ -156,18 +158,57 @@ export default function SemanticZoom(props) {
     } catch (error) {
       console.error("Failed to fetch cluster data:", error);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
-    fetchClusterData();
-  }, []);
+    fetchClusterData(true);
+    let cache = getFromLocalStorage("maxClusters");
+    if (
+      !cache ||
+      !cache[selectedDataset] ||
+      !cache[selectedDataset][dataModel]
+    ) {
+      fetchMetadata();
+    } else {
+      setMaxClusters(cache);
+    }
+  }, [selectedDataset, dataModel]);
+
+  function saveToLocalStorage(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+
+  function getFromLocalStorage(key) {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : null;
+  }
+
+  const fetchMetadata = async () => {
+    setIsLoading(true);
+    const url = `http://127.0.0.1:8081/api/${selectedDataset}/metadata/${dataModel}/clusters`;
+    const response = await fetch(url);
+    const data = await response.json();
+    const result = data.data;
+
+    // load the metadata cache, update it, and save it back
+    const cache = getFromLocalStorage("maxClusters") || {};
+    cache[selectedDataset] = {
+      ...(cache[selectedDataset] || {}), // safeguard for undefined dataset
+      [dataModel]: result.size,
+    };
+
+    saveToLocalStorage("maxClusters", cache);
+    setMaxClusters(cache);
+    setIsLoading(false);
+  };
 
   const fetchSingleCluster = async (clusterName) => {
     try {
       // encoding is needed because labels contain a whitespace
-      const url = `http://127.0.0.1:8081/api/${selectedDataset}/clusters/json?name=${encodeURIComponent(
+      const url = `http://127.0.0.1:8081/api/${selectedDataset}/clusters/${dataModel}?name=${encodeURIComponent(
         clusterName
-      )}&sort=probability&range=${rangeSliderValue}&rangeStart=${rangeStartSliderValue}`;
+      )}`;
       const response = await fetch(url);
       const data = await response.json();
       const result = data.data;
@@ -188,7 +229,6 @@ export default function SemanticZoom(props) {
     setParents(result.parents);
     setValues(result.values); // Set the values for plotly
     setUris(result.uris);
-    setIsLoading(false);
   };
 
   const handlePlotlyClick = (event) => {
@@ -220,7 +260,7 @@ export default function SemanticZoom(props) {
   };
 
   const handleApplyFilters = () => {
-    fetchClusterData();
+    fetchClusterData(false);
   };
 
   return (
@@ -247,6 +287,9 @@ export default function SemanticZoom(props) {
                 selectedDataset={selectedDataset}
                 setSelectedDataset={setSelectedDataset}
                 handleDatasetChange={handleDatasetChange}
+                dataModels={dataModels}
+                dataModel={dataModel}
+                handleDataModelChange={handleDataModelChange}
               />
               <FilterComponent
                 handleApplyFilters={handleApplyFilters}
@@ -257,6 +300,7 @@ export default function SemanticZoom(props) {
                 rangeStartSliderValue={rangeStartSliderValue}
                 setRangeStartSliderValue={setRangeStartSliderValue}
                 options={options}
+                max={maxClusters[selectedDataset][dataModel]}
               />
               {isLoading ? (
                 <p>Loading cluster data...</p>
@@ -291,8 +335,8 @@ export default function SemanticZoom(props) {
               </Typography>
               {selectedCluster && !isLoading && (
                 <Grid container spacing={2} alignItems="stretch">
-                  {selectedClusterLabels.map((label, index) => {
-                    if (!label.includes("Cluster"))
+                  {selectedClusterValues.map((value, index) => {
+                    if (!selectedClusterLabels[index].includes("Cluster"))
                       return (
                         <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
                           <Card style={{ height: "100%" }}>
@@ -300,11 +344,11 @@ export default function SemanticZoom(props) {
                               component="img"
                               height="140"
                               image={selectedClusterUris[index]}
-                              alt={label}
+                              alt={selectedClusterLabels[index + 1]}
                             />
                             <CardContent>
                               <Typography variant="h6" align="center">
-                                {label}
+                                {selectedClusterLabels[index + 1]}
                               </Typography>
                               <Typography
                                 variant="body2"
@@ -342,7 +386,7 @@ export default function SemanticZoom(props) {
             <InfoModal
               infOpen={infOpen}
               handleInfClose={handleInfClose}
-              features={features}
+              selectedDataset={selectedDataset}
             />
           </Grid>
         </Container>

@@ -14,6 +14,7 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import Sitemark from "./SitemarkIcon";
 import ColorModeIconDropdown from "../../shared-theme/ColorModeIconDropdown";
 import { Link } from "react-router-dom";
+import { useAppState } from "../../contexts/AppStateContext";
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: "flex",
@@ -32,9 +33,14 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 }));
 
 export default function AppAppBar(props) {
+  const appStateProps = useAppState();
   const [open, setOpen] = React.useState(false);
-  const loggedIn = props.loggedIn;
-  const setLoggedIn = props.setLoggedIn;
+  const loggedIn = appStateProps.loggedIn;
+  const setLoggedIn = appStateProps.setLoggedIn;
+
+  React.useEffect(() => {
+    console.log(loggedIn);
+  })
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);

@@ -18,12 +18,12 @@ public class ClusterDataToSKOSConverter
 
     public static void main(String[] args)
     {
-        String outputFile = "ttl/cluster_data_skos.ttl";
+        String outputFile = "ttl-new/cluster_data_skos_cifar10.ttl";
 
         try
         {
             ObjectMapper mapper = new ObjectMapper();
-            ClusterData root = mapper.readValue(new File("data/hierarchical_structure_uri.json"), ClusterData.class);
+            ClusterData root = mapper.readValue(new File("data/hierarchical_structure_uri_cifar10.json"), ClusterData.class);
 
             Model model = ModelFactory.createDefaultModel();
             String skosUri = "http://www.w3.org/2004/02/skos/core#";
@@ -55,7 +55,7 @@ public class ClusterDataToSKOSConverter
                 for (int i = 0; i < cluster.getChildren().size(); i++)
                 {
                     ClusterData.Cluster.ObjectData obj = cluster.getChildren().get(i);
-                    addPredictionToCluster(model, clusterResource, obj);
+                    addPredictionToCluster(model, clusterResource, obj, skosPrefLabel);
                 }
             }
 
@@ -72,13 +72,13 @@ public class ClusterDataToSKOSConverter
         }
     }
 
-    private static void addPredictionToCluster(Model model, Resource clusterResource, ClusterData.Cluster.ObjectData obj)
+    private static void addPredictionToCluster(Model model, Resource clusterResource, ClusterData.Cluster.ObjectData obj, Property skosPrefLabel)
     {
-        // need an unique prediction URI because otherwise the query results bundle onto each other wrongly
+        // need a unique prediction URI because otherwise the query results bundle onto each other wrongly
         String predictionUri = BASE_URI + "Prediction/" + obj.getName().replace(" ", "_") + "_" + extractImageId(obj.getUri());
         Resource predictionResource = model.createResource(predictionUri)
                 .addProperty(RDF.type, model.createResource("http://www.w3.org/2004/02/skos/core#Concept"))
-                .addProperty(model.createProperty(BASE_URI + "ontology#predictedObject"), createObjectResource(model, obj.getName(), obj.getUri()))
+                .addProperty(model.createProperty(BASE_URI + "ontology#predictedObject"), createObjectResource(model, obj.getName(), obj.getUri(), skosPrefLabel))
                 .addLiteral(model.createProperty(BASE_URI + "ontology#hasProbability"), obj.getProbability())
                 .addProperty(model.createProperty(BASE_URI + "ontology#hasURI"), obj.getUri());
 
@@ -86,12 +86,13 @@ public class ClusterDataToSKOSConverter
         clusterResource.addProperty(model.createProperty(BASE_URI + "ontology#hasPrediction"), predictionResource);
     }
 
-    private static Resource createObjectResource(Model model, String objectName, String objectUri)
+    private static Resource createObjectResource(Model model, String objectName, String objectUri, Property skosPrefLabel)
     {
         String objectUriId = BASE_URI + "Object/" + objectName.replace(" ", "_");
         Resource objectResource = model.createResource(objectUriId)
                 .addProperty(RDFS.label, objectName)
                 .addProperty(RDF.type, model.createResource("http://www.w3.org/2004/02/skos/core#Concept"))
+                .addProperty(skosPrefLabel, objectName) // Add skos:prefLabel
                 .addProperty(model.createProperty(BASE_URI + "ontology#hasURI"), objectUri);
         return objectResource;
     }

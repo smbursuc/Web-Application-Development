@@ -1,10 +1,11 @@
-from sentence_transformers import SentenceTransformer
+from sentence_transformers import SentenceTransformer, util
 from sklearn.metrics.pairwise import cosine_similarity
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import json
+import torch
 
 
 def prepare_data(start, end, filepath):
@@ -12,7 +13,10 @@ def prepare_data(start, end, filepath):
         data = json.load(f)['data']
 
     if (start != None and end != None):
-        data = data[start:end]
+        if (end > len(data)):
+            data = data[start:len(data)]
+        else:
+            data = data[start:end]
 
     objects = []
     for row in data:
@@ -21,7 +25,7 @@ def prepare_data(start, end, filepath):
 
     return objects
 
-def correlation(start, end, sort, sortType, filepath, showplot=False):
+def correlation(dataset, start, end, sort, sortType, showplot=False):
     """
     Calculate the semantic similarity of objects and visualize it as a heatmap.
 
@@ -33,11 +37,19 @@ def correlation(start, end, sort, sortType, filepath, showplot=False):
     :param showplot: Whether to display a heatmap plot
     :return: A dictionary containing the objects and their similarity matrix
     """
+    filepath = f"processed_data_uri_{dataset}.json"
+
     objects = prepare_data(start, end, filepath)
 
     # Step 1: Generate embeddings
-    model = SentenceTransformer('all-MiniLM-L6-v2')
-    embeddings = model.encode(objects)
+    model = SentenceTransformer('all-mpnet-base-v2')
+    embeddings = model.encode(objects, convert_to_tensor=True)
+
+    # Normalize embeddings (so cosine similarity becomes simply the dot product)
+    embeddings_norm = torch.nn.functional.normalize(embeddings, p=2, dim=1)
+
+    # Compute cosine similarity using SentenceTransformer's utility function
+    similarity_matrix = util.cos_sim(embeddings_norm, embeddings_norm)
 
     # Step 2: Calculate cosine similarity
     similarity_matrix = cosine_similarity(embeddings)
@@ -75,7 +87,7 @@ def correlation(start, end, sort, sortType, filepath, showplot=False):
 
     # Save hierarchical JSON for inspection
     f_data = json.dumps(similarity_data, indent=4)
-    with open("similarity_data.json", "w") as f:
+    with open("similarity_data_bsds300.json", "w") as f:
         f.write(f_data)
 
     if showplot:
@@ -91,4 +103,4 @@ def correlation(start, end, sort, sortType, filepath, showplot=False):
     return similarity_data
 
 if __name__ == "__main__":
-    correlation(1,500,"highest_probability","strongest_pair","processed_data_uri.json",False)
+    correlation("bsds300",0,9999,"highest_probability","strongest_pair",False)

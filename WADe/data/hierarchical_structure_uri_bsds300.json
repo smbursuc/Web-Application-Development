@@ -1,0 +1,550 @@
+{
+    "name": "Root",
+    "children": [
+        {
+            "name": "Cluster 0",
+            "children": [
+                {
+                    "name": "barn",
+                    "Probability": 0.8358954787254333,
+                    "URI": "http://host.docker.internal:8081/api/files/000aa946-c81a-416e-a3ac-38e1fd6b0718_temp_image_142.png"
+                },
+                {
+                    "name": "castle",
+                    "Probability": 0.8397825360298157,
+                    "URI": "http://host.docker.internal:8081/api/files/3e9fdfb8-473d-40b1-9d2f-ee35ebd3dd52_temp_image_285.png"
+                },
+                {
+                    "name": "thatch, thatched roof",
+                    "Probability": 0.9990710020065308,
+                    "URI": "http://host.docker.internal:8081/api/files/8e30f467-11cb-4370-a0c8-8ea7b6de3bd2_temp_image_54.png"
+                },
+                {
+                    "name": "greenhouse, nursery, glasshouse",
+                    "Probability": 0.9951836466789246,
+                    "URI": "http://host.docker.internal:8081/api/files/a03e1c55-c8fc-4772-b707-b8a673edfbb6_temp_image_259.png"
+                },
+                {
+                    "name": "palace",
+                    "Probability": 0.8425956964492798,
+                    "URI": "http://host.docker.internal:8081/api/files/d12a6236-a8ec-4099-a562-258f665bf847_temp_image_277.png"
+                }
+            ]
+        },
+        {
+            "name": "Cluster 1",
+            "children": [
+                {
+                    "name": "megalith, megalithic structure",
+                    "Probability": 0.7265174388885498,
+                    "URI": "http://host.docker.internal:8081/api/files/0a582037-52ee-47ef-8b42-4b552565c03c_temp_image_283.png"
+                },
+                {
+                    "name": "totem pole",
+                    "Probability": 0.9763946533203125,
+                    "URI": "http://host.docker.internal:8081/api/files/35aad9ea-e828-4d35-9ee0-e343efa89b76_temp_image_216.png"
+                },
+                {
+                    "name": "stupa, tope",
+                    "Probability": 0.7856278419494629,
+                    "URI": "http://host.docker.internal:8081/api/files/4c7a7045-bba6-4f6d-808f-d9808521c227_temp_image_106.png"
+                },
+                {
+                    "name": "dome",
+                    "Probability": 0.8564099073410034,
+                    "URI": "http://host.docker.internal:8081/api/files/7c9b99c5-bf46-4b2c-9b29-4468d5e5a803_temp_image_144.png"
+                },
+                {
+                    "name": "dome",
+                    "Probability": 0.9418312311172485,
+                    "URI": "http://host.docker.internal:8081/api/files/cf37cf06-d155-4ae0-a78b-fbec7ca485a4_temp_image_131.png"
+                },
+                {
+                    "name": "megalith, megalithic structure",
+                    "Probability": 0.9718252420425415,
+                    "URI": "http://host.docker.internal:8081/api/files/d5aa7600-c367-44c5-8bc6-1bf047317718_temp_image_166.png"
+                }
+            ]
+        },
+        {
+            "name": "Cluster 2",
+            "children": [
+                {
+                    "name": "sorrel",
+                    "Probability": 0.9909861087799072,
+                    "URI": "http://host.docker.internal:8081/api/files/0a7d6660-37d2-4a98-910d-b06ccf2ca65f_temp_image_107.png"
+                },
+                {
+                    "name": "sorrel",
+                    "Probability": 0.9750966429710388,
+                    "URI": "http://host.docker.internal:8081/api/files/30bcbeb4-3640-4874-b879-8d6a878b1c54_temp_image_145.png"
+                },
+                {
+                    "name": "daisy",
+                    "Probability": 0.9919595122337341,
+                    "URI": "http://host.docker.internal:8081/api/files/5314c932-a823-4dc6-b4c2-5078a1fa2b65_temp_image_170.png"
+                },
+                {
+                    "name": "mushroom",
+                    "Probability": 0.7185265421867371,
+                    "URI": "http://host.docker.internal:8081/api/files/baf7a305-5536-4a4a-99ad-c433d4861ad8_temp_image_255.png"
+                }
+            ]
+        },
+        {
+            "name": "Cluster 3",
+            "children": [
+                {
+                    "name": "anemone fish",
+                    "Probability": 0.9936813116073608,
+                    "URI": "http://host.docker.internal:8081/api/files/133274c8-156d-4d49-b3c3-beeac3e1629d_temp_image_262.png"
+                },
+                {
+                    "name": "albatross, mollymawk",
+                    "Probability": 0.9195802807807922,
+                    "URI": "http://host.docker.internal:8081/api/files/22f5d2fc-cd13-4c93-8483-738a87cf74c1_temp_image_195.png"
+                },
+                {
+                    "name": "brain coral",
+                    "Probability": 0.92058926820755,
+                    "URI": "http://host.docker.internal:8081/api/files/4514817a-e118-4c8f-9f75-bea625120a9a_temp_image_10.png"
+                },
+                {
+                    "name": "starfish, sea star",
+                    "Probability": 0.998221218585968,
+                    "URI": "http://host.docker.internal:8081/api/files/a527285d-eaf8-45c2-893b-6d53945566a8_temp_image_35.png"
+                },
+                {
+                    "name": "great grey owl, great gray owl, Strix nebulosa",
+                    "Probability": 0.9872233867645264,
+                    "URI": "http://host.docker.internal:8081/api/files/bcb32ad3-29e1-47e7-b2ff-a3a5903184a3_temp_image_38.png"
+                },
+                {
+                    "name": "eel",
+                    "Probability": 0.7305510640144348,
+                    "URI": "http://host.docker.internal:8081/api/files/c5c140a2-7ddc-4bf3-b2b4-a636003f444d_temp_image_90.png"
+                },
+                {
+                    "name": "hummingbird",
+                    "Probability": 0.9998340606689453,
+                    "URI": "http://host.docker.internal:8081/api/files/f83987a6-f4b4-4f50-bf18-f440cb42a174_temp_image_85.png"
+                }
+            ]
+        },
+        {
+            "name": "Cluster 4",
+            "children": [
+                {
+                    "name": "tiger, Panthera tigris",
+                    "Probability": 0.9338804483413696,
+                    "URI": "http://host.docker.internal:8081/api/files/1731cedf-7811-4888-8586-9a2dbcce30c0_temp_image_36.png"
+                },
+                {
+                    "name": "brown bear, bruin, Ursus arctos",
+                    "Probability": 0.8094759583473206,
+                    "URI": "http://host.docker.internal:8081/api/files/2807b6f7-1b60-4758-966f-07cfbd05a19a_temp_image_4.png"
+                },
+                {
+                    "name": "Gila monster, Heloderma suspectum",
+                    "Probability": 0.9999758005142212,
+                    "URI": "http://host.docker.internal:8081/api/files/49c52132-9986-401a-a6b4-b3b6a709dd6d_temp_image_198.png"
+                },
+                {
+                    "name": "jaguar, panther, Panthera onca, Felis onca",
+                    "Probability": 0.7352463603019714,
+                    "URI": "http://host.docker.internal:8081/api/files/589a0d0d-7940-4c67-bb42-7669dd2895fa_temp_image_178.png"
+                },
+                {
+                    "name": "tiger, Panthera tigris",
+                    "Probability": 0.9298528432846069,
+                    "URI": "http://host.docker.internal:8081/api/files/5d73d509-65bb-422f-8123-b71736e538de_temp_image_70.png"
+                },
+                {
+                    "name": "tiger, Panthera tigris",
+                    "Probability": 0.8769185543060303,
+                    "URI": "http://host.docker.internal:8081/api/files/69f5a4c4-bab2-4bbd-a4e6-6804ed4714c3_temp_image_236.png"
+                },
+                {
+                    "name": "cheetah, chetah, Acinonyx jubatus",
+                    "Probability": 0.889481246471405,
+                    "URI": "http://host.docker.internal:8081/api/files/74b8bd21-1644-45cd-92bf-e4691c0653ac_temp_image_156.png"
+                },
+                {
+                    "name": "leopard, Panthera pardus",
+                    "Probability": 0.8151622414588928,
+                    "URI": "http://host.docker.internal:8081/api/files/81510796-e6f1-4caf-850e-ae856874af9e_temp_image_258.png"
+                },
+                {
+                    "name": "ice bear, polar bear, Ursus Maritimus, Thalarctos maritimus",
+                    "Probability": 0.9980471134185791,
+                    "URI": "http://host.docker.internal:8081/api/files/830e146d-f6fc-476e-9729-80c807d76abd_temp_image_199.png"
+                },
+                {
+                    "name": "ice bear, polar bear, Ursus Maritimus, Thalarctos maritimus",
+                    "Probability": 0.9999344348907471,
+                    "URI": "http://host.docker.internal:8081/api/files/8f04f5a0-1ee3-42be-a371-3c70a30fbb3a_temp_image_102.png"
+                },
+                {
+                    "name": "lion, king of beasts, Panthera leo",
+                    "Probability": 0.8036639094352722,
+                    "URI": "http://host.docker.internal:8081/api/files/a7e443ca-2102-422b-a5b9-621552d37699_temp_image_62.png"
+                },
+                {
+                    "name": "white wolf, Arctic wolf, Canis lupus tundrarum",
+                    "Probability": 0.9165678024291992,
+                    "URI": "http://host.docker.internal:8081/api/files/bc8a1173-f249-473e-b840-45bfbe6dd871_temp_image_93.png"
+                },
+                {
+                    "name": "tiger, Panthera tigris",
+                    "Probability": 0.9427955150604248,
+                    "URI": "http://host.docker.internal:8081/api/files/c29c940f-d9bd-4a8c-b7fe-9a0eb033ec20_temp_image_274.png"
+                },
+                {
+                    "name": "tiger, Panthera tigris",
+                    "Probability": 0.9186071157455444,
+                    "URI": "http://host.docker.internal:8081/api/files/d3d25f65-08f2-4b74-9a81-19f53af4fabc_temp_image_191.png"
+                },
+                {
+                    "name": "brown bear, bruin, Ursus arctos",
+                    "Probability": 0.9613083004951477,
+                    "URI": "http://host.docker.internal:8081/api/files/e35f1818-b3d0-4d60-955e-5fc4e4e5789f_temp_image_139.png"
+                },
+                {
+                    "name": "lion, king of beasts, Panthera leo",
+                    "Probability": 0.8959354758262634,
+                    "URI": "http://host.docker.internal:8081/api/files/eb7b4059-03a9-4ec4-ac3f-7736cbf3b900_temp_image_21.png"
+                },
+                {
+                    "name": "tiger, Panthera tigris",
+                    "Probability": 0.8881286978721619,
+                    "URI": "http://host.docker.internal:8081/api/files/fc743604-c0eb-4f10-976c-14e42c19b1fe_temp_image_268.png"
+                }
+            ]
+        },
+        {
+            "name": "Cluster 5",
+            "children": [
+                {
+                    "name": "wallaby, brush kangaroo",
+                    "Probability": 0.9764695763587952,
+                    "URI": "http://host.docker.internal:8081/api/files/17bb113a-ab02-4868-bc0d-d614d7c789b0_temp_image_299.png"
+                },
+                {
+                    "name": "Arabian camel, dromedary, Camelus dromedarius",
+                    "Probability": 0.9895877838134766,
+                    "URI": "http://host.docker.internal:8081/api/files/40fb28d5-c344-42a3-ad9d-98fe8486e581_temp_image_279.png"
+                },
+                {
+                    "name": "baboon",
+                    "Probability": 0.8819989562034607,
+                    "URI": "http://host.docker.internal:8081/api/files/6106731b-37eb-4480-a5d0-82712b47db6c_temp_image_96.png"
+                },
+                {
+                    "name": "bison",
+                    "Probability": 0.8508018851280212,
+                    "URI": "http://host.docker.internal:8081/api/files/7830fc7f-d38d-437c-812a-14d4abd42ca1_temp_image_212.png"
+                },
+                {
+                    "name": "otter",
+                    "Probability": 0.8132849335670471,
+                    "URI": "http://host.docker.internal:8081/api/files/7d68a279-a462-42d1-bc3f-5c5d214680d1_temp_image_181.png"
+                },
+                {
+                    "name": "ostrich, Struthio camelus",
+                    "Probability": 0.9999959468841553,
+                    "URI": "http://host.docker.internal:8081/api/files/8cbcf6c3-4d95-4fe4-92a4-fc73afcc865e_temp_image_46.png"
+                },
+                {
+                    "name": "marmot",
+                    "Probability": 0.9951431751251221,
+                    "URI": "http://host.docker.internal:8081/api/files/a9ca03a8-7c01-4301-8c75-6ca747e616fc_temp_image_265.png"
+                },
+                {
+                    "name": "koala, koala bear, kangaroo bear, native bear, Phascolarctos cinereus",
+                    "Probability": 0.9997383952140808,
+                    "URI": "http://host.docker.internal:8081/api/files/c09d90f0-31db-4dad-afb5-5d72739f8f31_temp_image_248.png"
+                },
+                {
+                    "name": "wallaby, brush kangaroo",
+                    "Probability": 0.9497635364532471,
+                    "URI": "http://host.docker.internal:8081/api/files/cb7c7f36-95e1-49fb-8bc5-5a2a2975a737_temp_image_239.png"
+                },
+                {
+                    "name": "mongoose",
+                    "Probability": 0.7389984726905823,
+                    "URI": "http://host.docker.internal:8081/api/files/d2c9ed03-5a28-43a5-953d-3c49cdab62c2_temp_image_69.png"
+                },
+                {
+                    "name": "goose",
+                    "Probability": 0.966284990310669,
+                    "URI": "http://host.docker.internal:8081/api/files/d57ebd0c-4e58-4a4e-80ec-c39807713fe5_temp_image_151.png"
+                },
+                {
+                    "name": "otter",
+                    "Probability": 0.9779053330421448,
+                    "URI": "http://host.docker.internal:8081/api/files/d9dd78a1-d512-4ad3-8e3c-9c5837f6e3b3_temp_image_293.png"
+                },
+                {
+                    "name": "black grouse",
+                    "Probability": 0.7601495981216431,
+                    "URI": "http://host.docker.internal:8081/api/files/db616ea8-9d1e-4897-845b-b2b99f36790b_temp_image_213.png"
+                },
+                {
+                    "name": "zebra",
+                    "Probability": 0.999998927116394,
+                    "URI": "http://host.docker.internal:8081/api/files/e28b0a1a-5a18-4650-8b8f-449e8471fb8e_temp_image_225.png"
+                }
+            ]
+        },
+        {
+            "name": "Cluster 6",
+            "children": [
+                {
+                    "name": "promontory, headland, head, foreland",
+                    "Probability": 0.7623658776283264,
+                    "URI": "http://host.docker.internal:8081/api/files/201fba5d-50e6-42ba-8463-1f2f15a81715_temp_image_81.png"
+                },
+                {
+                    "name": "alp",
+                    "Probability": 0.7705184817314148,
+                    "URI": "http://host.docker.internal:8081/api/files/711ea51f-f994-4828-a6b5-bde387d87e38_temp_image_65.png"
+                },
+                {
+                    "name": "lakeside, lakeshore",
+                    "Probability": 0.7548578977584839,
+                    "URI": "http://host.docker.internal:8081/api/files/9d96dc50-e1dd-4ef6-94b4-138465e4729c_temp_image_136.png"
+                },
+                {
+                    "name": "sandbar, sand bar",
+                    "Probability": 0.8991819024085999,
+                    "URI": "http://host.docker.internal:8081/api/files/ab6808a0-5776-4989-95db-62a721c48749_temp_image_161.png"
+                },
+                {
+                    "name": "dam, dike, dyke",
+                    "Probability": 0.9186040759086609,
+                    "URI": "http://host.docker.internal:8081/api/files/eed17356-ec49-4e5b-9402-ffb59e1acb98_temp_image_58.png"
+                },
+                {
+                    "name": "valley, vale",
+                    "Probability": 0.8658695816993713,
+                    "URI": "http://host.docker.internal:8081/api/files/fbbd31da-13c1-4ddd-ae1e-ca83653a026f_temp_image_281.png"
+                },
+                {
+                    "name": "alp",
+                    "Probability": 0.7868740558624268,
+                    "URI": "http://host.docker.internal:8081/api/files/fd24dc51-e867-47cc-89bc-9441e1394783_temp_image_246.png"
+                }
+            ]
+        },
+        {
+            "name": "Cluster 7",
+            "children": [
+                {
+                    "name": "steel arch bridge",
+                    "Probability": 0.7854819297790527,
+                    "URI": "http://host.docker.internal:8081/api/files/21517e89-bd58-4956-a719-5daedb7f5142_temp_image_15.png"
+                },
+                {
+                    "name": "triumphal arch",
+                    "Probability": 0.99173903465271,
+                    "URI": "http://host.docker.internal:8081/api/files/4443fbd7-a549-4bf3-b58b-2bfd40982890_temp_image_249.png"
+                },
+                {
+                    "name": "viaduct",
+                    "Probability": 0.7299097776412964,
+                    "URI": "http://host.docker.internal:8081/api/files/52dd67ac-73c0-448a-8497-26f09a107ffd_temp_image_288.png"
+                },
+                {
+                    "name": "viaduct",
+                    "Probability": 0.9998519420623779,
+                    "URI": "http://host.docker.internal:8081/api/files/603babc5-0412-4549-936b-eca320a64ebb_temp_image_47.png"
+                },
+                {
+                    "name": "triumphal arch",
+                    "Probability": 0.9535090923309326,
+                    "URI": "http://host.docker.internal:8081/api/files/be05fbb5-1d7c-41dd-9f90-642a3bd99e95_temp_image_99.png"
+                }
+            ]
+        },
+        {
+            "name": "Cluster 8",
+            "children": [
+                {
+                    "name": "wig",
+                    "Probability": 0.7873465418815613,
+                    "URI": "http://host.docker.internal:8081/api/files/23723297-9fe7-42a8-8dab-671ec53b9afc_temp_image_33.png"
+                },
+                {
+                    "name": "bearskin, busby, shako",
+                    "Probability": 0.7930237650871277,
+                    "URI": "http://host.docker.internal:8081/api/files/42255221-8e69-4e58-8461-023210cf717e_temp_image_64.png"
+                },
+                {
+                    "name": "bonnet, poke bonnet",
+                    "Probability": 0.8887044787406921,
+                    "URI": "http://host.docker.internal:8081/api/files/73980b44-14f6-4e15-b3e8-c69cf4383c6c_temp_image_98.png"
+                },
+                {
+                    "name": "wig",
+                    "Probability": 0.9590407013893127,
+                    "URI": "http://host.docker.internal:8081/api/files/c8073b11-91d1-4780-992d-eb891924847e_temp_image_11.png"
+                },
+                {
+                    "name": "wig",
+                    "Probability": 0.8422291874885559,
+                    "URI": "http://host.docker.internal:8081/api/files/e205f8a7-18c7-4a1f-ace8-c9305f9ebceb_temp_image_112.png"
+                }
+            ]
+        },
+        {
+            "name": "Cluster 9",
+            "children": [
+                {
+                    "name": "ladybug, ladybeetle, lady beetle, ladybird, ladybird beetle",
+                    "Probability": 0.9142323136329651,
+                    "URI": "http://host.docker.internal:8081/api/files/241294f0-77c2-4e1f-b5fb-d3af902c07b8_temp_image_45.png"
+                }
+            ]
+        },
+        {
+            "name": "Cluster 10",
+            "children": [
+                {
+                    "name": "kite",
+                    "Probability": 0.8592357635498047,
+                    "URI": "http://host.docker.internal:8081/api/files/28d3a73f-8b03-4e21-8952-889f98ff7abb_temp_image_124.png"
+                },
+                {
+                    "name": "kite",
+                    "Probability": 0.8970731496810913,
+                    "URI": "http://host.docker.internal:8081/api/files/6aa09003-a8b0-4d1e-9d49-772e01eb04bb_temp_image_204.png"
+                },
+                {
+                    "name": "parachute, chute",
+                    "Probability": 0.9999579191207886,
+                    "URI": "http://host.docker.internal:8081/api/files/96b0484c-05ca-4149-8a32-5d48f46cbfef_temp_image_175.png"
+                }
+            ]
+        },
+        {
+            "name": "Cluster 11",
+            "children": [
+                {
+                    "name": "ski",
+                    "Probability": 0.9870325326919556,
+                    "URI": "http://host.docker.internal:8081/api/files/2ee32400-2a7d-4764-a35c-b2162ec075d3_temp_image_5.png"
+                },
+                {
+                    "name": "dogsled, dog sled, dog sleigh",
+                    "Probability": 0.7473315596580505,
+                    "URI": "http://host.docker.internal:8081/api/files/f0c5b490-0c7c-4f59-ab67-2b7d860176e3_temp_image_109.png"
+                }
+            ]
+        },
+        {
+            "name": "Cluster 12",
+            "children": [
+                {
+                    "name": "maze, labyrinth",
+                    "Probability": 0.8774365186691284,
+                    "URI": "http://host.docker.internal:8081/api/files/3b2b37e0-33c9-4fc6-9cea-5b867c6fffd5_temp_image_57.png"
+                }
+            ]
+        },
+        {
+            "name": "Cluster 13",
+            "children": [
+                {
+                    "name": "vase",
+                    "Probability": 0.956788957118988,
+                    "URI": "http://host.docker.internal:8081/api/files/4566bbcf-a18b-4d1e-8eca-e666edc7a77c_temp_image_257.png"
+                },
+                {
+                    "name": "pot, flowerpot",
+                    "Probability": 0.8741388320922852,
+                    "URI": "http://host.docker.internal:8081/api/files/6537d8cc-f869-4d8f-9ee9-c46cabbc68ca_temp_image_88.png"
+                }
+            ]
+        },
+        {
+            "name": "Cluster 14",
+            "children": [
+                {
+                    "name": "umbrella",
+                    "Probability": 0.9194160103797913,
+                    "URI": "http://host.docker.internal:8081/api/files/54d96e39-5151-4cf1-af5d-523c065e26a8_temp_image_193.png"
+                },
+                {
+                    "name": "shower cap",
+                    "Probability": 0.8290801644325256,
+                    "URI": "http://host.docker.internal:8081/api/files/b3526684-d3ac-4ff4-aac2-340c0b29cd02_temp_image_87.png"
+                },
+                {
+                    "name": "bathing cap, swimming cap",
+                    "Probability": 0.9279771447181702,
+                    "URI": "http://host.docker.internal:8081/api/files/e950a4a0-c2e4-429c-acfe-7eb0552d65fe_temp_image_16.png"
+                },
+                {
+                    "name": "bathing cap, swimming cap",
+                    "Probability": 0.7774394154548645,
+                    "URI": "http://host.docker.internal:8081/api/files/feec9ca7-f375-4330-84f5-3cd81db051e5_temp_image_186.png"
+                }
+            ]
+        },
+        {
+            "name": "Cluster 15",
+            "children": [
+                {
+                    "name": "warplane, military plane",
+                    "Probability": 0.7647982239723206,
+                    "URI": "http://host.docker.internal:8081/api/files/55430ba9-b988-4eba-8213-2a35223f3807_temp_image_264.png"
+                },
+                {
+                    "name": "liner, ocean liner",
+                    "Probability": 0.993311882019043,
+                    "URI": "http://host.docker.internal:8081/api/files/af71e9e0-6321-450a-9a6e-ead10fc22028_temp_image_123.png"
+                }
+            ]
+        },
+        {
+            "name": "Cluster 16",
+            "children": [
+                {
+                    "name": "groom, bridegroom",
+                    "Probability": 0.8864408731460571,
+                    "URI": "http://host.docker.internal:8081/api/files/b8357340-8c87-435c-bbb6-26166a91c645_temp_image_103.png"
+                },
+                {
+                    "name": "military uniform",
+                    "Probability": 0.9169754385948181,
+                    "URI": "http://host.docker.internal:8081/api/files/ca300ccf-06e5-41f6-a379-683eeb43651e_temp_image_53.png"
+                },
+                {
+                    "name": "gasmask, respirator, gas helmet",
+                    "Probability": 0.7057451605796814,
+                    "URI": "http://host.docker.internal:8081/api/files/f9a62275-9694-45eb-a149-2c8cafe1f5ee_temp_image_245.png"
+                }
+            ]
+        },
+        {
+            "name": "Cluster 17",
+            "children": [
+                {
+                    "name": "rapeseed",
+                    "Probability": 0.7920252084732056,
+                    "URI": "http://host.docker.internal:8081/api/files/6f170c49-2174-46b2-b4c8-f126b61824ac_temp_image_101.png"
+                },
+                {
+                    "name": "African elephant, Loxodonta africana",
+                    "Probability": 0.8228206634521484,
+                    "URI": "http://host.docker.internal:8081/api/files/70705081-0325-4ebb-9252-de4b66565b1c_temp_image_296.png"
+                },
+                {
+                    "name": "American egret, great white heron, Egretta albus",
+                    "Probability": 0.879654049873352,
+                    "URI": "http://host.docker.internal:8081/api/files/72f936d0-935e-44fb-bbb9-8b03754e4cb1_temp_image_122.png"
+                }
+            ]
+        }
+    ]
+}

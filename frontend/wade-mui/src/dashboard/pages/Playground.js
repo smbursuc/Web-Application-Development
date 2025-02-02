@@ -59,36 +59,10 @@ export default function Playground(props) {
       value: "cifar10",
       displayValue: "CIFAR-10",
     },
-  ];
-
-  const features = [
     {
-      title: "Description",
-      description:
-        "The CIFAR-10 and CIFAR-100 datasets are labeled subsets of the 80 million tiny images dataset.",
-    },
-    {
-      title: "Image Size",
-      description: "32x32",
-    },
-    {
-      title: "Dataset Size",
-      description: "50.000 images, ~177MB",
-    },
-    {
-      title: "Classes",
-      description:
-        "There are 10 classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck.",
-    },
-    {
-      title: "Prediction Time",
-      description: "~4 hours /w DeepDetect CPU, Ryzen 5 7600x",
-    },
-    {
-      title: "Predictions",
-      description:
-        "For each image of the dataset the best 3 guesses were stored. This explains why so many images are being categorized by one object, it was because the object was present in the top 3 predictions.",
-    },
+      value: "bsds300",
+      displayValue: "BSDS300"
+    }
   ];
 
   const handleInfOpen = () => {
@@ -111,65 +85,91 @@ export default function Playground(props) {
     {
       for: "clusterData",
       label: "Get Cluster Data (5 clusters)",
-      query: `PREFIX ex: <http://example.org/ontology#>
-SELECT ?cluster ?child ?name ?probability ?uri
+      query: `
+PREFIX ex: <http://example.org/ontology#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?clusterLabel ?predictedObjectLabel ?probability ?imageURI
 WHERE {
-  ?cluster a ex:Cluster ;
-           ex:hasChild ?child .
-  ?child a ex:Object ;
-         ex:hasName ?name ;
-         ex:hasProbability ?probability ;
-         ex:hasURI ?uri .
+  GRAPH <http://example.org/${selectedDataset}_clusters> {
+    ?cluster a skos:Concept ;
+             skos:prefLabel ?clusterLabel ;
+             ex:hasPrediction ?prediction .
+    ?prediction ex:hasProbability ?probability ;
+                ex:hasURI ?imageURI ;
+                ex:predictedObject ?predictedObject .
+    ?predictedObject skos:prefLabel ?predictedObjectLabel .
+  }
 }
 LIMIT 5
-OFFSET 5`,
+
+`,
     },
     {
       for: "clusterData",
-      label: "Average Cluster Probability Greater Than 20%",
+      label: "Average Cluster Probability Greater Than 90%",
       query: `PREFIX ex: <http://example.org/ontology#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-SELECT ?cluster ?child ?name ?probability ?uri
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?clusterLabel ?predictedObjectLabel ?probability ?imageURI
 WHERE {
-  ?cluster a ex:Cluster ;
-           ex:hasChild ?child .
-  ?child a ex:Object ;
-         ex:hasName ?name ;
-         ex:hasProbability ?probability ;
-         ex:hasURI ?uri .
-  FILTER (?probability > 0.2)
+  GRAPH <http://example.org/${selectedDataset}_clusters> {
+    ?cluster a skos:Concept ;
+             skos:prefLabel ?clusterLabel ;
+             ex:hasPrediction ?prediction .
+    ?prediction ex:hasProbability ?probability ;
+                ex:hasURI ?imageURI ;
+                ex:predictedObject ?predictedObject .
+    ?predictedObject skos:prefLabel ?predictedObjectLabel .
+    FILTER (?probability > 0.9)
+  }
 }
 LIMIT 5
-OFFSET 5
 `,
     },
     {
       for: "heatmapData",
       label: "Get Heatmap (5 relations)",
-      query: `PREFIX ex: <http://example.org/ontology#>
-
-SELECT ?object1 ?object2 ?similarity
+      query: `
+      PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX ex: <http://example.org/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?fromLabel ?toLabel ?similarityValue
 WHERE {
-  ?object1 ex:hasSimilarity ?similarityNode .
-  ?similarityNode ex:relatedTo ?object2 ;
-                  ex:similarityValue ?similarity .
+  GRAPH <http://example.org/${selectedDataset}_heatmap> {
+    ?sim ex:fromObject ?from .
+    ?sim ex:toObject ?to .
+    ?sim ex:hasCorrelationValue ?similarityValue .
+    ?from a skos:Concept ;
+          rdfs:label ?fromLabel .
+    ?to a skos:Concept ;
+          rdfs:label ?toLabel .
+  }
 }
 LIMIT 5
-OFFSET 5
+
 `,
     },
     {
       for: "heatmapData",
       label: "Pairings With Similarity Greater Than 20%",
-      query: `PREFIX ex: <http://example.org/ontology#>
-SELECT ?object1 ?object2 ?similarity
+      query: `
+      PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX ex: <http://example.org/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?fromLabel ?toLabel ?similarityValue
 WHERE {
-  ?object1 ex:hasSimilarity ?similarityNode .
-  ?similarityNode ex:relatedTo ?object2 ;
-                  ex:similarityValue ?similarity .
-  FILTER (?similarity > 0.2)
+  GRAPH <http://example.org/${selectedDataset}_heatmap> {
+    ?sim ex:fromObject ?from .
+    ?sim ex:toObject ?to .
+    ?sim ex:hasCorrelationValue ?similarityValue .
+    ?from a skos:Concept ;
+          rdfs:label ?fromLabel .
+    ?to a skos:Concept ;
+          rdfs:label ?toLabel .
+    FILTER(?similarityValue > 0.2)
+  }
 }
-ORDER BY DESC(?similarity)
 LIMIT 5`,
     },
   ];
@@ -213,7 +213,7 @@ WHERE {
 
     const limitClause = rangeSliderValue;
     const offsetClause = rangeStartSliderValue;
-    let query = filterQueries[dataType];
+    let query = predefinedQueries[dataType];
     query = query + (sortClause ? sortClause + "\n" : ""); // in case no-sort then don't include newline
     query = query + `LIMIT ${limitClause}\n`;
     query = query + `OFFSET ${offsetClause}`;
@@ -301,7 +301,7 @@ WHERE {
           <InfoModal
             infOpen={infOpen}
             handleInfClose={handleInfClose}
-            features={features}
+            selectedDataset={selectedDataset}
           />
           <Typography variant="h5" align="center" sx={{ my: 2 }}>
             SPARQL Query Builder
@@ -338,7 +338,7 @@ WHERE {
                 )
             )}
           </Box>
-          <Box
+          {/* <Box
             sx={{
               display: "flex",
               justifyContent: "flex-start",
@@ -362,7 +362,7 @@ WHERE {
             rangeStartSliderValue={rangeStartSliderValue}
             setRangeStartSliderValue={setRangeStartSliderValue}
             options={options}
-          />
+          /> */}
           {/* Query Text Area */}
           <Box
             component="form"

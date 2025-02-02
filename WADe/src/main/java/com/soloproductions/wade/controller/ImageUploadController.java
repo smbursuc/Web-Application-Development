@@ -21,7 +21,7 @@ import java.util.UUID;
 public class ImageUploadController
 {
 
-    private static final String UPLOAD_DIR = "uploaded-images";
+    private static final String UPLOAD_DIR = "bsds300";
 
     @PostMapping("/upload-image")
     public ResponseEntity<String> uploadImage(@RequestParam("image") MultipartFile file)
@@ -72,7 +72,22 @@ public class ImageUploadController
             }
             else
             {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+                filePath = Paths.get("uploaded-images").resolve(fileName).normalize();
+                resource = new UrlResource(filePath.toUri());
+
+                if (resource.exists())
+                {
+                    // content-type header needs to be set to image so that the browser won't display binary data
+                    String contentType = Files.probeContentType(filePath);
+                    return ResponseEntity.ok()
+                            .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"")
+                            .contentType(MediaType.parseMediaType(contentType))
+                            .body(resource);
+                }
+                else
+                {
+                    return ResponseEntity.notFound().build();
+                }
             }
         }
         catch (Exception e)

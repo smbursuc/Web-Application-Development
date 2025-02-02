@@ -4,81 +4,80 @@ import org.apache.jena.query.*;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class SparqlQueryService
 {
 
-    private static final String SPARQL_ENDPOINT = "http://127.0.0.1:3030/impr_skos";
+    private static final String SPARQL_ENDPOINT = "http://127.0.0.1:3030/impr";
 
-    public String buildClusterQuery(String name, String sort, int range, int rangeStart)
-    {
+    public String buildClusterQuery(String name, String sort, int range, int rangeStart, String graphURI) {
         StringBuilder query = new StringBuilder();
 
-        query.append("PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\n");
         query.append("PREFIX ex: <http://example.org/ontology#>\n");
-        query.append("SELECT ?clusterName ?predictionURI ?probability ?imageURI ?objectName\n");
+        query.append("PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\n");
+        query.append("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
+        query.append("SELECT ?clusterLabel ?predictedObjectLabel ?probability ?imageURI\n");
         query.append("WHERE {\n");
-        query.append("  ?cluster a skos:Concept ;\n");
-        query.append("           skos:prefLabel ?clusterName ;\n");
-        query.append("           ex:hasPrediction ?prediction .\n");
-        query.append("  ?prediction ex:hasProbability ?probability ;\n");
-        query.append("              ex:hasURI ?imageURI ;\n");
-        query.append("              ex:predictedObject ?object .\n");
-        query.append("  ?object skos:prefLabel ?objectName .\n");
+        query.append("  GRAPH <http://example.org/").append(graphURI).append("> {\n");
+        query.append("    ?cluster a skos:Concept ;\n");
+        query.append("             skos:prefLabel ?clusterLabel ;\n");
+        query.append("             ex:hasPrediction ?prediction .\n");
+        query.append("    ?prediction ex:hasProbability ?probability ;\n");
+        query.append("                ex:hasURI ?imageURI ;\n");
+        query.append("                ex:predictedObject ?predictedObject .\n");
+        query.append("    ?predictedObject skos:prefLabel ?predictedObjectLabel .\n");
+        query.append("  }\n");
 
-        if (name != null)
-        {
-            query.append("  FILTER (regex(?clusterName, \"").append(name).append("\", \"i\"))\n");
+        if (name != null && !name.isEmpty()) {
+            query.append("  FILTER (regex(?clusterLabel, \"").append(name).append("\", \"i\"))\n");
         }
 
         query.append("}\n");
 
-        // Add sorting
-        if (sort.equalsIgnoreCase("highest_probability"))
-        {
-            query.append("ORDER BY DESC(?probability)\n");
-        }
-        else if (sort.equalsIgnoreCase("lowest_probability"))
-        {
-            query.append("ORDER BY ASC(?probability)\n");
+        // Add sorting logic if provided
+        if (sort != null) {
+            if ("highest_probability".equalsIgnoreCase(sort)) {
+                query.append("ORDER BY DESC(?probability)\n");
+            } else if ("lowest_probability".equalsIgnoreCase(sort)) {
+                query.append("ORDER BY ASC(?probability)\n");
+            }
         }
 
-        // Add range and offset
-        query.append("LIMIT ").append(range).append("\n");
-        query.append("OFFSET ").append(rangeStart).append("\n");
+        // Add pagination settings
+        if (range != 0)
+        {
+            query.append("LIMIT ").append(range).append("\n");
+        }
+        if (rangeStart != 0)
+        {
+            query.append("OFFSET ").append(rangeStart).append("\n");
+        }
 
         return query.toString();
     }
 
-    public List<Map<String, String>> executeClusterSparqlQuery(String sparqlQuery)
-    {
+    public List<Map<String, String>> executeClusterSparqlQuery(String sparqlQuery) {
         Query query = QueryFactory.create(sparqlQuery);
-        try (QueryExecution qexec = QueryExecution.service(SPARQL_ENDPOINT).query(query).build();)
-        {
+        try (QueryExecution qexec = QueryExecution.service(SPARQL_ENDPOINT).query(query).build();) {
             ResultSet results = qexec.execSelect();
 
             List<Map<String, String>> resultList = new ArrayList<>();
-            while (results.hasNext())
-            {
+            while (results.hasNext()) {
                 QuerySolution solution = results.nextSolution();
                 Map<String, String> row = new HashMap<>();
-                row.put("clusterName", solution.getLiteral("clusterName").getString());
-//                row.put("predictionURI", solution.getResource("predictionURI").getURI());
+                row.put("clusterLabel", solution.getLiteral("clusterLabel").getString());
                 row.put("probability", solution.getLiteral("probability").getString());
                 row.put("imageURI", solution.getLiteral("imageURI").getString());
-                row.put("objectName", solution.getLiteral("objectName").getString());
+                row.put("predictedObjectLabel", solution.getLiteral("predictedObjectLabel").getString());
                 resultList.add(row);
             }
             return resultList;
         }
     }
 
-    public String buildHeatmapQuery(String sortType, String sort, int range, int rangeStart)
+    public String buildHeatmapQueryOld(String sortType, String sort, int range, int rangeStart, String graph)
     {
         StringBuilder query = new StringBuilder();
 
@@ -131,8 +130,65 @@ public class SparqlQueryService
             }
         }
 
-        query.append("LIMIT ").append(range).append("\n");
-        query.append("OFFSET ").append(rangeStart).append("\n");
+        if (range != 0)
+        {
+            query.append("LIMIT ").append(range).append("\n");
+        }
+        if (rangeStart != 0)
+        {
+            query.append("OFFSET ").append(rangeStart).append("\n");
+        }
+
+        return query.toString();
+    }
+
+    public String buildHeatmapQuery(String sortType, String sort, int range, int rangeStart, String graphURI) {
+        StringBuilder query = new StringBuilder();
+
+        query.append("PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\n");
+        query.append("PREFIX ex: <http://example.org/ontology#>\n");
+        query.append("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
+        query.append("SELECT ?fromLabel ?toLabel ?similarityValue\n");
+        query.append("WHERE {\n");
+        query.append("  GRAPH <http://example.org/").append(graphURI).append("> {\n"); // Include the GRAPH clause
+        query.append("    ?sim ex:fromObject ?from .\n");
+        query.append("    ?sim ex:toObject ?to .\n");
+        query.append("    ?sim ex:hasCorrelationValue ?similarityValue .\n");
+        query.append("    ?from a skos:Concept ;\n");
+        query.append("          rdfs:label ?fromLabel .\n");
+        query.append("    ?to a skos:Concept ;\n");
+        query.append("          rdfs:label ?toLabel .\n");
+        query.append("  }\n");
+        query.append("  FILTER(?similarityValue < 0.99)");
+        query.append("}\n");
+
+        // Append sorting logic based on the sortType and sort direction
+        if ("average_similarity".equalsIgnoreCase(sortType)) {
+            query.append("GROUP BY ?fromLabel ?toLabel ?similarityValue\n");
+            query.append("ORDER BY ");
+            if ("highest_probability".equalsIgnoreCase(sort)) {
+                query.append("DESC(AVG(?similarityValue))\n");
+            } else if ("lowest_probability".equalsIgnoreCase(sort)) {
+                query.append("ASC(AVG(?similarityValue))\n");
+            }
+        } else if ("strongest_pair".equalsIgnoreCase(sortType)) {
+            query.append("GROUP BY ?fromLabel ?toLabel ?similarityValue\n");
+            query.append("ORDER BY ");
+            if ("highest_probability".equalsIgnoreCase(sort)) {
+                query.append("DESC(MAX(?similarityValue))\n");
+            } else if ("lowest_probability".equalsIgnoreCase(sort)) {
+                query.append("ASC(MAX(?similarityValue))\n");
+            }
+        }
+
+        if (range != 0)
+        {
+            query.append("LIMIT ").append(range).append("\n");
+        }
+        if (rangeStart != 0)
+        {
+            query.append("OFFSET ").append(rangeStart).append("\n");
+        }
 
         return query.toString();
     }
@@ -149,44 +205,13 @@ public class SparqlQueryService
             {
                 QuerySolution solution = results.nextSolution();
                 Map<String, Object> row = new HashMap<>();
-                row.put("fromObject", solution.getResource("fromObject").getURI());
-                row.put("toObject", solution.getResource("toObject").getURI());
+                row.put("fromLabel", solution.getLiteral("fromLabel").getString());
+                row.put("toLabel", solution.getLiteral("toLabel").getString());
                 row.put("similarityValue", solution.getLiteral("similarityValue").getDouble());
                 resultList.add(row);
             }
             return resultList;
         }
     }
-
-    public List<String> getAllHeatmapObjectsFromRDF() throws Exception
-    {
-        String queryStr = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\n" +
-                "SELECT DISTINCT ?object\n" +
-                "WHERE {\n" +
-                "  ?object a skos:Concept .\n" +
-                "}" +
-                "LIMIT 500";
-
-        Query query = QueryFactory.create(queryStr);
-        try (QueryExecution qexec = QueryExecution.service(SPARQL_ENDPOINT).query(query).build();)
-        {
-            ResultSet results = qexec.execSelect();
-
-            List<String> objects = new ArrayList<>();
-            while (results.hasNext())
-            {
-                QuerySolution solution = results.nextSolution();
-                objects.add(solution.getResource("object").getURI());
-            }
-
-            if (objects.isEmpty())
-            {
-                throw new Exception("No objects found in the RDF store.");
-            }
-
-            return objects;
-        }
-    }
-
 
 }

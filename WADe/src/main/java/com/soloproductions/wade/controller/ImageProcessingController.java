@@ -107,7 +107,7 @@ public class ImageProcessingController
             inputNode.put("height", 224);
 
             ObjectNode outputNode = parametersNode.putObject("output");
-            outputNode.put("best", 3);
+            outputNode.put("best", 1);
 
             ObjectNode mllibNode = parametersNode.putObject("mllib");
             mllibNode.put("gpu", true);

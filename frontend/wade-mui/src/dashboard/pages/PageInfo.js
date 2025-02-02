@@ -55,6 +55,9 @@ export default function PageInfo(props) {
   const selectedDataset = props.selectedDataset;
   const setSelectedDataset = props.setSelectedDataset;
   const handleDatasetChange = props.handleDatasetChange;
+  const dataModel = props?.dataModel;
+  const dataModels = props?.dataModels;
+  const handleDataModelChange = props?.handleDataModelChange;
 
   return (
     <Box
@@ -105,6 +108,21 @@ export default function PageInfo(props) {
           ))}
         </Select>
       </FormControl>
+      {dataModels && <FormControl fullWidth >
+        <InputLabel id="datamodel-select-label">Select Data Model for Representation</InputLabel>
+        <Select
+          labelId="datamodel-select-label"
+          id="datamodel-select"
+          value={dataModel}
+          onChange={handleDataModelChange}
+        >
+          {dataModels.map((dataModel) => (
+            <MenuItem key={dataModel.value} value={dataModel.value}>
+              {dataModel.displayValue}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>}
     </Box>
   );
 }

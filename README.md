@@ -86,6 +86,10 @@ Maybe you can mention me or this repo in the acknowledgements too
 </div>
 
 
+### :video_camera: Demo
+
+A video demo: https://www.youtube.com/watch?v=CNgJ0re4Xik
+
 <!-- TechStack -->
 ### :space_invader: Tech Stack
 

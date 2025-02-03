@@ -130,7 +130,7 @@ A video demo: https://www.youtube.com/watch?v=CNgJ0re4Xik
 ### :key: Environment Variables
 
 The project uses JWT. The secret key is defined in `application.properties` but can be set anywhere desired.
-In order to manually add a dataset an API key is needed for Groq, which is used for cluster labeling. Find more about Groq <a href="https://console.groq.com/keys">here</a>.
+A Groq API key is optional for the runtime and mandatory for the data conversion. Find more about Groq <a href="https://console.groq.com/keys">here</a>.
 
 <!-- Getting Started -->
 ## 	:toolbox: Getting Started

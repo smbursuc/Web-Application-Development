@@ -88,8 +88,8 @@ Maybe you can mention me or this repo in the acknowledgements too
 
 ### :video_camera: Demo
 
-A video demo: https://youtu.be/GYQpHTsIiP0
-Tehnical documentation is in `scholarly-html-pg-pages/index.html`.
+- A video demo: https://youtu.be/GYQpHTsIiP0
+- Tehnical documentation is in `scholarly-html-pg-pages/index.html`.
 
 <!-- TechStack -->
 ### :space_invader: Tech Stack

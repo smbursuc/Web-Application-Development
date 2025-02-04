@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5b72f5c2-5283-475c-971b-4d4e8bb5e1fc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/frontend/wade-mui/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/wade-mui/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/wade-mui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/wade-mui/package.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2rg3MXz6M07LvNRGplOgMz5HWHo" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/repos/Web-Application-Development/WADe",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5b72f5c2-5283-475c-971b-4d4e8bb5e1fc" name="Changes" comment="" />
+      <created>1736966842510</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1736966842510</updated>
+      <workItem from="1736966843682" duration="639000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/shared-theme/themePrimitives.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/shared-theme/customizations/surfaces.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/theme/customizations/charts.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/theme/customizations/datePickers.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/theme/customizations/dataGrid.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/theme/customizations/index.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/theme/customizations/treeView.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/marketing-page/components/AppAppBar.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/MenuButton.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/marketing-page/components/Pricing.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/SessionsChart.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/Dashboard.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/marketing-page/components/SitemarkIcon.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/shared-theme/customizations/navigation.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/MenuContent.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/Header.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/OptionsMenu.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/sign-in/CustomIcons.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/PageViewsBarChart.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/marketing-page/components/FAQ.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/AppNavbar.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/StatCard.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/marketing-page/components/Testimonials.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/shared-theme/ColorModeSelect.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/shared-theme/ColorModeIconDropdown.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/CardAlert.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/MainGrid.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/NavbarBreadcrumbs.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/shared-theme/AppTheme.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/HighlightedCard.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/shared-theme/customizations/feedback.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/internals/components/Copyright.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/internals/data/gridData.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/SelectContent.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/shared-theme/customizations/dataDisplay.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/marketing-page/components/Footer.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/marketing-page/components/Hero.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/shared-theme/customizations/inputs.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/marketing-page/components/LogoCollection.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/CustomDatePicker.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/ChartUserByCountry.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/SideMenu.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/marketing-page/components/Highlights.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/marketing-page/MarketingPage.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/marketing-page/components/Features.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/sign-in/ForgotPassword.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/CustomizedDataGrid.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/sign-in/SignIn.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/sign-up/CustomIcons.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/sign-up/SignUp.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/internals/components/CustomIcons.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/CustomizedTreeView.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/SideMenuMobile.js" />
+        <option value="$PROJECT_DIR$/frontend/wade-mui/src/dashboard/components/Search.js" />
+      </list>
+    </option>
+  </component>
+</project>

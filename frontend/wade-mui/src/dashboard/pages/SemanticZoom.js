@@ -49,6 +49,7 @@ import CircleIcon from "@mui/icons-material/Circle";
 import InfoModal from "./InfoModal";
 import FilterComponent from "./FilterComponent";
 import PageInfo from "./PageInfo";
+import Groq from "groq-sdk";
 
 const xThemeComponents = {
   ...chartsCustomizations,
@@ -95,6 +96,8 @@ export default function SemanticZoom(props) {
   const [sort, setSort] = useState("highest_probability");
   const [dataModel, setDataModel] = useState("rdf");
 
+  const [selectedClusterLabel, setSelectedClusterLabel] = useState("");
+
   const [maxClusters, setMaxClusters] = useState(() => {
     return getFromLocalStorage("maxClusters") || {};
   });
@@ -130,13 +133,11 @@ export default function SemanticZoom(props) {
   };
 
   const fetchClusterData = async (resetParams) => {
-    setIsLoading(true);
-
     if (resetParams) {
       setRangeSliderValue(5);
       setRangeStartSliderValue(1);
     }
-    
+
     let queryParams = "";
     if (sort !== "no_sort") {
       queryParams = `sort=${sort}`;
@@ -154,25 +155,29 @@ export default function SemanticZoom(props) {
       const data = await response.json();
       const result = data.data;
 
-      updateValues(result);
+      await updateValues(result);
     } catch (error) {
       console.error("Failed to fetch cluster data:", error);
     }
-    setIsLoading(false);
   };
 
   useEffect(() => {
-    fetchClusterData(true);
-    let cache = getFromLocalStorage("maxClusters");
-    if (
-      !cache ||
-      !cache[selectedDataset] ||
-      !cache[selectedDataset][dataModel]
-    ) {
-      fetchMetadata();
-    } else {
-      setMaxClusters(cache);
-    }
+    const fetchData = async () => {
+      // setIsLoading(true);                            this unfortunately breaks the plot ! the plot re-renders and loses its event handler for the onclick
+      await fetchClusterData(true);
+      let cache = getFromLocalStorage("maxClusters");
+      if (
+        !cache ||
+        !cache[selectedDataset] ||
+        !cache[selectedDataset][dataModel]
+      ) {
+        fetchMetadata();
+      } else {
+        setMaxClusters(cache);
+      }
+      setIsLoading(false);
+    };
+    fetchData();
   }, [selectedDataset, dataModel]);
 
   function saveToLocalStorage(key, data) {
@@ -185,7 +190,6 @@ export default function SemanticZoom(props) {
   }
 
   const fetchMetadata = async () => {
-    setIsLoading(true);
     const url = `http://127.0.0.1:8081/api/${selectedDataset}/metadata/${dataModel}/clusters`;
     const response = await fetch(url);
     const data = await response.json();
@@ -213,9 +217,7 @@ export default function SemanticZoom(props) {
       const data = await response.json();
       const result = data.data;
 
-      setSelectedClusterLabels(result.labels);
-      setSelectedClusterValues(result.values);
-      setSelectedClusterUris(result.uris);
+      await updateValuesSingle(result);
       // setSelectedCluster(clusterName);
 
       // updateValues(result);
@@ -231,17 +233,26 @@ export default function SemanticZoom(props) {
     setUris(result.uris);
   };
 
+  const updateValuesSingle = async (result) => {
+    setSelectedClusterLabels(result.labels);
+    setSelectedClusterValues(result.values);
+    setSelectedClusterUris(result.uris);
+  };
+
   const handlePlotlyClick = (event) => {
-    if (event.points) {
+    if (event.points && !isLoading) {
       const clickedCluster = event.points[0].label;
       // ensure a cluster was clicked and not an item
       if (selectedCluster === clickedCluster || !clickedCluster) {
         // this is a deselect
         setSelectedCluster("");
+        setSelectedClusterLabel("");
       } else {
         if (clickedCluster.includes("Cluster")) {
+          setIsLoading(true);
           fetchSingleCluster(clickedCluster);
           setSelectedCluster(clickedCluster);
+          setIsLoading(false);
         }
       }
     }
@@ -260,8 +271,47 @@ export default function SemanticZoom(props) {
   };
 
   const handleApplyFilters = () => {
+    setIsLoading(true);
     fetchClusterData(false);
+    setIsLoading(false);
   };
+
+  const groq = new Groq({ apiKey: "your_api_key", dangerouslyAllowBrowser: true });
+
+  async function getGroqChatCompletion(prompt) {
+    return groq.chat.completions.create({
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+      model: "llama-3.3-70b-versatile",
+    });
+  }
+
+  const handleLabelCluster = () => {
+    const sendPrompt = async () => {
+      let promptQuery;
+      promptQuery = "You will receive a list of objects and your task is to assign a cluster label for these objects.\n";
+      promptQuery += "Reply with only one word (at most 2-3) with the fitting cluster name and nothing else.\n";
+      promptQuery += "The list of objects is:\n";
+      promptQuery += JSON.stringify(selectedClusterLabels);
+
+      try
+      {
+        const chatCompletion = await getGroqChatCompletion(promptQuery);
+        const content = chatCompletion.choices[0]?.message?.content || "";
+        setSelectedClusterLabel(content);
+      }
+      catch (error)
+      {
+        // this is a non vital feature of the application, just ignore if user didnt provide an API key
+      }
+      
+    }
+    sendPrompt();
+  }
 
   return (
     <AppTheme {...props} themeComponents={xThemeComponents}>
@@ -300,7 +350,13 @@ export default function SemanticZoom(props) {
                 rangeStartSliderValue={rangeStartSliderValue}
                 setRangeStartSliderValue={setRangeStartSliderValue}
                 options={options}
-                max={maxClusters[selectedDataset][dataModel]}
+                max={
+                  getFromLocalStorage("maxClusters") &&
+                  maxClusters[selectedDataset] &&
+                  maxClusters[selectedDataset][dataModel]
+                    ? maxClusters[selectedDataset][dataModel]
+                    : 100
+                }
               />
               {isLoading ? (
                 <p>Loading cluster data...</p>
@@ -334,38 +390,63 @@ export default function SemanticZoom(props) {
                   : "Select a cluster to see its details"}
               </Typography>
               {selectedCluster && !isLoading && (
-                <Grid container spacing={2} alignItems="stretch">
-                  {selectedClusterValues.map((value, index) => {
-                    if (!selectedClusterLabels[index].includes("Cluster"))
-                      return (
-                        <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-                          <Card style={{ height: "100%" }}>
-                            <CardMedia
-                              component="img"
-                              height="140"
-                              image={selectedClusterUris[index]}
-                              alt={selectedClusterLabels[index + 1]}
-                            />
-                            <CardContent>
-                              <Typography variant="h6" align="center">
-                                {selectedClusterLabels[index + 1]}
-                              </Typography>
-                              <Typography
-                                variant="body2"
-                                align="center"
-                                color="textSecondary"
-                              >
-                                Confidence:{" "}
-                                {(selectedClusterValues[index] * 100).toFixed(
-                                  2
+                <Grid>
+                  <Button
+                    variant="contained"
+                    sx={{ width: "100%" }}
+                    onClick={handleLabelCluster}
+                  >
+                    Label this cluster
+                  </Button>
+                  {selectedClusterLabel && (
+                    <Typography variant="h4" sx={{ my: 2 }}>
+                      The detected label is:{" "}
+                      <span style={{ color: "red" }}>{selectedClusterLabel}</span>
+                    </Typography>
+                  )}
+                  <Grid container spacing={2} alignItems="stretch">
+                    {selectedClusterValues.map((value, index) => {
+                      if (!selectedClusterLabels[index].includes("Cluster"))
+                        return (
+                          <Grid
+                            item="true"
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            lg={3}
+                            key={index}
+                          >
+                            <Card style={{ height: "100%" }}>
+                              <CardMedia
+                                component="img"
+                                height="140"
+                                image={selectedClusterUris[index].replace(
+                                  "host.docker.internal",
+                                  "localhost"
                                 )}
-                                %
-                              </Typography>
-                            </CardContent>
-                          </Card>
-                        </Grid>
-                      );
-                  })}
+                                alt={selectedClusterLabels[index + 1]}
+                              />
+                              <CardContent>
+                                <Typography variant="h6" align="center">
+                                  {selectedClusterLabels[index]}
+                                </Typography>
+                                <Typography
+                                  variant="body2"
+                                  align="center"
+                                  color="textSecondary"
+                                >
+                                  Confidence:{" "}
+                                  {(selectedClusterValues[index] * 100).toFixed(
+                                    2
+                                  )}
+                                  %
+                                </Typography>
+                              </CardContent>
+                            </Card>
+                          </Grid>
+                        );
+                    })}
+                  </Grid>
                 </Grid>
               )}
             </Grid>

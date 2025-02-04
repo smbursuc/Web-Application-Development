@@ -11,7 +11,7 @@ from groq import Groq
 
 dataset = "bsds300"
 
-client = Groq(api_key="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")
+client = Groq(api_key="your_api_key")
 
 # Function to parse JSON in batches
 def parse_json_in_batches(file_path, batch_size=1000):

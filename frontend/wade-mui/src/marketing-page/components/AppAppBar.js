@@ -15,6 +15,7 @@ import Sitemark from "./SitemarkIcon";
 import ColorModeIconDropdown from "../../shared-theme/ColorModeIconDropdown";
 import { Link } from "react-router-dom";
 import { useAppState } from "../../contexts/AppStateContext";
+import ImprLogo from '../../icons/ImprLogo';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: "flex",
@@ -62,7 +63,10 @@ export default function AppAppBar(props) {
           <Box
             sx={{ flexGrow: 1, display: "flex", alignItems: "center", px: 0 }}
           >
-            <Sitemark />
+            <ImprLogo  sx={{width: 50, height: "auto"}}>
+
+            </ImprLogo>
+            {/* <Sitemark />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <Button variant="text" color="info" size="small">
                 Features
@@ -92,7 +96,7 @@ export default function AppAppBar(props) {
               >
                 Blog
               </Button>
-            </Box>
+            </Box> */}
           </Box>
           <Box
             sx={{

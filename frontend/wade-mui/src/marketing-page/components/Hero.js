@@ -3,13 +3,14 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import InputLabel from '@mui/material/InputLabel';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
 import { visuallyHidden } from '@mui/utils';
 import { styled } from '@mui/material/styles';
+import { Link } from "react-router-dom";
 
 const StyledBox = styled('div')(({ theme }) => ({
   alignSelf: 'center',
@@ -74,7 +75,8 @@ export default function Hero() {
               fontSize: 'clamp(3rem, 10vw, 3.5rem)',
             }}
           >
-            Our&nbsp;latest&nbsp;
+            {/* Our&nbsp;latest&nbsp; */}
+            IMPR
             <Typography
               component="span"
               variant="h1"
@@ -86,7 +88,7 @@ export default function Hero() {
                 }),
               })}
             >
-              products
+              {/* products */}
             </Typography>
           </Typography>
           <Typography
@@ -96,20 +98,19 @@ export default function Hero() {
               width: { sm: '100%', md: '80%' },
             }}
           >
-            Explore our cutting-edge dashboard, delivering high-quality solutions
-            tailored to your needs. Elevate your experience with top-tier features
-            and services.
+            Semantic zooming has never been easier. Visualize clusterized object groups by semantic meaning with our powerful
+            representation and clustering tools.
           </Typography>
           <Stack
             direction={{ xs: 'column', sm: 'row' }}
             spacing={1}
             useFlexGap
-            sx={{ pt: 2, width: { xs: '100%', sm: '350px' } }}
+            sx={{ pt: 2, width: { xs: '100%', sm: '350px' }, justifyContent: "center" }}
           >
             <InputLabel htmlFor="email-hero" sx={visuallyHidden}>
               Email
             </InputLabel>
-            <TextField
+            {/* <TextField
               id="email-hero"
               hiddenLabel
               size="small"
@@ -123,17 +124,19 @@ export default function Hero() {
                   'aria-label': 'Enter your email address',
                 },
               }}
-            />
+            /> */}
             <Button
               variant="contained"
               color="primary"
               size="small"
               sx={{ minWidth: 'fit-content' }}
+              component={Link}
+              to="/signin"
             >
               Start now
             </Button>
           </Stack>
-          <Typography
+          {/* <Typography
             variant="caption"
             color="text.secondary"
             sx={{ textAlign: 'center' }}
@@ -143,9 +146,9 @@ export default function Hero() {
               Terms & Conditions
             </Link>
             .
-          </Typography>
+          </Typography> */}
         </Stack>
-        <StyledBox id="image" />
+        {/* <StyledBox id="image" /> */}
       </Container>
     </Box>
   );

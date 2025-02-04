@@ -23,7 +23,7 @@ export default function MarketingPage(props) {
       <CssBaseline enableColorScheme />
       <AppAppBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <Hero />
-      <div>
+      {/* <div>
         <LogoCollection />
         <Features />
         <Divider />
@@ -36,7 +36,7 @@ export default function MarketingPage(props) {
         <FAQ />
         <Divider />
         <Footer />
-      </div>
+      </div> */}
     </AppTheme>
   );
 }

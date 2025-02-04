@@ -22,6 +22,7 @@ import Alert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
 import LogoutRequired from "../logout-required/LogoutRequired";
 import { checkAuth } from "../utils/checkAuth";
+import { useAppState } from "../contexts/AppStateContext";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -78,6 +79,10 @@ export default function SignIn(props) {
   const [initialized, setInitialized] = useState(false);
   const [timerActive, setTimerActive] = useState(false);
 
+  const appStateProps = useAppState();
+  const setUsername = appStateProps.setUsername;
+  const setEmail = appStateProps.setEmail;
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -123,6 +128,8 @@ export default function SignIn(props) {
           setLoggedIn(true);
           setTimerActive(true);
           setInitialized(true);
+          setUsername(data.data.username);
+          setEmail(data.data.email);
           setTimeout(() => {
             navigate("/dashboard");
           }, 2000);
@@ -255,7 +262,7 @@ export default function SignIn(props) {
                 >
                   Sign in
                 </Button>
-                <Link
+                {/* <Link
                   component="button"
                   type="button"
                   onClick={handleClickOpen}
@@ -263,10 +270,10 @@ export default function SignIn(props) {
                   sx={{ alignSelf: "center" }}
                 >
                   Forgot your password?
-                </Link>
+                </Link> */}
               </Box>
-              <Divider>or</Divider>
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              {/* <Divider>or</Divider> */}
+              {/* <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                 <Button
                   fullWidth
                   variant="outlined"
@@ -293,7 +300,7 @@ export default function SignIn(props) {
                     Sign up
                   </Link>
                 </Typography>
-              </Box>
+              </Box> */}
             </Card>
           )}
           {responseMessage && timerActive && (

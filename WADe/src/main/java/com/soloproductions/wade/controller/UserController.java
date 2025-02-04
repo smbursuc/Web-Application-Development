@@ -67,6 +67,7 @@ public class UserController
         {
             User user = userService.login(loginRequest.getUsername(), loginRequest.getPassword());
             String username = user.getUsername();
+            String email = user.getEmail();
             String token = jwtUtil.generateToken(user.getUsername());
 
             ResponseCookie cookie = ResponseCookie.from("jwtToken", token)
@@ -76,7 +77,7 @@ public class UserController
                     .maxAge(3600)   // Set expiration time
                     .build();
 
-            LoginResponse loginResponse = new LoginResponse(username, "Login successful");
+            LoginResponse loginResponse = new LoginResponse(username, email, "Login successful");
             StandardResponse<LoginResponse> response = new StandardResponse<>(
                     "success",
                     "Login successful",

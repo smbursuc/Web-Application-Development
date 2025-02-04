@@ -93,32 +93,37 @@ export default function InfoModal(props) {
         {
           title: "Description",
           description:
-            "The BSDS300 and CIFAR-100 datasets are labeled subsets of the 80 million tiny images dataset.",
+            "The BSDS300 dataset provides 300 high quality images that are traditionally used for segmentation training",
         },
         {
           title: "Image Size",
-          description: "32x32",
+          description: "481x321",
         },
         {
           title: "Dataset Size",
-          description: "50.000 images, ~177MB",
+          description: "300 images, ~22MB",
         },
         {
           title: "Classes",
           description:
-            "There are 10 classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck.",
+            "There are several classes but primarly buildings, animals, humans and flowers.",
         },
         {
           title: "Prediction Time",
-          description: "~4 hours /w DeepDetect CPU, Ryzen 5 7600x",
+          description: "~2 minutes /w DeepDetect CPU, Ryzen 5 7600x",
         },
         {
           title: "Predictions",
           description:
-            "For each image of the dataset the best 3 guesses were stored. This explains why so many images are being categorized by one object, it was because the object was present in the top 3 predictions.",
+            "For each image of the dataset only the best guess was stored. All images with less than 70% confidence were discarded.",
         },
       ],
     };
+
+    const sources = {
+      bsds300: "https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/",
+      cifar10: "https://www.cs.toronto.edu/~kriz/cifar.html"
+    }
 
   return (
     <Modal
@@ -141,18 +146,17 @@ export default function InfoModal(props) {
         }}
       >
         <Typography id="modal-title" variant="h6" component="h2">
-          CIFAR-10
+        {selectedDataset.toUpperCase()}
         </Typography>
         <Typography id="modal-description" sx={{ mt: 2 }}>
-          The CIFAR-10 dataset is a labeled subsets of the 80 million tiny
-          images dataset.&nbsp;
+          The {selectedDataset.toUpperCase()} datset can be found &nbsp;
           <a
-            href="https://www.cs.toronto.edu/~kriz/cifar.html"
+            href={sources[selectedDataset]}
             target="_blank"
             rel="noopener noreferrer"
             style={{ textDecoration: "none" }}
           >
-            Source
+            here.
           </a>
         </Typography>
         <List>

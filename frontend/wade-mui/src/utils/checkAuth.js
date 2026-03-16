@@ -1,7 +1,8 @@
 export const checkAuth = async (
   setLoggedIn,
   setResponseMessage,
-  setInitialized
+  setInitialized,
+  setUser // Optional callback to set user info
 ) => {
   try {
     setInitialized(false);
@@ -21,6 +22,10 @@ export const checkAuth = async (
       } else {
         setResponseMessage("");
         setLoggedIn(true);
+        // data.data is now UserInfoDTO {username, email}
+        if (setUser && data.data) {
+            setUser(data.data);
+        }
       }
     } else {
       const errorData = await response.json();

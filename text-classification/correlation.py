@@ -7,10 +7,15 @@ import numpy as np
 import json
 import torch
 
-
 def prepare_data(start, end, filepath):
+    data = []
     with open(filepath, 'r') as f:
-        data = json.load(f)['data']
+        for i, line in enumerate(f):
+            if i < start:
+                continue
+            if i >= end:
+                break
+            data.append(json.loads(line))
 
     if (start != None and end != None):
         if (end > len(data)):
@@ -87,7 +92,7 @@ def correlation(dataset, start, end, sort, sortType, showplot=False):
 
     # Save hierarchical JSON for inspection
     f_data = json.dumps(similarity_data, indent=4)
-    with open("similarity_data_bsds300.json", "w") as f:
+    with open(f"similarity_data_{dataset}.json", "w") as f:
         f.write(f_data)
 
     if showplot:
@@ -103,4 +108,4 @@ def correlation(dataset, start, end, sort, sortType, showplot=False):
     return similarity_data
 
 if __name__ == "__main__":
-    correlation("bsds300",0,9999,"highest_probability","strongest_pair",False)
+    correlation("cifar10",0,9999,"highest_probability","strongest_pair",False)

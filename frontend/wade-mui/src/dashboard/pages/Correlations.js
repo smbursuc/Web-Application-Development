@@ -9,19 +9,33 @@ import Header from "../components/Header";
 import MainGrid from "../components/MainGrid";
 import SideMenu from "../components/SideMenu";
 import AppTheme from "../../shared-theme/AppTheme";
-import {
-  chartsCustomizations,
+import { chartsCustomizations,
   dataGridCustomizations,
   datePickersCustomizations,
   treeViewCustomizations,
 } from "../theme/customizations";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Plot from "react-plotly.js";
 import Container from "@mui/material/Container";
+import Modal from "@mui/material/Modal";
+import DataControlPanel from "../components/DataControlPanel";
+import HeatmapForm from "../components/HeatmapForm";
+import CreateDatasetForm from "../components/CreateDatasetForm";
+import { makeDataControlHandlers } from "../../common/DataControlHandlers";
 import FilterComponent from "./FilterComponent";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import PageInfo from "./PageInfo";
 import InfoModal from "./InfoModal";
+import Alert from "@mui/material/Alert";
+import DatasetCommons from "../../common/DatasetCommons";
+import SelectedDataset from "../../common/managers/SelectedDataset";
+import Datasets from "../../common/managers/Datasets";
+import DataModels from "../../common/managers/DataModels";
+import SortOptions from "../../common/managers/SortOptions";
+import MaxCache from "../../common/managers/MaxCache";
+import StaticMetadata from "../../common/managers/StaticMetadata";
+
 
 const xThemeComponents = {
   ...chartsCustomizations,
@@ -34,10 +48,25 @@ function SortType(props) {
   const options = props.options;
   const sortType = props.sortType;
   const setSortType = props.setSortType;
+  const selectedDataset = props?.selectedDataset;
 
   const handleSortTypeChange = (event) => {
     setSortType(event.target.value);
   };
+
+  function getSortTypes () {
+    // console.log("sort types", options);
+    // options[selectedDataset][datasetType]["sortBy"]
+    if (!options                          || 
+        Object.keys(options).length === 0 ||
+        Object.keys(options[selectedDataset]) === undefined ||
+        Object.keys(options[selectedDataset]["heatmap"]).length == 0 ||
+        options[selectedDataset]["heatmap"] === undefined ||
+        options[selectedDataset]["heatmap"]["sortType"].length === 0) {
+      return [];
+    }
+    return options[selectedDataset]["heatmap"]["sortType"];
+  }
 
   return (
     <FormControl fullWidth sx={{ my: 2 }}>
@@ -48,9 +77,9 @@ function SortType(props) {
         onChange={handleSortTypeChange}
         label="Sort by:"
       >
-        {options["sort_type"].values.map((value, index) => (
-          <MenuItem key={value} value={value}>
-            {value !== "no_sort" && options["sort_type"].descriptions[index]}
+        {getSortTypes().map((value, index) => (
+          <MenuItem key={value["value"]} value={value["value"]}>
+            {value !== "no_sort" && value["displayValue"]}
           </MenuItem>
         ))}
       </Select>
@@ -59,6 +88,7 @@ function SortType(props) {
 }
 
 export default function Correlations(props) {
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const [objects, setObjects] = useState(null);
   const [matrix, setMatrix] = useState(null);
@@ -71,206 +101,67 @@ export default function Correlations(props) {
   const [infOpen, setInfOpen] = useState(false);
 
   const [dataModel, setDataModel] = useState("json");
-  const [maxHeatmap, setMaxHeatmap] = useState(() => {
-      return getFromLocalStorage("maxHeatmap") || {};
-    });
+
+  // Deep linking logic
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const ds = params.get("dataset");
+    const dt = params.get("dataType");
+    const sortParam = params.get("sort");
+    const sortTypeParam = params.get("sortType");
+    const rangeParam = params.get("range");
+    const rangeStartParam = params.get("rangeStart");
+    if (ds) setSelectedDataset(ds);
+    if (dt) setDataModel(dt);
+    if (sortParam) setSort(sortParam);
+    if (sortTypeParam) setSortType(sortTypeParam);
+    if (rangeParam && !Number.isNaN(Number(rangeParam))) setRangeSliderValue(Number(rangeParam));
+    if (rangeStartParam && !Number.isNaN(Number(rangeStartParam))) setRangeStartSliderValue(Number(rangeStartParam));
+  }, [location.search]);
+  const [responseStatus, setResponseStatus] = useState("");
+
+  const [controlOpen, setControlOpen] = useState(false);
+  const [controlMode, setControlMode] = useState("");
+  const [formInitial, setFormInitial] = useState({});
+  const [createOpen, setCreateOpen] = useState(false);
+
+  // will adapt dynamically using the max possible range and the current start value
+  const [maxRange, setMaxRange] = useState(0);
+  const [staticMetadata, setStaticMetadata] = useState({});
+
+  const [maxHeatmap, setMaxHeatmap] = useState({});
 
   const handleDataModelChange = (event) => {
     setDataModel(event.target.value);
   };
 
-  const dataModels = [
-    {
-      value: "rdf",
-      displayValue: "RDF",
-    },
-    {
-      value: "json",
-      displayValue: "JSON",
-    },
-  ];
+  const [dataModels, setDataModels] = useState({});
+  const [datasets, setDatasets] = useState([]);
+  const [sortOptions, setSortOptions] = useState({});
 
-  const datasets = [
-    {
-      value: "cifar10",
-      displayValue: "CIFAR-10",
-    },
-    {
-      value: "bsds300",
-      displayValue: "BSDS300",
-    },
-  ];
+  // managers for safer access
+  const selectedDatasetObj = new SelectedDataset(selectedDataset, setSelectedDataset);
+  const datasetsObj = new Datasets(datasets, setDatasets);
+  const dataModelsObj = new DataModels(dataModels, setDataModels);
+  const sortOptionsObj = new SortOptions(sortOptions, setSortOptions);
+  const maxHeatmapObj = new MaxCache(maxHeatmap, setMaxHeatmap);
+  const staticMetadataObj = new StaticMetadata(staticMetadata, setStaticMetadata);
 
-  const features = {
-    cifar10: [
-      {
-        title: "Description",
-        description:
-          "The CIFAR-10 and CIFAR-100 datasets are labeled subsets of the 80 million tiny images dataset.",
-      },
-      {
-        title: "Image Size",
-        description: "32x32",
-      },
-      {
-        title: "Dataset Size",
-        description: "50.000 images, ~177MB",
-      },
-      {
-        title: "Classes",
-        description:
-          "There are 10 classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck.",
-      },
-      {
-        title: "Prediction Time",
-        description: "~4 hours /w DeepDetect CPU, Ryzen 5 7600x",
-      },
-      {
-        title: "Predictions",
-        description:
-          "For each image of the dataset the best 3 guesses were stored. This explains why so many images are being categorized by one object, it was because the object was present in the top 3 predictions.",
-      },
-    ],
-    bsds300: [
-      {
-        title: "Description",
-        description:
-          "The BSDS300 and CIFAR-100 datasets are labeled subsets of the 80 million tiny images dataset.",
-      },
-      {
-        title: "Image Size",
-        description: "32x32",
-      },
-      {
-        title: "Dataset Size",
-        description: "50.000 images, ~177MB",
-      },
-      {
-        title: "Classes",
-        description:
-          "There are 10 classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck.",
-      },
-      {
-        title: "Prediction Time",
-        description: "~4 hours /w DeepDetect CPU, Ryzen 5 7600x",
-      },
-      {
-        title: "Predictions",
-        description:
-          "For each image of the dataset the best 3 guesses were stored. This explains why so many images are being categorized by one object, it was because the object was present in the top 3 predictions.",
-      },
-    ],
-  };
-
-  const options = {
-    sort: {
-      values: ["highest_probability", "lowest_probability", "no_sort"],
-      descriptions: ["Highest Probability", "Lowest Probability", "No sorting"],
-    },
-    sort_type: {
-      values: ["average_similarity", "strongest_pair", "no_sort"],
-      descriptions: ["Average Similarity", "Strongest Pair", "No Sorting"],
-    },
-  };
-
-  const maxObjects = {
-    json: {
-      cifar10: 50000,
-      bsds300: 91,
-    },
-    rdf: {
-      cifar10: 50000,
-      bsds300: 8190,
-    },
-  };
-
-  const fetchData = async () => {
-    let queryParams = "";
-    if (sort !== "no_sort") {
-      queryParams = queryParams + `sort=${sort}`;
-    }
-
-    queryParams = queryParams + "&";
-
-    if (sortType !== "no_sort") {
-      queryParams = queryParams + `sortType=${sortType}`;
-    }
-
-    // http://127.0.0.1:5000/api/correlations/cifar10?
-    // http://127.0.0.1:8081/api/${selectedDataset}/heatmaps/json?
-    const url =
-      `http://127.0.0.1:8081/api/${selectedDataset}/heatmaps/${dataModel}?` +
-      queryParams +
-      `&range=${rangeSliderValue}&rangeStart=${rangeStartSliderValue}`;
-
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      setIsLoading(false);
-
-      if (!data.data) {
-        setObjects(data.objects);
-        setMatrix(data.matrix);
-      } else {
-        setObjects(data.data.objects);
-        setMatrix(data.data.matrix);
-      }
-    } catch (error) {
-      console.error("Failed to fetch correlation data:", error);
-    }
-  };
-
-  const fetchMetadata = async (resetParams) => {
-    setIsLoading(true);
-
-    if (resetParams) {
-      setRangeSliderValue(5);
-      setRangeSliderValue(1);
-    }
-    
-    const url = `http://127.0.0.1:8081/api/${selectedDataset}/metadata/${dataModel}/clusters`;
-    const response = await fetch(url);
-    const data = await response.json();
-    const result = data.data;
-
-    // load the metadata cache, update it, and save it back
-    const cache = getFromLocalStorage("maxHeatmap") || {};
-    cache[selectedDataset] = {
-      ...(cache[selectedDataset] || {}), // safeguard for undefined dataset
-      [dataModel]: result.size,
-    };
-
-    saveToLocalStorage("maxHeatmap", cache);
-    setMaxHeatmap(cache);
-    setIsLoading(false);
-  };
-
-  function saveToLocalStorage(key, data) {
-    localStorage.setItem(key, JSON.stringify(data));
-  }
-
-  function getFromLocalStorage(key) {
-    const data = localStorage.getItem(key);
-    return data ? JSON.parse(data) : null;
-  }
-
-  useEffect(() => {
-    fetchData(true);
-    let cache = getFromLocalStorage("maxHeatmap");
-    if (
-      !cache ||
-      !cache[selectedDataset] ||
-      !cache[selectedDataset][dataModel]
-    ) {
-      fetchMetadata();
-    } else {
-      setMaxHeatmap(cache);
-    }
-  }, [selectedDataset, dataModel]);
+  // max possible range
+  const [max, setMax] = useState(0);
 
   const handleApplyFilters = () => {
-    fetchData(false);
+    fetchHeatmapData(false);
   };
+
+  // Data control handlers (heatmap-specific)
+  const openControlModal = (mode, initial = {}) => {
+    setControlMode(mode);
+    setFormInitial(initial);
+    setControlOpen(true);
+  };
+
+  
 
   const handleInfOpen = () => {
     setInfOpen(true);
@@ -278,13 +169,13 @@ export default function Correlations(props) {
 
   useEffect(() => {
     // make sure to not fill this parameter if sort is not being used
-    if (sort === "no_sort") {
+    if (sort === "no_sort" && sortType !== "no_sort") {
       setSortType("no_sort");
-    } else {
+    } else if (sort !== "no_sort" && (!sortType || sortType === "no_sort")) {
       // if it used give it a default value
       setSortType("strongest_pair");
     }
-  }, [sort]);
+  }, [sort, sortType]);
 
   const handleDatasetChange = (event) => {
     setSelectedDataset(event.target.value);
@@ -294,6 +185,89 @@ export default function Correlations(props) {
     setInfOpen(false);
   };
 
+  function getDatasets() {
+    return datasetsObj.get();
+  }
+
+  function getMaxRange() {
+    // const mh = maxHeatmapObj.get();
+    // if (!mh || Object.keys(mh).length === 0) return 6;
+    // const val = maxHeatmapObj.getFor(selectedDataset, dataModel);
+    // if (val === undefined || val === null) return 6;
+    // let max = val;
+    // let start = rangeStartSliderValue;
+    // setMax(max - start);
+    // return max - start;
+    return max;
+  }
+
+  const {
+      fetchMetadata,
+      fetchClusterData,
+      fetchHeatmapData,
+      getFromLocalStorage,
+      saveToLocalStorage,
+    } = DatasetCommons({
+      selectedDataset,
+      dataModel,
+      setDatasets,
+      datasets,
+      setSelectedDataset,
+      setDataModel,
+      dataModels,
+      setDataModels,
+      staticMetadata,
+      setStaticMetadata,
+      setIsLoading,
+      setResponseStatus,
+      datasetType: "heatmap",
+      rangeSliderValue,
+      setRangeSliderValue,
+      rangeStartSliderValue,
+      setRangeStartSliderValue,
+        sort,
+        setSort,
+        objects,
+        matrix,
+        setObjects,
+        setMatrix,
+        maxHeatmap,
+        setMaxHeatmap,
+      sortType,
+      sortOptions,
+      setSortOptions,
+      setMax
+    });
+
+  const {
+    handleCreate: commonHandleCreate,
+    handleAdd: commonHandleAdd,
+    handleUpdate: commonHandleUpdate,
+    handleDelete: commonHandleDelete,
+    handleExport: commonHandleExport,
+    handleFormSubmit: commonHandleFormSubmit,
+    handleCreateSubmit: commonHandleCreateSubmit,
+  } = makeDataControlHandlers({
+    selectedDataset,
+    setSelectedDataset,
+    dataModel,
+    setDataModel,
+    setDatasets,
+    datasetType: "heatmap",
+    openControlModal,
+    setCreateOpen,
+    setResponseStatus,
+    refreshFn: fetchHeatmapData,
+    fetchMetadata,
+  });
+
+  const handleFormCancel = () => {
+    setControlOpen(false);
+    setFormInitial({});
+  };
+
+  const handleCreateCancel = () => setCreateOpen(false);
+
   return (
     <AppTheme {...props} themeComponents={xThemeComponents}>
       <CssBaseline enableColorScheme />
@@ -301,8 +275,15 @@ export default function Correlations(props) {
         <SideMenu />
         <AppNavbar />
         <Container sx={{ my: 4 }}>
+          {responseStatus && (
+            <Alert
+              severity={responseStatus.includes("error") ? "error" : "success"}
+            >
+              {responseStatus}
+            </Alert>
+          )}
           <PageInfo
-            datasets={datasets}
+            datasets={getDatasets()}
             handleInfOpen={handleInfOpen}
             selectedDataset={selectedDataset}
             setSelectedDataset={setSelectedDataset}
@@ -311,6 +292,18 @@ export default function Correlations(props) {
             dataModel={dataModel}
             handleDataModelChange={handleDataModelChange}
           />
+          <DataControlPanel
+            onCreate={commonHandleCreate}
+            onAdd={commonHandleAdd}
+            onUpdate={commonHandleUpdate}
+            onDelete={commonHandleDelete}
+            onExport={commonHandleExport}
+          />
+          <Modal open={createOpen} onClose={handleCreateCancel}>
+            <div style={{ display: "flex", justifyContent: "center", marginTop: 80 }}>
+              <CreateDatasetForm onSubmit={commonHandleCreateSubmit} onCancel={handleCreateCancel} />
+            </div>
+          </Modal>
           <FilterComponent
             handleApplyFilters={handleApplyFilters}
             sort={sort}
@@ -319,42 +312,61 @@ export default function Correlations(props) {
             setRangeSliderValue={setRangeSliderValue}
             rangeStartSliderValue={rangeStartSliderValue}
             setRangeStartSliderValue={setRangeStartSliderValue}
-            options={options}
+            options={sortOptions}
             sortType={
               <SortType
-                options={options}
+                options={sortOptions}
                 sortType={sortType}
                 setSortType={setSortType}
+                selectedDataset={selectedDataset}
               />
             }
-            max={maxObjects[dataModel][selectedDataset]}
+            max={getMaxRange()}
+            maxRange={maxRange}
+            setMaxRange={setMaxRange}
+            selectedDataset={selectedDataset}
+            dataModel={dataModel}
+            datasetType="heatmap"
           />
+          <Modal open={controlOpen} onClose={handleFormCancel}>
+            <div style={{ display: "flex", justifyContent: "center", marginTop: 80 }}>
+              <HeatmapForm mode={controlMode} initial={formInitial} onSubmit={(values) => commonHandleFormSubmit(values, controlMode)} onCancel={handleFormCancel} />
+            </div>
+          </Modal>
           {isLoading ? (
             <p>Loading heatmap data...</p>
           ) : (
-            <Plot
-              data={[
-                {
-                  z: matrix,
-                  x: objects,
-                  y: objects,
-                  type: "heatmap",
-                  colorscale: "Viridis",
-                },
-              ]}
-              layout={{
-                title: "Semantic Similarity Heatmap",
-                xaxis: { title: "Objects", automargin: true },
-                yaxis: { title: "Objects", automargin: true },
-                margin: { t: 50, l: 25, r: 25, b: 25 },
-              }}
-              style={{ width: "100%", height: "600px" }}
-            />
+            // If there's no matrix/objects data show a placeholder message
+            (!matrix || !Array.isArray(matrix) || matrix.length === 0 || !objects || !Array.isArray(objects) || objects.length === 0) ? (
+              <Box sx={{ p: 4 }}>
+                <Alert severity="info">There is no heatmap data. Please add heatmap data using the ADD button.</Alert>
+              </Box>
+            ) : (
+              <Plot
+                data={[
+                  {
+                    z: matrix,
+                    x: objects,
+                    y: objects,
+                    type: "heatmap",
+                    colorscale: "Viridis",
+                  },
+                ]}
+                layout={{
+                  title: "Semantic Similarity Heatmap",
+                  xaxis: { title: "Objects", automargin: true },
+                  yaxis: { title: "Objects", automargin: true },
+                  margin: { t: 50, l: 25, r: 25, b: 25 },
+                }}
+                style={{ width: "100%", height: "600px" }}
+              />
+            )
           )}
           <InfoModal
             infOpen={infOpen}
             handleInfClose={handleInfClose}
             selectedDataset={selectedDataset}
+            staticMetadata={staticMetadata}
           />
         </Container>
       </Box>

@@ -1,185 +1,287 @@
 package com.soloproductions.wade.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.soloproductions.wade.dto.SemanticFetchRequest;
-import com.soloproductions.wade.dto.StandardResponse;
-import com.soloproductions.wade.service.SparqlQueryService;
-import jakarta.servlet.http.Part;
+import com.soloproductions.wade.dto.*;
+import com.soloproductions.wade.service.DatasetService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.*;
-
+/**
+ * The list of all the endpoints related to the dataset API.
+ */
 @RestController
-@RequestMapping("/api/{dataset}")
+@RequestMapping("/api")
 public class DatasetController
 {
-    private final SparqlQueryService sparqlQueryService;
+    /** The dataset service used to handle dataset-related requests. */
+    private final DatasetService datasetService;
 
-    private final String URL = "http://127.0.0.1:3030/impr";
-
-    public DatasetController(SparqlQueryService sparqlQueryService)
+    /**
+     * Constructor for DatasetController. Initializes the dataset service.
+     *
+     * @param datasetService the dataset service to be used in the controller
+     */
+    public DatasetController(DatasetService datasetService)
     {
-        this.sparqlQueryService = sparqlQueryService;
+        this.datasetService = datasetService;
     }
 
-    @GetMapping("/clusters/json")
-    public ResponseEntity<StandardResponse<?>> getClusters(
-            @PathVariable String dataset,
-            @ModelAttribute SemanticFetchRequest sfDTO,
-            HttpServletRequest request
-    )
+    /**
+     * Endpoint to retrieve dataset data based on the specified parameters. The particular endpoint is serving
+     * GET requests aimed specifically for cluster datasets, and uses its own special request {@link ClusterDatasetRequest}.
+     * 
+     * @param   cdr       
+     *          the cluster dataset request containing the parameters for the request
+     * @param   request   
+     *          the HTTP servlet request
+     * 
+     * @return  the response entity containing the standard response with the dataset data
+     */
+    @GetMapping(value = "/{datasetName}/{datasetType}/{dataType}", params = {"mode=cluster", "export!=true"})
+    public ResponseEntity<StandardResponse<?>> getData(
+            @ModelAttribute ClusterDatasetRequest cdr,
+            HttpServletRequest request)
     {
-        // this is the servlet under the hood in Flask, JSON data is retrieved from here
-        String url = String.format("http://127.0.0.1:5000/api/clusters/%s", dataset);
-
-        // create expected data for plotly, a JSON with 3 arrays: values, parents, labels
-        Map<String, List<Object>> plotlyData = SemanticRepresentationHelper.getClustersForPlotlyJSON(url, sfDTO);
-
-        StandardResponse<Map<String, List<Object>>> response = new StandardResponse<>(
-                "success",
-                "Clusters retrieved successfully",
-                plotlyData
-        );
+        cdr.setRequestType("get");
+        StandardResponse<Object> response = datasetService.handleRequest(cdr);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/clusters/rdf")
-    public ResponseEntity<StandardResponse<?>> getClustersRDF(
-            @PathVariable String dataset,
-            @ModelAttribute SemanticFetchRequest sfDTO,
-            HttpServletRequest request
-    )
+    /**
+     * Endpoint to retrieve dataset data based on the specified parameters. The particular endpoint is serving
+     * GET requests aimed specifically for heatmap datasets, and uses its own special request {@link SimilarityDatasetRequest}.
+     * 
+     * @param   sdr       
+     *          the similarity dataset request containing the parameters for the request
+     * @param   request   
+     *          the HTTP servlet request
+     * 
+     * @return  the response entity containing the standard response with the dataset data
+     */
+    @GetMapping(value = "/{datasetName}/{datasetType}/{dataType}", params = {"mode=similarity", "export!=true"})
+    public ResponseEntity<StandardResponse<?>> getData(
+            @ModelAttribute SimilarityDatasetRequest sdr,
+            HttpServletRequest request)
     {
-        String name = sfDTO.getName();
-        String sort = sfDTO.getSort();
-        int range = sfDTO.getRange();
-        int rangeStart = sfDTO.getRangeStart();
-
-        String graph = String.format("%s_clusters", dataset);
-
-        // string construction of the query
-        String sparqlQuery = sparqlQueryService.buildClusterQuery(name, sort, range, rangeStart, graph);
-
-        List<Map<String, String>> queryResults = sparqlQueryService.executeClusterSparqlQuery(sparqlQuery);
-
-        // comply with plotly format
-        Map<String, List<Object>> plotlyData = SemanticRepresentationHelper.getClustersForPlotlyRDF(queryResults);
-
-        StandardResponse<Map<String, List<Object>>> response = new StandardResponse<>(
-                "success",
-                "Clusters retrieved successfully",
-                plotlyData
-        );
+        sdr.setRequestType("get");
+        StandardResponse<Object> response = datasetService.handleRequest(sdr);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/heatmaps/json")
-    public ResponseEntity<StandardResponse<?>> getJSONHeatmap(
-            @PathVariable String dataset,
-            @ModelAttribute SemanticFetchRequest sfDTO,
-            HttpServletRequest request
-    )
-    {
-        // this is the servlet under the hood in Flask, JSON data is retrieved from here
-        String url = String.format("http://127.0.0.1:5000/api/correlations/%s", dataset);
-
-        // create expected data for plotly, a JSON with 3 arrays: values, parents, labels
-        Map<String, List<Object>> plotlyData = SemanticRepresentationHelper.getHeatmapJSON(url, sfDTO);
-
-        StandardResponse<Map<String, List<Object>>> response = new StandardResponse<>(
-                "success",
-                "Clusters retrieved successfully",
-                plotlyData
-        );
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @GetMapping("/heatmaps/rdf")
-    public ResponseEntity<StandardResponse<?>> getRDFHeatmap(
-            @PathVariable String dataset,
-            @ModelAttribute SemanticFetchRequest sfDTO,
-            HttpServletRequest request
-    ) throws Exception
-    {
-        String sortType = sfDTO.getSortType();
-        String sort = sfDTO.getSort();
-        int range = sfDTO.getRange();
-        int rangeStart = sfDTO.getRangeStart();
-
-        String graph = String.format("%s_heatmap", dataset);
-
-        // string construction of the query
-        String sparqlQuery = sparqlQueryService.buildHeatmapQuery(sortType, sort, range, rangeStart, graph);
-
-        List<Map<String, Object>> queryResults = sparqlQueryService.executeHeatmapSparqlQuery(sparqlQuery);
-
-        // comply with the plotly structure
-        Map<String, Object> plotlyData = SemanticRepresentationHelper.transformHeatmapResultsForPlotly(queryResults);
-
-        StandardResponse<Map<String, Object>> response = new StandardResponse<>(
-                "success",
-                "Clusters retrieved successfully",
-                plotlyData
-        );
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @GetMapping("/metadata/{dataModel}/{representation}")
+    /**
+     * Fetches the metadata for a respective dataset. The metadata includes all necessary information, besides the dataset data
+     * itself, needed to display the dataset in the client. It includes metadata related to its size, information (set in configuration)
+     * such as the description, sorting methods, available data types etc.
+     * 
+     * @param   datasetName   
+     *          the name of the dataset to fetch the metadata for
+     * @param   dataType      
+     *          the data type of the dataset to fetch the metadata for (e.g., rdf, tabular, etc.)
+     * @param   datasetType   
+     *          the dataset type of the dataset to fetch the metadata for (e.g., heatmap, clusters, etc.)
+     * @param   generalInfo   
+     *          whether to include all the information regarding the dataset besides its shape, or vice-versa
+     * @param   request       
+     *          the HTTP servlet request
+     * 
+     * @return  the response entity containing the standard response with the dataset metadata
+     */
+    @GetMapping("/metadata")
     public ResponseEntity<StandardResponse<?>> getMetadata(
-            @PathVariable String dataModel,
-            @PathVariable String dataset,
-            @PathVariable String representation
-    ) throws IOException, InterruptedException
+            @RequestParam String datasetName,
+            @RequestParam String dataType,
+            @RequestParam String datasetType,
+            @RequestParam Boolean generalInfo,
+            HttpServletRequest request)
     {
-        Map<String, Object> metadata = new HashMap<>();
-        if (dataModel.equalsIgnoreCase("rdf"))
-        {
-            String graph = String.format("%s_%s", dataset, representation);
-            String sparqlQuery = "";
-            int rows = 0;
-            if (representation.equalsIgnoreCase("clusters"))
-            {
-                sparqlQuery = sparqlQueryService.buildClusterQuery(null, null, 0, 0, graph);
-                List<Map<String, String>> queryResults = sparqlQueryService.executeClusterSparqlQuery(sparqlQuery);
-                rows = queryResults.size();
-            }
-            else if (representation.equalsIgnoreCase("heatmaps"))
-            {
-                sparqlQuery = sparqlQueryService.buildHeatmapQuery(null, null, 0, 0, graph);
-                List<Map<String, Object>> queryResults = sparqlQueryService.executeHeatmapSparqlQuery(sparqlQuery);
-                rows = queryResults.size();
-            }
-            metadata.put("size", rows);
-        }
-        else if (dataModel.equalsIgnoreCase("json"))
-        {
-            String fullUrl = String.format("http://127.0.0.1:5000/api/metadata/%s/%s", dataset, representation);
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(fullUrl))
-                    .GET()
-                    .build();
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            String body = response.body();
+        // TODO: investigate why not using RequestParam adds a bunch of trailing spaces
+        MetadataRequest mr = new MetadataRequest();
+        mr.setDatasetName(datasetName);
+        mr.setGeneralInfo(generalInfo);
+        mr.setDataType(dataType);
+        mr.setDatasetType(datasetType);
+        mr.setRequestType("get");
 
-            ObjectMapper objectMapper = new ObjectMapper();
-            metadata = objectMapper.readValue(body, Map.class);
-        }
+        StandardResponse<Object> response = datasetService.handleRequest(mr);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
-        StandardResponse<Map<String, Object>> response = new StandardResponse<>(
-                "success",
-                "Metadata retrieved successfully",
-                metadata
-        );
+    /**
+     * Endpoint responsible for executing queries generated in the Playground mode. Executes the SPARQL query for the input
+     * dataset and returns the result.
+     * 
+     * @param   datasetName   
+     *          the name of the dataset to execute the SPARQL query for
+     * @param   datasetType   
+     *          the dataset type of the dataset to execute the SPARQL query for, heatmap or clusters
+     * @param   rawResults    
+     *          whether to return the raw results from the SPARQL query execution or to parse them into a more user-friendly format
+     * @param   dto           
+     *          the SPARQL query request containing the SPARQL query to execute and other relevant parameters
+     * @param   request       
+     *          the HTTP servlet request
+     * 
+     * @return  the response entity containing the standard response with the SPARQL query results
+     */
+    @PostMapping("/{datasetName}/{datasetType}/rdf")
+    public ResponseEntity<StandardResponse<?>> runSparqlQuery(
+            @PathVariable String datasetName,
+            @PathVariable String datasetType,
+            @RequestParam(defaultValue = "false") boolean rawResults,
+            @RequestBody SparqlQueryRequest dto,
+            HttpServletRequest request)
+    {
+        // we only send the query as the body, add the rest of the parameters manually
+        dto.setDatasetName(datasetName);
+        dto.setDatasetType(datasetType);
+        dto.setDataType("rdf");
+        dto.setRawResults(rawResults);
+        dto.setRequestType("update");
+
+        StandardResponse<Object> response = datasetService.handleRequest(dto);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    /**
+     * Endpoint responsible for creating a new dataset. Accepts a dataset creation request and returns the result.
+     * 
+     * @param   dto
+     *          the dataset creation request containing the dataset details
+     * @param   request
+     *          the HTTP servlet request
+     * 
+     * @return  the response entity containing the standard response with the dataset creation result
+     */
+    @PostMapping("/create")
+    public ResponseEntity<StandardResponse<?>> postDataset(
+            @RequestBody DatasetPostRequest dto,
+            HttpServletRequest request)
+    {
+        dto.setRequestType("post");
+        dto.setCreation(true);
+
+        StandardResponse<Object> response = datasetService.handleRequest(dto);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    /**
+     * Endpoint responsible for updating an existing dataset. Accepts a dataset update request and returns the result.
+     * 
+     * @param   datasetName   
+     *          the name of the dataset to update
+     * @param   datasetType   
+     *          the dataset type of the dataset to update, heatmap or clusters
+     * @param   dataType      
+     *          the data type of the dataset to update (e.g., rdf, json, etc.)
+     * @param   dto           
+     *          the dataset update request containing the updated dataset details
+     * @param   request       
+     *          the HTTP servlet request
+     * 
+     * @return  the response entity containing the standard response with the dataset update result
+     */
+    @PostMapping("/{datasetName}/{datasetType}/{dataType}")
+    public ResponseEntity<StandardResponse<?>> postDataset(
+            @PathVariable String datasetName,
+            @PathVariable String datasetType,
+            @PathVariable String dataType,
+            @RequestBody DatasetPostRequest dto,
+            HttpServletRequest request)
+    {
+        dto.setDatasetName(datasetName);
+        dto.setDatasetType(datasetType);
+        dto.setDataType(dataType);
+        dto.setRequestType("post");
+        dto.setCreation(false);
+
+        StandardResponse<Object> response = datasetService.handleRequest(dto);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    /**
+     * Endpoint responsible for updating an existing dataset. Accepts a dataset update request and returns the result.
+     * 
+     * @param   datasetName   
+     *          the name of the dataset to update
+     * @param   datasetType   
+     *          the dataset type of the dataset to update, heatmap or clusters
+     * @param   dataType      
+     *          the data type of the dataset to update (e.g., rdf, json, etc.)
+     * @param   dto           
+     *          the dataset update request containing the updated dataset details
+     * @param   request       
+     *          the HTTP servlet request
+     * 
+     * @return  the response entity containing the standard response with the dataset update result
+     */
+    @PutMapping("/{datasetName}/{datasetType}/{dataType}")
+    public ResponseEntity<StandardResponse<?>> putDataset(
+            @PathVariable String datasetName,
+            @PathVariable String datasetType,
+            @PathVariable String dataType,
+            @RequestBody DatasetPutRequest dto,
+            HttpServletRequest request)
+    {
+        dto.setDatasetName(datasetName);
+        dto.setDatasetType(datasetType);
+        dto.setDataType(dataType);
+        dto.setRequestType("put");
+
+        StandardResponse<Object> response = datasetService.handleRequest(dto);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    /**
+     * Endpoint responsible for deleting an existing dataset. Accepts a dataset delete request and returns the result.
+     * 
+     * @param   datasetName   
+     *          the name of the dataset to delete
+     * @param   datasetType   
+     *          the dataset type of the dataset to delete, heatmap or clusters
+     * @param   dataType      the data type of the dataset to delete (e.g., rdf, json, etc.)
+     * @param   dto           the dataset delete request containing the dataset details
+     * @param   request       the HTTP servlet request
+     * 
+     * @return  the response entity containing the standard response with the dataset delete result
+     */
+    @DeleteMapping("/{datasetName}/{datasetType}/{dataType}")
+    public ResponseEntity<StandardResponse<?>> deleteDataset(
+            @PathVariable String datasetName,
+            @PathVariable String datasetType,
+            @PathVariable String dataType,
+            @RequestBody DatasetDeleteRequest dto,
+            HttpServletRequest request)
+    {
+        dto.setDatasetName(datasetName);
+        dto.setDatasetType(datasetType);
+        dto.setDataType(dataType);
+        dto.setRequestType("delete");
+
+        StandardResponse<Object> response = datasetService.handleRequest(dto);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    /**
+     * Endpoint responsible for exporting an existing dataset. Accepts a dataset export request and returns 
+     * the result of the export operation.
+     * 
+     * @param   exportRequest 
+     *          the dataset export request containing the details of the dataset to export
+     * @param   request       
+     *          the HTTP servlet request
+     * 
+     * @return  the response entity containing the standard response with the dataset export result
+     */
+    @GetMapping(value = "/{datasetName}/{datasetType}/{dataType}", params = {"export=true"})
+    public ResponseEntity<StandardResponse<?>> exportDataset(
+            @ModelAttribute ExportRequest exportRequest,
+            HttpServletRequest request)
+    {
+        exportRequest.setRequestType("get");
+
+        StandardResponse<Object> response = datasetService.handleRequest(exportRequest);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

@@ -61,8 +61,8 @@ export default function Playground(props) {
     },
     {
       value: "bsds300",
-      displayValue: "BSDS300"
-    }
+      displayValue: "BSDS300",
+    },
   ];
 
   const handleInfOpen = () => {
@@ -77,13 +77,13 @@ export default function Playground(props) {
     setSelectedDataset(event.target.value);
   };
 
-  const [dataType, setDataType] = useState("clusterData");
+  const [dataType, setDataType] = useState("clusters");
   const [query, setQuery] = useState("");
 
   // Predefined queries with descriptive labels
   const predefinedQueries = [
     {
-      for: "clusterData",
+      for: "clusters",
       label: "Get Cluster Data (5 clusters)",
       query: `
 PREFIX ex: <http://example.org/ontology#>
@@ -106,7 +106,7 @@ LIMIT 5
 `,
     },
     {
-      for: "clusterData",
+      for: "clusters",
       label: "Average Cluster Probability Greater Than 90%",
       query: `PREFIX ex: <http://example.org/ontology#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
@@ -128,10 +128,9 @@ LIMIT 5
 `,
     },
     {
-      for: "heatmapData",
+      for: "heatmap",
       label: "Get Heatmap (5 relations)",
-      query: `
-      PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+      query: `PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX ex: <http://example.org/ontology#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT ?fromLabel ?toLabel ?similarityValue
@@ -151,10 +150,9 @@ LIMIT 5
 `,
     },
     {
-      for: "heatmapData",
+      for: "heatmap",
       label: "Pairings With Similarity Greater Than 20%",
-      query: `
-      PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+      query: `PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX ex: <http://example.org/ontology#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT ?fromLabel ?toLabel ?similarityValue
@@ -175,7 +173,7 @@ LIMIT 5`,
   ];
 
   const filterQueries = {
-    clusterData: `PREFIX ex: <http://example.org/ontology#>
+    clusters: `PREFIX ex: <http://example.org/ontology#>
 SELECT ?cluster (AVG(?probability) AS ?avgProbability)
 WHERE {
   ?cluster a ex:Cluster ;
@@ -185,7 +183,7 @@ WHERE {
 }
 GROUP BY ?cluster
 `,
-    heatmapData: `PREFIX ex: <http://example.org/ontology#>
+    heatmap: `PREFIX ex: <http://example.org/ontology#>
 SELECT ?object1 ?object2 ?similarity
 WHERE {
   ?object1 ex:hasSimilarity ?similarityNode .
@@ -222,19 +220,20 @@ WHERE {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch("http://localhost:3030/impr", {
+      const url = `http://localhost:8081/api/${selectedDataset}/${dataType}/rdf?rawResults=true`;
+
+      const response = await fetch(url, {
         method: "POST",
         headers: {
-          "Content-Type": "application/sparql-query",
+          "Content-Type": "application/json",
         },
-        body: query,
+        body: JSON.stringify({
+          query: query,
+        }),
+        credentials: "include",
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const result = await response.json(); // Change to response.json() if the server returns JSON
+      const result = await response.json();
       setData(result);
     } catch (error) {
       console.error("Error submitting query:", error);
@@ -243,36 +242,45 @@ WHERE {
   };
 
   useEffect(() => {
-    if (data !== null) {
-      const columns = data.head.vars.map((varName) => ({
+    if (data !== null && data.data !== null && data.data.resultSet) {
+      const resultSet = data.data.resultSet;
+
+      if (resultSet.length === 0) {
+        setColumns([]);
+        setRows([]);
+        return;
+      }
+
+      // Extract column names from keys of the first row
+      const columnNames = Object.keys(resultSet[0]);
+
+      const columns = columnNames.map((varName) => ({
         field: varName,
         headerName: varName.toUpperCase(),
         flex: 1,
         renderCell: (params) => {
           const value = params.row[varName];
-          if (value.type === "uri") {
+
+          // Detect URI-like strings (http/https)
+          if (typeof value === "string" && value.startsWith("http")) {
             return (
-              <a href={value.value} target="_blank" rel="noopener noreferrer">
-                {value.value}
+              <a href={value} target="_blank" rel="noopener noreferrer">
+                {value}
               </a>
             );
           }
-          return value.value;
+          return value;
         },
       }));
 
-      const rows = data.results.bindings.map((binding, index) => {
-        const row = { id: index }; // Unique ID for each row
-        data.head.vars.forEach((varName) => {
-          row[varName] = binding[varName];
-        });
-        return row;
-      });
+      const rows = resultSet.map((binding, index) => ({
+        id: index,
+        ...binding,
+      }));
 
       setColumns(columns);
       setRows(rows);
-    }
-    else {
+    } else {
       setColumns([]);
       setRows([]);
     }
@@ -314,8 +322,8 @@ WHERE {
               value={dataType}
               onChange={(e) => setDataType(e.target.value)}
             >
-              <MenuItem value="clusterData">Cluster Data</MenuItem>
-              <MenuItem value="heatmapData">Heatmap Data</MenuItem>
+              <MenuItem value="clusters">Cluster Data</MenuItem>
+              <MenuItem value="heatmap">Heatmap Data</MenuItem>
             </Select>
           </FormControl>
           <Box sx={{ display: "flex", justifyContent: "flex-start" }}>

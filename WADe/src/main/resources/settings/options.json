@@ -1,0 +1,31 @@
+{
+  "defaults": {
+    "notifications": true,
+    "darkMode": false,
+    "apiKey": ""
+  },
+  "options": [
+    {
+      "key": "notifications",
+      "label": "Enable Email Notifications",
+      "type": "boolean",
+      "description": "Receive update and activity notifications by email.",
+      "sensitive": false
+    },
+    {
+      "key": "darkMode",
+      "label": "Force Dark Mode (Experimental)",
+      "type": "boolean",
+      "description": "Preference is stored now but runtime theme switching is not active yet.",
+      "sensitive": false
+    },
+    {
+      "key": "apiKey",
+      "label": "External API Key (Placeholder)",
+      "type": "string",
+      "description": "Stored on server for future integrations.",
+      "placeholder": "Enter API key",
+      "sensitive": true
+    }
+  ]
+}

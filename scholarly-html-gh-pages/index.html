@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Scholarly HTML</title>
+    <link rel="stylesheet" href="css/scholarly.min.css">
+    <script src="js/scholarly.min.js"></script>
+  </head>
+  <body prefix="schema: http://schema.org">
+    <header>
+      <div class="banner">
+        <img src="scholarly-html.svg" width="227" height="50" alt="Scholarly HTML logo">
+        <div class="status">Community Draft</div>
+      </div>
+      <h1>Scholarly HTML</h1>
+    </header>
+    <!--
+      XXX
+      - check refs
+      - the math example has too much maths
+      - bring back some of the old style
+      - make semantics, validation, processing sub-sections of each structural element
+      - have a section before that for general constructs
+        - explain why use RDFa
+        - explain our patterns: RDFa, roles
+      - figure captions need to get set throughout
+      - dedication? see doc-dedication
+      - syntactic constraints (prefix)
+      - needs more sthenurines
+      - examples of everything
+      - some notes on using Semantic CSS
+      - needs more RDFa in the spec itself
+    -->
+    <div role="contentinfo">
+      <dl>
+        <dt>Authors</dt>
+        <dd>
+          Bursuc Serban-Mihai
+        </dd>
+        <dt>Bugs &amp; Feedback</dt>
+        <dd>
+          <a href="https://github.com/smbursuc/Web-Application-Development/issues">Issues and PRs welcome!</a>
+        </dd>
+        <dt>License</dt>
+        <dd>
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC-BY</a>
+        </dd>
+      </dl>
+    </div>
+    <section typeof="sa:Abstract" id="abstract" role="doc-abstract">
+      <h2>Abstract</h2>
+      <p>
+        IMPR is an application that allows an user to explore several image databases and find semantic groupings. It offers features such as semantic zoom and heatmap correlations. The API exposes all relation
+        through REST API and can offer both JSON and RDF data.
+      </p>
+    </section>
+    <section id="introduction" role="doc-introduction">
+      <!-- review? -->
+    <h2>Introduction</h2>
+    <p>
+      In the era of data-driven decision-making, large-scale image datasets play a crucial role in advancing computer vision and artificial intelligence applications. 
+      This project introduces an <strong>extensible microservice-based system</strong> designed to process, analyze, and extract meaningful insights from <strong>image datasets</strong>, such as <strong>CIFAR-10</strong> and <strong>BSDS300</strong>. 
+      The system integrates <strong>deep learning (DL) and machine learning (ML) techniques</strong>, leveraging public REST APIs like <strong>DeepDetect</strong>, 
+      and employs <strong>semantic web technologies</strong> to provide <strong>smart faceted search, filtering, visualization, and recommendation capabilities</strong>.
+    </p>
+
+    <p>
+      The platform follows a <strong>microservices architecture</strong>, ensuring scalability and modularity while allowing seamless integration of additional processing services. 
+      The core functionalities of the system include:
+    </p>
+
+    <ul>
+        <li>
+          <strong>Browsing and Smart Faceted Searching</strong> – Users can explore datasets 
+          efficiently through an intelligent search mechanism that enables filtering based on metadata, extracted features, or semantic attributes.
+        </li>
+        <li>
+          <strong>Deep Learning & Machine Learning Integration</strong> – The system applies state-of-the-art AI models to classify, correlate, and recommend images based on extracted patterns.
+        </li>
+        <li>
+          <strong>Semantic Web Technologies & SPARQL Endpoint</strong> – A structured knowledge representation is created using ontologies, 
+          enabling <strong>semantic zoom</strong>, <strong>knowledge-driven querying</strong>, and <strong>SPARQL-based data retrieval</strong>.
+        </li>
+        <li>
+          <strong>Interactive Visualizations & Analytics</strong> – The platform offers visual tools to <strong>identify patterns, trends, and correlations</strong>, 
+          enhancing interpretability and decision support.
+        </li>
+    </ul>
+
+    <p>
+      By combining <strong>AI-driven image analysis with semantic reasoning</strong>, the system provides a <strong>novel approach</strong> to dataset exploration, 
+      bridging the gap between deep learning models and knowledge-based representations. Additionally, a <strong>comparative study</strong> will be conducted to assess various processing techniques, 
+      highlighting their strengths, weaknesses, and performance across different datasets.
+    </p>
+    </section>
+    <section id="structure">
+      <!-- review? -->
+      <h2>Structure</h2>
+      <p>The system is built using a microservice architecture that ensures flexibility, scalability, and maintainability. It consists of multiple interconnected services, each responsible for a specific function. These components work together to provide efficient processing, querying, and retrieval of dataset information.</p>
+
+      <h2>Core Components</h2>
+
+      <ul>
+          <li>
+              <u>Main Server (Proxy Server) - Spring Boot</u>: This is the core backend service responsible for managing security and request routing. It implements JWT-based session handling and maintains user authentication and authorization through JPA. Additionally, it interacts with the SPARQL server to construct and execute queries, ensuring a seamless interface between the front-end and the RDF data store.
+          </li>
+          <li>
+              <u>JSON Server - Flask</u>: This service processes cached cluster data stored in JSON format. It dynamically serves data based on query parameters and performs runtime calculations to generate heatmap data. This enables efficient real-time data visualization without placing excessive computational demands on the main server.
+          </li>
+          <li>
+              <u>Apache Jena Fuseki</u>: This component serves as the SPARQL query engine and the RDF data store. It is responsible for executing semantic queries and facilitating knowledge representation. All structured data is loaded into Fuseki, allowing for fast and optimized retrieval using SPARQL endpoints.
+          </li>
+      </ul>
+
+      <h2>Workflow Overview</h2>
+      <p>The system follows a structured workflow, where user requests are processed through the main proxy server, which then delegates tasks to the appropriate services. Data queries are handled by either the JSON server for cached data or the SPARQL engine for structured semantic queries. The processed results are then returned to the client, ensuring an efficient and scalable system.</p>
+
+    </section>
+    <section id="semantics">
+      <!-- review? -->
+      <h2>Background</h2>
+      <p>At the core of the system's processing pipeline lies an essential requirement: the ability to analyze and extract meaningful insights from an image dataset. The workflow begins with a dataset of images, which serves as the foundation for all subsequent data processing, classification, and retrieval mechanisms. Since raw image files alone do not provide structured information, an image detection library is needed to generate meaningful labels that can be further processed and queried semantically.</p>
+
+      <h2>Image Processing with DeepDetect</h2>
+      <p>For this project, we selected <u>DeepDetect</u> as the image detection library, which allowed us to process images and extract labels programmatically. The decision was based on its ease of integration with a RESTful API, the ability to support multiple pre-trained deep learning models, and its capacity to handle batch processing efficiently.</p>
+
+      <h2>Choice of Image Datasets</h2>
+      <p>To evaluate the robustness of our approach, we utilized two distinct datasets:</p>
+
+      <ul>
+          <li><u>CIFAR-10</u>: A large-scale dataset composed of low-resolution images, widely used for benchmarking image classification models. While it offers a diverse range of images, its limited resolution makes high-precision classification challenging.</li>
+          <li><u>BSDS300</u>: A relatively smaller dataset but with high-resolution images, frequently used in segmentation and edge detection tasks. While the image quality is superior, the dataset is limited in terms of the number of available images, restricting its applicability for large-scale training.</li>
+      </ul>
+
+      <h3>Pros and Cons of Dataset Selection</h3>
+      <p>The choice of datasets introduced a trade-off in terms of quality versus scalability. <u>CIFAR-10 excels in quantity but suffers from poor image resolution, making detailed feature extraction difficult</u>. On the other hand, <u>BSDS300 offers high-quality images but lacks the volume required for large-scale deep learning model training</u>. This contrast allowed us to test the adaptability of our pipeline to different types of image data.</p>
+
+      <h2>Challenges in RDF Representation and SPARQL Querying</h2>
+      <p>One of the critical challenges encountered in this workflow stemmed from the nature of the data output. <u>DeepDetect generates JSON-formatted output, rather than RDF data</u>, making it incompatible with direct SPARQL querying. Since RDF and SPARQL operate on structured, linked data, converting raw JSON output into a well-formed semantic format posed a significant challenge.</p>
+
+      <p>In order to bridge this gap, the project had to ensure that all fundamental processing tasks—such as object detection, clustering, and querying—were fully functional using <u>standard JSON data before introducing the additional complexity of RDF transformation</u>. This approach provided the flexibility to refine the machine learning pipeline without being constrained by semantic web integration complexities.</p>
+
+      <h2>Ensuring Compatibility Across Full-Stack Implementation</h2>
+      <p>Given the scale and modular nature of the project, it was imperative to adopt a phased integration approach. The most practical solution was to <u>first establish a stable processing pipeline using standard JSON-based data flow</u>, ensuring that all core functionalities—such as image analysis, metadata retrieval, and visualization—were working effectively. Only once these foundational components were tested and validated, <u>the JSON data was converted into RDF format</u> for integration with the SPARQL-based query engine.</p>
+
+      <p>This dual-layered approach allowed us to optimize the system for both performance and scalability while maintaining the ability to perform advanced semantic queries when needed. By structuring the workflow in this manner, we ensured that the system remained functional across multiple layers of data processing while progressively incorporating more advanced querying capabilities.</p>
+
+    </section>
+    <section id="scholarly-article">
+      <!-- review? -->
+      <h2>Pipeline Start</h2>
+      <p>
+        First comes creating the JSON object data from DeepDetect.
+      </p>
+      <h1>Image Processing Documentation</h1>
+      <p>There is a script (<strong>classification.py</strong>) responsible for automating the processing of images from a dataset, leveraging a microservice-based architecture where a backend API handles the analysis of each image. It integrates with a REST API and processes images in batches, filtering results based on probability thresholds. The final processed data is stored in a structured JSON file.</p>
+
+      <h2>Key Functionalities</h2>
+      <ul>
+          <li><u>Automatic Image Link Generation</u> – Retrieves file paths from a dataset directory and converts them into URLs for remote processing.</li>
+          <li><u>Batch Processing via API Calls</u> – Sends batches of image URLs to a processing API and filters the results based on confidence levels.</li>
+          <li><u>Conditional Data Storage</u> – Stores only relevant results in a JSON file, ensuring that low-confidence predictions are discarded.</li>
+      </ul>
+
+      <h2>Workflow Overview</h2>
+      <p>The script follows a structured workflow, ensuring efficient handling of large datasets. It operates in the following sequence:</p>
+      <ol>
+          <li><strong>Dataset Configuration:</strong> The dataset to be processed is defined (e.g., "bsds300"). The corresponding folder path and API endpoints are set.</li>
+          <li><strong>Generating Image Links:</strong> The script scans the folder and constructs direct image URLs based on a predefined base path.</li>
+          <li><strong>Processing in Batches:</strong> The images are processed in small batches using API requests, preventing system overload and improving efficiency.</li>
+          <li><strong>Filtering Based on Probability:</strong> The API response includes classification results with probabilities, and only images with a probability ≥ 0.7 are retained.</li>
+          <li><strong>Saving Processed Data:</strong> The final dataset is written to a structured JSON file.</li>
+      </ol>
+
+      <h2>Code Breakdown</h2>
+
+      <h3>1. Configuration</h3>
+      <p>The script begins by defining key variables such as dataset selection, folder paths, API endpoints, and batch size:</p>
+      <pre><code>
+        dataset = "bsds300"
+        folder_path = f"E:\\repos\\Web-Application-Development\\WADe\\{dataset}"
+        base_url = "http://localhost:8081/api/files/"
+        api_url = "http://localhost:8081/api/process-image"
+        output_file = f"processed_data_uri_{dataset}.json"
+        batch_size = 1
+      </code></pre>
+      <p>The batch size can be adjusted based on system capabilities and API rate limits.</p>
+
+      <h3>2. Generating Image Links</h3>
+      <p>The function <code>generate_image_links()</code> scans the dataset folder, extracts valid image files, and constructs their corresponding API-accessible URLs.</p>
+      <pre><code>
+        def generate_image_links(folder_path, base_url):
+            links = []
+            for filename in sorted(os.listdir(folder_path)):
+                if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif')):
+                    link = f"{base_url}{filename}" 
+                    links.append(link)
+            return links
+      </code></pre>
+      <p>This ensures only valid image formats are processed.</p>
+
+      <h3>3. Sending API Requests in Batches</h3>
+      <p>The <code>process_images_in_batches()</code> function is responsible for handling API requests efficiently:</p>
+      <pre><code>
+        def process_images_in_batches(links, api_url, batch_size):
+            processed_data = []
+            total_links = len(links)
+            
+            for i in range(0, total_links, batch_size):
+                batch = links[i:i+batch_size]
+                payload = {
+                    "responseType": "processed",
+                    "imagePaths": batch
+                }
+                
+                try:
+                    print(f"Processing batch {i // batch_size + 1}...")
+                    response = requests.post(api_url, json=payload)
+                    if response.status_code == 200:
+                        response_data = response.json()
+                        if "data" in response_data:
+                            data = response_data["data"]
+                            parts = data[0].rsplit(" ", 2)
+                            probability = parts[1]
+                            if float(probability) >= 0.7:
+                                processed_data.extend(response_data["data"])
+                        else:
+                            print(f"Unexpected response format: {response_data}")
+                    else:
+                        print(f"Failed to process batch {i // batch_size + 1}: {response.status_code}, {response.text}")
+                except Exception as e:
+                    print(f"Error processing batch {i // batch_size + 1}: {e}")
+            return processed_data
+      </code></pre>
+      <p>This function ensures that API calls are performed in a controlled manner, preventing unnecessary load on the system.</p>
+
+      <h3>4. Saving the Processed Data</h3>
+      <p>Once processing is complete, results are stored in a structured JSON file:</p>
+      <pre><code>
+        print("Saving processed data to JSON file...")
+        output = {"data": processed_data}
+        with open(output_file, "w") as json_file:
+            json.dump(output, json_file, indent=4)
+        print(f"Processed data saved to {output_file}.")
+      </code></pre>
+
+      <h2>Challenges and Considerations</h2>
+      <ul>
+          <li><u>DeepDetect provides JSON output, but the system requires RDF for semantic querying</u>. This means that JSON must later be converted to RDF.</li>
+          <li><u>SPARQL query generation is more complex than working with JSON</u>. Ensuring that the system first processes JSON correctly before RDF transformation is a key design choice.</li>
+          <li><u>Probability threshold filtering (≥ 0.7)</u> ensures only high-confidence classifications are retained, improving result reliability.</li>
+          <li>Batch processing prevents API overload and optimizes performance for large datasets.</li>
+      </ul>
+
+      
+    </section>
+    <section id="hypermedia">
+      <!-- review? -->
+      <h2>Clustering</h2>
+      <p>
+        Clustering data can be tricky as there are several options to achieve it. We will explore the several options tried and tested.
+      </p>
+
+      <h1>Clustering and Semantic Zoom Processing</h1>
+      <p>This module is responsible for clustering labeled image data and generating a hierarchical structure that supports <strong>semantic zooming</strong>. It leverages multiple clustering approaches to structure detected objects into meaningful groups, enhancing interpretability and visualization.</p>
+
+      <h2>Core Technologies & Libraries</h2>
+      <ul>
+          <li><strong>scikit-learn</strong> – Used for <strong>Agglomerative Clustering</strong>, providing hierarchical clustering capabilities. <strong>This ended up underperforming and was deprecated.</strong></li>
+          <li><strong>HDBSCAN</strong> – A density-based clustering algorithm that allows for more adaptive group formations, especially for noisy datasets.</li>
+          <li><strong>Sentence-Transformers</strong> – Converts object names into <strong>semantic embeddings</strong>, making clustering more accurate by leveraging <strong>contextual relationships</strong>.</li>
+          <li><strong>Apache Groq API</strong> – Provides an external AI-based approach to clustering, useful for semantically meaningful grouping beyond pure vector similarity.</li>
+          <li><strong>Plotly</strong> – Generates <strong>interactive tree maps</strong> to visually represent hierarchical structures.</li>
+      </ul>
+
+      <h2>Key Architectural Decisions</h2>
+
+      <h3>1. Multi-Stage Clustering</h3>
+      <p>The system allows for multiple clustering approaches:</p>
+      <ul>
+          <li><strong>Agglomerative Clustering (scikit-learn)</strong>: Traditional hierarchical clustering used when a fixed distance threshold is appropriate.</li>
+          <li><strong>HDBSCAN</strong>: More adaptable clustering, useful when handling noise and varying densities in data.</li>
+          <li><strong>Groq API-based Clustering</strong>: Provides AI-assisted grouping based on linguistic meaning, offering more semantically rich clusters.</li>
+      </ul>
+
+      <h4>Code Snippet - HDBSCAN for Density-Based Clustering</h4>
+      <pre><code>
+        import hdbscan
+        from sklearn.preprocessing import normalize
+
+        embeddings_norm = normalize(embeddings, norm='l2')  # Normalize embeddings
+        clusterer = hdbscan.HDBSCAN(min_cluster_size=3, metric='euclidean')
+        clusters = clusterer.fit_predict(embeddings_norm)
+      </code></pre>
+      <p>HDBSCAN automatically determines the number of clusters based on density, reducing the need for manual tuning.</p>
+
+      <h3>2. Semantic Embedding for Object Similarity</h3>
+      <p>Since traditional clustering algorithms rely on <strong>numerical distances</strong>, <strong>Sentence-Transformers</strong> is used to convert object names into numerical representations (embeddings). This allows clustering to work effectively even when objects are represented as textual labels rather than structured numerical data.</p>
+
+      <h4>Code Snippet - Converting Text to Embeddings</h4>
+      <pre><code>
+        from sentence_transformers import SentenceTransformer
+
+        model = SentenceTransformer('all-MiniLM-L6-v2')
+        embeddings = model.encode(objects)  # Convert text objects into numerical vectors
+      </code></pre>
+      <p>This allows for <strong>semantic understanding</strong>, making clustering more effective than simple word-matching techniques.</p>
+
+      <h3>3. AI-Based Clustering with Groq</h3>
+      <p>For more complex clustering tasks, an external <strong>Groq-based clustering API</strong> is used. This allows for groupings based on <strong>semantic meaning</strong>, rather than just numerical similarity.</p>
+
+      <h4>Code Snippet - Clustering via Groq API</h4>
+      <pre><code>
+        def cluster_with_groq(object_names):
+            formatted_objects = json.dumps(object_names, ensure_ascii=False)
+            prompt = (
+                "Cluster the following objects into semantically meaningful groups..."
+                f"Objects to cluster (JSON format):\n{formatted_objects}"
+            )
+
+            response = client.chat.completions.create(
+                model="llama-3.3-70b-versatile",
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.0
+            )
+
+            cluster_mapping = json.loads(response.choices[0].message.content)
+            return cluster_mapping
+      </code></pre>
+      <p>The <strong>Groq API</strong> leverages <strong>natural language understanding</strong> to group objects in a way that respects their semantic meaning.</p>
+
+      <h2>Challenges & Considerations</h2>
+      <ul>
+          <li><strong>Balancing Model Performance & Speed</strong>: Running <strong>deep semantic embedding models</strong> on large datasets is computationally expensive. <strong>MiniLM-L6-v2</strong> was chosen as a lightweight alternative for <strong>fast, high-quality embeddings</strong>.</li>
+          <li><strong>Ensuring Consistency Across Batches</strong>: Since clustering is performed in <strong>batches</strong>, a <strong>global cluster offset</strong> is applied to prevent duplicate cluster IDs when processing incrementally.</li>
+          <li><strong>Handling External API Dependencies</strong>: The <strong>Groq API response is cached</strong> locally to avoid redundant calls, improving efficiency.</li>
+      </ul>
+
+    </section>
+    <section id="processing-model">
+      <!-- review? -->
+      <h2>Heatmap data</h2>
+      <p>
+        Next we will talk about how the heatmap data has been generated.
+      </p>
+      <h1>Semantic Similarity Analysis</h1>
+      <p>This module is designed to compute and analyze <strong>semantic similarity</strong> between detected objects using <strong>text embeddings</strong> and <strong>cosine similarity</strong>. The objective is to create a <strong>heatmap representation</strong> of object relationships based on their semantic meanings.</p>
+
+      <h2>Core Technologies & Libraries</h2>
+      <ul>
+          <li><strong>Sentence-Transformers</strong> – Converts object names into <strong>vector embeddings</strong>, enabling meaningful semantic comparisons.</li>
+          <li><strong>scikit-learn</strong> – Provides <strong>cosine similarity computation</strong>, measuring how similar two vectors (objects) are.</li>
+          <li><strong>PyTorch</strong> – Used for <strong>tensor-based normalization</strong>, ensuring embeddings remain consistent for distance-based similarity calculations.</li>
+          <li><strong>Seaborn & Matplotlib</strong> – Generate <strong>heatmaps</strong> for visualizing semantic similarity.</li>
+      </ul>
+
+      <h2>Key Architectural Decisions</h2>
+
+      <h3>1. Using Embeddings for Semantic Representation</h3>
+      <p>Instead of using <strong>raw textual data</strong>, objects are converted into <strong>vector embeddings</strong> using the <strong>all-mpnet-base-v2</strong> transformer model. This ensures that objects with similar meanings (even if phrased differently) are clustered closer together.</p>
+
+      <h3>2. Cosine Similarity as a Distance Metric</h3>
+      <p>Since embeddings are multi-dimensional vectors, the <strong>cosine similarity</strong> function is used to measure the angle between two vectors, which effectively determines how similar two objects are.</p>
+
+      <h2>Similarity Matrix Calculation</h2>
+
+      <p>The similarity matrix is computed in three key steps:</p>
+      <ul>
+          <li><strong>Generate embeddings</strong>: Convert object names into numerical representations.</li>
+          <li><strong>Normalize embeddings</strong>: Ensure vectors maintain consistent magnitude.</li>
+          <li><strong>Compute cosine similarity</strong>: Compare objects based on their vector distances.</li>
+      </ul>
+
+      <h4>Code Snippet - Calculating the Similarity Matrix</h4>
+      <pre><code>
+          # Step 1: Generate embeddings using Sentence-Transformers
+          model = SentenceTransformer('all-mpnet-base-v2')
+          embeddings = model.encode(objects, convert_to_tensor=True)
+
+          # Step 2: Normalize embeddings (so cosine similarity becomes simply the dot product)
+          embeddings_norm = torch.nn.functional.normalize(embeddings, p=2, dim=1)
+
+          # Step 3: Compute cosine similarity
+          similarity_matrix = cosine_similarity(embeddings)
+      </code></pre>
+
+      <h3>Explanation of the Code</h3>
+
+      <ul>
+          <li><strong>Step 1: Convert objects into embeddings</strong>  
+              The model <code>'all-mpnet-base-v2'</code> is used to transform text labels into dense numerical vectors.</li>
+          <li><strong>Step 2: Normalize embeddings</strong>  
+              Normalization ensures that all vectors have unit length, making cosine similarity calculations <strong>scale-invariant</strong>.</li>
+          <li><strong>Step 3: Compute cosine similarity</strong>  
+              The similarity matrix is computed by taking the <strong>dot product</strong> of normalized embeddings, which effectively measures how closely related two objects are.</li>
+      </ul>
+
+      <h3>3. Sorting and Visualization</h3>
+      <p>The similarity matrix can be sorted based on <strong>average similarity</strong> or <strong>strongest pair</strong>, allowing different ways of structuring the analysis.</p>
+
+      <h4>Sorting Criteria</h4>
+      <ul>
+          <li><strong>Average Similarity:</strong> Objects with the highest mean similarity across all others are prioritized.</li>
+          <li><strong>Strongest Pair:</strong> Objects that are most similar to at least one other object are prioritized.</li>
+      </ul>
+
+      <h2>Challenges & Considerations</h2>
+      <ul>
+          <li><strong>High-Dimensional Computation</strong>: Computing cosine similarity across large datasets is <strong>computationally expensive</strong>. Using <strong>tensor-based operations</strong> helps optimize speed.</li>
+          <li><strong>Handling Similar Object Names</strong>: The transformer model ensures objects with similar meanings (e.g., "car" and "vehicle") are placed closer together.</li>
+          <li><strong>Sorting for Interpretability</strong>: Sorting by <strong>strongest pair</strong> vs. <strong>average similarity</strong> provides flexibility in how the data is analyzed.</li>
+      </ul>
+    </section>
+    <section id="acks">
+      <!-- review? -->
+      <h2>Cluster Conversion to RDF</h2>
+      <h1>Converting Clustered Data to RDF</h1>
+      <p>This module is responsible for transforming the hierarchical clustering output (in JSON format) into an <strong>RDF representation</strong> using <strong>Apache Jena</strong> and <strong>SKOS (Simple Knowledge Organization System)</strong>. The resulting RDF dataset allows for <strong>semantic querying</strong> using SPARQL.</p>
+
+      <h2>Core Technologies & Libraries</h2>
+      <ul>
+          <li><strong>Apache Jena</strong> – Used for constructing RDF models and serializing them in <strong>Turtle format</strong>.</li>
+          <li><strong>SKOS Vocabulary</strong> – Defines concepts, labels, and hierarchical relationships between <strong>clusters and objects</strong>.</li>
+          <li><strong>Jackson (ObjectMapper)</strong> – Parses hierarchical JSON data from the clustering output.</li>
+      </ul>
+
+      <h2>Key Architectural Decisions</h2>
+
+      <h3>1. Using SKOS for Knowledge Representation</h3>
+      <p>SKOS (Simple Knowledge Organization System) was chosen to structure the clustered data in an <strong>ontological format</strong>, enabling efficient retrieval and linking of objects to their respective clusters.</p>
+
+      <h3>2. RDF Structure and Relationships</h3>
+      <p>The RDF model represents:</p>
+      <ul>
+          <li>Each <strong>cluster</strong> as a <code>skos:Concept</code>, labeled with <code>skos:prefLabel</code>.</li>
+          <li>Each <strong>object prediction</strong> as a <code>skos:Concept</code> linked to:
+              <ul>
+                  <li>The <strong>cluster it belongs to</strong> (<code>ex:hasPrediction</code>).</li>
+                  <li>The <strong>predicted object type</strong> (<code>ex:predictedObject</code>).</li>
+                  <li>The <strong>probability score</strong> (<code>ex:hasProbability</code>).</li>
+                  <li>The <strong>image URI</strong> from which it was detected (<code>ex:hasURI</code>).</li>
+              </ul>
+          </li>
+      </ul>
+
+      <h2>Code Implementation</h2>
+
+      <h3>Processing Clusters and Predictions</h3>
+      <p>The following Java snippet demonstrates how the <strong>hierarchical JSON structure is converted into RDF</strong>:</p>
+
+      <pre><code>
+        private static void addPredictionToCluster(Model model, Resource clusterResource, ClusterData.Cluster.ObjectData obj, Property skosPrefLabel) 
+        {
+            String predictionUri = BASE_URI + "Prediction/" + obj.getName().replace(" ", "_") + "_" + extractImageId(obj.getUri());
+            
+            Resource predictionResource = model.createResource(predictionUri)
+                .addProperty(RDF.type, model.createResource("http://www.w3.org/2004/02/skos/core#Concept"))
+                .addProperty(model.createProperty(BASE_URI + "ontology#predictedObject"), 
+                            createObjectResource(model, obj.getName(), obj.getUri(), skosPrefLabel))
+                .addLiteral(model.createProperty(BASE_URI + "ontology#hasProbability"), obj.getProbability())
+                .addProperty(model.createProperty(BASE_URI + "ontology#hasURI"), obj.getUri());
+
+            clusterResource.addProperty(model.createProperty(BASE_URI + "ontology#hasPrediction"), predictionResource);
+        }
+      </code></pre>
+
+      <h3>Explanation of the Code</h3>
+      <ul>
+          <li><strong>Each detected object is assigned a unique URI</strong> based on its <strong>name and image ID</strong> to avoid conflicts.</li>
+          <li><strong>It is defined as a <code>skos:Concept</code></strong> to integrate with SKOS-based reasoning.</li>
+          <li><strong>The predicted object is linked to:</strong>
+              <ul>
+                  <li><code>ex:predictedObject</code> → The object label.</li>
+                  <li><code>ex:hasProbability</code> → The probability score.</li>
+                  <li><code>ex:hasURI</code> → The image source.</li>
+                  <li><code>ex:hasPrediction</code> → The cluster containing this object.</li>
+              </ul>
+          </li>
+      </ul>
+
+      <h2>Example Output (Turtle Format)</h2>
+
+      <h3>Cluster Representation</h3>
+      <pre><code>
+        &lt;http://example.org/Cluster/Cluster_7&gt;
+                a                 skos:Concept ;
+                ex:hasPrediction  &lt;http://example.org/Prediction/triumphal_arch_be05fbb5-1d7c-41dd-9f90-642a3bd99e9599&gt; ,
+                                  &lt;http://example.org/Prediction/viaduct_603babc5-0412-4549-936b-eca320a64ebb47&gt; ;
+                skos:prefLabel    "Cluster 7" .
+      </code></pre>
+
+      <h3>Predicted Object Representation</h3>
+      <pre><code>
+        &lt;http://example.org/Prediction/bonnet,_poke_bonnet_73980b44-14f6-4e15-b3e8-c69cf4383c6c98&gt;
+                a                   skos:Concept ;
+                ex:hasProbability   "0.8887044787406921"^^xsd:double ;
+                ex:hasURI           "http://host.docker.internal:8081/api/files/73980b44-14f6-4e15-b3e8-c69cf4383c6c_temp_image_98.png" ;
+                ex:predictedObject  &lt;http://example.org/Object/bonnet,_poke_bonnet&gt; .
+      </code></pre>
+
+      <h2>Challenges & Considerations</h2>
+      <ul>
+          <li><strong>Ensuring Unique Prediction URIs</strong>: Since multiple predictions for the same object may exist, an <strong>image ID is appended</strong> to avoid overwriting entries.</li>
+          <li><strong>Probability Thresholding</strong>: Only objects with <strong>high confidence scores</strong> were included in the RDF dataset.</li>
+          <li><strong>Efficient Hierarchical Querying</strong>: Using <strong>SKOS-based relationships</strong> allows <strong>SPARQL queries</strong> to traverse clusters and objects semantically.</li>
+      </ul>
+    </section>
+    <section id="heatmap_conversion">
+      <h1>Converting Heatmap Data to RDF</h1>
+      <p>This module is responsible for transforming <strong>heatmap data</strong> into an <strong>RDF representation</strong> using <strong>Apache Jena</strong>. The RDF dataset represents <strong>semantic similarity relationships</strong> between objects, allowing for <strong>SPARQL-based retrieval and reasoning.</strong></p>
+
+      <h2>Core Technologies & Libraries</h2>
+      <ul>
+          <li><strong>Apache Jena</strong> – Used for constructing RDF models and serializing them in <strong>Turtle format</strong>.</li>
+          <li><strong>SKOS Vocabulary</strong> – Used to represent objects as <code>skos:Concept</code> entities.</li>
+          <li><strong>RDF Schema (RDFS)</strong> – Defines relationships such as <strong>domain and range constraints</strong> for similarity relations.</li>
+      </ul>
+
+      <h2>Key Architectural Decisions</h2>
+
+      <h3>1. Representing Similarity Relationships</h3>
+      <p>Unlike cluster-based RDF conversion, which focuses on <strong>grouping objects into hierarchical clusters</strong>, the heatmap RDF representation focuses on <strong>pairwise relationships</strong> between objects, capturing their similarity scores.</p>
+
+      <h3>2. RDF Structure and Relationships</h3>
+      <p>The RDF model represents:</p>
+      <ul>
+          <li>Each <strong>object</strong> as a <code>skos:Concept</code>.</li>
+          <li>Each <strong>similarity relation</strong> as a structured RDF triple with:
+              <ul>
+                  <li><code>ex:fromObject</code> → The first object in the similarity pair.</li>
+                  <li><code>ex:toObject</code> → The second object in the similarity pair.</li>
+                  <li><code>ex:hasCorrelationValue</code> → The computed similarity score between the two objects.</li>
+              </ul>
+          </li>
+          <li>Defining <code>ex:fromObject</code> as having an <strong>RDFS domain</strong> of <code>ex:SimilarityRelation</code> and a <strong>range</strong> of <code>skos:Concept</code>.</li>
+      </ul>
+
+      <h2>Code Implementation</h2>
+
+      <h3>Processing Pairwise Similarities</h3>
+      <p>The following Java snippet demonstrates how the <strong>heatmap similarity data is structured in RDF format</strong>:</p>
+
+      <pre><code>
+        Resource similarityRelation = model.createResource()
+            .addProperty(model.createProperty(BASE_URI + "fromObject"), model.createResource(fromObjectUri))
+            .addLiteral(model.createProperty(BASE_URI + "hasCorrelationValue"), similarityScore)
+            .addProperty(model.createProperty(BASE_URI + "toObject"), model.createResource(toObjectUri));
+
+        model.add(similarityRelation, RDF.type, model.createResource(BASE_URI + "SimilarityRelation"));
+      </code></pre>
+
+      <h3>Explanation of the Code</h3>
+      <ul>
+          <li><strong>Each similarity relation is represented as an RDF resource</strong>, rather than a simple triple, to allow for <strong>explicit annotations</strong> (e.g., similarity scores).</li>
+          <li><strong>The relation links two objects:</strong>
+              <ul>
+                  <li><code>ex:fromObject</code> → The first object.</li>
+                  <li><code>ex:toObject</code> → The second object.</li>
+                  <li><code>ex:hasCorrelationValue</code> → The numerical similarity score.</li>
+              </ul>
+          </li>
+          <li><strong>Each similarity relation is explicitly typed</strong> as <code>ex:SimilarityRelation</code>, enabling structured queries.</li>
+      </ul>
+
+      <h2>Example Output (Turtle Format)</h2>
+
+      <h3>Pairwise Similarity Representation</h3>
+      <pre><code>
+        [
+          ex:fromObject           &lt;http://example.org/Object/otter&gt; ;
+          ex:hasCorrelationValue  "0.2683798670768738"^^xsd:double ;
+          ex:toObject             &lt;http://example.org/Object/barn&gt;
+        ] .
+      </code></pre>
+
+      <h3>RDFS Constraints on Similarity Relations</h3>
+      <pre><code>
+        ex:fromObject  &lt;http://www.w3.org/2000/01/rdf-schema#domain&gt;
+                        ex:SimilarityRelation ;
+                &lt;http://www.w3.org/2000/01/rdf-schema#range&gt;
+                        skos:Concept .
+      </code></pre>
+
+      <h2>Challenges & Considerations</h2>
+      <ul>
+          <li><strong>Handling Large Similarity Matrices</strong>: Pairwise similarity relationships can grow exponentially. This causes performance issues for large datasets.</li>
+          <li><strong>Defining Ontological Constraints</strong>: Adding <strong>RDFS domain and range constraints</strong> improves <strong>semantic reasoning</strong> and ensures data consistency.</li>
+          <li><strong>SPARQL Querying Efficiency</strong>: Using <strong>explicit relationships</strong> instead of simple triples enables <strong>optimized SPARQL queries</strong> for retrieving related objects.</li>
+      </ul>
+    </section>
+    <section id="queries">
+      <h1>SPARQL Queries for API</h1>
+      <p>The API retrieves data from the RDF knowledge base using <strong>SPARQL queries</strong>. These queries allow structured access to both <strong>clustering data</strong> and <strong>heatmap similarity data</strong>, ensuring efficient retrieval of relevant information.</p>
+
+      <h2>1. Retrieving Clustered Objects</h2>
+      <p>This query fetches predicted objects associated with clusters, along with their probability scores and source images.</p>
+
+      <pre><code>
+        PREFIX ex: &lt;http://example.org/ontology#&gt;
+        PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        SELECT ?clusterLabel ?predictedObjectLabel ?probability ?imageURI
+        WHERE {
+          GRAPH &lt;http://example.org/cifar10_clusters&gt; {
+            ?cluster a skos:Concept ;
+                    skos:prefLabel ?clusterLabel ;
+                    ex:hasPrediction ?prediction .
+            ?prediction ex:hasProbability ?probability ;
+                        ex:hasURI ?imageURI ;
+                        ex:predictedObject ?predictedObject .
+            ?predictedObject skos:prefLabel ?predictedObjectLabel .
+          }
+        }
+        LIMIT 5
+      </code></pre>
+
+      <h3>Explanation</h3>
+      <ul>
+          <li><strong>Clusters</strong> are identified using <code>skos:Concept</code> and labeled with <code>skos:prefLabel</code>.</li>
+          <li><strong>Predicted objects</strong> are linked to their clusters via <code>ex:hasPrediction</code>.</li>
+          <li>Each object has:
+              <ul>
+                  <li><strong>A probability score</strong> (<code>ex:hasProbability</code>).</li>
+                  <li><strong>A corresponding image URI</strong> (<code>ex:hasURI</code>).</li>
+                  <li><strong>A readable label</strong> (<code>skos:prefLabel</code>).</li>
+              </ul>
+          </li>
+      </ul>
+
+      <h2>2. Retrieving Object Similarity from Heatmap Data</h2>
+      <p>This query extracts the similarity scores between objects from the heatmap RDF graph.</p>
+
+      <pre><code>
+        PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
+        PREFIX ex: &lt;http://example.org/ontology#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        SELECT ?fromLabel ?toLabel ?similarityValue
+        WHERE {
+          GRAPH &lt;http://example.org/cifar10_heatmap&gt; {
+            ?sim ex:fromObject ?from .
+            ?sim ex:toObject ?to .
+            ?sim ex:hasCorrelationValue ?similarityValue .
+            ?from a skos:Concept ;
+                  rdfs:label ?fromLabel .
+            ?to a skos:Concept ;
+                  rdfs:label ?toLabel .
+          }
+        }
+        LIMIT 5
+      </code></pre>
+
+      <h3>Explanation</h3>
+      <ul>
+          <li><strong>Each similarity relation</strong> is stored as a structured triple:
+              <ul>
+                  <li><code>ex:fromObject</code> → The first object in the pair.</li>
+                  <li><code>ex:toObject</code> → The second object in the pair.</li>
+                  <li><code>ex:hasCorrelationValue</code> → The computed similarity score.</li>
+              </ul>
+          </li>
+          <li><strong>Objects are labeled</strong> using <code>rdfs:label</code> for easier retrieval.</li>
+          <li>The query is usually limited for performance reasons. Query parameters in the API dictate the LIMIT and the OFFSET.</li>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,678 @@
+
+> Task :compileJava
+Note: E:\repos\Web-Application-Development\WADe\src\main\java\com\soloproductions\wade\datatype\SqlController.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :processResources UP-TO-DATE
+> Task :classes
+
+> Task :com.soloproductions.wade.WaDeApplication.main()
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.1)
+
+2026-02-22T21:09:04.200+02:00  INFO 11380 --- [WADe] [           main] c.soloproductions.wade.WaDeApplication   : Starting WaDeApplication using Java 18.0.1.1 with PID 11380 (E:\repos\Web-Application-Development\WADe\build\classes\java\main started by godar in E:\repos\Web-Application-Development\WADe)
+2026-02-22T21:09:04.203+02:00  INFO 11380 --- [WADe] [           main] c.soloproductions.wade.WaDeApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-02-22T21:09:04.953+02:00  INFO 11380 --- [WADe] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-22T21:09:05.009+02:00  INFO 11380 --- [WADe] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 47 ms. Found 5 JPA repository interfaces.
+2026-02-22T21:09:05.602+02:00  INFO 11380 --- [WADe] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-02-22T21:09:05.611+02:00  INFO 11380 --- [WADe] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-22T21:09:05.613+02:00  INFO 11380 --- [WADe] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2026-02-22T21:09:05.679+02:00  INFO 11380 --- [WADe] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-02-22T21:09:05.679+02:00  INFO 11380 --- [WADe] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1443 ms
+2026-02-22T21:09:05.921+02:00  INFO 11380 --- [WADe] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-22T21:09:06.007+02:00  INFO 11380 --- [WADe] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.4.Final
+2026-02-22T21:09:06.046+02:00  INFO 11380 --- [WADe] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-22T21:09:06.231+02:00  INFO 11380 --- [WADe] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-22T21:09:06.254+02:00  INFO 11380 --- [WADe] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-22T21:09:06.366+02:00  INFO 11380 --- [WADe] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@43fbc2bf
+2026-02-22T21:09:06.368+02:00  INFO 11380 --- [WADe] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-22T21:09:06.419+02:00  INFO 11380 --- [WADe] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 14.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-22T21:09:07.059+02:00  INFO 11380 --- [WADe] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-22T21:09:07.114+02:00  INFO 11380 --- [WADe] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-22T21:09:07.466+02:00  INFO 11380 --- [WADe] [           main] c.s.wade.service.PredictionService       : Ollama is already running at localhost:11434. Stopping existing instance to capture logs...
+2026-02-22T21:09:07.505+02:00  INFO 11380 --- [WADe] [           main] c.s.wade.service.PredictionService       : Killing detected Ollama process PID: 16516
+2026-02-22T21:09:07.752+02:00  INFO 11380 --- [WADe] [           main] c.s.wade.service.PredictionService       : Using configured explicit Ollama executable: E:\Ollama\ollama.exe
+2026-02-22T21:09:07.752+02:00  INFO 11380 --- [WADe] [           main] c.s.wade.service.PredictionService       : Starting ollama with command: E:\Ollama\ollama.exe serve
+2026-02-22T21:09:07.752+02:00  INFO 11380 --- [WADe] [           main] c.s.wade.service.PredictionService       : Set Ollama working directory to: E:\Ollama
+2026-02-22T21:09:07.756+02:00  INFO 11380 --- [WADe] [           main] c.s.wade.service.PredictionService       : Ollama started by us with PID: 12728
+2026-02-22T21:09:07.801+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:07.800+02:00 level=INFO source=routes.go:1663 msg="server config" env="map[CUDA_VISIBLE_DEVICES: GGML_VK_VISIBLE_DEVICES: GPU_DEVICE_ORDINAL: HIP_VISIBLE_DEVICES: HSA_OVERRIDE_GFX_VERSION: HTTPS_PROXY: HTTP_PROXY: NO_PROXY: OLLAMA_CONTEXT_LENGTH:0 OLLAMA_DEBUG:DEBUG OLLAMA_EDITOR: OLLAMA_FLASH_ATTENTION:false OLLAMA_GPU_OVERHEAD:0 OLLAMA_HOST:http://127.0.0.1:11434 OLLAMA_KEEP_ALIVE:5m0s OLLAMA_KV_CACHE_TYPE: OLLAMA_LLM_LIBRARY: OLLAMA_LOAD_TIMEOUT:5m0s OLLAMA_MAX_LOADED_MODELS:0 OLLAMA_MAX_QUEUE:512 OLLAMA_MODELS:E:\\Ollama\\models OLLAMA_MULTIUSER_CACHE:false OLLAMA_NEW_ENGINE:false OLLAMA_NOHISTORY:false OLLAMA_NOPRUNE:false OLLAMA_NO_CLOUD:false OLLAMA_NUM_PARALLEL:1 OLLAMA_ORIGINS:[http://localhost https://localhost http://localhost:* https://localhost:* http://127.0.0.1 https://127.0.0.1 http://127.0.0.1:* https://127.0.0.1:* http://0.0.0.0 https://0.0.0.0 http://0.0.0.0:* https://0.0.0.0:* app://* file://* tauri://* vscode-webview://* vscode-file://*] OLLAMA_REMOTES:[ollama.com] OLLAMA_SCHED_SPREAD:false OLLAMA_VULKAN:true ROCR_VISIBLE_DEVICES:]"
+2026-02-22T21:09:07.801+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:07.801+02:00 level=INFO source=routes.go:1665 msg="Ollama cloud disabled: false"
+2026-02-22T21:09:07.802+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:07.802+02:00 level=INFO source=images.go:473 msg="total blobs: 25"
+2026-02-22T21:09:07.803+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:07.803+02:00 level=INFO source=images.go:480 msg="total unused blobs removed: 0"
+2026-02-22T21:09:07.804+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:07.804+02:00 level=INFO source=routes.go:1718 msg="Listening on 127.0.0.1:11434 (version 0.16.3)"
+2026-02-22T21:09:07.804+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:07.804+02:00 level=DEBUG source=sched.go:147 msg="starting llm scheduler"
+2026-02-22T21:09:07.805+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:07.805+02:00 level=INFO source=runner.go:67 msg="discovering available GPUs..."
+2026-02-22T21:09:07.822+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:07.822+02:00 level=INFO source=server.go:431 msg="starting runner" cmd="E:\\Ollama\\ollama.exe runner --ollama-engine --port 49457"
+2026-02-22T21:09:07.822+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:07.822+02:00 level=DEBUG source=server.go:432 msg=subprocess OLLAMA_DEBUG=1 OLLAMA_MODELS=E:\Ollama\models OLLAMA_VULKAN=1 PATH="E:\\Ollama\\lib\\ollama;E:\\Ollama\\lib\\ollama\\cuda_v12;C:\\Python310\\Scripts\\;C:\\Python310\\;C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\Program Files\\Common Files\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\Git\\cmd;C:\\Program Files\\PostgreSQL\\14\\bin;C:\\Program Files\\PostgreSQL\\14\\lib;F:\\php;C:\\Program Files\\Redis\\;C:\\Program Files\\dotnet\\;C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\;C:\\Program Files\\Azure Data Studio\\bin;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Amazon\\AWSCLIV2\\;E:\\Tesseract;C:\\Program Files\\nodejs\\;E:\\jena-5.2.0\\apache-jena\\bin;C:\\Program Files\\CMake\\bin;C:\\Program Files\\Meld\\;C:\\poppler\\Library\\bin;;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Users\\godar\\AppData\\Local\\Programs\\Python\\Python39\\Scripts\\;C:\\Users\\godar\\AppData\\Local\\Programs\\Python\\Python39\\;C:\\Users\\godar\\.cargo\\bin;C:\\Users\\godar\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\godar\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\godar\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;G:\\IntelliJ IDEA 2024.2.3\\bin;;F:\\php;F:\\flutter\\bin;C:\\tools\\dart-sdk\\bin;C:\\Users\\godar\\AppData\\Roaming\\Pub\\Cache\\bin;C:\\tools\\dart-sdk;;C:\\Program Files\\Azure Data Studio\\bin;C:\\Users\\godar\\AppData\\Roaming\\npm;C:\\Program Files\\JetBrains\\IntelliJ IDEA Community Edition 2025.2.3\\bin;E:\\Ollama" OLLAMA_LIBRARY_PATH=E:\Ollama\lib\ollama;E:\Ollama\lib\ollama\cuda_v12
+2026-02-22T21:09:07.892+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:07.891+02:00 level=DEBUG source=runner.go:437 msg="bootstrap discovery took" duration=75.5276ms OLLAMA_LIBRARY_PATH="[E:\\Ollama\\lib\\ollama E:\\Ollama\\lib\\ollama\\cuda_v12]" extra_envs=map[]
+2026-02-22T21:09:07.893+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:07.893+02:00 level=INFO source=server.go:431 msg="starting runner" cmd="E:\\Ollama\\ollama.exe runner --ollama-engine --port 61318"
+2026-02-22T21:09:07.893+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:07.893+02:00 level=DEBUG source=server.go:432 msg=subprocess OLLAMA_DEBUG=1 OLLAMA_MODELS=E:\Ollama\models OLLAMA_VULKAN=1 PATH="E:\\Ollama\\lib\\ollama;E:\\Ollama\\lib\\ollama\\cuda_v13;C:\\Python310\\Scripts\\;C:\\Python310\\;C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\Program Files\\Common Files\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\Git\\cmd;C:\\Program Files\\PostgreSQL\\14\\bin;C:\\Program Files\\PostgreSQL\\14\\lib;F:\\php;C:\\Program Files\\Redis\\;C:\\Program Files\\dotnet\\;C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\;C:\\Program Files\\Azure Data Studio\\bin;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Amazon\\AWSCLIV2\\;E:\\Tesseract;C:\\Program Files\\nodejs\\;E:\\jena-5.2.0\\apache-jena\\bin;C:\\Program Files\\CMake\\bin;C:\\Program Files\\Meld\\;C:\\poppler\\Library\\bin;;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Users\\godar\\AppData\\Local\\Programs\\Python\\Python39\\Scripts\\;C:\\Users\\godar\\AppData\\Local\\Programs\\Python\\Python39\\;C:\\Users\\godar\\.cargo\\bin;C:\\Users\\godar\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\godar\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\godar\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;G:\\IntelliJ IDEA 2024.2.3\\bin;;F:\\php;F:\\flutter\\bin;C:\\tools\\dart-sdk\\bin;C:\\Users\\godar\\AppData\\Roaming\\Pub\\Cache\\bin;C:\\tools\\dart-sdk;;C:\\Program Files\\Azure Data Studio\\bin;C:\\Users\\godar\\AppData\\Roaming\\npm;C:\\Program Files\\JetBrains\\IntelliJ IDEA Community Edition 2025.2.3\\bin;E:\\Ollama" OLLAMA_LIBRARY_PATH=E:\Ollama\lib\ollama;E:\Ollama\lib\ollama\cuda_v13
+2026-02-22T21:09:08.000+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:08.000+02:00 level=DEBUG source=runner.go:437 msg="bootstrap discovery took" duration=108.6746ms OLLAMA_LIBRARY_PATH="[E:\\Ollama\\lib\\ollama E:\\Ollama\\lib\\ollama\\cuda_v13]" extra_envs=map[]
+2026-02-22T21:09:08.001+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:08.000+02:00 level=INFO source=server.go:431 msg="starting runner" cmd="E:\\Ollama\\ollama.exe runner --ollama-engine --port 61323"
+2026-02-22T21:09:08.001+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:08.000+02:00 level=DEBUG source=server.go:432 msg=subprocess OLLAMA_DEBUG=1 OLLAMA_MODELS=E:\Ollama\models OLLAMA_VULKAN=1 PATH="E:\\Ollama\\lib\\ollama;E:\\Ollama\\lib\\ollama\\rocm;C:\\Python310\\Scripts\\;C:\\Python310\\;C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\Program Files\\Common Files\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\Git\\cmd;C:\\Program Files\\PostgreSQL\\14\\bin;C:\\Program Files\\PostgreSQL\\14\\lib;F:\\php;C:\\Program Files\\Redis\\;C:\\Program Files\\dotnet\\;C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\;C:\\Program Files\\Azure Data Studio\\bin;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Amazon\\AWSCLIV2\\;E:\\Tesseract;C:\\Program Files\\nodejs\\;E:\\jena-5.2.0\\apache-jena\\bin;C:\\Program Files\\CMake\\bin;C:\\Program Files\\Meld\\;C:\\poppler\\Library\\bin;;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Users\\godar\\AppData\\Local\\Programs\\Python\\Python39\\Scripts\\;C:\\Users\\godar\\AppData\\Local\\Programs\\Python\\Python39\\;C:\\Users\\godar\\.cargo\\bin;C:\\Users\\godar\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\godar\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\godar\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;G:\\IntelliJ IDEA 2024.2.3\\bin;;F:\\php;F:\\flutter\\bin;C:\\tools\\dart-sdk\\bin;C:\\Users\\godar\\AppData\\Roaming\\Pub\\Cache\\bin;C:\\tools\\dart-sdk;;C:\\Program Files\\Azure Data Studio\\bin;C:\\Users\\godar\\AppData\\Roaming\\npm;C:\\Program Files\\JetBrains\\IntelliJ IDEA Community Edition 2025.2.3\\bin;E:\\Ollama" OLLAMA_LIBRARY_PATH=E:\Ollama\lib\ollama;E:\Ollama\lib\ollama\rocm
+2026-02-22T21:09:08.067+02:00  INFO 11380 --- [WADe] [           main] c.s.wade.service.PredictionService       : Ollama started and listening on localhost:11434
+2026-02-22T21:09:08.452+02:00  INFO 11380 --- [WADe] [           main] c.s.wade.service.EmbeddedFusekiServer    : Graph 'http://example.org/cifar10_clusters' already contains data, skipping
+2026-02-22T21:09:08.453+02:00  INFO 11380 --- [WADe] [           main] c.s.wade.service.EmbeddedFusekiServer    : Graph 'http://example.org/bsds300_heatmap' already contains data, skipping
+2026-02-22T21:09:08.453+02:00  INFO 11380 --- [WADe] [           main] c.s.wade.service.EmbeddedFusekiServer    : Graph 'http://example.org/bsds300_clusters' already contains data, skipping
+2026-02-22T21:09:08.455+02:00  INFO 11380 --- [WADe] [           main] c.s.wade.service.EmbeddedFusekiServer    : Graph 'http://example.org/cifar10_heatmap' already contains data, skipping
+2026-02-22T21:09:08.467+02:00  INFO 11380 --- [WADe] [           main] c.s.wade.service.EmbeddedFusekiServer    : No new data loaded, transaction aborted
+2026-02-22T21:09:08.503+02:00  WARN 11380 --- [WADe] [           main] o.apache.jena.fuseki.server.EndpointSet  : Redefining endpoint for query
+2026-02-22T21:09:08.503+02:00  WARN 11380 --- [WADe] [           main] o.apache.jena.fuseki.server.EndpointSet  : Redefining endpoint for update
+2026-02-22T21:09:08.503+02:00  WARN 11380 --- [WADe] [           main] o.apache.jena.fuseki.server.EndpointSet  : Redefining endpoint for gsp-rw
+2026-02-22T21:09:08.587+02:00  INFO 11380 --- [WADe] [           main] org.eclipse.jetty.server.Server          : jetty-12.0.16; built: 2024-12-09T21:02:54.535Z; git: c3f88bafb4e393f23204dc14dc57b042e84debc7; jvm 18.0.1.1+2-6
+2026-02-22T21:09:08.600+02:00  INFO 11380 --- [WADe] [           main] o.e.jetty.server.handler.ContextHandler  : Started oeje10s.ServletContextHandler@180466a9{org.apache.jena.fuseki.Servlet,/,b=null,a=AVAILABLE,h=oeje10s.ServletHandler@2670435{STARTED}}
+2026-02-22T21:09:08.602+02:00  INFO 11380 --- [WADe] [           main] o.e.j.e.servlet.ServletContextHandler    : Started oeje10s.ServletContextHandler@180466a9{org.apache.jena.fuseki.Servlet,/,b=null,a=AVAILABLE,h=oeje10s.ServletHandler@2670435{STARTED}}
+2026-02-22T21:09:08.613+02:00  INFO 11380 --- [WADe] [           main] o.e.jetty.server.AbstractConnector       : Started ServerConnector@3c0ebd51{HTTP/1.1, (http/1.1)}{0.0.0.0:3030}
+2026-02-22T21:09:08.616+02:00  INFO 11380 --- [WADe] [           main] org.eclipse.jetty.server.Server          : Started oejs.Server@2eb6a77f{STARTING}[12.0.16,sto=0] @5001ms
+2026-02-22T21:09:08.616+02:00  INFO 11380 --- [WADe] [           main] org.apache.jena.fuseki.Server            : Start Fuseki (http=3030)
+2026-02-22T21:09:08.616+02:00  INFO 11380 --- [WADe] [           main] c.s.wade.service.EmbeddedFusekiServer    : Fuseki server started at http://localhost:3030/impr
+2026-02-22T21:09:08.742+02:00  WARN 11380 --- [WADe] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-22T21:09:08.807+02:00  INFO 11380 --- [WADe] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-02-22T21:09:08.870+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:08.870+02:00 level=DEBUG source=runner.go:437 msg="bootstrap discovery took" duration=870.8397ms OLLAMA_LIBRARY_PATH="[E:\\Ollama\\lib\\ollama E:\\Ollama\\lib\\ollama\\rocm]" extra_envs=map[]
+2026-02-22T21:09:08.871+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:08.871+02:00 level=INFO source=server.go:431 msg="starting runner" cmd="E:\\Ollama\\ollama.exe runner --ollama-engine --port 61261"
+2026-02-22T21:09:08.871+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:08.871+02:00 level=DEBUG source=server.go:432 msg=subprocess OLLAMA_DEBUG=1 OLLAMA_MODELS=E:\Ollama\models OLLAMA_VULKAN=1 PATH="E:\\Ollama\\lib\\ollama;E:\\Ollama\\lib\\ollama\\vulkan;C:\\Python310\\Scripts\\;C:\\Python310\\;C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\Program Files\\Common Files\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\Git\\cmd;C:\\Program Files\\PostgreSQL\\14\\bin;C:\\Program Files\\PostgreSQL\\14\\lib;F:\\php;C:\\Program Files\\Redis\\;C:\\Program Files\\dotnet\\;C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\;C:\\Program Files\\Azure Data Studio\\bin;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Amazon\\AWSCLIV2\\;E:\\Tesseract;C:\\Program Files\\nodejs\\;E:\\jena-5.2.0\\apache-jena\\bin;C:\\Program Files\\CMake\\bin;C:\\Program Files\\Meld\\;C:\\poppler\\Library\\bin;;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Users\\godar\\AppData\\Local\\Programs\\Python\\Python39\\Scripts\\;C:\\Users\\godar\\AppData\\Local\\Programs\\Python\\Python39\\;C:\\Users\\godar\\.cargo\\bin;C:\\Users\\godar\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\godar\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\godar\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;G:\\IntelliJ IDEA 2024.2.3\\bin;;F:\\php;F:\\flutter\\bin;C:\\tools\\dart-sdk\\bin;C:\\Users\\godar\\AppData\\Roaming\\Pub\\Cache\\bin;C:\\tools\\dart-sdk;;C:\\Program Files\\Azure Data Studio\\bin;C:\\Users\\godar\\AppData\\Roaming\\npm;C:\\Program Files\\JetBrains\\IntelliJ IDEA Community Edition 2025.2.3\\bin;E:\\Ollama" OLLAMA_LIBRARY_PATH=E:\Ollama\lib\ollama;E:\Ollama\lib\ollama\vulkan
+2026-02-22T21:09:08.952+02:00  INFO 11380 --- [WADe] [           main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2026-02-22T21:09:09.080+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:09.079+02:00 level=DEBUG source=runner.go:437 msg="bootstrap discovery took" duration=208.9623ms OLLAMA_LIBRARY_PATH="[E:\\Ollama\\lib\\ollama E:\\Ollama\\lib\\ollama\\vulkan]" extra_envs=map[]
+2026-02-22T21:09:09.080+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:09.079+02:00 level=DEBUG source=runner.go:124 msg="evaluating which, if any, devices to filter out" initial_count=4
+2026-02-22T21:09:09.080+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:09.079+02:00 level=DEBUG source=runner.go:146 msg="verifying if device is supported" library=E:\Ollama\lib\ollama\rocm description="AMD Radeon RX 6700 XT" compute=gfx1031 id=0 pci_id=0000:03:00.0
+2026-02-22T21:09:09.080+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:09.079+02:00 level=DEBUG source=runner.go:146 msg="verifying if device is supported" library=E:\Ollama\lib\ollama\rocm description="AMD Radeon(TM) Graphics" compute=gfx1036 id=1 pci_id=0000:12:00.0
+2026-02-22T21:09:09.081+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:09.080+02:00 level=INFO source=server.go:431 msg="starting runner" cmd="E:\\Ollama\\ollama.exe runner --ollama-engine --port 61267"
+2026-02-22T21:09:09.081+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:09.080+02:00 level=INFO source=server.go:431 msg="starting runner" cmd="E:\\Ollama\\ollama.exe runner --ollama-engine --port 61268"
+2026-02-22T21:09:09.081+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:09.080+02:00 level=DEBUG source=server.go:432 msg=subprocess OLLAMA_DEBUG=1 OLLAMA_MODELS=E:\Ollama\models OLLAMA_VULKAN=1 PATH="E:\\Ollama\\lib\\ollama;E:\\Ollama\\lib\\ollama\\rocm;C:\\Python310\\Scripts\\;C:\\Python310\\;C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\Program Files\\Common Files\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\Git\\cmd;C:\\Program Files\\PostgreSQL\\14\\bin;C:\\Program Files\\PostgreSQL\\14\\lib;F:\\php;C:\\Program Files\\Redis\\;C:\\Program Files\\dotnet\\;C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\;C:\\Program Files\\Azure Data Studio\\bin;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Amazon\\AWSCLIV2\\;E:\\Tesseract;C:\\Program Files\\nodejs\\;E:\\jena-5.2.0\\apache-jena\\bin;C:\\Program Files\\CMake\\bin;C:\\Program Files\\Meld\\;C:\\poppler\\Library\\bin;;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Users\\godar\\AppData\\Local\\Programs\\Python\\Python39\\Scripts\\;C:\\Users\\godar\\AppData\\Local\\Programs\\Python\\Python39\\;C:\\Users\\godar\\.cargo\\bin;C:\\Users\\godar\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\godar\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\godar\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;G:\\IntelliJ IDEA 2024.2.3\\bin;;F:\\php;F:\\flutter\\bin;C:\\tools\\dart-sdk\\bin;C:\\Users\\godar\\AppData\\Roaming\\Pub\\Cache\\bin;C:\\tools\\dart-sdk;;C:\\Program Files\\Azure Data Studio\\bin;C:\\Users\\godar\\AppData\\Roaming\\npm;C:\\Program Files\\JetBrains\\IntelliJ IDEA Community Edition 2025.2.3\\bin;E:\\Ollama" OLLAMA_LIBRARY_PATH=E:\Ollama\lib\ollama;E:\Ollama\lib\ollama\rocm GGML_CUDA_INIT=1 HIP_VISIBLE_DEVICES=0
+2026-02-22T21:09:09.081+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:09.080+02:00 level=DEBUG source=server.go:432 msg=subprocess OLLAMA_DEBUG=1 OLLAMA_MODELS=E:\Ollama\models OLLAMA_VULKAN=1 PATH="E:\\Ollama\\lib\\ollama;E:\\Ollama\\lib\\ollama\\rocm;C:\\Python310\\Scripts\\;C:\\Python310\\;C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\Program Files\\Common Files\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\Git\\cmd;C:\\Program Files\\PostgreSQL\\14\\bin;C:\\Program Files\\PostgreSQL\\14\\lib;F:\\php;C:\\Program Files\\Redis\\;C:\\Program Files\\dotnet\\;C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\;C:\\Program Files\\Azure Data Studio\\bin;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Amazon\\AWSCLIV2\\;E:\\Tesseract;C:\\Program Files\\nodejs\\;E:\\jena-5.2.0\\apache-jena\\bin;C:\\Program Files\\CMake\\bin;C:\\Program Files\\Meld\\;C:\\poppler\\Library\\bin;;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Users\\godar\\AppData\\Local\\Programs\\Python\\Python39\\Scripts\\;C:\\Users\\godar\\AppData\\Local\\Programs\\Python\\Python39\\;C:\\Users\\godar\\.cargo\\bin;C:\\Users\\godar\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\godar\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\godar\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;G:\\IntelliJ IDEA 2024.2.3\\bin;;F:\\php;F:\\flutter\\bin;C:\\tools\\dart-sdk\\bin;C:\\Users\\godar\\AppData\\Roaming\\Pub\\Cache\\bin;C:\\tools\\dart-sdk;;C:\\Program Files\\Azure Data Studio\\bin;C:\\Users\\godar\\AppData\\Roaming\\npm;C:\\Program Files\\JetBrains\\IntelliJ IDEA Community Edition 2025.2.3\\bin;E:\\Ollama" OLLAMA_LIBRARY_PATH=E:\Ollama\lib\ollama;E:\Ollama\lib\ollama\rocm HIP_VISIBLE_DEVICES=1 GGML_CUDA_INIT=1
+2026-02-22T21:09:09.296+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:09.296+02:00 level=DEBUG source=runner.go:437 msg="bootstrap discovery took" duration=216.866ms OLLAMA_LIBRARY_PATH="[E:\\Ollama\\lib\\ollama E:\\Ollama\\lib\\ollama\\rocm]" extra_envs="map[GGML_CUDA_INIT:1 HIP_VISIBLE_DEVICES:0]"
+2026-02-22T21:09:09.297+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:09.296+02:00 level=DEBUG source=runner.go:153 msg="filtering device which didn't fully initialize" id=0 libdir=E:\Ollama\lib\ollama\rocm pci_id=0000:03:00.0 library=ROCm
+2026-02-22T21:09:09.316+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:09.316+02:00 level=DEBUG source=runner.go:437 msg="bootstrap discovery took" duration=236.2755ms OLLAMA_LIBRARY_PATH="[E:\\Ollama\\lib\\ollama E:\\Ollama\\lib\\ollama\\rocm]" extra_envs="map[GGML_CUDA_INIT:1 HIP_VISIBLE_DEVICES:1]"
+2026-02-22T21:09:09.316+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:09.316+02:00 level=DEBUG source=runner.go:153 msg="filtering device which didn't fully initialize" id=1 libdir=E:\Ollama\lib\ollama\rocm pci_id=0000:12:00.0 library=ROCm
+2026-02-22T21:09:09.316+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:09.316+02:00 level=DEBUG source=runner.go:40 msg="GPU bootstrap discovery took" duration=1.5113399s
+2026-02-22T21:09:09.316+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:09.316+02:00 level=INFO source=types.go:42 msg="inference compute" id=00000000-0300-0000-0000-000000000000 filter_id="" library=Vulkan compute=0.0 name=Vulkan0 description="AMD Radeon RX 6700 XT" libdirs=ollama,vulkan driver=0.0 pci_id=0000:03:00.0 type=discrete total="12.0 GiB" available="11.2 GiB"
+2026-02-22T21:09:09.316+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:09.316+02:00 level=INFO source=types.go:42 msg="inference compute" id=00000000-1200-0000-0000-000000000000 filter_id="" library=Vulkan compute=0.0 name=Vulkan1 description="AMD Radeon(TM) Graphics" libdirs=ollama,vulkan driver=0.0 pci_id=0000:12:00.0 type=iGPU total="15.8 GiB" available="15.0 GiB"
+2026-02-22T21:09:09.316+02:00  INFO 11380 --- [WADe] [lama-log-reader] c.s.wade.service.PredictionService       : [ollama] time=2026-02-22T21:09:09.316+02:00 level=INFO source=routes.go:1768 msg="vram-based default context" total_vram="27.8 GiB" default_num_ctx=32768
+2026-02-22T21:09:09.483+02:00  INFO 11380 --- [WADe] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-22T21:09:09.825+02:00  INFO 11380 --- [WADe] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+2026-02-22T21:09:09.922+02:00  INFO 11380 --- [WADe] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2026-02-22T21:09:09.932+02:00  INFO 11380 --- [WADe] [           main] c.soloproductions.wade.WaDeApplication   : Started WaDeApplication in 6.0 seconds (process running for 6.318)
+2026-02-22T21:09:10.076+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-22T21:09:10.076+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-02-22T21:09:10.078+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-02-22T21:10:53.220+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:53.220+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:53.220+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:53.222+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@1785009e
+2026-02-22T21:10:53.225+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:10:53.228+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@4c2ce782
+2026-02-22T21:10:53.230+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:10:53.236+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=64, totalActions=64, datasetsCreated=0}
+2026-02-22T21:10:53.236+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=64, totalActions=64, datasetsCreated=0}
+2026-02-22T21:10:53.240+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:10:53.242+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:10:53.254+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:53.254+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:53.254+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:53.256+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@1169ed7c
+2026-02-22T21:10:53.256+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@4a9c8c4f
+2026-02-22T21:10:53.256+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:10:53.256+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:10:53.259+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=64, totalActions=64, datasetsCreated=0}
+2026-02-22T21:10:53.259+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=64, totalActions=64, datasetsCreated=0}
+2026-02-22T21:10:53.259+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:10:53.260+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:10:55.099+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:55.108+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:55.249+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:55.249+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:55.251+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@7711c001
+2026-02-22T21:10:55.251+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@3263534b
+2026-02-22T21:10:55.252+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:10:55.252+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:10:55.256+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:10:55.256+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:10:55.256+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=64, totalActions=64, datasetsCreated=0}
+2026-02-22T21:10:55.256+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=64, totalActions=64, datasetsCreated=0}
+2026-02-22T21:10:55.264+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:55.264+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:55.264+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@37649648
+2026-02-22T21:10:55.266+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@32cecbd9
+2026-02-22T21:10:55.268+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:10:55.270+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:10:55.274+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=64, totalActions=64, datasetsCreated=0}
+2026-02-22T21:10:55.274+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=64, totalActions=64, datasetsCreated=0}
+2026-02-22T21:10:55.276+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:10:55.276+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:10:57.860+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:57.911+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:57.926+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:57.980+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:58.002+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:58.015+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:10:58.049+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.service.UserActionService       : Saved action id=65, userId=10, actionType=VIEW, datasetId=cifar10, datasetType=clusters
+2026-02-22T21:10:58.273+02:00  INFO 11380 --- [WADe] [ qtp98383937-53] org.apache.jena.fuseki.Fuseki            : [1] GET http://127.0.0.1:3030/impr?query=PREFIX++skos:+%3Chttp://www.w3.org/2004/02/skos/core%23%3E%0APREFIX++rdfs:+%3Chttp://www.w3.org/2000/01/rdf-schema%23%3E%0APREFIX++ex:+++%3Chttp://example.org/ontology%23%3E%0A%0ASELECT++?clusterLabel+?predictedObjectLabel+?probability+?imageURI%0AWHERE%0A++%7B+GRAPH+%3Chttp://example.org/cifar10_clusters%3E%0A++++++%7B+?cluster++a+++++++++++++++++++skos:Concept+%3B%0A++++++++++++++++++skos:prefLabel++++++?clusterLabel+%3B%0A++++++++++++++++++ex:hasPrediction++++?prediction+.%0A++++++++?prediction++ex:hasProbability++?probability+%3B%0A++++++++++++++++++ex:hasURI+++++++++++?imageURI+%3B%0A++++++++++++++++++ex:predictedObject++?predictedObject+.%0A++++++++?predictedObject%0A++++++++++++++++++skos:prefLabel++++++?predictedObjectLabel%0A++++++%7D%0A++%7D%0AORDER+BY+ASC%28?probability%29%0AOFFSET++1%0ALIMIT+++5%0A
+2026-02-22T21:10:58.279+02:00  INFO 11380 --- [WADe] [ qtp98383937-53] org.apache.jena.fuseki.Fuseki            : [1] Query = PREFIX  skos: <http://www.w3.org/2004/02/skos/core#> PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX  ex:   <http://example.org/ontology#>  SELECT  ?clusterLabel ?predictedObjectLabel ?probability ?imageURI WHERE   { GRAPH <http://example.org/cifar10_clusters>       { ?cluster  a                   skos:Concept ;                   skos:prefLabel      ?clusterLabel ;                   ex:hasPrediction    ?prediction .         ?prediction  ex:hasProbability  ?probability ;                   ex:hasURI           ?imageURI ;                   ex:predictedObject  ?predictedObject .         ?predictedObject                   skos:prefLabel      ?predictedObjectLabel       }   } ORDER BY ASC(?probability) OFFSET  1 LIMIT   5 
+2026-02-22T21:10:59.926+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:59.949+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:10:59.956+02:00  WARN 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.dataset.AbstractDatasetData     : Empty range parameter. Using the default value of 20.
+2026-02-22T21:10:59.956+02:00  WARN 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.dataset.AbstractDatasetData     : Empty range parameter. Setting rangeStart from the start (0).
+2026-02-22T21:10:59.957+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:10:59.959+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.service.UserActionService       : Saved action id=66, userId=10, actionType=VIEW, datasetId=frierendataset, datasetType=clusters
+2026-02-22T21:11:00.011+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:00.016+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:11:00.024+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.service.UserActionService       : Saved action id=67, userId=10, actionType=VIEW, datasetId=frierendataset, datasetType=clusters
+2026-02-22T21:11:00.827+02:00  INFO 11380 --- [WADe] [ qtp98383937-53] org.apache.jena.fuseki.Fuseki            : [1] 200 OK (2.552 s)
+2026-02-22T21:11:00.828+02:00  INFO 11380 --- [WADe] [ qtp98383937-53] org.apache.jena.fuseki.Request           : 127.0.0.1 - - [22/Feb/2026:19:11:00 +0000] "GET /impr" 200 - "" "Java-http-client/18.0.1.1"
+2026-02-22T21:11:02.903+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:02.924+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:02.928+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:11:02.931+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.service.UserActionService       : Saved action id=68, userId=10, actionType=VIEW, datasetId=mynewdataset, datasetType=clusters
+2026-02-22T21:11:05.773+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:05.773+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:05.773+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:05.775+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@6c297140
+2026-02-22T21:11:05.775+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@11d4c4b7
+2026-02-22T21:11:05.776+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:11:05.776+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:11:05.778+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:11:05.778+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:11:05.779+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=68, totalActions=68, datasetsCreated=0}
+2026-02-22T21:11:05.779+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=68, totalActions=68, datasetsCreated=0}
+2026-02-22T21:11:05.783+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:05.783+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:05.784+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@7f37a30c
+2026-02-22T21:11:05.784+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:05.785+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@59336fd0
+2026-02-22T21:11:05.786+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:11:05.786+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:11:05.788+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:11:05.788+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:11:05.788+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=68, totalActions=68, datasetsCreated=0}
+2026-02-22T21:11:05.788+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=68, totalActions=68, datasetsCreated=0}
+2026-02-22T21:11:15.306+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:15.317+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:15.323+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:15.329+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:15.378+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:15.396+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:15.403+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:11:15.405+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : Saved action id=69, userId=10, actionType=VIEW, datasetId=cifar10, datasetType=clusters
+2026-02-22T21:11:15.408+02:00  INFO 11380 --- [WADe] [ qtp98383937-31] org.apache.jena.fuseki.Fuseki            : [2] GET http://127.0.0.1:3030/impr?query=PREFIX++skos:+%3Chttp://www.w3.org/2004/02/skos/core%23%3E%0APREFIX++rdfs:+%3Chttp://www.w3.org/2000/01/rdf-schema%23%3E%0APREFIX++ex:+++%3Chttp://example.org/ontology%23%3E%0A%0ASELECT++?clusterLabel+?predictedObjectLabel+?probability+?imageURI%0AWHERE%0A++%7B+GRAPH+%3Chttp://example.org/cifar10_clusters%3E%0A++++++%7B+?cluster++a+++++++++++++++++++skos:Concept+%3B%0A++++++++++++++++++skos:prefLabel++++++?clusterLabel+%3B%0A++++++++++++++++++ex:hasPrediction++++?prediction+.%0A++++++++?prediction++ex:hasProbability++?probability+%3B%0A++++++++++++++++++ex:hasURI+++++++++++?imageURI+%3B%0A++++++++++++++++++ex:predictedObject++?predictedObject+.%0A++++++++?predictedObject%0A++++++++++++++++++skos:prefLabel++++++?predictedObjectLabel%0A++++++%7D%0A++%7D%0AORDER+BY+ASC%28?probability%29%0AOFFSET++1%0ALIMIT+++3%0A
+2026-02-22T21:11:15.408+02:00  INFO 11380 --- [WADe] [ qtp98383937-31] org.apache.jena.fuseki.Fuseki            : [2] Query = PREFIX  skos: <http://www.w3.org/2004/02/skos/core#> PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX  ex:   <http://example.org/ontology#>  SELECT  ?clusterLabel ?predictedObjectLabel ?probability ?imageURI WHERE   { GRAPH <http://example.org/cifar10_clusters>       { ?cluster  a                   skos:Concept ;                   skos:prefLabel      ?clusterLabel ;                   ex:hasPrediction    ?prediction .         ?prediction  ex:hasProbability  ?probability ;                   ex:hasURI           ?imageURI ;                   ex:predictedObject  ?predictedObject .         ?predictedObject                   skos:prefLabel      ?predictedObjectLabel       }   } ORDER BY ASC(?probability) OFFSET  1 LIMIT   3 
+2026-02-22T21:11:17.102+02:00  INFO 11380 --- [WADe] [ qtp98383937-31] org.apache.jena.fuseki.Fuseki            : [2] 200 OK (1.694 s)
+2026-02-22T21:11:17.102+02:00  INFO 11380 --- [WADe] [ qtp98383937-31] org.apache.jena.fuseki.Request           : 127.0.0.1 - - [22/Feb/2026:19:11:17 +0000] "GET /impr" 200 - "" "Java-http-client/18.0.1.1"
+2026-02-22T21:11:24.238+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:24.238+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:24.239+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@37ed7fde
+2026-02-22T21:11:24.241+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:11:24.241+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:24.241+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@1d097291
+2026-02-22T21:11:24.242+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:11:24.242+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:11:24.242+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:11:24.246+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=69, totalActions=69, datasetsCreated=0}
+2026-02-22T21:11:24.246+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=69, totalActions=69, datasetsCreated=0}
+2026-02-22T21:11:24.246+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:24.248+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:24.249+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@62de46bb
+2026-02-22T21:11:24.249+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:11:24.252+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:11:24.252+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:11:24.252+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:11:24.252+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@6e04b686
+2026-02-22T21:11:24.253+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:11:24.256+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=69, totalActions=69, datasetsCreated=0}
+2026-02-22T21:11:24.256+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=69, totalActions=69, datasetsCreated=0}
+2026-02-22T21:13:41.555+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:13:41.555+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:13:41.556+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@fe7ab72
+2026-02-22T21:13:41.556+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@6eb273ad
+2026-02-22T21:13:41.556+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:13:41.556+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:13:41.559+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:13:41.559+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:13:41.560+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=69, totalActions=69, datasetsCreated=0}
+2026-02-22T21:13:41.560+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=69, totalActions=69, datasetsCreated=0}
+2026-02-22T21:14:42.914+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:14:42.921+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:14:43.082+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:14:43.084+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@3b9d6828
+2026-02-22T21:14:43.084+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:14:43.085+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@456e9d18
+2026-02-22T21:14:43.085+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:14:43.088+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:14:43.089+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=69, totalActions=69, datasetsCreated=0}
+2026-02-22T21:14:43.089+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=69, totalActions=69, datasetsCreated=0}
+2026-02-22T21:14:43.093+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:14:43.093+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:14:43.099+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:14:43.099+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:14:43.099+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@2b19dde9
+2026-02-22T21:14:43.099+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@7245fc77
+2026-02-22T21:14:43.101+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:14:43.101+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:14:43.102+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:14:43.102+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:14:43.104+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=69, totalActions=69, datasetsCreated=0}
+2026-02-22T21:14:43.104+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=69, totalActions=69, datasetsCreated=0}
+2026-02-22T21:15:21.994+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:22.006+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:22.023+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:22.096+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:22.117+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:22.125+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:15:22.126+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : Saved action id=70, userId=10, actionType=VIEW, datasetId=cifar10, datasetType=clusters
+2026-02-22T21:15:22.131+02:00  INFO 11380 --- [WADe] [ qtp98383937-49] org.apache.jena.fuseki.Fuseki            : [3] GET http://127.0.0.1:3030/impr?query=PREFIX++skos:+%3Chttp://www.w3.org/2004/02/skos/core%23%3E%0APREFIX++rdfs:+%3Chttp://www.w3.org/2000/01/rdf-schema%23%3E%0APREFIX++ex:+++%3Chttp://example.org/ontology%23%3E%0A%0ASELECT++?clusterLabel+?predictedObjectLabel+?probability+?imageURI%0AWHERE%0A++%7B+GRAPH+%3Chttp://example.org/cifar10_clusters%3E%0A++++++%7B+?cluster++a+++++++++++++++++++skos:Concept+%3B%0A++++++++++++++++++skos:prefLabel++++++?clusterLabel+%3B%0A++++++++++++++++++ex:hasPrediction++++?prediction+.%0A++++++++?prediction++ex:hasProbability++?probability+%3B%0A++++++++++++++++++ex:hasURI+++++++++++?imageURI+%3B%0A++++++++++++++++++ex:predictedObject++?predictedObject+.%0A++++++++?predictedObject%0A++++++++++++++++++skos:prefLabel++++++?predictedObjectLabel%0A++++++%7D%0A++%7D%0AORDER+BY+ASC%28?probability%29%0AOFFSET++1%0ALIMIT+++5%0A
+2026-02-22T21:15:22.131+02:00  INFO 11380 --- [WADe] [ qtp98383937-49] org.apache.jena.fuseki.Fuseki            : [3] Query = PREFIX  skos: <http://www.w3.org/2004/02/skos/core#> PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX  ex:   <http://example.org/ontology#>  SELECT  ?clusterLabel ?predictedObjectLabel ?probability ?imageURI WHERE   { GRAPH <http://example.org/cifar10_clusters>       { ?cluster  a                   skos:Concept ;                   skos:prefLabel      ?clusterLabel ;                   ex:hasPrediction    ?prediction .         ?prediction  ex:hasProbability  ?probability ;                   ex:hasURI           ?imageURI ;                   ex:predictedObject  ?predictedObject .         ?predictedObject                   skos:prefLabel      ?predictedObjectLabel       }   } ORDER BY ASC(?probability) OFFSET  1 LIMIT   5 
+2026-02-22T21:15:23.779+02:00  INFO 11380 --- [WADe] [ qtp98383937-49] org.apache.jena.fuseki.Fuseki            : [3] 200 OK (1.647 s)
+2026-02-22T21:15:23.779+02:00  INFO 11380 --- [WADe] [ qtp98383937-49] org.apache.jena.fuseki.Request           : 127.0.0.1 - - [22/Feb/2026:19:15:23 +0000] "GET /impr" 200 - "" "Java-http-client/18.0.1.1"
+2026-02-22T21:15:25.737+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:25.759+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:25.761+02:00  WARN 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.dataset.AbstractDatasetData     : Empty range parameter. Using the default value of 20.
+2026-02-22T21:15:25.761+02:00  WARN 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.dataset.AbstractDatasetData     : Empty range parameter. Setting rangeStart from the start (0).
+2026-02-22T21:15:25.762+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:15:25.771+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.service.UserActionService       : Saved action id=71, userId=10, actionType=VIEW, datasetId=frierendataset, datasetType=clusters
+2026-02-22T21:15:25.815+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:25.818+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:15:25.819+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.service.UserActionService       : Saved action id=72, userId=10, actionType=VIEW, datasetId=frierendataset, datasetType=clusters
+2026-02-22T21:15:30.786+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:30.806+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:30.808+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:15:30.810+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : Saved action id=73, userId=10, actionType=VIEW, datasetId=mynewdataset, datasetType=clusters
+2026-02-22T21:15:34.441+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:34.441+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:34.441+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:34.441+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@cd4943e
+2026-02-22T21:15:34.441+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@64249477
+2026-02-22T21:15:34.441+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:15:34.441+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:15:34.443+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:15:34.443+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:15:34.444+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=73, totalActions=73, datasetsCreated=0}
+2026-02-22T21:15:34.444+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=73, totalActions=73, datasetsCreated=0}
+2026-02-22T21:15:34.447+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:34.447+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:34.449+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@53d53ae2
+2026-02-22T21:15:34.449+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:34.449+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@6adf4686
+2026-02-22T21:15:34.449+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:15:34.449+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:15:34.452+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=73, totalActions=73, datasetsCreated=0}
+2026-02-22T21:15:34.452+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=73, totalActions=73, datasetsCreated=0}
+2026-02-22T21:15:34.452+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:15:34.452+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:15:40.037+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:40.048+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:40.062+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:40.097+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:40.100+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:15:40.101+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.service.UserActionService       : Saved action id=74, userId=10, actionType=VIEW, datasetId=mynewdataset, datasetType=clusters
+2026-02-22T21:15:49.196+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:49.196+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:49.196+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:49.196+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@486291f7
+2026-02-22T21:15:49.196+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@133c117b
+2026-02-22T21:15:49.196+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:15:49.196+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:15:49.199+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:15:49.199+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:15:49.199+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=74, totalActions=74, datasetsCreated=0}
+2026-02-22T21:15:49.199+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=74, totalActions=74, datasetsCreated=0}
+2026-02-22T21:15:49.202+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:49.202+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:49.202+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:49.203+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@6955ca23
+2026-02-22T21:15:49.203+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@2ed07b52
+2026-02-22T21:15:49.205+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:15:49.205+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:15:49.206+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=74, totalActions=74, datasetsCreated=0}
+2026-02-22T21:15:49.206+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=74, totalActions=74, datasetsCreated=0}
+2026-02-22T21:15:49.206+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:15:49.206+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:15:51.307+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:51.317+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:51.331+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:51.364+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:51.367+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:15:51.369+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.service.UserActionService       : Saved action id=75, userId=10, actionType=VIEW, datasetId=mynewdataset, datasetType=clusters
+2026-02-22T21:15:53.796+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:53.796+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:53.796+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:53.796+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@1046da0d
+2026-02-22T21:15:53.796+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@74424ffa
+2026-02-22T21:15:53.797+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:15:53.797+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:15:53.798+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:15:53.798+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:15:53.799+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=75, totalActions=75, datasetsCreated=0}
+2026-02-22T21:15:53.799+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=75, totalActions=75, datasetsCreated=0}
+2026-02-22T21:15:53.802+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:53.802+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:53.802+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:15:53.804+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@368fdbdd
+2026-02-22T21:15:53.804+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@540613c4
+2026-02-22T21:15:53.806+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:15:53.806+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:15:53.806+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:15:53.806+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:15:53.806+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=75, totalActions=75, datasetsCreated=0}
+2026-02-22T21:15:53.806+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=75, totalActions=75, datasetsCreated=0}
+2026-02-22T21:16:22.457+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:16:22.468+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:16:22.476+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:16:22.517+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:16:22.536+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:16:22.542+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:16:22.543+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : Saved action id=76, userId=10, actionType=VIEW, datasetId=cifar10, datasetType=clusters
+2026-02-22T21:16:22.546+02:00  INFO 11380 --- [WADe] [ qtp98383937-49] org.apache.jena.fuseki.Fuseki            : [4] GET http://127.0.0.1:3030/impr?query=PREFIX++skos:+%3Chttp://www.w3.org/2004/02/skos/core%23%3E%0APREFIX++rdfs:+%3Chttp://www.w3.org/2000/01/rdf-schema%23%3E%0APREFIX++ex:+++%3Chttp://example.org/ontology%23%3E%0A%0ASELECT++?clusterLabel+?predictedObjectLabel+?probability+?imageURI%0AWHERE%0A++%7B+GRAPH+%3Chttp://example.org/cifar10_clusters%3E%0A++++++%7B+?cluster++a+++++++++++++++++++skos:Concept+%3B%0A++++++++++++++++++skos:prefLabel++++++?clusterLabel+%3B%0A++++++++++++++++++ex:hasPrediction++++?prediction+.%0A++++++++?prediction++ex:hasProbability++?probability+%3B%0A++++++++++++++++++ex:hasURI+++++++++++?imageURI+%3B%0A++++++++++++++++++ex:predictedObject++?predictedObject+.%0A++++++++?predictedObject%0A++++++++++++++++++skos:prefLabel++++++?predictedObjectLabel%0A++++++%7D%0A++%7D%0AORDER+BY+ASC%28?probability%29%0AOFFSET++1%0ALIMIT+++5%0A
+2026-02-22T21:16:22.546+02:00  INFO 11380 --- [WADe] [ qtp98383937-49] org.apache.jena.fuseki.Fuseki            : [4] Query = PREFIX  skos: <http://www.w3.org/2004/02/skos/core#> PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX  ex:   <http://example.org/ontology#>  SELECT  ?clusterLabel ?predictedObjectLabel ?probability ?imageURI WHERE   { GRAPH <http://example.org/cifar10_clusters>       { ?cluster  a                   skos:Concept ;                   skos:prefLabel      ?clusterLabel ;                   ex:hasPrediction    ?prediction .         ?prediction  ex:hasProbability  ?probability ;                   ex:hasURI           ?imageURI ;                   ex:predictedObject  ?predictedObject .         ?predictedObject                   skos:prefLabel      ?predictedObjectLabel       }   } ORDER BY ASC(?probability) OFFSET  1 LIMIT   5 
+2026-02-22T21:16:24.192+02:00  INFO 11380 --- [WADe] [ qtp98383937-49] org.apache.jena.fuseki.Fuseki            : [4] 200 OK (1.646 s)
+2026-02-22T21:16:24.192+02:00  INFO 11380 --- [WADe] [ qtp98383937-49] org.apache.jena.fuseki.Request           : 127.0.0.1 - - [22/Feb/2026:19:16:24 +0000] "GET /impr" 200 - "" "Java-http-client/18.0.1.1"
+2026-02-22T21:16:25.631+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:16:25.631+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:16:25.631+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:16:25.631+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@70af80b5
+2026-02-22T21:16:25.631+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@21718199
+2026-02-22T21:16:25.633+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:16:25.633+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:16:25.635+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:16:25.635+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:16:25.636+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:16:25.636+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:16:25.638+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:16:25.638+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:16:25.638+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:16:25.639+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@78772ba4
+2026-02-22T21:16:25.639+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@2a4c0ebc
+2026-02-22T21:16:25.639+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:16:25.639+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:16:25.641+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:16:25.641+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:16:25.641+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:16:25.642+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:18:37.220+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:18:37.220+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:18:37.220+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@3950ec16
+2026-02-22T21:18:37.220+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@4a159a29
+2026-02-22T21:18:37.221+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:18:37.221+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:18:37.221+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:18:37.223+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:18:37.223+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:18:37.224+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:18:37.224+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:18:37.229+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:18:37.229+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:18:37.229+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:18:37.229+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@2aa27e01
+2026-02-22T21:18:37.229+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@57cc5f30
+2026-02-22T21:18:37.230+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:18:37.230+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:18:37.232+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:18:37.232+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:18:37.232+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:18:37.232+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:18:45.127+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:18:45.127+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:18:45.127+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:18:45.127+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@366a57c1
+2026-02-22T21:18:45.127+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@6e71e70e
+2026-02-22T21:18:45.129+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:18:45.129+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:18:45.130+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:18:45.130+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:18:45.130+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:18:45.130+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:18:45.135+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:18:45.135+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:18:45.135+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:18:45.136+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@19850cd3
+2026-02-22T21:18:45.136+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@1867c431
+2026-02-22T21:18:45.136+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:18:45.136+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:18:45.137+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:18:45.138+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:18:45.138+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:18:45.138+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:21:30.938+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:30.944+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:31.069+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:31.069+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:31.069+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@6dedf8a0
+2026-02-22T21:21:31.071+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@3f482788
+2026-02-22T21:21:31.071+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:31.073+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:31.074+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:21:31.074+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:21:31.081+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:31.081+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:21:31.081+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:21:31.081+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@195c5470
+2026-02-22T21:21:31.083+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:31.086+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:21:31.086+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:21:31.095+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:31.096+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@31b61c21
+2026-02-22T21:21:31.098+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:31.100+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:21:31.100+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:21:35.384+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:35.384+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:35.384+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:35.384+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@4c0cf84c
+2026-02-22T21:21:35.385+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@2663bd1a
+2026-02-22T21:21:35.386+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:35.386+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:35.387+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:21:35.387+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:21:35.387+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:21:35.387+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:21:35.393+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:35.393+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:35.393+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:35.394+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@65fe2616
+2026-02-22T21:21:35.394+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@17ebc315
+2026-02-22T21:21:35.395+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:35.395+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:35.396+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:21:35.396+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:21:35.396+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:21:35.396+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=76, totalActions=76, datasetsCreated=0}
+2026-02-22T21:21:37.710+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:37.717+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:37.728+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:37.767+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:37.775+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:37.777+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : Saved action id=77, userId=10, actionType=VIEW, datasetId=bsds300, datasetType=heatmap
+2026-02-22T21:21:38.719+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:38.719+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:38.720+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@16788021
+2026-02-22T21:21:38.720+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@7c52d10a
+2026-02-22T21:21:38.720+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:38.720+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:38.722+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:21:38.722+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:21:38.722+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=77, totalActions=77, datasetsCreated=0}
+2026-02-22T21:21:38.722+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=77, totalActions=77, datasetsCreated=0}
+2026-02-22T21:21:38.726+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:38.727+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:38.727+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:38.727+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@25a7c209
+2026-02-22T21:21:38.727+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@513dfd05
+2026-02-22T21:21:38.729+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:38.729+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:38.729+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:21:38.730+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:21:38.730+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=77, totalActions=77, datasetsCreated=0}
+2026-02-22T21:21:38.730+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=77, totalActions=77, datasetsCreated=0}
+2026-02-22T21:21:38.732+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:42.922+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:42.938+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:42.950+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:42.980+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:42.986+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:42.988+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.service.UserActionService       : Saved action id=78, userId=10, actionType=VIEW, datasetId=bsds300, datasetType=heatmap
+2026-02-22T21:21:49.508+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:49.508+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:49.508+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:49.510+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@482e2109
+2026-02-22T21:21:49.510+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@43c37602
+2026-02-22T21:21:49.510+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:49.510+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:49.512+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:21:49.512+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:21:49.512+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=78, totalActions=78, datasetsCreated=0}
+2026-02-22T21:21:49.512+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=78, totalActions=78, datasetsCreated=0}
+2026-02-22T21:21:49.516+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:49.516+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:49.516+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:49.516+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@239c2282
+2026-02-22T21:21:49.516+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@70a523f5
+2026-02-22T21:21:49.517+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:49.517+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:49.519+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=78, totalActions=78, datasetsCreated=0}
+2026-02-22T21:21:49.519+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:21:49.519+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=78, totalActions=78, datasetsCreated=0}
+2026-02-22T21:21:49.519+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:21:52.547+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:52.555+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:52.572+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:52.603+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:52.605+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:52.606+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.service.UserActionService       : Saved action id=79, userId=10, actionType=VIEW, datasetId=mynewdataset, datasetType=clusters
+2026-02-22T21:21:54.498+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:54.498+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:54.498+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@d1ba3ec
+2026-02-22T21:21:54.498+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@20778e9c
+2026-02-22T21:21:54.499+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:54.499+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:54.501+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:21:54.501+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:21:54.501+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=79, totalActions=79, datasetsCreated=0}
+2026-02-22T21:21:54.501+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=79, totalActions=79, datasetsCreated=0}
+2026-02-22T21:21:54.502+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:54.504+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:54.504+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:54.504+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@16bc8253
+2026-02-22T21:21:54.505+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@6bffbd3b
+2026-02-22T21:21:54.506+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:54.506+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:21:54.506+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:21:54.506+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:21:54.506+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=79, totalActions=79, datasetsCreated=0}
+2026-02-22T21:21:54.506+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=79, totalActions=79, datasetsCreated=0}
+2026-02-22T21:21:54.508+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:58.523+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:21:58.529+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:22:11.009+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:22:11.017+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:28:31.551+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:29:46.804+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:29:58.197+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.controller.FeedbackController   : === FEEDBACK SENT ===
+2026-02-22T21:29:58.197+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.controller.FeedbackController   : From: Anonymous (N/A)
+2026-02-22T21:29:58.197+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.controller.FeedbackController   : Sent to: impr.feedback@gmail.com
+2026-02-22T21:29:58.197+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.controller.FeedbackController   : =========================
+2026-02-22T21:32:19.551+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:33:41.236+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:33:52.154+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.controller.FeedbackController   : === FEEDBACK SENT ===
+2026-02-22T21:33:52.154+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.controller.FeedbackController   : From: test1 (godares104@gmail.com)
+2026-02-22T21:33:52.154+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.controller.FeedbackController   : Sent to: impr.feedback@gmail.com
+2026-02-22T21:33:52.154+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.controller.FeedbackController   : =========================
+2026-02-22T21:35:19.576+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:35:19.583+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:35:36.498+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:35:47.840+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.controller.FeedbackController   : === FEEDBACK SENT ===
+2026-02-22T21:35:47.840+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.controller.FeedbackController   : From: test1 (godares104@gmail.com)
+2026-02-22T21:35:47.840+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.controller.FeedbackController   : Sent to: impr.feedback@gmail.com
+2026-02-22T21:35:47.840+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.controller.FeedbackController   : =========================
+2026-02-22T21:36:37.570+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:36:37.576+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:36:51.094+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:37:02.685+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.controller.FeedbackController   : === FEEDBACK SENT ===
+2026-02-22T21:37:02.685+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.controller.FeedbackController   : From: test1 (godares104@gmail.com)
+2026-02-22T21:37:02.685+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.controller.FeedbackController   : Sent to: impr.feedback@gmail.com
+2026-02-22T21:37:02.685+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.controller.FeedbackController   : =========================
+2026-02-22T21:39:14.950+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:14.962+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:14.972+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:15.015+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:15.020+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:39:15.023+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : Saved action id=80, userId=10, actionType=VIEW, datasetId=bsds300, datasetType=heatmap
+2026-02-22T21:39:16.314+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:16.315+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:16.315+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:16.317+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@49804881
+2026-02-22T21:39:16.317+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@11b94f48
+2026-02-22T21:39:16.317+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:39:16.317+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:39:16.318+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:39:16.320+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:39:16.320+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=80, totalActions=80, datasetsCreated=0}
+2026-02-22T21:39:16.320+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=80, totalActions=80, datasetsCreated=0}
+2026-02-22T21:39:16.322+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:16.323+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:16.323+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@1a578061
+2026-02-22T21:39:16.325+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:39:16.325+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:16.325+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@37c1beb5
+2026-02-22T21:39:16.325+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:39:16.326+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:39:16.326+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:39:16.328+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=80, totalActions=80, datasetsCreated=0}
+2026-02-22T21:39:16.328+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=80, totalActions=80, datasetsCreated=0}
+2026-02-22T21:39:18.498+02:00  INFO 11380 --- [WADe] [nio-8081-exec-9] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:18.505+02:00  INFO 11380 --- [WADe] [nio-8081-exec-1] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:18.517+02:00  INFO 11380 --- [WADe] [nio-8081-exec-2] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:18.548+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:18.551+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:39:18.553+02:00  INFO 11380 --- [WADe] [nio-8081-exec-6] c.s.wade.service.UserActionService       : Saved action id=81, userId=10, actionType=VIEW, datasetId=bsds300, datasetType=heatmap
+2026-02-22T21:39:20.085+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:20.085+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:20.085+02:00  INFO 11380 --- [WADe] [io-8081-exec-10] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:20.085+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@3b5b84e7
+2026-02-22T21:39:20.087+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@294930b2
+2026-02-22T21:39:20.087+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:39:20.087+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:39:20.088+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:39:20.088+02:00  INFO 11380 --- [WADe] [nio-8081-exec-4] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:39:20.088+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=81, totalActions=81, datasetsCreated=0}
+2026-02-22T21:39:20.088+02:00  INFO 11380 --- [WADe] [nio-8081-exec-3] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=81, totalActions=81, datasetsCreated=0}
+2026-02-22T21:39:20.091+02:00  INFO 11380 --- [WADe] [nio-8081-exec-8] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:20.091+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:20.091+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.filter.JwtAuthenticationFilter  : Successfully authenticated user: test1
+2026-02-22T21:39:20.091+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@2eb63b42
+2026-02-22T21:39:20.091+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.w.controller.UserActionController    : History auth principalType=com.soloproductions.wade.entity.User, authName=com.soloproductions.wade.entity.User@52ce31e6
+2026-02-22T21:39:20.091+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:39:20.091+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.service.UserActionService       : resolveUser identity='test1' -> test1
+2026-02-22T21:39:20.093+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.wade.service.UserActionService       : getUserHistory userId=10, limit=10, returned=10
+2026-02-22T21:39:20.093+02:00  INFO 11380 --- [WADe] [nio-8081-exec-5] c.s.w.controller.UserActionController    : History request resolved username='test1', limit=10, actions=10
+2026-02-22T21:39:20.093+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.wade.service.UserActionService       : getUserStats userId=10, stats={datasetsViewed=81, totalActions=81, datasetsCreated=0}
+2026-02-22T21:39:20.093+02:00  INFO 11380 --- [WADe] [nio-8081-exec-7] c.s.w.controller.UserActionController    : Stats request resolved username='test1', payload={datasetsViewed=81, totalActions=81, datasetsCreated=0}
+
+> Task :com.soloproductions.wade.WaDeApplication.main() FAILED
+[Incubating] Problems report is available at: file:///E:/repos/Web-Application-Development/WADe/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':com.soloproductions.wade.WaDeApplication.main()'.
+> Process 'command 'C:\Program Files\Java\jdk-18.0.1.1\bin\java.exe'' finished with non-zero exit value 1073807364
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 57m 10s
+3 actionable tasks: 2 executed, 1 up-to-date

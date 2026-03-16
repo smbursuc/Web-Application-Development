@@ -12,13 +12,14 @@ import FacebookIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/X';
 import SitemarkIcon from './SitemarkIcon';
+import ImprLogoHeader from './ImprLogoHeader';
 
 function Copyright() {
   return (
     <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1 }}>
       {'Copyright © '}
       <Link color="text.secondary" href="https://mui.com/">
-        Sitemark
+        IMPR
       </Link>
       &nbsp;
       {new Date().getFullYear()}
@@ -55,14 +56,14 @@ export default function Footer() {
           }}
         >
           <Box sx={{ width: { xs: '100%', sm: '60%' } }}>
-            <SitemarkIcon />
+            <ImprLogoHeader />
             <Typography variant="body2" gutterBottom sx={{ fontWeight: 600, mt: 2 }}>
-              Join the newsletter
+              The best application to visualize and export your data.
             </Typography>
             <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
-              Subscribe for weekly updates. No spams ever!
+              Definitely.
             </Typography>
-            <InputLabel htmlFor="email-newsletter">Email</InputLabel>
+            {/* <InputLabel htmlFor="email-newsletter">Email</InputLabel>
             <Stack direction="row" spacing={1} useFlexGap>
               <TextField
                 id="email-newsletter"
@@ -88,10 +89,10 @@ export default function Footer() {
               >
                 Subscribe
               </Button>
-            </Stack>
+            </Stack> */}
           </Box>
         </Box>
-        <Box
+        {/* <Box
           sx={{
             display: { xs: 'none', sm: 'flex' },
             flexDirection: 'column',
@@ -136,8 +137,8 @@ export default function Footer() {
           <Link color="text.secondary" variant="body2" href="#">
             Press
           </Link>
-        </Box>
-        <Box
+        </Box> */}
+        {/* <Box
           sx={{
             display: { xs: 'none', sm: 'flex' },
             flexDirection: 'column',
@@ -156,7 +157,7 @@ export default function Footer() {
           <Link color="text.secondary" variant="body2" href="#">
             Contact
           </Link>
-        </Box>
+        </Box> */}
       </Box>
       <Box
         sx={{
@@ -169,7 +170,7 @@ export default function Footer() {
         }}
       >
         <div>
-          <Link color="text.secondary" variant="body2" href="#">
+          {/* <Link color="text.secondary" variant="body2" href="#">
             Privacy Policy
           </Link>
           <Typography sx={{ display: 'inline', mx: 0.5, opacity: 0.5 }}>
@@ -177,7 +178,7 @@ export default function Footer() {
           </Typography>
           <Link color="text.secondary" variant="body2" href="#">
             Terms of Service
-          </Link>
+          </Link> */}
           <Copyright />
         </div>
         <Stack
@@ -189,13 +190,13 @@ export default function Footer() {
           <IconButton
             color="inherit"
             size="small"
-            href="https://github.com/mui"
+            href="https://github.com/smbursuc/Web-Application-Development/tree/main"
             aria-label="GitHub"
             sx={{ alignSelf: 'center' }}
           >
             <FacebookIcon />
           </IconButton>
-          <IconButton
+          {/* <IconButton
             color="inherit"
             size="small"
             href="https://x.com/MaterialUI"
@@ -212,7 +213,7 @@ export default function Footer() {
             sx={{ alignSelf: 'center' }}
           >
             <LinkedInIcon />
-          </IconButton>
+          </IconButton> */}
         </Stack>
       </Box>
     </Container>

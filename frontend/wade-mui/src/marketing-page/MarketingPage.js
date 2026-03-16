@@ -24,14 +24,14 @@ export default function MarketingPage(props) {
       <AppAppBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <Hero />
       <div>
-        <LogoCollection />
+        {/* <LogoCollection /> */}
         <Features />
         <Divider />
         <Testimonials />
         <Divider />
         <Highlights />
-        <Divider />
-        <Pricing />
+        {/* <Divider />
+        <Pricing /> */}
         <Divider />
         <FAQ />
         <Divider />

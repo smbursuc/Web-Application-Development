@@ -11,11 +11,11 @@ import { useTheme } from '@mui/system';
 
 const userTestimonials = [
   {
-    avatar: <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />,
-    name: 'Remy Sharp',
+    avatar: <Avatar alt="Robb Stark" src="/static/images/avatar/1.jpg" />,
+    name: 'Robb Stark',
     occupation: 'Senior Engineer',
     testimonial:
-      "I absolutely love how versatile this product is! Whether I'm tackling work projects or indulging in my favorite hobbies, it seamlessly adapts to my changing needs. Its intuitive design has truly enhanced my daily routine, making tasks more efficient and enjoyable.",
+      "Wow, this is literally the best app I've ever used. I've used this against the Lannisters, marking them down as I went to Riverrun. Amazing...",
   },
   {
     avatar: <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />,

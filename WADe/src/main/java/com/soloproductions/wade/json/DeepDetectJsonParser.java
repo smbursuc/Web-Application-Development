@@ -5,8 +5,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Parser implementation for DeepDetect JSON prediction responses. The parser 
+ * extracts prediction classes and flattens them into string rows in the format: 
+ * {@code <class-label> <probability> <uri>}.
+ */
 public class DeepDetectJsonParser implements ResponseParser
 {
+    /**
+     * Parses a DeepDetect response payload.
+     *
+     * @param   jsonInput 
+     *          raw JSON response from DeepDetect
+     * 
+     * @return  flattened prediction rows
+     */
     public List<String> parseResponse(String jsonInput)
     {
         try

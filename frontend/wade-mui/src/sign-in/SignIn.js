@@ -19,9 +19,11 @@ import AppTheme from "../shared-theme/AppTheme";
 import ColorModeSelect from "../shared-theme/ColorModeSelect";
 import { useState, useEffect } from "react";
 import Alert from "@mui/material/Alert";
+import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
 import LogoutRequired from "../logout-required/LogoutRequired";
 import { checkAuth } from "../utils/checkAuth";
+import ImprLogoHeader from "../marketing-page/components/ImprLogoHeader";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -189,7 +191,20 @@ export default function SignIn(props) {
           />
           {(!loggedIn || timerActive) && initialized && (
             <Card variant="outlined">
-              <SitemarkIcon />
+              <Tooltip title="Go Back" arrow>
+                <Box
+                  component="span"
+                  sx={{ cursor: "pointer", display: "inline-flex" }}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => navigate("/")}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") navigate("/");
+                  }}
+                >
+                  <ImprLogoHeader />
+                </Box>
+              </Tooltip>
               <Typography
                 component="h1"
                 variant="h4"
@@ -242,10 +257,10 @@ export default function SignIn(props) {
                     color={passwordError ? "error" : "primary"}
                   />
                 </FormControl>
-                <FormControlLabel
+                {/* <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
                   label="Remember me"
-                />
+                /> */}
                 <ForgotPassword open={open} handleClose={handleClose} />
                 <Button
                   type="submit"
@@ -255,7 +270,7 @@ export default function SignIn(props) {
                 >
                   Sign in
                 </Button>
-                <Link
+                {/* <Link
                   component="button"
                   type="button"
                   onClick={handleClickOpen}
@@ -263,11 +278,11 @@ export default function SignIn(props) {
                   sx={{ alignSelf: "center" }}
                 >
                   Forgot your password?
-                </Link>
+                </Link> */}
               </Box>
               <Divider>or</Divider>
               <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                <Button
+                {/* <Button
                   fullWidth
                   variant="outlined"
                   onClick={() => alert("Sign in with Google")}
@@ -282,11 +297,11 @@ export default function SignIn(props) {
                   startIcon={<FacebookIcon />}
                 >
                   Sign in with Facebook
-                </Button>
+                </Button> */}
                 <Typography sx={{ textAlign: "center" }}>
                   Don&apos;t have an account?{" "}
                   <Link
-                    href="/material-ui/getting-started/templates/sign-in/"
+                    href="/signup"
                     variant="body2"
                     sx={{ alignSelf: "center" }}
                   >

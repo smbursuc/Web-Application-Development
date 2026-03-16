@@ -10,33 +10,37 @@ import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 
 import DevicesRoundedIcon from '@mui/icons-material/DevicesRounded';
-import EdgesensorHighRoundedIcon from '@mui/icons-material/EdgesensorHighRounded';
 import ViewQuiltRoundedIcon from '@mui/icons-material/ViewQuiltRounded';
+import DownloadIcon from '@mui/icons-material/Download';
+import StorageIcon from '@mui/icons-material/Storage';
+import DashboardImage from '../../interactive_dashboard.png';
+import ExportImage from '../../export.png';
+import SparqlPlaygroundImage from '../../sparql_playground.png';
 
 const items = [
   {
     icon: <ViewQuiltRoundedIcon />,
     title: 'Dashboard',
     description:
-      'This item could provide a snapshot of the most important metrics or data points related to the product.',
-    imageLight: `url("${process.env.TEMPLATE_IMAGE_URL || 'https://mui.com'}/static/images/templates/templates-images/dash-light.png")`,
-    imageDark: `url("${process.env.TEMPLATE_IMAGE_URL || 'https://mui.com'}/static/images/templates/templates-images/dash-dark.png")`,
+      'Create and update your datasets through an interactive dashboard interface.',
+    imageLight: `url("${DashboardImage}")`,
+    imageDark: `url("${DashboardImage}")`,
   },
   {
-    icon: <EdgesensorHighRoundedIcon />,
-    title: 'Mobile integration',
+    icon: <DownloadIcon />,
+    title: 'Export data',
     description:
-      'This item could provide information about the mobile app version of the product.',
-    imageLight: `url("${process.env.TEMPLATE_IMAGE_URL || 'https://mui.com'}/static/images/templates/templates-images/mobile-light.png")`,
-    imageDark: `url("${process.env.TEMPLATE_IMAGE_URL || 'https://mui.com'}/static/images/templates/templates-images/mobile-dark.png")`,
+      'Export your datasets in various data formats for further analysis and use.',
+    imageLight: `url("${ExportImage}")`,
+    imageDark: `url("${ExportImage}")`,
   },
   {
-    icon: <DevicesRoundedIcon />,
-    title: 'Available on all platforms',
+    icon: <StorageIcon />,
+    title: 'Data playground',
     description:
-      'This item could let users know the product is available on all platforms, such as web, mobile, and desktop.',
-    imageLight: `url("${process.env.TEMPLATE_IMAGE_URL || 'https://mui.com'}/static/images/templates/templates-images/devices-light.png")`,
-    imageDark: `url("${process.env.TEMPLATE_IMAGE_URL || 'https://mui.com'}/static/images/templates/templates-images/devices-dark.png")`,
+      'Openly interact with your datasets using a SPARQL query playground.',
+    imageLight: `url("${SparqlPlaygroundImage}")`,
+    imageDark: `url("${SparqlPlaygroundImage}")`,
   },
 ];
 
@@ -159,9 +163,7 @@ export default function Features() {
           variant="body1"
           sx={{ color: 'text.secondary', mb: { xs: 2, sm: 4 } }}
         >
-          Provide a brief overview of the key features of the product. For example,
-          you could list the number of features, their types or benefits, and
-          add-ons.
+          Create graphical visualizations of your datasets and gain insights.
         </Typography>
       </Box>
       <Box
@@ -249,19 +251,22 @@ export default function Features() {
             <Box
               sx={(theme) => ({
                 m: 'auto',
-                width: 420,
-                height: 500,
+                width: 770,
+                height: 600,
                 backgroundSize: 'contain',
-                backgroundImage: 'var(--items-imageLight)',
-                ...theme.applyStyles('dark', {
-                  backgroundImage: 'var(--items-imageDark)',
-                }),
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                // Use only a single background image depending on theme mode
+                backgroundImage:
+                  (theme.palette && theme.palette.mode === 'dark')
+                    ? 'var(--items-imageDark)'
+                    : 'var(--items-imageLight)',
               })}
               style={
                 items[selectedItemIndex]
                   ? {
-                      '--items-imageLight': items[selectedItemIndex].imageLight,
-                      '--items-imageDark': items[selectedItemIndex].imageDark,
+                      '--items-imageLight': items[selectedItemIndex].imageLight || '',
+                      '--items-imageDark': items[selectedItemIndex].imageDark || '',
                     }
                   : {}
               }

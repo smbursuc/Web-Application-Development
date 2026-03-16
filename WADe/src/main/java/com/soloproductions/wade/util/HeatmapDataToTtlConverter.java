@@ -9,9 +9,27 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 
+/**
+ * Standalone converter that reads a heatmap similarity JSON file and writes a
+ * plain Turtle ({@code .ttl}) file without using Apache Jena, building the
+ * RDF triples manually via a {@link StringBuilder}.
+ *
+ * <p>Each labelled object is emitted as an {@code ex:Object} triple, and each
+ * pairwise similarity value is expressed as an anonymous blank node with
+ * {@code ex:relatedTo} and {@code ex:similarityValue} properties.
+ *
+ * <p>Run via {@link #main(String[])} — intended as a one-off data pipeline step,
+ * not a Spring-managed bean.
+ */
 public class HeatmapDataToTtlConverter
 {
 
+    /**
+     * Entry point. Reads the similarity JSON file hardcoded in the body and
+     * writes the Turtle output to {@code ttl/heatmap_data.ttl}.
+     *
+     * @param   args    unused
+     */
     public static void main(String[] args)
     {
         String baseUri = "http://example.org/";
@@ -47,9 +65,9 @@ public class HeatmapDataToTtlConverter
                         String objectUri2 = baseUri + "Object/" + objects[j].replace(" ", "_");
 
                         ttlBuilder.append("<").append(objectUri1).append("> ex:hasSimilarity [\n")
-                                .append("    ex:relatedTo <").append(objectUri2).append("> ;\n")
-                                .append("    ex:similarityValue \"").append(matrix[i][j]).append("\"^^xsd:decimal\n")
-                                .append("] .\n\n");
+                                  .append("    ex:relatedTo <").append(objectUri2).append("> ;\n")
+                                  .append("    ex:similarityValue \"").append(matrix[i][j]).append("\"^^xsd:decimal\n")
+                                  .append("] .\n\n");
                     }
                 }
             }

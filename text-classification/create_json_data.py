@@ -5,13 +5,14 @@ import sys
 
 # Configurations
 
-dataset = "bsds300"
+dataset = "cifar10"
 
 folder_path = f"E:\\repos\\Web-Application-Development\\WADe\\{dataset}"  # Replace with the path to your folder
-base_url = "http://localhost:8081/api/files/"
+base_url = "http://host.docker.internal:8081/api/files/"
 api_url = "http://localhost:8081/api/process-image"  # Replace with your processing endpoint
 output_file = f"processed_data_uri_{dataset}.json"
-batch_size = 1  # Adjust batch size as needed
+batch_size = 50  # Adjust batch size as needed
+limit = 10000
 
 # Function to generate file links
 def generate_image_links(folder_path, base_url):
@@ -25,11 +26,13 @@ def generate_image_links(folder_path, base_url):
     return links
 
 # Function to process images in batches
-def process_images_in_batches(links, api_url, batch_size):
+def process_images_in_batches(links, api_url, batch_size, limit):
     processed_data = []
     total_links = len(links)
     
     for i in range(0, total_links, batch_size):
+        if len(processed_data) >= limit:
+            break
         batch = links[i:i+batch_size]
         payload = {
             "responseType": "processed",
@@ -65,7 +68,7 @@ if __name__ == "__main__":
 
     # Process images in batches
     print("Processing images in batches...")
-    processed_data = process_images_in_batches(image_links, api_url, batch_size)
+    processed_data = process_images_in_batches(image_links, api_url, batch_size, limit)
 
     # Save processed data to JSON file
     print("Saving processed data to JSON file...")

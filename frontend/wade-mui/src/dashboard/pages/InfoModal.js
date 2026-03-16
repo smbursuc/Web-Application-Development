@@ -46,6 +46,8 @@ import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import BuildIcon from "@mui/icons-material/Build";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CircleIcon from "@mui/icons-material/Circle";
+import StaticMetadata from "../../common/managers/StaticMetadata";
+import SelectedDataset from "../../common/managers/SelectedDataset";
 
 const xThemeComponents = {
   ...chartsCustomizations,
@@ -57,68 +59,32 @@ const xThemeComponents = {
 export default function InfoModal(props) {
   const infOpen = props.infOpen;
   const handleInfClose = props.handleInfClose;
-  const selectedDataset = props.selectedDataset;
+  const selectedDatasetObj = new SelectedDataset(props.selectedDataset);
+  const staticMetadataObj = new StaticMetadata(props.staticMetadata);
 
-  const features = {
-      cifar10: [
-        {
-          title: "Description",
-          description:
-            "The CIFAR-10 and CIFAR-100 datasets are labeled subsets of the 80 million tiny images dataset.",
-        },
-        {
-          title: "Image Size",
-          description: "32x32",
-        },
-        {
-          title: "Dataset Size",
-          description: "50.000 images, ~177MB",
-        },
-        {
-          title: "Classes",
-          description:
-            "There are 10 classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck.",
-        },
-        {
-          title: "Prediction Time",
-          description: "~4 hours /w DeepDetect CPU, Ryzen 5 7600x",
-        },
-        {
-          title: "Predictions",
-          description:
-            "For each image of the dataset the best 3 guesses were stored. This explains why so many images are being categorized by one object, it was because the object was present in the top 3 predictions.",
-        },
-      ],
-      bsds300: [
-        {
-          title: "Description",
-          description:
-            "The BSDS300 and CIFAR-100 datasets are labeled subsets of the 80 million tiny images dataset.",
-        },
-        {
-          title: "Image Size",
-          description: "32x32",
-        },
-        {
-          title: "Dataset Size",
-          description: "50.000 images, ~177MB",
-        },
-        {
-          title: "Classes",
-          description:
-            "There are 10 classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck.",
-        },
-        {
-          title: "Prediction Time",
-          description: "~4 hours /w DeepDetect CPU, Ryzen 5 7600x",
-        },
-        {
-          title: "Predictions",
-          description:
-            "For each image of the dataset the best 3 guesses were stored. This explains why so many images are being categorized by one object, it was because the object was present in the top 3 predictions.",
-        },
-      ],
-    };
+  function getFeatures() {
+    const sd = selectedDatasetObj.get();
+    return staticMetadataObj.getFeatures(sd || "");
+  }
+
+  function getDisplayValue() {
+    const sd = selectedDatasetObj.get();
+    return staticMetadataObj.getDisplayValue(sd || "") || "";
+  }
+
+  function getSummary() {
+    const sd = selectedDatasetObj.get();
+    return staticMetadataObj.getSummary(sd || "") || "";
+  }
+
+  function getSource() {
+    const sd = selectedDatasetObj.get();
+    return staticMetadataObj.getSource(sd || "") || "";
+  }
+
+  useEffect(() => {
+    // console.log("InfoModal features:", staticMetadataObj.get());
+  }, [staticMetadataObj.get()]);
 
   return (
     <Modal
@@ -141,13 +107,12 @@ export default function InfoModal(props) {
         }}
       >
         <Typography id="modal-title" variant="h6" component="h2">
-          CIFAR-10
+          {getDisplayValue()}
         </Typography>
         <Typography id="modal-description" sx={{ mt: 2 }}>
-          The CIFAR-10 dataset is a labeled subsets of the 80 million tiny
-          images dataset.&nbsp;
+          {getSummary()}&nbsp;
           <a
-            href="https://www.cs.toronto.edu/~kriz/cifar.html"
+            href={getSource()}
             target="_blank"
             rel="noopener noreferrer"
             style={{ textDecoration: "none" }}
@@ -156,7 +121,7 @@ export default function InfoModal(props) {
           </a>
         </Typography>
         <List>
-          {features[selectedDataset].map((feature, index) => (
+          {getFeatures().map((feature, index) => (
             <ListItem key={index} alignItems="flex-start" sx={{ gap: 1 }}>
               <ListItemIcon>
                 <CircleIcon color="primary" />

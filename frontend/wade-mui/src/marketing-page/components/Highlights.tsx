@@ -15,15 +15,15 @@ import ThumbUpAltRoundedIcon from '@mui/icons-material/ThumbUpAltRounded';
 const items = [
   {
     icon: <SettingsSuggestRoundedIcon />,
-    title: 'Adaptable performance',
+    title: 'Performance',
     description:
-      'Our product effortlessly adjusts to your needs, boosting efficiency and simplifying your tasks.',
+      'Smartly handles data for the highest delivered performance.',
   },
   {
     icon: <ConstructionRoundedIcon />,
-    title: 'Built to last',
+    title: 'Fast construction',
     description:
-      'Experience unmatched durability that goes above and beyond with lasting investment.',
+      'Large datasets are built in a matter of minutes.',
   },
   {
     icon: <ThumbUpAltRoundedIcon />,

@@ -1,0 +1,7 @@
+text-classification/venv/
+*.json
+WADe/data/impr/
+text-classification/similarity_data_cifar10.json
+text-classification/cifar-10-python.tar.gz
+WADe/application.properties
+WADe/application-cloud.properties

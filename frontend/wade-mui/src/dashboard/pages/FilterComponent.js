@@ -47,6 +47,7 @@ import BuildIcon from "@mui/icons-material/Build";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CircleIcon from "@mui/icons-material/Circle";
 import SemanticZoomModal from "./InfoModal";
+import SortOptions from "../../common/managers/SortOptions";
 import { filter } from "d3";
 
 export default function FilterComponent(props) {
@@ -58,11 +59,20 @@ export default function FilterComponent(props) {
   const rangeStartSliderValue = props.rangeStartSliderValue;
   const setRangeStartSliderValue = props.setRangeStartSliderValue;
   const options = props.options;
+  const sortOptionsObj = new SortOptions(options, props.setSortOptions);
   const sortType = props?.sortType;
+  let selectedDataset = props?.selectedDataset;
+  let dataModel = props?.dataModel;
+  let datasetType = props?.datasetType;
+
+  // max possible range
   let max = props.max;
 
+  // max possible range considering start value
+  let maxRange = props.maxRange;
+  const setMaxRange = props.setMaxRange;
+
   const [filterOpen, setFilterOpen] = useState(false);
-  const [maxRange, setMaxRange] = useState(0);
 
   const handleRangeSliderChange = (event, newValue) => {
     setRangeSliderValue(newValue);
@@ -85,9 +95,29 @@ export default function FilterComponent(props) {
   }
 
   useEffect(() => {
-    let diff = max - rangeStartSliderValue;
-    setMaxRange(diff > 50 ? 50 : diff);
-  }, [rangeStartSliderValue])
+    // Only update max/range when a valid `max` (from metadata/cache) is provided.
+    // If `max` is missing or not positive, leave existing values alone.
+    const maxNum = Number(max);
+    let diff;
+    if (maxNum > 0) {
+      diff = maxNum - rangeStartSliderValue;
+      if (diff < 1) diff = 1; // Slider `min` is 1
+      // Keep current within [1, diff]
+      const boundedCurrent = Math.max(1, Number(rangeSliderValue) || 1);
+      const newVal = Math.min(boundedCurrent, diff);
+      setRangeSliderValue(newVal);
+      setMaxRange(diff);
+    }
+    else {
+      // diff = 1;
+    }
+  }, [rangeStartSliderValue, max]);
+
+  function getSortOptions () {
+    const sortBy = sortOptionsObj.getSortBy(selectedDataset || "", datasetType || "");
+    if (!Array.isArray(sortBy) || sortBy.length === 0) return [];
+    return sortBy;
+  }
 
   return (
     <Box>
@@ -134,9 +164,11 @@ export default function FilterComponent(props) {
             onChange={handleSortChange}
             label="Sort by:"
           >
-            {options["sort"].values.map((value, index) => (
-              <MenuItem key={value} value={value}>
-                {options["sort"].descriptions[index]}
+            {getSortOptions().map((value, index) => (
+              <MenuItem 
+              key={value["value"]} 
+              value={value["value"]}>
+                {value["displayValue"]}
               </MenuItem>
             ))}
           </Select>
@@ -164,7 +196,7 @@ export default function FilterComponent(props) {
             onChange={handleRangeStartSliderChange}
             valueLabelDisplay="auto"
             min={1}
-            max={max < 50 ? max : 50}
+            max={max}
           />
         </Box>
 

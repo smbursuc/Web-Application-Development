@@ -8,6 +8,7 @@ import {
   MenuItem,
   Button,
   Select,
+  Skeleton,
   FormControl,
   InputLabel,
   List,
@@ -48,6 +49,8 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CircleIcon from "@mui/icons-material/Circle";
 import SemanticZoomModal from "./InfoModal";
 import FilterComponent from "./FilterComponent";
+import Datasets from "../../common/managers/Datasets";
+import DataModels from "../../common/managers/DataModels";
 
 export default function PageInfo(props) {
   const datasets = props.datasets;
@@ -58,6 +61,21 @@ export default function PageInfo(props) {
   const dataModel = props?.dataModel;
   const dataModels = props?.dataModels;
   const handleDataModelChange = props?.handleDataModelChange;
+
+  const datasetsObj = new Datasets(datasets);
+  function getDataset() {
+    const ds = datasetsObj.get();
+    if (!ds || ds.length === 0) return null;
+    return ds.find((dataset) => dataset.value === selectedDataset);
+  }
+
+  const dataModelsObj = new DataModels(dataModels);
+  function getDataModels() {
+    const dm = dataModelsObj.get();
+    if (!dm || Object.keys(dm).length === 0) return [];
+    if (!dm[selectedDataset] || dm[selectedDataset].length === 0) return [];
+    return dm[selectedDataset];
+  }
 
   return (
     <Box
@@ -84,31 +102,32 @@ export default function PageInfo(props) {
         }}
       >
         <Typography variant="h3">
-          {
-            datasets.find((dataset) => dataset.value === selectedDataset)
-              .displayValue
-          }
+          {getDataset() ? getDataset().displayValue : ""}
         </Typography>
         <IconButton aria-label="Information" onClick={handleInfOpen}>
           <HelpRoundedIcon />
         </IconButton>
       </Container>
-      <FormControl fullWidth >
-        <InputLabel id="dataset-select-label">Select Dataset</InputLabel>
-        <Select
-          labelId="dataset-select-label"
-          id="dataset-select"
-          value={selectedDataset}
-          onChange={handleDatasetChange}
-        >
-          {datasets.map((dataset) => (
-            <MenuItem key={dataset.value} value={dataset.value}>
-              {dataset.displayValue}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      {dataModels && <FormControl fullWidth >
+      {datasets && datasets.length > 0 ? (
+        <FormControl fullWidth >
+          <InputLabel id="dataset-select-label">Select Dataset</InputLabel>
+          <Select
+            labelId="dataset-select-label"
+            id="dataset-select"
+            value={selectedDataset}
+            onChange={handleDatasetChange}
+          >
+            {datasets.map((dataset) => (
+              <MenuItem key={dataset.value} value={dataset.value}>
+                {dataset.displayValue}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      ) : (
+        <Skeleton variant="rectangular" width="100%" height={56} />
+      )}
+      {getDataModels().length > 0 && <FormControl fullWidth >
         <InputLabel id="datamodel-select-label">Select Data Model for Representation</InputLabel>
         <Select
           labelId="datamodel-select-label"
@@ -116,7 +135,7 @@ export default function PageInfo(props) {
           value={dataModel}
           onChange={handleDataModelChange}
         >
-          {dataModels.map((dataModel) => (
+          {getDataModels().map((dataModel) => (
             <MenuItem key={dataModel.value} value={dataModel.value}>
               {dataModel.displayValue}
             </MenuItem>

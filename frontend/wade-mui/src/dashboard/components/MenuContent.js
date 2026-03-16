@@ -12,18 +12,40 @@ import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
 import HelpRoundedIcon from "@mui/icons-material/HelpRounded";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAppState } from "../../contexts/AppStateContext";
 
 export default function MenuContent() {
   const navigate = useNavigate();
+  const location = useLocation();
   const appStateProps = useAppState();
-  const selectedIndex = appStateProps.selectedIndex;
-  const setSelectedIndex = appStateProps.setSelectedIndex;
+  const setAboutOpen = appStateProps.setAboutOpen;
+  const isDirty = appStateProps.isDirty;
+  const setIsDirty = appStateProps.setIsDirty;
+
+  const routeByOption = {
+    Home: "/dashboard",
+    "SPARQL Playground": "/sparql-playground",
+    "Semantic Zoom": "/semantic-zoom",
+    Correlations: "/correlations",
+    Settings: "/settings",
+    Feedback: "/feedback",
+  };
+
+  // Fix: active highlight is now computed from the current URL path instead of a global selected index,
+  // so navigation triggered outside menu clicks (e.g. clicking logo -> /dashboard) always updates highlight correctly.
+  const isOptionSelected = (option) => routeByOption[option] === location.pathname;
 
   const handleListItemClick = (index, option) => {
-    setSelectedIndex(index); 
+    // Check for unsaved changes
+    if (isDirty) {
+        // Simple confirmation
+        const confirmed = window.confirm("You have unsaved changes. Are you sure you want to leave?");
+        if (!confirmed) return;
+        setIsDirty(false); // Reset if they agree to leave
+    }
+
     switch (option)
     {
       case "Home":
@@ -37,6 +59,16 @@ export default function MenuContent() {
         break;
       case "Correlations":
         navigate("/correlations");
+        break;
+      case "Settings":
+        navigate("/settings");
+        break;
+      case "About":
+        // Stay on current page, just open modal
+        setAboutOpen(true);
+        break;
+      case "Feedback":
+        navigate("/feedback");
         break;
     }
   };
@@ -58,13 +90,11 @@ export default function MenuContent() {
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: "space-between" }}>
       <List dense>
         {mainListItems.map((item, index) => (
-          <ListItem
-            key={index}
-            disablePadding
-            sx={{ display: "block" }}
-            onClick={() => handleListItemClick(index, item.text)}
-          >
-            <ListItemButton selected={index === selectedIndex}>
+          <ListItem key={index} disablePadding sx={{ display: "block" }}>
+            <ListItemButton
+              selected={isOptionSelected(item.text)}
+              onClick={() => handleListItemClick(index, item.text)}
+            >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItemButton>
@@ -75,7 +105,10 @@ export default function MenuContent() {
       <List dense>
         {secondaryListItems.map((item, index) => (
           <ListItem key={index} disablePadding sx={{ display: "block" }}>
-            <ListItemButton>
+            <ListItemButton
+              selected={isOptionSelected(item.text)}
+                onClick={() => handleListItemClick(index + mainListItems.length, item.text)}
+            >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItemButton>

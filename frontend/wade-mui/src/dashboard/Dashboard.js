@@ -21,6 +21,8 @@ import { useAppState } from '../contexts/AppStateContext';
 import { useNavigate } from 'react-router-dom';
 import { Alert } from "@mui/material";
 
+import DashboardContent from './pages/DashboardContent';
+
 const xThemeComponents = {
   ...chartsCustomizations,
   ...dataGridCustomizations,
@@ -34,11 +36,12 @@ export default function Dashboard(props) {
   const appStateContext = useAppState();
   const loggedIn = appStateContext.loggedIn;
   const setLoggedIn = appStateContext.setLoggedIn;
+  const setUser = appStateContext.setUser; // Add this
   const navigate = useNavigate();
 
   // first check if user is allowed to enter this page
   useEffect(() => {
-    checkAuth(setLoggedIn, setResponseMessage, setInitialized);
+    checkAuth(setLoggedIn, setResponseMessage, setInitialized, setUser);
   }, [])
 
   // on re-render after check redirect away from the page if not allowed
@@ -77,8 +80,7 @@ export default function Dashboard(props) {
               mt: { xs: 8, md: 0 },
             }}
           >
-            <Header />
-            <MainGrid />
+            <DashboardContent /> 
           </Stack>
         </Box>
       </Box>) : (

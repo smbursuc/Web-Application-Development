@@ -1,0 +1,134 @@
+{
+  "common": {
+    "sortOptions": {
+      "common": [
+        {
+          "name": "highest_probability",
+          "displayValue": "Highest Probability"
+        },
+        {
+          "name": "lowest_probability",
+          "displayValue": "Lowest Probability"
+        },
+        {
+          "name": "no_sort",
+          "displayValue": "No Sorting"
+        }
+      ],
+      "heatmaps": [
+        {
+          "name": "average_similarity",
+          "displayValue": "Average Similarity"
+        },
+        {
+          "name": "strongest_pair",
+          "displayValue": "Strongest Pair"
+        }
+      ]
+    },
+    "dataModels": [
+      {
+        "name": "rdf",
+        "displayValue": "RDF"
+      },
+      {
+        "name": "json",
+        "displayValue": "JSON"
+      },
+      {
+        "name": "sql",
+        "displayValue": "SQL"
+      }
+    ]
+  },
+  "cifar10": {
+    "features": [
+      {
+        "title": "Description",
+        "description": "The CIFAR-10 and CIFAR-100 datasets are labeled subsets of the 80 million tiny images dataset."
+      },
+      {
+        "title": "Image Size",
+        "description": "32x32"
+      },
+      {
+        "title": "Dataset Size",
+        "description": "50.000 images, ~177MB"
+      },
+      {
+        "title": "Classes",
+        "description": "There are 10 classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck."
+      },
+      {
+        "title": "Prediction Time",
+        "description": "~4 hours /w DeepDetect CPU, Ryzen 5 7600x"
+      },
+      {
+        "title": "Predictions",
+        "description": "For each image of the dataset the best 3 guesses were stored. This explains why so many images are being categorized by one object, it was because the object was present in the top 3 predictions."
+      }
+    ],
+    "displayValue": "CIFAR-10",
+    "summary": "The CIFAR-10 dataset.",
+    "source": "https://www.cs.toronto.edu/~kriz/cifar.html",
+    "datasetInfo": {
+      "heatmap": ["json", "rdf"],
+      "clusters": ["json", "rdf"]
+    },
+    "datasetTypes": [
+      {
+        "name": "Clusters",
+        "displayValue": "clusters"
+      },
+      {
+        "name": "Heatmaps",
+        "displayValue": "heatmaps"
+      }
+    ]
+  },
+  "bsds300": {
+    "features": [
+      {
+        "title": "Description",
+        "description": "The BSDS300 dataset provides 300 high quality images that are traditionally used for segmentation training"
+      },
+      {
+        "title": "Image Size",
+        "description": "481x321"
+      },
+      {
+        "title": "Dataset Size",
+        "description": "300 images, ~22MB"
+      },
+      {
+        "title": "Classes",
+        "description": "There are several classes but primarly buildings, animals, humans and flowers."
+      },
+      {
+        "title": "Prediction Time",
+        "description": "~2 minutes /w DeepDetect CPU, Ryzen 5 7600x"
+      },
+      {
+        "title": "Predictions",
+        "description": "For each image of the dataset only the best guess was stored. All images with less than 70% confidence were discarded."
+      }
+    ],
+    "displayValue": "BSDS300",
+    "summary": "The BSDS300 dataset.",
+    "source": "https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/",
+    "datasetInfo": {
+      "heatmap": ["json", "rdf"],
+      "clusters": ["json", "rdf"]
+    },
+    "datasetTypes": [
+      {
+        "name": "Clusters",
+        "displayValue": "clusters"
+      },
+      {
+        "name": "Heatmaps",
+        "displayValue": "heatmaps"
+      }
+    ]
+  }
+}

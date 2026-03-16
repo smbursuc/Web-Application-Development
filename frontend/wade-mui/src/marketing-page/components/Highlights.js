@@ -15,39 +15,39 @@ import ThumbUpAltRoundedIcon from '@mui/icons-material/ThumbUpAltRounded';
 const items = [
   {
     icon: <SettingsSuggestRoundedIcon />,
-    title: 'Adaptable performance',
+    title: 'Performance',
     description:
-      'Our product effortlessly adjusts to your needs, boosting efficiency and simplifying your tasks.',
+      'Smartly handles data for the highest delivered performance.',
   },
   {
     icon: <ConstructionRoundedIcon />,
-    title: 'Built to last',
+    title: 'Fast construction',
     description:
-      'Experience unmatched durability that goes above and beyond with lasting investment.',
+      'Large datasets are built in a matter of minutes.',
   },
   {
     icon: <ThumbUpAltRoundedIcon />,
     title: 'Great user experience',
     description:
-      'Integrate our product into your routine with an intuitive and easy-to-use interface.',
+      'Dynamic and visually appealing UI for an engaging user experience.',
   },
   {
     icon: <AutoFixHighRoundedIcon />,
     title: 'Innovative functionality',
     description:
-      'Stay ahead with features that set new standards, addressing your evolving needs better than the rest.',
+      'Uses state-of-the-art AI to provide smart data suggestions.',
   },
   {
     icon: <SupportAgentRoundedIcon />,
     title: 'Reliable support',
     description:
-      'Count on our responsive customer support, offering assistance that goes beyond the purchase.',
+      'Lightning-fast customer support ready to assist you anytime.',
   },
   {
     icon: <QueryStatsRoundedIcon />,
     title: 'Precision in every detail',
     description:
-      'Enjoy a meticulously crafted product where small touches make a significant impact on your overall experience.',
+      'Enjoy large and complex datasets with utmost accuracy and reliability.',
   },
 ];
 
@@ -81,9 +81,7 @@ export default function Highlights() {
             Highlights
           </Typography>
           <Typography variant="body1" sx={{ color: 'grey.400' }}>
-            Explore why our product stands out: adaptability, durability,
-            user-friendly design, and innovation. Enjoy reliable customer support and
-            precision in every detail.
+            Some of the best features that we proudly present to your users.
           </Typography>
         </Box>
         <Grid container spacing={2}>

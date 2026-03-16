@@ -13,6 +13,7 @@ script_root = os.path.dirname(os.path.abspath(__file__))
 dataset_path = os.path.join(script_root, dataset_filename)
 extracted_path = os.path.join(script_root, dataset_folder)
 upload_url = "http://localhost:8081/api/upload-image"
+limit = 10000
 
 # Step 1: Download CIFAR-10 dataset
 cifar10_url = "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"
@@ -48,6 +49,8 @@ for batch_file in batch_files:
     total_images += len(images)
     
     for i, image_data in enumerate(images):
+        if uploaded_count >= limit:
+            break
         # Convert image data to PIL format
         image_array = image_data.reshape(3, 32, 32).transpose(1, 2, 0)
         image = Image.fromarray(image_array)

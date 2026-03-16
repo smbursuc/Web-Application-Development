@@ -13,10 +13,16 @@ import Playground from "./dashboard/pages/Playground";
 import { AppStateProvider } from "./contexts/AppStateContext";
 import SemanticZoom from "./dashboard/pages/SemanticZoom";
 import Correlations from "./dashboard/pages/Correlations";
+import GlobalSiteManager from "./common/GlobalSiteManager";
+import AboutModal from "./dashboard/components/AboutModal";
+import Settings from "./dashboard/pages/Settings";
+import Feedback from "./dashboard/pages/Feedback";
 
 function App() {
   return (
     <AppStateProvider>
+      <GlobalSiteManager />
+      <AboutModal />
       <Router>
         <Routes>
           {/* Define your routes */}
@@ -27,6 +33,8 @@ function App() {
           <Route path="/sparql-playground" element={<Playground />} />
           <Route path="/semantic-zoom" element={<SemanticZoom />} />
           <Route path="/correlations" element={<Correlations />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/feedback" element={<Feedback />} />
         </Routes>
       </Router>
     </AppStateProvider>

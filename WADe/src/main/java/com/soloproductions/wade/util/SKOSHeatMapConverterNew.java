@@ -11,10 +11,30 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Standalone converter that reads a heatmap similarity JSON file and writes a
+ * SKOS-annotated Turtle ({@code .ttl}) file with typed RDF properties using
+ * Apache Jena.
+ *
+ * <p>Compared to {@link HeatmapToSKOSConverter}, this version explicitly declares
+ * RDFS domains and ranges for the correlation properties and uses a typed
+ * {@code xsd:float} literal for similarity values.
+ *
+ * <p>Run via {@link #main(String[])} — intended as a one-off data pipeline step,
+ * not a Spring-managed bean.
+ */
 public class SKOSHeatMapConverterNew
 {
     private static final String BASE_URI = "http://example.org/";
 
+    /**
+     * Entry point. Reads a similarity JSON file and writes the SKOS RDF output to
+     * {@code ttl/heatmap_data_skos_cifar10.ttl}.
+     *
+     * @param   args        unused
+     *
+     * @throws  IOException if the input file cannot be read or the output cannot be written
+     */
     public static void main(String[] args) throws IOException
     {
         String inputFilePath = "E:\\repos\\Web-Application-Development\\text-classification\\similarity_data_500.json";
@@ -46,6 +66,17 @@ public class SKOSHeatMapConverterNew
         System.out.println("SKOS RDF data saved to: " + outputFilePath);
     }
 
+    /**
+     * Converts a list of object labels and a similarity matrix into a Jena
+     * {@link Model} containing {@code skos:Concept} resources and blank-node
+     * correlation triples.
+     *
+     * @param   objects     ordered list of object labels
+     * @param   matrix      square pairwise similarity matrix ({@code matrix[i][j]} is
+     *                      the similarity between {@code objects[i]} and {@code objects[j]})
+     *
+     * @return  populated Jena model ready to serialise as Turtle
+     */
     private static Model convertHeatmapToSKOS(List<String> objects, double[][] matrix)
     {
         Model model = ModelFactory.createDefaultModel();

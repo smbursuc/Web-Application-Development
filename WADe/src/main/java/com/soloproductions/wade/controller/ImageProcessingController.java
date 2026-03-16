@@ -19,13 +19,28 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+/**
+ * Controller for handling image processing requests. It receives image paths, sends them to the 
+ * DeepDetect API for processing, and returns the results. This module was used for creating the default datasets, 
+ * and is not currently part of the live lifecycle of the frontend application.
+ */
 public class ImageProcessingController
 {
-
+    /** The URL of the DeepDetect API used for image processing. */
     private static final String DEEPDETECT_URL = "http://localhost:8080/predict";
 
+    /**
+     * Endpoint for processing images. It accepts a list of image paths, sends them to the DeepDetect API, 
+     * and returns the results.
+     *
+     * @param    piRequest    
+     *           the request containing the list of image paths and optional response type
+     * 
+     * @return   a response entity containing the standard response with the processing results or an error message
+     */
     @PostMapping("/process-image")
-    public ResponseEntity<StandardResponse<?>> processImage(@RequestBody ProcessImageRequest piRequest)
+    public ResponseEntity<StandardResponse<?>> processImage(
+            ProcessImageRequest piRequest)
     {
         try
         {
@@ -54,7 +69,6 @@ public class ImageProcessingController
             String responseType = piRequest.getResponseType();
             if (responseType != null && responseType.equalsIgnoreCase("raw"))
             {
-                // Return the DeepDetect response
                 StandardResponse<String> successResponse = new StandardResponse<>(
                         "success",
                         "Processing completed!",
@@ -90,6 +104,16 @@ public class ImageProcessingController
         }
     }
 
+    /**
+     * Constructs the JSON payload for the DeepDetect API request based on the provided image paths.
+     * Note that these parameters are tweaked for the Dockerized version of DeepDetect. The parameters
+     * are from a standard request example from the DeepDetect documentation.
+     * 
+     * @param   imagePaths
+     *          the list of image paths to be processed
+     * 
+     * @return  the JSON payload as a string to be sent to the DeepDetect API
+     */
     private String constructRequestPayload(List<String> imagePaths)
     {
         try

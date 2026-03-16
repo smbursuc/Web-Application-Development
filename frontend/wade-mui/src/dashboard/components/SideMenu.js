@@ -11,6 +11,9 @@ import MenuContent from './MenuContent';
 import CardAlert from './CardAlert';
 import OptionsMenu from './OptionsMenu';
 import ImprLogo from '../../icons/ImprLogo';
+import { useAppState } from '../../contexts/AppStateContext';
+import ImprLogoHeader from '../../marketing-page/components/ImprLogoHeader';
+import { Link as RouterLink } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -26,6 +29,8 @@ const Drawer = styled(MuiDrawer)({
 });
 
 export default function SideMenu() {
+  const { user } = useAppState();
+
   return (
     <Drawer
       variant="permanent"
@@ -37,18 +42,23 @@ export default function SideMenu() {
       }}
     >
       <Box
+        component={RouterLink}
+        to="/dashboard"
+        aria-label="Go to dashboard"
         sx={{
           display: 'flex',
           justifyContent: "center",
           mt: 'calc(var(--template-frame-height, 0px) + 4px)',
           p: 1.5,
+          textDecoration: 'none',
+          cursor: 'pointer',
         }}
       >
-        <ImprLogo/>
+        <ImprLogoHeader />
       </Box>
       <Divider />
       <MenuContent />
-      <CardAlert />
+      {/* <CardAlert /> */}
       <Stack
         direction="row"
         sx={{
@@ -61,16 +71,16 @@ export default function SideMenu() {
       >
         <Avatar
           sizes="small"
-          alt="Riley Carter"
+          alt={user?.username || "User"}
           src="/static/images/avatar/7.jpg"
           sx={{ width: 36, height: 36 }}
         />
         <Box sx={{ mr: 'auto' }}>
           <Typography variant="body2" sx={{ fontWeight: 500, lineHeight: '16px' }}>
-            Riley Carter
+            {user?.username || "Guest"}
           </Typography>
           <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-            riley@email.com
+            {user?.email || "No Email"}
           </Typography>
         </Box>
         <OptionsMenu />

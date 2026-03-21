@@ -28,12 +28,12 @@
     },
     "dataModels": [
       {
-        "name": "rdf",
-        "displayValue": "RDF"
-      },
-      {
         "name": "json",
         "displayValue": "JSON"
+      },
+      {
+        "name": "rdf",
+        "displayValue": "RDF"
       },
       {
         "name": "sql",

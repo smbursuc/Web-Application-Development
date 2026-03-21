@@ -22,8 +22,8 @@ import AppTheme from "./shared-theme/AppTheme";
 function App() {
   return (
     <AppStateProvider>
-      <GlobalSiteManager />
       <AppTheme>
+        <GlobalSiteManager />
         <AboutModal />
       </AppTheme>
       <Router>

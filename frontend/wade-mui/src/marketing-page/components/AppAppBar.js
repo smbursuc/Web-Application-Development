@@ -174,12 +174,12 @@ export default function AppAppBar(props) {
                 <MenuItem>Blog</MenuItem>
                 <Divider sx={{ my: 3 }} />
                 <MenuItem>
-                  <Button color="primary" variant="contained" fullWidth>
+                  <Button color="primary" variant="contained" fullWidth component={Link} to="/signup">
                     Sign up
                   </Button>
                 </MenuItem>
                 <MenuItem>
-                  <Button color="primary" variant="outlined" fullWidth>
+                  <Button color="primary" variant="outlined" fullWidth component={Link} to="/signin">
                     Sign in
                   </Button>
                 </MenuItem>

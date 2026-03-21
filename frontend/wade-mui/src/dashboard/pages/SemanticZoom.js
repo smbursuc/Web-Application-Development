@@ -93,7 +93,7 @@ export default function SemanticZoom(props) {
   const [rangeSliderValue, setRangeSliderValue] = useState(5);
   const [rangeStartSliderValue, setRangeStartSliderValue] = useState(0);
   const [sort, setSort] = useState("");
-  const [dataModel, setDataModel] = useState("");
+  const [dataModel, setDataModel] = useState("json");
 
   // Deep linking logic
   useEffect(() => {

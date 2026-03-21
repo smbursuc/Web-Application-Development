@@ -1,4 +1,6 @@
-const BASE_URL = "http://localhost:8081/api/site-info";
+import API_BASE_URL from '../config';
+
+const BASE_URL = `${API_BASE_URL}/api/site-info`;
 
 export const getSiteMessage = async (key) => {
     try {

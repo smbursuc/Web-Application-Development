@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Box, TextField, Button, FormControl, InputLabel, Select, MenuItem, FormControlLabel, Checkbox, Alert } from "@mui/material";
+import API_BASE_URL from '../../config';
 
 export default function ClusterForm(props) {
   const { initial = {}, onSubmit, onCancel, mode = "add", candidates = [] } = props;
@@ -62,7 +63,7 @@ export default function ClusterForm(props) {
     setError("");
     setStatusMessage("Waiting for AI to guess...");
     try {
-      const resp = await fetch("http://localhost:8081/api/prediction/node/guess", {
+      const resp = await fetch(`${API_BASE_URL}/api/prediction/node/guess`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ uri })
@@ -96,7 +97,7 @@ export default function ClusterForm(props) {
         console.log("Predicting parent cluster. Candidates:", candidates);
         if (candidates && candidates.length > 0) {
             try {
-                const clusterResp = await fetch("http://localhost:8081/api/prediction/cluster/select-with-confidence", {
+                const clusterResp = await fetch(`${API_BASE_URL}/api/prediction/cluster/select-with-confidence`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ object1: json.object, candidates })

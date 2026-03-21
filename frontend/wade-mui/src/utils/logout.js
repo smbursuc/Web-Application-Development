@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAppState } from "../contexts/AppStateContext";
+import API_BASE_URL from '../config';
 
 export function useLogout(setResponseMessage) {
   const navigate = useNavigate();
@@ -8,7 +9,7 @@ export function useLogout(setResponseMessage) {
 
   const logout = async () => {
     try {
-      const response = await fetch("http://localhost:8081/api/users/logout", {
+      const response = await fetch(`${API_BASE_URL}/api/users/logout`, {
         method: "POST",
         credentials: "include", // Ensure cookies are sent
       });

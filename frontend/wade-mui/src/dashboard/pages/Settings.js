@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import Card from "@mui/material/Card";
+import API_BASE_URL from '../../config';
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
@@ -50,7 +51,7 @@ export default function Settings(props) {
       try {
         setSettingsLoading(true);
         setResponseMessage("");
-        const response = await fetch("http://localhost:8081/api/settings", {
+        const response = await fetch(`${API_BASE_URL}/api/settings`, {
           method: "GET",
           credentials: "include",
         });
@@ -84,7 +85,7 @@ export default function Settings(props) {
   const handleSave = async () => {
     try {
         const payload = { ...settingsValues };
-        const response = await fetch("http://localhost:8081/api/settings", {
+        const response = await fetch(`${API_BASE_URL}/api/settings`, {
             method: "POST",
           credentials: "include",
             headers: { "Content-Type": "application/json" },

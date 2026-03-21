@@ -8,6 +8,7 @@ import AppTheme from "../shared-theme/AppTheme";
 import ColorModeSelect from "../shared-theme/ColorModeSelect";
 import Alert from "@mui/material/Alert";
 import { useState } from "react";
+import API_BASE_URL from '../config';
 import { useNavigate } from "react-router-dom";
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -63,7 +64,7 @@ const LogoutRequired = ({ message }) => {
 
   const logout = async () => {
     try {
-      const response = await fetch("http://localhost:8081/api/users/logout", {
+      const response = await fetch(`${API_BASE_URL}/api/users/logout`, {
         method: "POST",
         credentials: "include", // Ensure cookies are sent
       });

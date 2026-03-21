@@ -3,6 +3,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Stack from "@mui/material/Stack";
 import AppNavbar from "../components/AppNavbar";
 import Header from "../components/Header";
+import API_BASE_URL from '../../config';
 import MainGrid from "../components/MainGrid";
 import SideMenu from "../components/SideMenu";
 import AppTheme from "../../shared-theme/AppTheme";
@@ -220,7 +221,7 @@ WHERE {
 
   const handleSubmit = async () => {
     try {
-      const url = `http://localhost:8081/api/${selectedDataset}/${dataType}/rdf?rawResults=true`;
+      const url = `${API_BASE_URL}/api/${selectedDataset}/${dataType}/rdf?rawResults=true`;
 
       const response = await fetch(url, {
         method: "POST",

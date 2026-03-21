@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { data } from "react-router-dom";
+import API_BASE_URL from '../config';
 import SelectedDataset from "./managers/SelectedDataset";
 import SortOptions from "./managers/SortOptions";
 import Datasets from "./managers/Datasets";
@@ -58,7 +59,7 @@ export default function DatasetCommons(props) {
       datasetType: datasetType,
       generalInfo: generalInfo,
     });
-    const url = `http://localhost:8081/api/metadata?${params.toString()}`;
+    const url = `${API_BASE_URL}/api/metadata?${params.toString()}`;
     let data = {};
     try {
       const response = await fetch(url, { credentials: "include" });
@@ -443,7 +444,7 @@ export default function DatasetCommons(props) {
       queryParams +
       `&range=${newRange}&rangeStart=${newRangeStart}&mode=cluster`; // mandatory
     const url =
-      `http://localhost:8081/api/${selectedDatasetObj.get()}/clusters/${dataModel}?` +
+      `${API_BASE_URL}/api/${selectedDatasetObj.get()}/clusters/${dataModel}?` +
       queryParams;
 
     try {
@@ -481,7 +482,7 @@ export default function DatasetCommons(props) {
     // http://localhost:5000/api/correlations/cifar10?
     // http://localhost:8081/api/${selectedDataset}/heatmaps/json?
     const url =
-      `http://localhost:8081/api/${selectedDatasetObj.get()}/heatmap/${dataModel}?` +
+      `${API_BASE_URL}/api/${selectedDatasetObj.get()}/heatmap/${dataModel}?` +
       queryParams +
       `&range=${rangeSliderValue}&rangeStart=${rangeStartSliderValue}&mode=similarity`;
 

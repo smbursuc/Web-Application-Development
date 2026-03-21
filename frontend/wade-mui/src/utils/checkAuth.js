@@ -1,3 +1,5 @@
+import API_BASE_URL from '../config';
+
 export const checkAuth = async (
   setLoggedIn,
   setResponseMessage,
@@ -7,7 +9,7 @@ export const checkAuth = async (
   try {
     setInitialized(false);
     const response = await fetch(
-      "http://localhost:8081/api/users/validate-token",
+      `${API_BASE_URL}/api/users/validate-token`,
       {
         method: "GET",
         credentials: "include", // Ensure cookies are sent

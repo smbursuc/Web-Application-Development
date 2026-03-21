@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Box, TextField, Button, FormControlLabel, Checkbox, Alert } from "@mui/material";
+import API_BASE_URL from '../../config';
 
 export default function HeatmapForm(props) {
   const { initial = {}, onSubmit, onCancel, mode } = props;
@@ -45,7 +46,7 @@ export default function HeatmapForm(props) {
     setError("");
     setStatusMessage("Waiting for AI to guess...");
     try {
-        const resp = await fetch("http://localhost:8081/api/prediction/similarity/score", {
+        const resp = await fetch(`${API_BASE_URL}/api/prediction/similarity/score`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ object1, object2 })

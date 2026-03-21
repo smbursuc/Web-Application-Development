@@ -3,6 +3,7 @@ import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import API_BASE_URL from '../../config';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Card from "@mui/material/Card";
@@ -64,7 +65,7 @@ export default function Feedback(props) {
         email: user.email,
             message 
         };
-        const response = await fetch("http://localhost:8081/api/feedback", {
+        const response = await fetch(`${API_BASE_URL}/api/feedback`, {
             method: "POST",
         credentials: "include",
             headers: { "Content-Type": "application/json" },

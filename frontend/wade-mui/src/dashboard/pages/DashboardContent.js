@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import API_BASE_URL from '../../config';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -34,7 +35,7 @@ export default function DashboardContent() {
     React.useEffect(() => {
         console.log('[DashboardContent] loading history + stats');
         // Fetch History
-        fetch('http://localhost:8081/api/history?limit=10', { credentials: 'include' })
+        fetch(`${API_BASE_URL}/api/history?limit=10`, { credentials: 'include' })
             .then(async (res) => {
                 if (!res.ok) {
                     const body = await res.text();
@@ -55,7 +56,7 @@ export default function DashboardContent() {
             .catch(err => console.error("History fetch error", err));
 
         // Fetch Stats
-        fetch('http://localhost:8081/api/history/stats', { credentials: 'include' })
+        fetch(`${API_BASE_URL}/api/history/stats`, { credentials: 'include' })
             .then(async (res) => {
                 if (!res.ok) {
                     const body = await res.text();

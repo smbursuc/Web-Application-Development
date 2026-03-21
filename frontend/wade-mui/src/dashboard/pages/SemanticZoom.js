@@ -1,6 +1,7 @@
 import * as React from "react";
 import { alpha } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import API_BASE_URL from '../../config';
 import {
   Container,
   Box,
@@ -175,7 +176,7 @@ export default function SemanticZoom(props) {
   const fetchSingleCluster = async (clusterName) => {
     try {
       // encoding is needed because labels contain a whitespace
-      const url = `http://localhost:8081/api/${selectedDataset}/clusters/${dataModel}?mode=cluster&clusterName=${encodeURIComponent(
+      const url = `${API_BASE_URL}/api/${selectedDataset}/clusters/${dataModel}?mode=cluster&clusterName=${encodeURIComponent(
         clusterName
       )}`;
       const response = await fetch(url, { credentials: "include" });

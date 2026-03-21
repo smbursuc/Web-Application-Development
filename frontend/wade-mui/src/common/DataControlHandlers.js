@@ -1,3 +1,5 @@
+import API_BASE_URL from '../config';
+
 export function makeDataControlHandlers({
   selectedDataset,
   setSelectedDataset,
@@ -43,7 +45,7 @@ export function makeDataControlHandlers({
   const handleExport = async () => {
     try {
       const urlType = datasetType === "heatmap" ? "heatmap" : "clusters";
-      const url = `http://localhost:8081/api/${selectedDataset}/${urlType}/${dataModel}?export=true`;
+      const url = `${API_BASE_URL}/api/${selectedDataset}/${urlType}/${dataModel}?export=true`;
       const resp = await fetch(url, { credentials: "include" });
       if (!resp.ok) throw new Error(`Export failed: ${resp.statusText}`);
       const blob = await resp.blob();
@@ -86,7 +88,7 @@ export function makeDataControlHandlers({
           entry: { data: entryData },
         };
 
-        const url = `http://localhost:8081/api/${selectedDataset}/heatmap/${dataModel}`;
+        const url = `${API_BASE_URL}/api/${selectedDataset}/heatmap/${dataModel}`;
         const method = requestType === "update" ? "PUT" : requestType === "delete" ? "DELETE" : "POST";
 
         const resp = await fetch(url, {
@@ -150,7 +152,7 @@ export function makeDataControlHandlers({
           entry: { data: entryData },
         };
 
-        const url = `http://localhost:8081/api/${selectedDataset}/clusters/${dataModel}`;
+        const url = `${API_BASE_URL}/api/${selectedDataset}/clusters/${dataModel}`;
         const method = requestType === "update" ? "PUT" : requestType === "delete" ? "DELETE" : "POST";
 
         const resp = await fetch(url, {
@@ -176,7 +178,7 @@ export function makeDataControlHandlers({
   const handleCreateSubmit = async (body) => {
     try {
       if (datasetType === "heatmap") {
-        const url = `http://localhost:8081/api/create`;
+        const url = `${API_BASE_URL}/api/create`;
         const resp = await fetch(url, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -213,7 +215,7 @@ export function makeDataControlHandlers({
       } else {
         // For non-heatmap dataset types (e.g., clusters) creation uses the same
         // `/api/create` endpoint and the CreateDatasetForm payload.
-        const url = `http://localhost:8081/api/create`;
+        const url = `${API_BASE_URL}/api/create`;
         const resp = await fetch(url, {
           method: "POST",
           credentials: "include",

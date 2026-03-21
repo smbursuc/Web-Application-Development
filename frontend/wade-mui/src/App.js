@@ -17,12 +17,15 @@ import GlobalSiteManager from "./common/GlobalSiteManager";
 import AboutModal from "./dashboard/components/AboutModal";
 import Settings from "./dashboard/pages/Settings";
 import Feedback from "./dashboard/pages/Feedback";
+import AppTheme from "./shared-theme/AppTheme";
 
 function App() {
   return (
     <AppStateProvider>
       <GlobalSiteManager />
-      <AboutModal />
+      <AppTheme>
+        <AboutModal />
+      </AppTheme>
       <Router>
         <Routes>
           {/* Define your routes */}

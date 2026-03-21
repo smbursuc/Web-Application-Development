@@ -89,6 +89,9 @@ public class SecurityConfig
         // Allow credentials (cookies, authorization headers) to be included (for JWT)
         configuration.setAllowCredentials(true);
 
+        // Expose rate-limit headers so the React frontend can read them
+        configuration.setExposedHeaders(List.of("X-RateLimit-Remaining"));
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
         // Apply CORS configuration to all API endpoints

@@ -1,8 +1,28 @@
 import * as React from "react";
-import { Box, TextField, Button, FormControl, InputLabel, Select, MenuItem, FormControlLabel, Checkbox } from "@mui/material";
+import { Box, TextField, Button, FormControl, InputLabel, Select, MenuItem, FormControlLabel, Checkbox, Alert } from "@mui/material";
 
 export default function ClusterForm(props) {
   const { initial = {}, onSubmit, onCancel, mode = "add", candidates = [] } = props;
+
+  // Formats raw server/Groq error messages into something human-readable
+  const formatError = (msg) => {
+    if (!msg) return msg;
+    try {
+      const jsonMatch = msg.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        const parsed = JSON.parse(jsonMatch[0].replace(/<EOL>/g, '').trim());
+        if (parsed.error?.message) return parsed.error.message;
+      }
+    } catch (_) {}
+    return msg
+      .replace(/^Server error \d+: Error processing image: /, '')
+      .replace(/^Error processing image: /, '')
+      .replace(/^Groq vision completion failed: /, '')
+      .replace(/^Groq chat completion failed: /, '')
+      .replace(/^LLM prediction failed: /, '')
+      .replace(/<EOL>$/, '')
+      .trim();
+  };
   
   // For update by ID
   const [id, setId] = React.useState(initial.id || "");
@@ -19,20 +39,40 @@ export default function ClusterForm(props) {
   const [isRootChild, setIsRootChild] = React.useState(mode !== "update"); // Default true for new, or manual toggle
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
+  const [statusMessage, setStatusMessage] = React.useState("");
+  const [rateLimitRemaining, setRateLimitRemaining] = React.useState(null);
+
+  React.useEffect(() => {
+    fetch("http://localhost:8081/api/prediction/rate-limit/status")
+      .then(r => r.json())
+      .then(data => setRateLimitRemaining(data.remaining))
+      .catch(() => {});
+  }, []);
 
   const handleGuess = async () => {
     if (!uri) {
       setError("Image URL is required for AI guessing.");
       return;
     }
+    if (candidates.length === 0) {
+      setError("AI guess cannot assign a parent cluster because no clusters exist yet. Please add at least one cluster node first, then try again.");
+      return;
+    }
     setLoading(true);
     setError("");
+    setStatusMessage("Waiting for AI to guess...");
     try {
       const resp = await fetch("http://localhost:8081/api/prediction/node/guess", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ uri })
       });
+      // Read rate-limit remaining from header (available after the first LLM call)
+      const remaining = resp.headers.get("X-RateLimit-Remaining");
+      if (remaining !== null) setRateLimitRemaining(Number(remaining));
+      if (resp.status === 429) {
+        throw new Error(await resp.text());
+      }
       if (!resp.ok) {
         throw new Error("Server error " + resp.status + ": " + (await resp.text()));
       }
@@ -61,6 +101,8 @@ export default function ClusterForm(props) {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ object1: json.object, candidates })
                 });
+                const clusterRemaining = clusterResp.headers.get("X-RateLimit-Remaining");
+                if (clusterRemaining !== null) setRateLimitRemaining(Number(clusterRemaining));
                 if (clusterResp.ok) {
                     const predictionRaw = await clusterResp.text();
                     console.log("Predicted Cluster Raw Response:", predictionRaw);
@@ -135,12 +177,14 @@ export default function ClusterForm(props) {
       if (json.probability) setProbability(json.probability);
       // Turn off guess mode to show the fields again
       setGuessMode(false);
+      setStatusMessage("Guess complete.");
       
       // If LLM returned a 'extracted_text' useful debug
       if (json.extracted_text) console.log("OCR Text:", json.extracted_text);
 
     } catch (err) {
       setError(err.message);
+      setStatusMessage("");
     } finally {
       setLoading(false);
     }
@@ -186,7 +230,13 @@ export default function ClusterForm(props) {
     <Box component="form" onSubmit={submit} sx={{ display: "flex", flexDirection: "column", gap: 2, width: 480, bgcolor: "background.paper", p: 3, borderRadius: 2 }}>
       <h2>{mode === "delete" ? "Delete Cluster Node" : mode === "update" ? "Update Cluster Node" : "Add Cluster Node"}</h2>
       
-      {error && <div style={{color:'red', marginBottom:'10px'}}>Error: {error}</div>}
+      {error && <Alert severity="error" sx={{ mb: 1 }}>{formatError(error)}</Alert>}
+      {!error && statusMessage && <Alert severity={statusMessage.startsWith("Waiting") ? "info" : "success"} sx={{ mb: 1 }}>{statusMessage}</Alert>}
+      {guessMode && rateLimitRemaining !== null && (
+        <Alert severity={rateLimitRemaining === 0 ? "warning" : "info"} sx={{ mb: 1 }}>
+          {rateLimitRemaining === 0 ? "AI guess quota reached. Please wait for the limit to reset." : `AI guesses remaining: ${rateLimitRemaining}`}
+        </Alert>
+      )}
 
       {mode === "update" && (
         <TextField 
@@ -221,7 +271,7 @@ export default function ClusterForm(props) {
             />
           )}
 
-          {!isRootChild && (
+          {!isRootChild && !guessMode && (
             <TextField 
                 label="Cluster Name (Parent)" 
                 value={clusterName} 

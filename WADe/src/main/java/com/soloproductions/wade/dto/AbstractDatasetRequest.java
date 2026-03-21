@@ -309,7 +309,9 @@ public abstract class AbstractDatasetRequest
             sb.append(String.format("The sort direction %s is invalid.", sortDirection));
             sb.append(" Must either be: ");
             sb.append(AbstractDatasetData.SORT_DIRECTIONS);
-            sb.append(".");
+            sb.append(" but was ");
+            sb.append(sortDirection);
+            sb.append("!");
             throw new IllegalArgumentException(sb.toString());
         }
     }

@@ -132,6 +132,7 @@ public class UserController
         }
         catch (IllegalArgumentException e)
         {
+            LOG.warn("Failed login attempt for user '{}': {}", loginRequest.getUsername(), e.getMessage());
             StandardResponse<Void> errorResponse = new StandardResponse<>(
                     "error",
                     e.getMessage(),

@@ -275,10 +275,8 @@ export default function Correlations(props) {
         <SideMenu />
         <AppNavbar />
         <Container sx={{ my: 4 }}>
-          {responseStatus && (
-            <Alert
-              severity={responseStatus.includes("error") ? "error" : "success"}
-            >
+          {responseStatus && responseStatus.toLowerCase().includes("error") && (
+            <Alert severity="error">
               {responseStatus}
             </Alert>
           )}

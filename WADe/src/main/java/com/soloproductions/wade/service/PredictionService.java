@@ -812,7 +812,7 @@ public class PredictionService
         catch (Exception e)
         {
             LOG.error("LLM prediction failed", e);
-            return "Error: " + e.getMessage();
+            throw new RuntimeException("LLM prediction failed: " + e.getMessage(), e);
         }
         return "Unknown";
     }

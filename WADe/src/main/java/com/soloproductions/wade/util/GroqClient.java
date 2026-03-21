@@ -104,7 +104,7 @@ public class GroqClient
         catch (Exception e)
         {
             LOG.error("Groq chat completion failed", e);
-            return "Error: " + e.getMessage();
+            throw new RuntimeException("Groq chat completion failed: " + e.getMessage(), e);
         }
     }
 
@@ -154,7 +154,7 @@ public class GroqClient
         catch (Exception e)
         {
             LOG.error("Groq vision completion failed", e);
-            return "Error: " + e.getMessage();
+            throw new RuntimeException("Groq vision completion failed: " + e.getMessage(), e);
         }
     }
 

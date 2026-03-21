@@ -90,7 +90,7 @@ export default function SemanticZoom(props) {
   const [infOpen, setInfOpen] = useState(false);
 
   const [rangeSliderValue, setRangeSliderValue] = useState(5);
-  const [rangeStartSliderValue, setRangeStartSliderValue] = useState(1);
+  const [rangeStartSliderValue, setRangeStartSliderValue] = useState(0);
   const [sort, setSort] = useState("");
   const [dataModel, setDataModel] = useState("");
 
@@ -129,6 +129,7 @@ export default function SemanticZoom(props) {
   const [controlOpen, setControlOpen] = useState(false);
   const [controlMode, setControlMode] = useState("");
   const [formInitial, setFormInitial] = useState({});
+  const [controlKey, setControlKey] = useState(0);
   const [createOpen, setCreateOpen] = useState(false);
 
   // max possible range
@@ -154,6 +155,8 @@ export default function SemanticZoom(props) {
     setControlMode(mode);
     setFormInitial(initial);
     setControlOpen(true);
+    // make sure to remount the dialog each time, looks better this way?
+    setControlKey((k) => k + 1);
   };
 
   // handlers will be initialized after DatasetCommons so fetchClusterData is available
@@ -205,8 +208,11 @@ export default function SemanticZoom(props) {
         // add the child node (keep arrays aligned)
         labels.push(child.name);
         parents.push(rootName);
-        // default placeholder for the child itself
-        values.push(0);
+        // Give every cluster a small fixed value so empty clusters remain visible in
+        // the treemap, while keeping the value well below any real leaf probability so
+        // leaf sub-tiles always have a noticeably larger proportional area than the
+        // cluster's own "header" band (avoids the 50/50 split when leaf prob == 1).
+        values.push(0.1);
         uris.push("");
         typesLocal.push("cluster");
 
@@ -215,8 +221,9 @@ export default function SemanticZoom(props) {
           for (const grandChild of child.children) {
             labels.push(grandChild.name);
             parents.push(child.name);
-            values.push(grandChild.Probability || 0);
-            uris.push(grandChild.uri || "");
+            values.push(grandChild.Probability ?? 0);
+            // JSON field is serialised as "URI" (capital) per @JsonProperty("URI") on ClusterNode
+            uris.push(grandChild.URI || grandChild.uri || "");
             typesLocal.push("leaf");
           }
         }
@@ -329,6 +336,19 @@ export default function SemanticZoom(props) {
       fetchSingleCluster(label);
     } else {
       setSelectedCluster(label);
+      // For leaf nodes, find the URI from the main arrays and populate the detail panel directly
+      const leafIdx = labels.indexOf(label);
+      if (leafIdx !== -1) {
+        setSelectedClusterLabels([label]);
+        setSelectedClusterValues([values[leafIdx]]);
+        setSelectedClusterUris([uris[leafIdx]]);
+        setSelectedClusterTypes(["leaf"]);
+      } else {
+        setSelectedClusterLabels([]);
+        setSelectedClusterValues([]);
+        setSelectedClusterUris([]);
+        setSelectedClusterTypes([]);
+      }
     }
   };
 
@@ -526,6 +546,7 @@ export default function SemanticZoom(props) {
                     }}
                   >
                     <ClusterForm
+                      key={controlKey}
                       mode={controlMode}
                       initial={formInitial}
                       candidates={labels.filter((_, idx) => types[idx] === "cluster" && labels[idx] !== "Root")}
@@ -554,6 +575,10 @@ export default function SemanticZoom(props) {
                 />
                 {isLoading ? (
                   <p>Loading cluster data...</p>
+                ) : !labels.some(l => l !== "Root") ? (
+                  <Box sx={{ p: 4 }}>
+                    <Alert severity="info">There is no cluster data. Please add cluster nodes using the ADD button.</Alert>
+                  </Box>
                 ) : (
                   <Plot
                     data={[

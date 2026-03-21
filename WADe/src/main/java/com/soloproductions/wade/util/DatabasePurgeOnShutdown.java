@@ -40,7 +40,7 @@ public class DatabasePurgeOnShutdown
      */
     public DatabasePurgeOnShutdown(HeatmapRepository heatmapRepository,
                                    ClusterRepository clusterRepository,
-                                   @Value("${wade.db.purge.on.shutdown:true}") boolean purgeOnShutdown)
+                                   @Value("${wade.db.purge.on.shutdown:false}") boolean purgeOnShutdown)
     {
         this.heatmapRepository = heatmapRepository;
         this.clusterRepository = clusterRepository;

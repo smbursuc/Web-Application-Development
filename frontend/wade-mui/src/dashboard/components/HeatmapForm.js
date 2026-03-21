@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, TextField, Button, FormControlLabel, Checkbox } from "@mui/material";
+import { Box, TextField, Button, FormControlLabel, Checkbox, Alert } from "@mui/material";
 
 export default function HeatmapForm(props) {
   const { initial = {}, onSubmit, onCancel, mode } = props;
@@ -9,6 +9,32 @@ export default function HeatmapForm(props) {
   const [guessMode, setGuessMode] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
+  const [statusMessage, setStatusMessage] = React.useState("");
+  const [rateLimitRemaining, setRateLimitRemaining] = React.useState(null);
+
+  React.useEffect(() => {
+    fetch("http://localhost:8081/api/prediction/rate-limit/status")
+      .then(r => r.json())
+      .then(data => setRateLimitRemaining(data.remaining))
+      .catch(() => {});
+  }, []);
+
+  const formatError = (msg) => {
+    if (!msg) return msg;
+    try {
+      const jsonMatch = msg.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        const parsed = JSON.parse(jsonMatch[0].replace(/<EOL>/g, '').trim());
+        if (parsed.error?.message) return parsed.error.message;
+      }
+    } catch (_) {}
+    return msg
+      .replace(/^Server error \d+: /, '')
+      .replace(/^Groq chat completion failed: /, '')
+      .replace(/^LLM prediction failed: /, '')
+      .replace(/<EOL>$/, '')
+      .trim();
+  };
 
   const handleGuess = async () => {
     if (!object1 || !object2) {
@@ -17,12 +43,18 @@ export default function HeatmapForm(props) {
     }
     setLoading(true);
     setError("");
+    setStatusMessage("Waiting for AI to guess...");
     try {
         const resp = await fetch("http://localhost:8081/api/prediction/similarity/score", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ object1, object2 })
         });
+        const remaining = resp.headers.get("X-RateLimit-Remaining");
+        if (remaining !== null) setRateLimitRemaining(Number(remaining));
+        if (resp.status === 429) {
+            throw new Error(await resp.text());
+        }
         if (!resp.ok) {
             throw new Error("Server error " + resp.status + ": " + (await resp.text()));
         }
@@ -45,9 +77,11 @@ export default function HeatmapForm(props) {
              if (!isNaN(num)) setSimilarity(num);
          }
          setGuessMode(false);
+         setStatusMessage("Guess complete.");
 
     } catch (err) {
         setError(err.message);
+        setStatusMessage("");
     } finally {
         setLoading(false);
     }
@@ -66,8 +100,15 @@ export default function HeatmapForm(props) {
   };
 
   return (
-    <Box component="form" onSubmit={submit} sx={{ display: "flex", flexDirection: "column", gap: 2, width: 360 }}>
-      {error && <div style={{color:'red'}}>Error: {error}</div>}
+    <Box component="form" onSubmit={submit} sx={{ display: "flex", flexDirection: "column", gap: 2, width: 360, bgcolor: "background.paper", p: 3, borderRadius: 2 }}>
+      <h2>{mode === "delete" ? "Delete Heatmap Pair" : mode === "update" ? "Update Heatmap Pair" : "Add Heatmap Pair"}</h2>
+      {error && <Alert severity="error">{formatError(error)}</Alert>}
+      {!error && statusMessage && <Alert severity={statusMessage.startsWith("Waiting") ? "info" : "success"}>{statusMessage}</Alert>}
+      {guessMode && rateLimitRemaining !== null && (
+        <Alert severity={rateLimitRemaining === 0 ? "warning" : "info"}>
+          {rateLimitRemaining === 0 ? "AI guess quota reached. Please wait for the limit to reset." : `AI guesses remaining: ${rateLimitRemaining}`}
+        </Alert>
+      )}
       <TextField label="Object 1" value={object1} onChange={(e) => setObject1(e.target.value)} required />
       <TextField label="Object 2" value={object2} onChange={(e) => setObject2(e.target.value)} required />
       

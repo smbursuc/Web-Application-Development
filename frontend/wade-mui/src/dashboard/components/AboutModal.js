@@ -14,7 +14,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  bgcolor: '#333232',
+  bgcolor: 'background.paper',
   color: 'text.primary',
   border: '1px solid',
   borderColor: 'divider',
@@ -46,14 +46,14 @@ export default function AboutModal() {
     >
       <Box sx={style}>
         <ImprLogoHeader />
-        <Typography id="modal-modal-title" variant="h6" component="h2" color="#e4e710" mt={2} fontSize={20}>
+        <Typography id="modal-modal-title" variant="h6" component="h2" color="primary" mt={2} fontSize={20}>
           About IMPR
         </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2, whiteSpace: 'pre-wrap' }} color="#fff" fontSize={12}>
+        <Typography id="modal-modal-description" sx={{ mt: 2, whiteSpace: 'pre-wrap' }} color="text.primary" fontSize={12}>
           {aboutText}
         </Typography>
         
-        <Typography variant="caption" display="block" sx={{ mt: 3, fontStyle: 'italic', color: '#fff' }} fontSize={12}>
+        <Typography variant="caption" display="block" sx={{ mt: 3, fontStyle: 'italic', color: 'text.secondary' }} fontSize={12}>
             Version: {version}
         </Typography>
 

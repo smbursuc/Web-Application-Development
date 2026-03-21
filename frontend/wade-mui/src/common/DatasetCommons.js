@@ -70,6 +70,7 @@ export default function DatasetCommons(props) {
     const status = data.status;
     if (status !== "success") {
       responseStatusObj.set(`Error: ${data.message}`);
+      setIsLoading(false);
       return;
     }
     const result = data.data;
@@ -90,11 +91,19 @@ export default function DatasetCommons(props) {
       } else {
         maxHeatmapObj.set(cache);
       }
+      // Only clear the loading indicator when fetching size/cache metadata (generalInfo=false).
+      // For the initial general metadata load (generalInfo=true) we keep isLoading=true so the
+      // UI shows a continuous loading state until the subsequent data fetch completes, preventing
+      // a brief flash of empty graph content between the two fetch phases.
+      // So in essence, the loading is done after the dataset data is collected, and now we
+      // ask for the slider data.
+      setIsLoading(false);
     } else {
       const staticMetadata = result.staticMetadata;
       staticMetadataObj.set(staticMetadata);
+      // NOTE: intentionally NOT calling setIsLoading(false) here. Wait for the dataset
+      // data to be loaded for better results during loading.
     }
-    setIsLoading(false);
     return true;
   };
 

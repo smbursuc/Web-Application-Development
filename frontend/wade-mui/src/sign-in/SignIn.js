@@ -134,7 +134,6 @@ export default function SignIn(props) {
         }
       } else {
         const errorData = await response.json();
-        console.log(errorData);
         setResponseMessage(`Error: ${errorData.message || "Login failed."}`);
       }
     } catch (error) {
@@ -143,11 +142,6 @@ export default function SignIn(props) {
     }
 
     // setInitialized(true);
-
-    console.log({
-      username: data.get("username"),
-      password: data.get("password"),
-    });
   };
 
   const validateInputs = () => {
@@ -311,10 +305,10 @@ export default function SignIn(props) {
               </Box>
             </Card>
           )}
-          {responseMessage && timerActive && (
+          {responseMessage && (
             <Alert
               severity={
-                responseMessage.includes("Error") && loggedIn
+                responseMessage.startsWith("Error")
                   ? "error"
                   : "success"
               }

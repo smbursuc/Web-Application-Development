@@ -26,6 +26,10 @@ public class SecurityConfig
     /** The JWT authentication filter used to validate JWT tokens in incoming requests. */
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    /** Comma-separated list of allowed CORS origins, injected from application properties. */
+    @org.springframework.beans.factory.annotation.Value("${wade.cors.allowed-origins:http://localhost:3000}")
+    private String allowedOriginsProperty;
+
     /** 
      * Constructor for SecurityConfig. Initializes the JWT authentication filter.
      * 
@@ -77,8 +81,9 @@ public class SecurityConfig
     {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // Allow requests from React app (localhost:3000)
-        configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+        // Allowed origins are configured via wade.cors.allowed-origins in application.properties
+        List<String> origins = List.of(allowedOriginsProperty.split(","));
+        configuration.setAllowedOrigins(origins);
 
         // Allow HTTP methods such as GET, POST, PUT, DELETE, OPTIONS
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));

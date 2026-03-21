@@ -32,9 +32,10 @@ public class SettingsService
      */
     public SettingsPageData getSettingsPageData(String username)
     {
-        SettingsValues values = userSettings.computeIfAbsent(username, key -> copyValues(config.getDefaults()));
+        SettingsValues defaults = config != null ? config.getDefaults() : null;
+        SettingsValues values = userSettings.computeIfAbsent(username, key -> copyValues(defaults));
         SettingsPageData data = new SettingsPageData();
-        data.setOptions(config.getOptions());
+        data.setOptions(config != null ? config.getOptions() : java.util.Collections.emptyList());
         data.setValues(copyValues(values));
         return data;
     }
@@ -51,7 +52,8 @@ public class SettingsService
      */
     public SettingsValues saveSettings(String username, SettingsValues incoming)
     {
-        SettingsValues current = userSettings.computeIfAbsent(username, key -> copyValues(config.getDefaults()));
+        SettingsValues defaults = config != null ? config.getDefaults() : null;
+        SettingsValues current = userSettings.computeIfAbsent(username, key -> copyValues(defaults));
         if (incoming.getNotifications() != null)
         {
             current.setNotifications(incoming.getNotifications());

@@ -87,6 +87,11 @@ public abstract class AbstractDatasetRequest
     public void validateDatasetName()
     {
         String datasetName = getDatasetName();
+        if (datasetName == null || !datasetName.matches("[a-zA-Z0-9_\\-]{1,100}"))
+        {
+            throw new IllegalArgumentException(
+                "Dataset name must contain only letters, digits, hyphens, or underscores (1–100 characters).");
+        }
         Datasets dataset = AbstractDatasetData.resolveDatasetFromString(datasetName);
         if (dataset == null)
         {
@@ -302,6 +307,10 @@ public abstract class AbstractDatasetRequest
     public void validateSortType()
     {
         String sortDirection = getSortDirection();
+        if (sortDirection == null || sortDirection.isEmpty())
+        {
+            return;
+        }
         SortDirection sd = AbstractDatasetData.resolveSortDirectionFromString(sortDirection);
         if (sd == null && !isMetadataRequest())
         {

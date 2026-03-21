@@ -1,5 +1,6 @@
 package com.soloproductions.wade.datatype;
 
+import com.fasterxml.jackson.core.StreamReadConstraints;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soloproductions.wade.dataset.*;
 import com.soloproductions.wade.dto.ExportRequest;
@@ -31,6 +32,20 @@ public class JsonController extends AbstractDataTypeController
     public JsonController(DatasetData datasetData)
     {
         super(datasetData);
+    }
+
+    /**
+     * Dataset creation is not supported for the JSON data type.
+     * Users should choose the SQL data type when creating a new dataset.
+     *
+     * @throws  IllegalArgumentException
+     *          always, because JSON creation is not implemented
+     */
+    @Override
+    public Object executeCreateRequest(com.soloproductions.wade.dto.AbstractDatasetRequest adr)
+    {
+        throw new IllegalArgumentException(
+            "Creating datasets with data type JSON is not supported. Please select SQL as the data type when creating a new dataset.");
     }
 
     /**
@@ -127,6 +142,13 @@ public class JsonController extends AbstractDataTypeController
         ClusterDataset cd = (ClusterDataset) getDatasetData();
 
         ClusterNode root = cd.getRootNode();
+        if (root == null)
+        {
+            ClusterNode empty = new ClusterNode();
+            empty.setName("Root");
+            empty.setChildren(Collections.emptyList());
+            return empty;
+        }
         if (root.getChildren() == null || root.getChildren().isEmpty())
         {
             throw new IllegalStateException("Cannot apply filters with no data!");
@@ -159,8 +181,10 @@ public class JsonController extends AbstractDataTypeController
 
         AbstractDatasetData.handleRanges(null, cd, null, null, nrClusters);
 
-        int rangeEnd = Math.min(rangeStart + range, nrClusters);
-        List<ClusterNode> limited = children.subList(rangeStart, rangeEnd);
+        int effectiveRangeStart = rangeStart != null ? rangeStart : 0;
+        int effectiveRange = range != null ? range : nrClusters;
+        int rangeEnd = Math.min(effectiveRangeStart + effectiveRange, nrClusters);
+        List<ClusterNode> limited = children.subList(effectiveRangeStart, rangeEnd);
 
         ClusterNode result = new ClusterNode();
         result.setName(root.getName());
@@ -184,7 +208,8 @@ public class JsonController extends AbstractDataTypeController
             case CLUSTERS ->
             {
                 ClusterDataset cd = (ClusterDataset) dd;
-                int size = cd.getRootNode().getChildren().size();
+                ClusterNode rootNode = cd.getRootNode();
+                int size = (rootNode != null && rootNode.getChildren() != null) ? rootNode.getChildren().size() : 0;
                 md.setSize(size);
             }
             case HEATMAP ->
@@ -225,6 +250,8 @@ public class JsonController extends AbstractDataTypeController
                 
                 // Convert the filtered data to JSON (clean escaped newlines / pretty-print)
                 ObjectMapper mapper = new ObjectMapper();
+                mapper.getFactory().setStreamReadConstraints(
+                    StreamReadConstraints.builder().maxNestingDepth(4000).build());
                 String json = serializeExportObject(filteredData, mapper);
                 LOG.info("JsonController.exportData filtered result size={}", json == null ? 0 : json.length());
                 return json;
@@ -240,6 +267,8 @@ public class JsonController extends AbstractDataTypeController
                 }
                 String content = Files.readString(file.toPath());
                 ObjectMapper mapper = new ObjectMapper();
+                mapper.getFactory().setStreamReadConstraints(
+                    StreamReadConstraints.builder().maxNestingDepth(4000).build());
                 String cleaned = serializeExportObject(content, mapper);
                 LOG.info("JsonController.exportData raw file length={}", cleaned == null ? 0 : cleaned.length());
                 return cleaned;

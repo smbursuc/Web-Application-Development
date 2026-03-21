@@ -2,9 +2,9 @@ import * as React from "react";
 import { Box, TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 export default function CreateDatasetForm(props) {
-  const { initial = {}, onSubmit, onCancel } = props;
+  const { initial = {}, onSubmit, onCancel, defaultDatasetType } = props;
   const [datasetName, setDatasetName] = React.useState(initial.datasetName || "");
-  const [datasetType, setDatasetType] = React.useState(initial.datasetType || "heatmap");
+  const [datasetType, setDatasetType] = React.useState(defaultDatasetType || initial.datasetType || "heatmap");
   const [dataType, setDataType] = React.useState(initial.dataType || "sql");
 
   const submit = (e) => {
@@ -29,7 +29,6 @@ export default function CreateDatasetForm(props) {
         <InputLabel id="data-type-label">Data Type</InputLabel>
         <Select labelId="data-type-label" value={dataType} label="Data Type" onChange={(e) => setDataType(e.target.value)}>
           <MenuItem value="sql">sql</MenuItem>
-          <MenuItem value="json">json</MenuItem>
         </Select>
       </FormControl>
 

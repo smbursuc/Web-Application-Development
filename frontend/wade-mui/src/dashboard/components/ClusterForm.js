@@ -42,6 +42,16 @@ export default function ClusterForm(props) {
   const [error, setError] = React.useState("");
   const [statusMessage, setStatusMessage] = React.useState("");
   const [rateLimitRemaining, setRateLimitRemaining] = React.useState(null);
+  const [localFile, setLocalFile] = React.useState(null);
+
+  const handleLocalFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setLocalFile(file);
+    const reader = new FileReader();
+    reader.onload = (ev) => setUri(ev.target.result); // base64 data URI
+    reader.readAsDataURL(file);
+  };
 
   React.useEffect(() => {
     fetch("http://localhost:8081/api/prediction/rate-limit/status")
@@ -294,6 +304,7 @@ export default function ClusterForm(props) {
                 setIsLeaf(checked);
                 if (!checked) {
                     setGuessMode(false);
+                    setLocalFile(null);
                 } else {
                     // Leaf nodes cannot be root children
                     setIsRootChild(false);
@@ -325,19 +336,28 @@ export default function ClusterForm(props) {
               )}
 
               {mode !== "update" && (
-                <Box sx={{display: 'flex', gap: 1}}>
+                <Box sx={{display: 'flex', gap: 1, flexDirection: 'column'}}>
+                  <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
                     <TextField 
-                      label="URI (Image URL)" 
-                      value={uri} 
-                      onChange={(e) => setUri(e.target.value)} 
+                      label={guessMode ? "Image URL (or pick a file below)" : "URI (Image URL)"}
+                      value={localFile ? localFile.name : uri} 
+                      onChange={(e) => { setUri(e.target.value); setLocalFile(null); }} 
                       fullWidth
                       required={guessMode}
+                      disabled={!!localFile}
                     />
                     {guessMode && (
                         <Button variant="contained" onClick={handleGuess} disabled={loading}>
                             {loading ? "Thinking..." : "Guess"}
                         </Button>
                     )}
+                  </Box>
+                  {guessMode && (
+                    <Button variant="outlined" component="label" size="small">
+                      {localFile ? `File: ${localFile.name}` : "Upload local image"}
+                      <input type="file" accept="image/*" hidden onChange={handleLocalFileChange} />
+                    </Button>
+                  )}
                 </Box>
               )}
             </>

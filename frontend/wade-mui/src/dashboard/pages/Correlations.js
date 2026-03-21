@@ -296,10 +296,11 @@ export default function Correlations(props) {
             onUpdate={commonHandleUpdate}
             onDelete={commonHandleDelete}
             onExport={commonHandleExport}
+            isDefaultDataset={["bsds300", "cifar10"].includes(selectedDataset)}
           />
           <Modal open={createOpen} onClose={handleCreateCancel}>
             <div style={{ display: "flex", justifyContent: "center", marginTop: 80 }}>
-              <CreateDatasetForm onSubmit={commonHandleCreateSubmit} onCancel={handleCreateCancel} />
+              <CreateDatasetForm onSubmit={commonHandleCreateSubmit} onCancel={handleCreateCancel} defaultDatasetType="heatmap" />
             </div>
           </Modal>
           <FilterComponent

@@ -523,6 +523,7 @@ export default function SemanticZoom(props) {
                   onUpdate={handleUpdate}
                   onDelete={handleDelete}
                   onExport={handleExport}
+                  isDefaultDataset={["bsds300", "cifar10"].includes(selectedDataset)}
                 />
                 <Modal open={createOpen} onClose={handleCreateCancel}>
                   <div
@@ -535,6 +536,7 @@ export default function SemanticZoom(props) {
                     <CreateDatasetForm
                       onSubmit={handleCreateSubmit}
                       onCancel={handleCreateCancel}
+                      defaultDatasetType="clusters"
                     />
                   </div>
                 </Modal>

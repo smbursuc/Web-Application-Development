@@ -759,6 +759,14 @@ public class SqlController extends AbstractDataTypeController
             throw new IllegalArgumentException("Duplicate cluster name in payload: " + name);
         }
 
+        // Guard: if the node's own name matches its parent name, the nodeMap in buildClusterTree
+        // would map both to the same object, creating a circular reference. Fall back to Root.
+        if (name.equalsIgnoreCase(parent))
+        {
+            LOG.warn("Cluster node '{}' has itself as parent; resetting parent to Root.", name);
+            parent = "Root";
+        }
+
         ClusterEntity entity = new ClusterEntity();
         entity.setUsername(username);
         entity.setDatasetName(datasetName);
@@ -1207,6 +1215,12 @@ public class SqlController extends AbstractDataTypeController
             ClusterNode parent = nodeMap.get(r.getParentName());
             if (parent != null)
             {
+                // Guard: skip self-referential nodes to prevent infinite Jackson serialization
+                if (node == parent)
+                {
+                    LOG.warn("Skipping self-referential cluster node '{}' (parentName == nodeName). Data may be corrupt.", r.getNodeName());
+                    continue;
+                }
                 if (clusterName == null || clusterName.equals(r.getNodeName()) || parent.getName().equals(clusterName))
                 {
                     if (parent.getChildren() == null)

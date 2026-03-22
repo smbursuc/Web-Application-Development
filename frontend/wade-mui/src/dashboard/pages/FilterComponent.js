@@ -197,7 +197,7 @@ export default function FilterComponent(props) {
             onChange={handleRangeStartSliderChange}
             valueLabelDisplay="auto"
             min={1}
-            max={Math.max(1, max - maxRangeConst)}
+            max={Math.max(1, max - 1)}
           />
         </Box>
 

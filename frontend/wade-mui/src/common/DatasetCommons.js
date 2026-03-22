@@ -294,6 +294,9 @@ export default function DatasetCommons(props) {
       if (current !== "" && (prev.dataset !== current || prev.type !== datasetType)) {
         prevSelectionRef.current = { dataset: current, type: datasetType };
         setDataModel("");
+        // Reset range sliders so stale values from a previous (larger) dataset
+        // are never sent to the server for the freshly selected dataset.
+        setRangeStartSliderValue(0);
         return;
       }
       prevSelectionRef.current = { dataset: current, type: datasetType };

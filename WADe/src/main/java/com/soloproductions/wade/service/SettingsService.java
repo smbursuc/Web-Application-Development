@@ -1,11 +1,14 @@
 package com.soloproductions.wade.service;
 
+import com.soloproductions.wade.dto.SettingOption;
 import com.soloproductions.wade.dto.SettingsPageConfig;
 import com.soloproductions.wade.dto.SettingsPageData;
 import com.soloproductions.wade.dto.SettingsValues;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -21,6 +24,42 @@ public class SettingsService
 
     /** In-memory per-user settings store. */
     private final ConcurrentHashMap<String, SettingsValues> userSettings = new ConcurrentHashMap<>();
+
+    /**
+     * Builds the default settings configuration so the Settings page always
+     * has something to render, even before a proper config file is wired up.
+     */
+    @PostConstruct
+    public void init()
+    {
+        SettingOption notifications = new SettingOption();
+        notifications.setKey("notifications");
+        notifications.setLabel("Enable Notifications");
+        notifications.setType("boolean");
+        notifications.setDescription("Receive in-app notifications for long-running operations.");
+
+        SettingOption darkMode = new SettingOption();
+        darkMode.setKey("darkMode");
+        darkMode.setLabel("Dark Mode");
+        darkMode.setType("boolean");
+        darkMode.setDescription("Use the dark colour theme across the application.");
+
+        SettingOption apiKey = new SettingOption();
+        apiKey.setKey("apiKey");
+        apiKey.setLabel("API Key");
+        apiKey.setType("string");
+        apiKey.setSensitive(true);
+        apiKey.setDescription("Personal API key used for authenticated external requests.");
+        apiKey.setPlaceholder("sk-...");
+
+        SettingsValues defaults = new SettingsValues();
+        defaults.setNotifications(false);
+        defaults.setDarkMode(false);
+
+        config = new SettingsPageConfig();
+        config.setOptions(List.of(notifications, darkMode, apiKey));
+        config.setDefaults(defaults);
+    }
 
     /**
      * Retrieves settings page payload for a user (options + current values).

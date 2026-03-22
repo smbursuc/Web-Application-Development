@@ -60,6 +60,7 @@ export default function OptionsMenu() {
         sx={{
           [`& .${listClasses.root}`]: {
             padding: '4px',
+            minWidth: 160,
           },
           [`& .${paperClasses.root}`]: {
             padding: 0,
@@ -80,7 +81,7 @@ export default function OptionsMenu() {
           sx={{
             [`& .${listItemIconClasses.root}`]: {
               ml: 'auto',
-              minWidth: '5vw',
+              minWidth: 0,
             },
           }}
         >

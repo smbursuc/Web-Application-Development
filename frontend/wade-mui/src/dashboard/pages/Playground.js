@@ -260,7 +260,15 @@ WHERE {
         headerName: varName.toUpperCase(),
         flex: 1,
         renderCell: (params) => {
-          const value = params.row[varName];
+          let value = params.row[varName];
+
+          // Replace docker-internal hostnames so links work in a browser
+          if (typeof value === "string") {
+            value = value.replace(
+              /https?:\/\/host\.docker\.internal(:\d+)?/g,
+              API_BASE_URL || window.location.origin
+            );
+          }
 
           // Detect URI-like strings (http/https)
           if (typeof value === "string" && value.startsWith("http")) {

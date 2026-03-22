@@ -172,7 +172,7 @@ export default function AppAppBar(props) {
                 <MenuItem>Pricing</MenuItem>
                 <MenuItem>FAQ</MenuItem>
                 <MenuItem>Blog</MenuItem> */}
-                <Divider sx={{ my: 3 }} />
+                {/* <Divider sx={{ my: 3 }} /> */}
                 <MenuItem>
                   <Button color="primary" variant="contained" fullWidth component={Link} to="/signup">
                     Sign up

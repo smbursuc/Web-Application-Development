@@ -102,8 +102,11 @@ export default function InfoModal(props) {
           bgcolor: "background.paper",
           border: "2px solid #000",
           boxShadow: 24,
-          p: 4,
+          p: { xs: 2, sm: 4 },
           borderRadius: 2,
+          width: { xs: "92vw", sm: 560 },
+          maxHeight: "80vh",
+          overflowY: "auto",
         }}
       >
         <Typography id="modal-title" variant="h6" component="h2">

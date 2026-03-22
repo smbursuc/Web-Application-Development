@@ -13,11 +13,9 @@ export default function DataControlPanel(props) {
 
   return (
     <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", my: 2 }}>
-      {!isDefaultDataset && (
-        <Button variant="contained" onClick={onCreate} sx={{ my: 2 }}>
-          Create
-        </Button>
-      )}
+      <Button variant="contained" onClick={onCreate} sx={{ my: 2 }}>
+        Create
+      </Button>
       {!isDefaultDataset && (
         <Button variant="contained" onClick={onAdd} sx={{ my: 2 }}>
           Add

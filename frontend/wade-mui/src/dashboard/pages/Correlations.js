@@ -274,7 +274,7 @@ export default function Correlations(props) {
       <Box sx={{ display: "flex" }}>
         <SideMenu />
         <AppNavbar />
-        <Container sx={{ my: 4 }}>
+        <Container sx={{ my: 4, pt: { xs: 8, md: 0 } }}>
           {responseStatus && responseStatus.toLowerCase().includes("error") && (
             <Alert severity="error">
               {responseStatus}

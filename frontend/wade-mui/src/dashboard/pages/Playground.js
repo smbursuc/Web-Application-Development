@@ -298,7 +298,7 @@ WHERE {
         <SideMenu />
         <AppNavbar />
         <Container
-          sx={{ width: "100%", maxWidth: { sm: "100%", md: "1400px" } }}
+          sx={{ width: "100%", maxWidth: { sm: "100%", md: "1400px" }, pt: { xs: 8, md: 0 } }}
         >
           <PageInfo
             datasets={datasets}

@@ -322,6 +322,16 @@ export default function SemanticZoom(props) {
 
     if (!label) return;
 
+    // Clicking the root node (parent is "") should always clear the selection
+    if (parents[idx] === "") {
+      setSelectedCluster("");
+      setSelectedClusterLabels([]);
+      setSelectedClusterValues([]);
+      setSelectedClusterUris([]);
+      setSelectedClusterTypes([]);
+      return;
+    }
+
     // Toggle selection if clicking the already-selected cluster
     if (selectedCluster === label) {
       setSelectedCluster("");
@@ -479,7 +489,7 @@ export default function SemanticZoom(props) {
         <SideMenu />
         <AppNavbar />
         <Container
-          sx={{ width: "100%", maxWidth: { sm: "100%", md: "1400px" } }}
+          sx={{ width: "100%", maxWidth: { sm: "100%", md: "1400px" }, pt: { xs: 8, md: 0 } }}
         >
           <Grid
             // container {/* Single page application for now... */}

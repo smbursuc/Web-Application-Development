@@ -1,11 +1,21 @@
 import * as React from "react";
 import { Box, TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
+/**
+ * Data types that support dataset creation.
+ * Add a new entry here when a data type gains create/write support.
+ */
+export const CREATABLE_DATA_TYPES = [
+  { value: "sql", label: "SQL" },
+  // { value: "json", label: "JSON" },  // uncomment when JSON creation is implemented
+  // { value: "rdf",  label: "RDF" },   // uncomment when RDF creation is implemented
+];
+
 export default function CreateDatasetForm(props) {
   const { initial = {}, onSubmit, onCancel, defaultDatasetType } = props;
   const [datasetName, setDatasetName] = React.useState(initial.datasetName || "");
   const [datasetType, setDatasetType] = React.useState(defaultDatasetType || initial.datasetType || "heatmap");
-  const [dataType, setDataType] = React.useState(initial.dataType || "sql");
+  const [dataType, setDataType] = React.useState(initial.dataType || CREATABLE_DATA_TYPES[0].value);
 
   const submit = (e) => {
     e.preventDefault();
@@ -28,7 +38,9 @@ export default function CreateDatasetForm(props) {
       <FormControl>
         <InputLabel id="data-type-label">Data Type</InputLabel>
         <Select labelId="data-type-label" value={dataType} label="Data Type" onChange={(e) => setDataType(e.target.value)}>
-          <MenuItem value="sql">sql</MenuItem>
+          {CREATABLE_DATA_TYPES.map((dt) => (
+            <MenuItem key={dt.value} value={dt.value}>{dt.label}</MenuItem>
+          ))}
         </Select>
       </FormControl>
 

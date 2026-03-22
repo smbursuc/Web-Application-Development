@@ -51,6 +51,7 @@ import InfoModal from "./InfoModal";
 import FilterComponent from "./FilterComponent";
 import PageInfo from "./PageInfo";
 import Alert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
 import DataControlPanel from "../components/DataControlPanel";
 import CreateDatasetForm from "../components/CreateDatasetForm";
 import ClusterForm from "../components/ClusterForm";
@@ -503,7 +504,11 @@ export default function SemanticZoom(props) {
           >
             {/* <Grid item size={{ xs: 12, sm: 6, lg: 3 }}> */}{" "}
             {/* Decide whether to leave this page as a two column grid or not... */}
-            {!evaluateClusterCache() ? (
+            {isLoading && !evaluateClusterCache() ? (
+              <Grid sx={{ display: 'flex', justifyContent: 'center', py: 6 }}>
+                <CircularProgress />
+              </Grid>
+            ) : !evaluateClusterCache() ? (
               <Grid>
                 <Alert severity="error" sx={{ mb: 2 }}>
                   Trouble setting up this page. Please contact the administrator

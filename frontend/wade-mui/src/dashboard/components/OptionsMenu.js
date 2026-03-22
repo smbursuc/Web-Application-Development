@@ -79,6 +79,7 @@ export default function OptionsMenu() {
         <MenuItem
           onClick={handleLogout}
           sx={{
+            pl: 2,
             [`& .${listItemIconClasses.root}`]: {
               ml: 'auto',
               minWidth: 0,

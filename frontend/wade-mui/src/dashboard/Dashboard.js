@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 import { checkAuth } from '../utils/checkAuth';
 import { useAppState } from '../contexts/AppStateContext';
 import { useNavigate } from 'react-router-dom';
-import { Alert } from "@mui/material";
+import { Alert, Box as LoadingBox, CircularProgress } from "@mui/material";
 
 import DashboardContent from './pages/DashboardContent';
 
@@ -84,9 +84,18 @@ export default function Dashboard(props) {
           </Stack>
         </Box>
       </Box>) : (
-        <Alert severity='success'>
-          Loading...
-        </Alert>
+        <LoadingBox
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100vh',
+            gap: 2,
+          }}
+        >
+          <CircularProgress size={48} />
+        </LoadingBox>
       )}
     </AppTheme>
   );

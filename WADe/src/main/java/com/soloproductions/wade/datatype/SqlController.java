@@ -759,14 +759,6 @@ public class SqlController extends AbstractDataTypeController
             throw new IllegalArgumentException("Duplicate cluster name in payload: " + name);
         }
 
-        // Guard: if the node's own name matches its parent name, the nodeMap in buildClusterTree
-        // would map both to the same object, creating a circular reference. Fall back to Root.
-        if (name.equalsIgnoreCase(parent))
-        {
-            LOG.warn("Cluster node '{}' has itself as parent; resetting parent to Root.", name);
-            parent = "Root";
-        }
-
         ClusterEntity entity = new ClusterEntity();
         entity.setUsername(username);
         entity.setDatasetName(datasetName);
@@ -1193,11 +1185,18 @@ public class SqlController extends AbstractDataTypeController
      */
     private Object buildClusterTree(List<ClusterEntity> rows, String clusterName)
     {
-        Map<String, ClusterNode> nodeMap = new HashMap<>();
+        // idMap: keyed by entity ID so that two leaf nodes with the same name (e.g. two "cat"
+        // leaves in different clusters) are never conflated into a single ClusterNode instance.
+        Map<Long, ClusterNode> idMap = new HashMap<>();
+
+        // parentLookup: keyed by name, used only to resolve parent references.
+        // Parents are always cluster (non-leaf) nodes, which have unique names.
+        Map<String, ClusterNode> parentLookup = new HashMap<>();
+
         ClusterNode root = new ClusterNode();
         root.setName("Root");
         root.setChildren(new ArrayList<>());
-        nodeMap.put("Root", root);
+        parentLookup.put("Root", root);
 
         rows.removeIf((row) -> row.getNodeName().equalsIgnoreCase("root"));
         for (ClusterEntity r : rows)
@@ -1206,31 +1205,30 @@ public class SqlController extends AbstractDataTypeController
             node.setName(r.getNodeName());
             node.setProbability(r.getProbability());
             node.setUri(r.getUri());
-            nodeMap.put(r.getNodeName(), node);
+            idMap.put(r.getId(), node);
+
+            // Only cluster (non-leaf) nodes go into parentLookup so that leaf-name
+            // collisions never shadow their parent cluster.
+            boolean isLeaf = r.getProbability() != null || r.getUri() != null;
+            if (!isLeaf)
+            {
+                parentLookup.put(r.getNodeName(), node);
+            }
         }
 
         for (ClusterEntity r : rows)
         {
-            ClusterNode node = nodeMap.get(r.getNodeName());
-            ClusterNode parent = nodeMap.get(r.getParentName());
+            ClusterNode node = idMap.get(r.getId());
+            ClusterNode parent = parentLookup.get(r.getParentName());
             if (parent != null)
             {
-                // Guard: skip self-referential nodes to prevent infinite Jackson serialization
-                if (node == parent)
-                {
-                    LOG.warn("Skipping self-referential cluster node '{}' (parentName == nodeName). Data may be corrupt.", r.getNodeName());
-                    continue;
-                }
                 if (clusterName == null || clusterName.equals(r.getNodeName()) || parent.getName().equals(clusterName))
                 {
                     if (parent.getChildren() == null)
                     {
                         parent.setChildren(new ArrayList<>());
                     }
-                    if (!parent.getChildren().contains(node))
-                    {
-                        parent.getChildren().add(node);
-                    }
+                    parent.getChildren().add(node);
                 }
             }
         }

@@ -933,6 +933,23 @@ public class PredictionService
      * @return  downloaded image bytes
      */
     private byte[] downloadImage(String imageUrl) {
+        // Handle data: URIs (base64-encoded images uploaded directly from the browser)
+        if (imageUrl.startsWith("data:")) {
+            int commaIdx = imageUrl.indexOf(',');
+            if (commaIdx < 0) {
+                throw new RuntimeException("Invalid data URI: missing base64 payload");
+            }
+            try {
+                byte[] bytes = java.util.Base64.getDecoder().decode(imageUrl.substring(commaIdx + 1));
+                LOG.info("Decoded data URI image: {} bytes", bytes.length);
+                return bytes;
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException("Could not decode data URI: " + e.getMessage());
+            }
+        }
+
+        // Safe label for logging — never print a full data URI
+        String logLabel = imageUrl.length() > 120 ? imageUrl.substring(0, 120) + "[...]" : imageUrl;
         try {
             java.net.URL url = new java.net.URL(imageUrl);
             java.net.HttpURLConnection conn = (java.net.HttpURLConnection) url.openConnection();
@@ -943,16 +960,16 @@ public class PredictionService
 
             int status = conn.getResponseCode();
             if (status != 200) {
-                throw new RuntimeException("HTTP error " + status + " while downloading image from " + imageUrl);
+                throw new RuntimeException("HTTP error " + status + " while downloading image from " + logLabel);
             }
 
             try (java.io.InputStream is = conn.getInputStream()) {
                 byte[] bytes = is.readAllBytes();
-                LOG.info("Downloaded image from {}: {} bytes", imageUrl, bytes.length);
+                LOG.info("Downloaded image from {}: {} bytes", logLabel, bytes.length);
                 return bytes;
             }
         } catch (Exception e) {
-            LOG.error("Failed to download image: {}", imageUrl, e);
+            LOG.error("Failed to download image: {}", logLabel, e);
             throw new RuntimeException("Could not download image: " + e.getMessage());
         }
     }

@@ -652,7 +652,7 @@ export default function SemanticZoom(props) {
                               <CardMedia
                                 component="img"
                                 height="140"
-                                image={`${API_BASE_URL}${uri.replace(/^https?:\/\/[^/]+/, '')}`}
+                                image={/^https?:\/\//.test(uri) ? uri : `${API_BASE_URL}${uri}`}
                                 alt={label}
                               />
                               <CardContent>

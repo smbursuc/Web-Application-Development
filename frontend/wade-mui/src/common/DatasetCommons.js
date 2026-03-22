@@ -115,11 +115,13 @@ export default function DatasetCommons(props) {
   };
 
   function saveToLocalStorage(key, data) {
-    localStorage.setItem(key, JSON.stringify(data));
+    // Switch to localStorage once the range-limit flow is stable.
+    sessionStorage.setItem(key, JSON.stringify(data));
   }
 
   function getFromLocalStorage(key) {
-    const data = localStorage.getItem(key);
+    // Switch to localStorage once the range-limit flow is stable.
+    const data = sessionStorage.getItem(key);
     return data ? JSON.parse(data) : null;
   }
 

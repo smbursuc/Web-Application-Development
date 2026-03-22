@@ -80,7 +80,7 @@ export default function OptionsMenu() {
           sx={{
             [`& .${listItemIconClasses.root}`]: {
               ml: 'auto',
-              minWidth: 0,
+              minWidth: '5vw',
             },
           }}
         >

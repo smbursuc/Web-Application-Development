@@ -1024,7 +1024,8 @@ public class PredictionService
                 "1. Extract all readable text.\n" +
                 "2. Identify the primary subject or object.\n" +
                 "3. Estimate your confidence (0.0 to 1.0).\n" +
-                "Respond with valid JSON only. Structure: {\"extracted_text\": string, \"object\": string, \"probability\": number}";
+                "4. Suggest a concise 1-3 word semantic category tag that could serve as a cluster name for this image (e.g. 'sports cars', 'wild animals', 'urban landscapes').\n" +
+                "Respond with valid JSON only. Structure: {\"extracted_text\": string, \"object\": string, \"probability\": number, \"cluster_tag\": string}";
 
         if (groqClient != null)
         {

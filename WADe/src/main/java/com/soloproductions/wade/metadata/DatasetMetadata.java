@@ -20,6 +20,9 @@ public class DatasetMetadata
     /** Dynamic size value calculated for the requested dataset operation. */
     private int size;
 
+    /** Maximum allowed range value exposed to clients so they can cap the range slider. */
+    private int maxRange;
+
     /** Default metadata configuration path. */
     public static final String CONFIG_PATH = "dataset_metadata/dataset_metadata.json";
 
@@ -45,6 +48,27 @@ public class DatasetMetadata
     public void setSize(int size)
     {
         this.size = size;
+    }
+
+    /**
+     * Returns the maximum allowed range value.
+     *
+     * @return  maxRange value
+     */
+    public int getMaxRange()
+    {
+        return maxRange;
+    }
+
+    /**
+     * Sets the maximum allowed range value.
+     *
+     * @param   maxRange
+     *          max range to store
+     */
+    public void setMaxRange(int maxRange)
+    {
+        this.maxRange = maxRange;
     }
 
     /**

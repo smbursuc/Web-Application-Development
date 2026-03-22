@@ -9,6 +9,7 @@ export function makeDataControlHandlers({
   datasetType = "heatmap",
   openControlModal,
   setCreateOpen,
+  setControlOpen,
   setResponseStatus,
   refreshFn,
   fetchMetadata,
@@ -102,6 +103,7 @@ export function makeDataControlHandlers({
           setResponseStatus(`error: ${data.message || JSON.stringify(data)}`);
         } else {
           setResponseStatus("success: operation completed");
+          if (typeof setControlOpen === "function") setControlOpen(false);
           if (typeof refreshFn === "function") refreshFn(false);
         }
       } else {
@@ -166,6 +168,7 @@ export function makeDataControlHandlers({
           setResponseStatus(`error: ${data.message || JSON.stringify(data)}`);
         } else {
           setResponseStatus("success: operation completed");
+          if (typeof setControlOpen === "function") setControlOpen(false);
           if (typeof refreshFn === "function") refreshFn(false);
         }
       }

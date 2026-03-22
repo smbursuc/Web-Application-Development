@@ -711,6 +711,9 @@ public abstract class AbstractDatasetData implements DatasetData
         // get the persistence related metadata
         DatasetMetadata dm = getDataTypeController().getMetadata();
 
+        // expose the server-side constant so clients can cap their range slider
+        dm.setMaxRange(MAX_RANGE);
+
         // complete the data with static metadata
         setMetadataStatic(dm, DatasetMetadata.CONFIG_PATH);
         setMetadata(dm);

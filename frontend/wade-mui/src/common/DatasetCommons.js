@@ -44,6 +44,7 @@ export default function DatasetCommons(props) {
   const selectedDatasetObj = new SelectedDataset(selectedDataset, setSelectedDataset);
   const sortOptionsObj = new SortOptions(props.sortOptions, setSortOptions);
   const setMax = props.setMax;
+  const setMaxRangeConst = props.setMaxRangeConst || null;
 
   const fetchMetadata = async (generalInfo) => {
     setIsLoading(true);
@@ -91,6 +92,11 @@ export default function DatasetCommons(props) {
         maxClustersObj.set(cache);
       } else {
         maxHeatmapObj.set(cache);
+      }
+      // Propagate server-supplied MAX_RANGE constant to parent so the range
+      // slider can cap at the right value without hard-coding it on the client.
+      if (result.maxRange && typeof setMaxRangeConst === "function") {
+        setMaxRangeConst(result.maxRange);
       }
       // Only clear the loading indicator when fetching size/cache metadata (generalInfo=false).
       // For the initial general metadata load (generalInfo=true) we keep isLoading=true so the

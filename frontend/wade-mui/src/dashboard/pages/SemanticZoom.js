@@ -114,6 +114,8 @@ export default function SemanticZoom(props) {
 
   // will adapt dynamically using the max possible range and the current start value
   const [maxRange, setMaxRange] = useState(0);
+  // server-supplied MAX_RANGE constant; defaults to 100 until first metadata fetch
+  const [maxRangeConst, setMaxRangeConst] = useState(100);
   const [staticMetadata, setStaticMetadata] = useState({});
 
   const [maxClusters, setMaxClusters] = useState({});
@@ -425,6 +427,7 @@ export default function SemanticZoom(props) {
     sortOptions,
     setSortOptions,
     setMax,
+    setMaxRangeConst,
   });
 
   // initialize handlers now that fetchClusterData is available
@@ -445,6 +448,7 @@ export default function SemanticZoom(props) {
     datasetType: "clusters",
     openControlModal,
     setCreateOpen,
+    setControlOpen,
     setResponseStatus,
     refreshFn: fetchClusterData,
     fetchMetadata,
@@ -582,6 +586,7 @@ export default function SemanticZoom(props) {
                   max={getMaxClusters()}
                   maxRange={maxRange}
                   setMaxRange={setMaxRange}
+                  maxRangeConst={maxRangeConst}
                   selectedDataset={selectedDataset}
                   dataModel={dataModel}
                   datasetType="clusters"

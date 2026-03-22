@@ -71,6 +71,8 @@ export default function FilterComponent(props) {
   // max possible range considering start value
   let maxRange = props.maxRange;
   const setMaxRange = props.setMaxRange;
+  // server-supplied upper bound for the range slider (from metadata)
+  const maxRangeConst = props.maxRangeConst || 100;
 
   const [filterOpen, setFilterOpen] = useState(false);
 
@@ -102,14 +104,13 @@ export default function FilterComponent(props) {
     if (maxNum > 0) {
       diff = maxNum - rangeStartSliderValue;
       if (diff < 1) diff = 1; // Slider `min` is 1
-      // Keep current within [1, diff]
+      // Cap at the server-supplied MAX_RANGE constant
+      const cappedDiff = Math.min(diff, maxRangeConst);
+      // Keep current within [1, cappedDiff]
       const boundedCurrent = Math.max(1, Number(rangeSliderValue) || 1);
-      const newVal = Math.min(boundedCurrent, diff);
+      const newVal = Math.min(boundedCurrent, cappedDiff);
       setRangeSliderValue(newVal);
-      setMaxRange(diff);
-    }
-    else {
-      // diff = 1;
+      setMaxRange(cappedDiff);
     }
   }, [rangeStartSliderValue, max]);
 
@@ -196,7 +197,7 @@ export default function FilterComponent(props) {
             onChange={handleRangeStartSliderChange}
             valueLabelDisplay="auto"
             min={1}
-            max={max}
+            max={Math.max(1, max - maxRangeConst)}
           />
         </Box>
 

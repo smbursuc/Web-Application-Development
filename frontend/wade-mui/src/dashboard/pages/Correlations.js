@@ -127,6 +127,8 @@ export default function Correlations(props) {
 
   // will adapt dynamically using the max possible range and the current start value
   const [maxRange, setMaxRange] = useState(0);
+  // server-supplied MAX_RANGE constant; defaults to 100 until first metadata fetch
+  const [maxRangeConst, setMaxRangeConst] = useState(100);
   const [staticMetadata, setStaticMetadata] = useState({});
 
   const [maxHeatmap, setMaxHeatmap] = useState({});
@@ -236,7 +238,8 @@ export default function Correlations(props) {
       sortType,
       sortOptions,
       setSortOptions,
-      setMax
+      setMax,
+      setMaxRangeConst,
     });
 
   const {
@@ -256,6 +259,7 @@ export default function Correlations(props) {
     datasetType: "heatmap",
     openControlModal,
     setCreateOpen,
+    setControlOpen,
     setResponseStatus,
     refreshFn: fetchHeatmapData,
     fetchMetadata,
@@ -323,6 +327,7 @@ export default function Correlations(props) {
             max={getMaxRange()}
             maxRange={maxRange}
             setMaxRange={setMaxRange}
+            maxRangeConst={maxRangeConst}
             selectedDataset={selectedDataset}
             dataModel={dataModel}
             datasetType="heatmap"

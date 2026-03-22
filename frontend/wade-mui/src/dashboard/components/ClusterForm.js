@@ -43,13 +43,29 @@ export default function ClusterForm(props) {
   const [statusMessage, setStatusMessage] = React.useState("");
   const [rateLimitRemaining, setRateLimitRemaining] = React.useState(null);
   const [localFile, setLocalFile] = React.useState(null);
+  const [clusterTag, setClusterTag] = React.useState("");
 
   const handleLocalFileChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
     setLocalFile(file);
     const reader = new FileReader();
-    reader.onload = (ev) => setUri(ev.target.result); // base64 data URI
+    reader.onload = (ev) => {
+      // Resize to max 800px on the longest side at 70% JPEG quality to prevent
+      // nginx 413 errors when submitting large mobile camera images.
+      const img = new Image();
+      img.onload = () => {
+        const MAX_PX = 800;
+        const scale = Math.min(1, MAX_PX / Math.max(img.width, img.height));
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        setUri(canvas.toDataURL('image/jpeg', 0.7));
+      };
+      img.src = ev.target.result;
+    };
     reader.readAsDataURL(file);
   };
 
@@ -102,6 +118,11 @@ export default function ClusterForm(props) {
       
       if (json.object) {
         setNodeName(json.object);
+        
+        // Extract cluster_tag from AI response if present
+        if (json.cluster_tag) {
+          setClusterTag(json.cluster_tag);
+        }
         
         // Secondary guess: Predict cluster (parent)
         console.log("Predicting parent cluster. Candidates:", candidates);
@@ -171,6 +192,11 @@ export default function ClusterForm(props) {
                          setClusterName("Root");
                     } else {
                         console.warn("No match found for predicted cluster in candidates:", cleanCluster);
+                        // Fall back to the cluster_tag from the image analysis as a suggested new cluster name
+                        if (json.cluster_tag) {
+                          setClusterName(json.cluster_tag);
+                          setIsRootChild(false);
+                        }
                     }
                 }
                 else {
@@ -232,13 +258,14 @@ export default function ClusterForm(props) {
         if (probability !== "") payload.probability = Number(probability);
         if (uri) payload.uri = uri;
       }
+      if (clusterTag) payload.clusterTag = clusterTag;
     }
     
     onSubmit(payload);
   };
 
   return (
-    <Box component="form" onSubmit={submit} sx={{ display: "flex", flexDirection: "column", gap: 2, width: 480, bgcolor: "background.paper", p: 3, borderRadius: 2 }}>
+    <Box component="form" onSubmit={submit} sx={{ display: "flex", flexDirection: "column", gap: 2, width: { xs: '92vw', sm: 480 }, maxHeight: '85vh', overflowY: 'auto', bgcolor: "background.paper", p: 3, borderRadius: 2 }}>
       <h2>{mode === "delete" ? "Delete Cluster Node" : mode === "update" ? "Update Cluster Node" : "Add Cluster Node"}</h2>
       
       {error && <Alert severity="error" sx={{ mb: 1 }}>{formatError(error)}</Alert>}
@@ -268,6 +295,17 @@ export default function ClusterForm(props) {
                 onChange={(e) => setNodeName(e.target.value)} 
                 required 
               />
+           )}
+
+           {/* Show AI-suggested cluster tag after guess completes */}
+           {!guessMode && clusterTag && mode !== "delete" && (
+             <TextField
+               label="AI Cluster Tag"
+               value={clusterTag}
+               onChange={(e) => setClusterTag(e.target.value)}
+               helperText="Suggested semantic category (AI). You can edit or ignore this."
+               size="small"
+             />
            )}
           
           {/* Toggle for Root child (typically for clusters only, not leaves) */}
@@ -365,7 +403,7 @@ export default function ClusterForm(props) {
         </>
       )}
 
-      <Box sx={{ display: "flex", gap: 1 }}>
+      <Box sx={{ display: "flex", gap: 1, position: 'sticky', bottom: 0, bgcolor: 'background.paper', pt: 1 }}>
 
         <Button type="submit" variant="contained">
           {mode === "delete" ? "Delete" : mode === "update" ? "Update" : "Add"}

@@ -227,7 +227,7 @@ export default function ClusterForm(props) {
     }
   };
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     setError("");
     
@@ -256,7 +256,32 @@ export default function ClusterForm(props) {
       };
       if (isLeaf) {
         if (probability !== "") payload.probability = Number(probability);
-        if (uri) payload.uri = uri;
+        if (uri) {
+          // If the user picked a local file, uri is a data: URI.
+          // Upload it to the server first and use the returned path instead —
+          // storing a base64 blob directly in the db would exceed varchar(255).
+          let storedUri = uri;
+          if (uri.startsWith("data:")) {
+            setLoading(true);
+            setStatusMessage("Uploading image...");
+            try {
+              const blob = await fetch(uri).then(r => r.blob());
+              const formData = new FormData();
+              formData.append("image", blob, localFile?.name || "upload.jpg");
+              const uploadResp = await fetch(`${API_BASE_URL}/api/upload-image`, { method: "POST", body: formData });
+              if (!uploadResp.ok) throw new Error(`Upload failed: ${uploadResp.status}`);
+              storedUri = await uploadResp.text();
+            } catch (err) {
+              setError(`Image upload failed: ${err.message}`);
+              setLoading(false);
+              setStatusMessage("");
+              return;
+            }
+            setLoading(false);
+            setStatusMessage("");
+          }
+          payload.uri = storedUri;
+        }
       }
       if (clusterTag) payload.clusterTag = clusterTag;
     }

@@ -137,7 +137,7 @@ export default function DashboardContent() {
             {/* Greeting */}
             <Box sx={{ mb: 4, mt: 2 }}>
                 <Typography variant="h4" component="h1" gutterBottom color="text.primary">
-                    Welcome back, {user?.displayName || user?.username || "Researcher"}!
+                    Welcome back, {user?.displayName || user?.username || "Guest"}!
                 </Typography>
                 <Typography variant="body1" color="text.secondary">
                     Here is an overview of your recent activity and workspace statistics.

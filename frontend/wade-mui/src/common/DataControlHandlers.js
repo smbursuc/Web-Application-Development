@@ -1,5 +1,30 @@
 import API_BASE_URL from '../config';
 
+/**
+ * Removes the cached size entry for a specific dataset/dataModel combination so the
+ * next read will re-query the server for the updated row count.
+ * Should be called after any operation that changes the number of rows (create / delete).
+ */
+function invalidateSizeCache(datasetType, datasetName, dataModel) {
+  const cacheKey = "max" + (datasetType === "clusters" ? "Clusters" : "Heatmap");
+  try {
+    const raw = sessionStorage.getItem(cacheKey);
+    if (!raw) return;
+    const cache = JSON.parse(raw);
+    if (cache[datasetName]) {
+      delete cache[datasetName][dataModel];
+      // Clean up empty dataset entry to keep the store tidy
+      if (Object.keys(cache[datasetName]).length === 0) {
+        delete cache[datasetName];
+      }
+    }
+    sessionStorage.setItem(cacheKey, JSON.stringify(cache));
+  } catch (e) {
+    // Defensive — if the cache is malformed just remove the whole key
+    sessionStorage.removeItem(cacheKey);
+  }
+}
+
 export function makeDataControlHandlers({
   selectedDataset,
   setSelectedDataset,
@@ -13,6 +38,9 @@ export function makeDataControlHandlers({
   setResponseStatus,
   refreshFn,
   fetchMetadata,
+  sort,
+  rangeSliderValue,
+  rangeStartSliderValue,
 }) {
   const handleCreate = () => {
     // Open the dataset creation dialog for all dataset types
@@ -43,13 +71,21 @@ export function makeDataControlHandlers({
     }
   };
 
-  const handleExport = async () => {
+  const handleExport = async (honorFilters = false) => {
     try {
       const urlType = datasetType === "heatmap" ? "heatmap" : "clusters";
-      const url = `${API_BASE_URL}/api/${selectedDataset}/${urlType}/${dataModel}?export=true`;
+      let url = `${API_BASE_URL}/api/${selectedDataset}/${urlType}/${dataModel}?export=true`;
+      if (honorFilters) {
+        url += `&honorFilters=true`;
+        if (sort) url += `&sortDirection=${encodeURIComponent(sort)}`;
+        if (rangeSliderValue != null) url += `&range=${rangeSliderValue}`;
+        if (rangeStartSliderValue != null) url += `&rangeStart=${rangeStartSliderValue}`;
+      }
       const resp = await fetch(url, { credentials: "include" });
       if (!resp.ok) throw new Error(`Export failed: ${resp.statusText}`);
-      const blob = await resp.blob();
+      const json = await resp.json();
+      const exportData = json?.data ?? json;
+      const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: "application/json" });
       const href = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = href;
@@ -102,6 +138,13 @@ export function makeDataControlHandlers({
         if (data.status && data.status !== "success") {
           setResponseStatus(`error: ${data.message || JSON.stringify(data)}`);
         } else {
+          // Invalidate size cache for operations that change row count.
+          // Then re-fetch the updated size from the server so the range sliders
+          // reflect the new count before the data refresh fires.
+          if (requestType === "create" || requestType === "delete") {
+            invalidateSizeCache("heatmap", selectedDataset, dataModel);
+            if (typeof fetchMetadata === "function") await fetchMetadata(false);
+          }
           setResponseStatus("success: operation completed");
           if (typeof setControlOpen === "function") setControlOpen(false);
           if (typeof refreshFn === "function") refreshFn(false);
@@ -112,18 +155,26 @@ export function makeDataControlHandlers({
         let entryData;
 
         if (requestType === "create" || requestType === "add") {
-          // Create hierarchical structure: root -> cluster -> node
-          // For simplicity, we'll create a node under an existing cluster
-          const node = {
-            name: values.name,
-            Probability: Number(values.probability),
-            URI: values.uri,
-          };
-          const cluster = {
-            name: values.parent,
-            children: [node],
-          };
-          entryData = cluster;
+          if (values.children) {
+            // AI auto-create mode: hierarchical payload — new cluster + leaf in one shot.
+            // values = { name: clusterName, parent: "Root", children: [{name, Probability, URI}], clusterTag }
+            entryData = {
+              name: values.name,
+              parent: values.parent || "Root",
+              children: values.children,
+            };
+          } else if (values.parent === "Root" && !values.probability && !values.uri) {
+            // "Add a new cluster" mode — create just the cluster node
+            entryData = { name: values.name, parent: "Root" };
+          } else {
+            // "Add object to existing cluster" mode
+            const node = {};
+            if (values.name) node.name = values.name;
+            if (values.parent) node.parent = values.parent;
+            if (values.probability != null && values.probability !== "") node.Probability = Number(values.probability);
+            if (values.uri) node.URI = values.uri;
+            entryData = node;
+          }
         } else if (requestType === "delete") {
           // Delete by name and parent
           entryData = [{
@@ -167,6 +218,13 @@ export function makeDataControlHandlers({
         if (data.status && data.status !== "success") {
           setResponseStatus(`error: ${data.message || JSON.stringify(data)}`);
         } else {
+          // Invalidate size cache for operations that change row count.
+          // Then re-fetch the updated size from the server so the range sliders
+          // reflect the new count before the data refresh fires.
+          if (requestType === "create" || requestType === "delete") {
+            invalidateSizeCache("clusters", selectedDataset, dataModel);
+            if (typeof fetchMetadata === "function") await fetchMetadata(false);
+          }
           setResponseStatus("success: operation completed");
           if (typeof setControlOpen === "function") setControlOpen(false);
           if (typeof refreshFn === "function") refreshFn(false);

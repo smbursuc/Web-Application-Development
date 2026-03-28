@@ -243,18 +243,20 @@ public class JsonController extends AbstractDataTypeController
             String filePath = ((AbstractDatasetData) dd).resolveFilePath(dd.getDatasetName());
             LOG.info("JsonController.exportData called for dataset={}, filePath={}, honorFilters={}", dd.getDatasetName(), filePath, exportRequest.isHonorFilters());
             
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.getFactory().setStreamReadConstraints(
+                StreamReadConstraints.builder().maxNestingDepth(4000).build());
+            
+            Object dataToReturn;
             if (exportRequest.isHonorFilters())
             {
                 // Execute read request with filters applied to get filtered data
                 Object filteredData = executeReadRequest();
                 
-                // Convert the filtered data to JSON (clean escaped newlines / pretty-print)
-                ObjectMapper mapper = new ObjectMapper();
-                mapper.getFactory().setStreamReadConstraints(
-                    StreamReadConstraints.builder().maxNestingDepth(4000).build());
-                String json = serializeExportObject(filteredData, mapper);
-                LOG.info("JsonController.exportData filtered result size={}", json == null ? 0 : json.length());
-                return json;
+                // Return as parsed object (not string) so StandardResponse serializes it properly without double-escaping
+                String jsonString = serializeExportObject(filteredData, mapper);
+                dataToReturn = mapper.readValue(jsonString, Object.class);
+                LOG.info("JsonController.exportData filtered result size={}", jsonString == null ? 0 : jsonString.length());
             }
             else
             {
@@ -266,18 +268,45 @@ public class JsonController extends AbstractDataTypeController
                     throw new IllegalStateException("Data file not found: " + filePath);
                 }
                 String content = Files.readString(file.toPath());
-                ObjectMapper mapper = new ObjectMapper();
-                mapper.getFactory().setStreamReadConstraints(
-                    StreamReadConstraints.builder().maxNestingDepth(4000).build());
                 String cleaned = serializeExportObject(content, mapper);
+                
+                // Parse into object and replace Docker internal URLs with app URLs
+                Object parsed = mapper.readValue(cleaned, Object.class);
+                dataToReturn = replaceContainerUrls(parsed, mapper);
                 LOG.info("JsonController.exportData raw file length={}", cleaned == null ? 0 : cleaned.length());
-                return cleaned;
             }
+            
+            return dataToReturn;
         }
         catch (IOException e)
         {
             LOG.error("Failed to export JSON data", e);
             throw new RuntimeException("Export failed: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Replace Docker container URLs (host.docker.internal:8081) with the application base URL.
+     * This ensures exported JSON files contain accessible URLs outside the container.
+     */
+    private Object replaceContainerUrls(Object obj, ObjectMapper mapper)
+    {
+        if (obj == null) 
+        {
+            return null;
+        }
+        
+        try
+        {
+            String jsonStr = mapper.writeValueAsString(obj);
+            // Replace Docker internal URL with relative path (frontend will resolve it)
+            jsonStr = jsonStr.replace("http://host.docker.internal:8081", "");
+            return mapper.readValue(jsonStr, Object.class);
+        }
+        catch (IOException e)
+        {
+            LOG.warn("Failed to replace container URLs", e);
+            return obj;
         }
     }
 }

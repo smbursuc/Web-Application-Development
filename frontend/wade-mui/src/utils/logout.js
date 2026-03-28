@@ -6,6 +6,7 @@ export function useLogout(setResponseMessage) {
   const navigate = useNavigate();
   const appStateProps = useAppState();
   const setLoggedIn = appStateProps.setLoggedIn;
+  const setUser = appStateProps.setUser;
 
   const logout = async () => {
     try {
@@ -17,8 +18,9 @@ export function useLogout(setResponseMessage) {
       if (response.ok) {
         setResponseMessage("Logout successful. Redirecting...");
         setLoggedIn(false);
+        setUser({ username: "", email: "" });
         setTimeout(() => {
-          navigate("/"); // Navigate to the home page
+          navigate("/home"); // Navigate to the home page
         }, 2000);
       } else {
         const errorData = await response.json();

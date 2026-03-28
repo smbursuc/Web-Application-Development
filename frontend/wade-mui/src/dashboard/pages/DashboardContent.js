@@ -10,6 +10,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Chip from '@mui/material/Chip';
 import ListItemButton from '@mui/material/ListItemButton';
+import Button from '@mui/material/Button';
 import { useAppState } from '../../contexts/AppStateContext';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
@@ -21,9 +22,10 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 import DatasetIcon from '@mui/icons-material/Dataset';
 import InsertChartIcon from '@mui/icons-material/InsertChart';
 import TouchAppIcon from '@mui/icons-material/TouchApp';
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 
 export default function DashboardContent() {
-    const { user } = useAppState();
+    const { user, loggedIn } = useAppState();
     const [history, setHistory] = React.useState([]);
     const [stats, setStats] = React.useState({
         totalActions: 0,
@@ -32,40 +34,29 @@ export default function DashboardContent() {
     });
     const navigate = useNavigate();
 
-    React.useEffect(() => {
-        console.log('[DashboardContent] loading history + stats');
-        // Fetch History
+    const fetchHistory = React.useCallback(() => {
+        if (!loggedIn) return;
         fetch(`${API_BASE_URL}/api/history?limit=10`, { credentials: 'include' })
             .then(async (res) => {
-                if (!res.ok) {
-                    const body = await res.text();
-                    console.warn('[DashboardContent] history request failed', { status: res.status, body });
-                    return [];
-                }
+                if (!res.ok) return [];
                 const payload = await res.json();
-                console.log('[DashboardContent] history payload', payload);
                 return payload;
             })
             .then(data => {
                 const items = Array.isArray(data)
                     ? data
                     : (Array.isArray(data?.data) ? data.data : []);
-                console.log('[DashboardContent] parsed history items', items.length);
                 setHistory(items);
             })
             .catch(err => console.error("History fetch error", err));
+    }, []);
 
-        // Fetch Stats
+    const fetchStats = React.useCallback(() => {
+        if (!loggedIn) return;
         fetch(`${API_BASE_URL}/api/history/stats`, { credentials: 'include' })
             .then(async (res) => {
-                if (!res.ok) {
-                    const body = await res.text();
-                    console.warn('[DashboardContent] stats request failed', { status: res.status, body });
-                    return {};
-                }
-                const payload = await res.json();
-                console.log('[DashboardContent] stats payload', payload);
-                return payload;
+                if (!res.ok) return {};
+                return res.json();
             })
             .then(data => {
                 const statsPayload = data?.data && typeof data.data === 'object' ? data.data : data;
@@ -74,10 +65,29 @@ export default function DashboardContent() {
                     datasetsCreated: statsPayload?.datasetsCreated ?? 0,
                     datasetsViewed: statsPayload?.datasetsViewed ?? 0,
                 });
-                console.log('[DashboardContent] parsed stats', statsPayload);
             })
             .catch(err => console.error("Stats fetch error", err));
     }, []);
+
+    React.useEffect(() => {
+        fetchHistory();
+        fetchStats();
+    }, [fetchHistory, fetchStats]);
+
+    const handleClearHistory = async () => {
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/history`, {
+                method: 'DELETE',
+                credentials: 'include',
+            });
+            if (res.ok) {
+                setHistory([]);
+                setStats({ totalActions: 0, datasetsCreated: 0, datasetsViewed: 0 });
+            }
+        } catch (err) {
+            console.error("Clear history error", err);
+        }
+    };
 
     const handleHistoryClick = (item) => {
         // item contains: datasetId, datasetType (heatmap/clusters)
@@ -134,13 +144,37 @@ export default function DashboardContent() {
                 </Typography>
             </Box>
 
-            <Grid container spacing={3}>
+            {!loggedIn && (
+                <Paper elevation={2} sx={{ p: 4, borderRadius: 2, textAlign: 'center', mb: 3 }}>
+                    <AssessmentIcon sx={{ fontSize: 48, color: 'text.disabled', mb: 1 }} />
+                    <Typography variant="h6" color="text.secondary" gutterBottom>
+                        Account history is not available in guest mode.
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        To preserve account history, create an account.
+                    </Typography>
+                    <Button variant="outlined" sx={{ mt: 2 }} onClick={() => navigate('/')}>
+                        Create an account
+                    </Button>
+                </Paper>
+            )}
+
+            {loggedIn && <Grid container spacing={3}>
                 {/* Stats Section */}
                 <Grid item xs={12} md={4}>
                     <Paper elevation={2} sx={{ p: 3, height: '100%', borderRadius: 2 }}>
                         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                             <AssessmentIcon color="primary" sx={{ mr: 1 }} />
-                            <Typography variant="h6">Your Stats</Typography>
+                            <Typography variant="h6" sx={{ flexGrow: 1 }}>Your Stats</Typography>
+                            <Button
+                                size="small"
+                                color="error"
+                                variant="outlined"
+                                startIcon={<DeleteSweepIcon />}
+                                onClick={handleClearHistory}
+                            >
+                                Clear History
+                            </Button>
                         </Box>
                         <Divider sx={{ mb: 2 }} />
                         
@@ -213,7 +247,7 @@ export default function DashboardContent() {
                         )}
                     </Paper>
                 </Grid>
-            </Grid>
+            </Grid>}
         </Box>
     );
 }

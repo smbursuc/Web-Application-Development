@@ -118,6 +118,24 @@ public class UserActionService
     }
 
     /**
+     * Deletes all recorded history for the given user.
+     *
+     * @param   username
+     *          username used to resolve the user
+     */
+    public void clearHistory(String username)
+    {
+        User user = resolveUser(username);
+        if (user == null)
+        {
+            LOG.warn("clearHistory called but user could not be resolved. identity='{}'", username);
+            return;
+        }
+        actionRepository.deleteByUserId(user.getId());
+        LOG.info("clearHistory userId={}", user.getId());
+    }
+
+    /**
      * Computes basic user activity statistics for dashboard display.
      *
      * @param   username

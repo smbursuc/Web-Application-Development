@@ -8,11 +8,13 @@ import { listClasses } from '@mui/material/List';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon, { listItemIconClasses } from '@mui/material/ListItemIcon';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import MenuButton from './MenuButton';
 import { useAppState } from '../../contexts/AppStateContext';
 import { useLogout } from '../../utils/logout';
 import { useState, Fragment } from "react";
+import { useNavigate } from 'react-router-dom';
 
 const MenuItem = styled(MuiMenuItem)({
   margin: '2px 0',
@@ -27,6 +29,7 @@ export default function OptionsMenu() {
   const setLoggedIn = appStateProps.setLoggedIn;
 
   const logout = useLogout(setResponseMessage);
+  const navigate = useNavigate();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -38,7 +41,12 @@ export default function OptionsMenu() {
   const handleLogout = () => {
     logout();
     handleClose();
-  }
+  };
+
+  const handleReturnToMain = () => {
+    navigate('/');
+    handleClose();
+  };
 
   return (
     <Fragment>
@@ -76,21 +84,39 @@ export default function OptionsMenu() {
         <MenuItem onClick={handleClose}>Add another account</MenuItem>
         <MenuItem onClick={handleClose}>Settings</MenuItem>
         <Divider /> */}
-        <MenuItem
-          onClick={handleLogout}
-          sx={{
-            pl: 2,
-            [`& .${listItemIconClasses.root}`]: {
-              ml: 'auto',
-              minWidth: 0,
-            },
-          }}
-        >
-          <ListItemText>Logout</ListItemText>
-          <ListItemIcon>
-            <LogoutRoundedIcon fontSize="small" />
-          </ListItemIcon>
-        </MenuItem>
+        {loggedIn ? (
+          <MenuItem
+            onClick={handleLogout}
+            sx={{
+              pl: 2,
+              [`& .${listItemIconClasses.root}`]: {
+                ml: 'auto',
+                minWidth: 0,
+              },
+            }}
+          >
+            <ListItemText>Logout</ListItemText>
+            <ListItemIcon>
+              <LogoutRoundedIcon fontSize="small" />
+            </ListItemIcon>
+          </MenuItem>
+        ) : (
+          <MenuItem
+            onClick={handleReturnToMain}
+            sx={{
+              pl: 2,
+              [`& .${listItemIconClasses.root}`]: {
+                ml: 'auto',
+                minWidth: 0,
+              },
+            }}
+          >
+            <ListItemText>Return to main page</ListItemText>
+            <ListItemIcon>
+              <HomeRoundedIcon fontSize="small" />
+            </ListItemIcon>
+          </MenuItem>
+        )}
       </Menu>
     </Fragment>
   );

@@ -21,6 +21,7 @@ export const checkAuth = async (
       if (data.status === "no_token") {
         setLoggedIn(false);
         setResponseMessage("");
+        if (setUser) setUser({ username: "", email: "" });
       } else {
         setResponseMessage("");
         setLoggedIn(true);

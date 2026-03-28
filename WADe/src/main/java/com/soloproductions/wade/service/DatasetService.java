@@ -3,17 +3,18 @@ package com.soloproductions.wade.service;
 import com.soloproductions.wade.controller.ResponseStatus;
 import com.soloproductions.wade.dataset.*;
 import com.soloproductions.wade.dto.*;
-import com.soloproductions.wade.metadata.DatasetMetadata;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Service;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import com.soloproductions.wade.entity.DatasetMetadataEntity;
 import com.soloproductions.wade.entity.User;
-
+import com.soloproductions.wade.metadata.DatasetMetadata;
+import com.soloproductions.wade.repository.DatasetMetadataRepository;
 import com.soloproductions.wade.repository.UserDatasetRepository;
 import com.soloproductions.wade.util.ApplicationContextProvider;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -124,6 +125,11 @@ public class DatasetService
      */
     public Object processRequest(AbstractDatasetRequest adr) throws IOException
     {
+        if (adr.isDatasetMetadataRequest())
+        {
+            return handleDatasetMetadataRequest((DatasetMetadataRequest) adr);
+        }
+
         if (adr.isMetadataRequest())
         {
             MetadataRequest mr = (MetadataRequest) adr;
@@ -292,6 +298,94 @@ public class DatasetService
         }
 
         return response;
+    }
+
+    /**
+     * Resolves the dataset-metadata repository from the application context.
+     *
+     * @return   dataset-metadata repository bean
+     */
+    private static DatasetMetadataRepository getDatasetMetadataRepository()
+    {
+        return ApplicationContextProvider.getBean(DatasetMetadataRepository.class);
+    }
+
+    /**
+     * Handles a {@link DatasetMetadataRequest}: reads or upserts a
+     * {@link DatasetMetadataEntity} for the current user and dataset.
+     *
+     * <p>Dynamic datasets are user-owned, so this method requires an authenticated user.
+     * No guest fallback is applied.</p>
+     *
+     * @param   r   
+     *          the dataset-metadata request
+     * 
+     * @return  response DTO with {@code displayValue}, {@code summary}, and {@code source}
+     *
+     * @throws  IllegalStateException
+     *          when user is not authenticated
+     */
+    private DatasetMetadataResponse handleDatasetMetadataRequest(DatasetMetadataRequest r)
+    {
+        String username = getCurrentUsername();
+        if (username == null)
+        {
+            LOG.error("Attempted dataset-metadata access without authentication for dataset '{}'", r.getDatasetName());
+            throw new IllegalStateException("User not authenticated. Dynamic dataset metadata requires authentication.");
+        }
+
+        String datasetName = r.getDatasetName();
+        DatasetMetadataRepository repo = getDatasetMetadataRepository();
+        boolean isPut = r.getRequestType().equalsIgnoreCase("put");
+
+        DatasetMetadataEntity entity;
+        if (isPut)
+        {
+            entity = repo.findByUsernameAndDatasetName(username, datasetName)
+                         .orElseGet(() -> 
+                         {
+                            DatasetMetadataEntity e = new DatasetMetadataEntity();
+                            e.setUsername(username);
+                            e.setDatasetName(datasetName);
+                            return e;
+                         });
+
+            if (r.getSummary() != null) 
+            {
+                entity.setSummary(r.getSummary());
+            }
+
+            if (r.getSource() != null) 
+            {
+                entity.setSource(r.getSource());
+            }
+
+            try
+            {
+                repo.save(entity);
+            }
+            catch (Exception e)
+            {
+                LOG.error("Failed to save dataset metadata for dataset '{}' and user '{}'", datasetName, username, e);
+                throw e;
+            }
+        }
+        else
+        {
+            entity = repo.findByUsernameAndDatasetName(username, datasetName).orElse(null);
+
+            if (entity == null)
+            {
+                // Return empty defaults if metadata hasn't been persisted yet
+                return new DatasetMetadataResponse("", "");
+            }
+        }
+
+        return new DatasetMetadataResponse
+        (
+            entity.getSummary(),
+            entity.getSource()
+        );
     }
 
     /**
@@ -630,7 +724,12 @@ public class DatasetService
     {
         String message = "Request for %s %s! Dataset name: %s, data type: %s, dataset type: %s.";
         String requestFor = "UNDEFINED";
-        if (adr.isMetadataRequest())
+        if (adr.isDatasetMetadataRequest())
+        {
+            String op = adr.getRequestType().equalsIgnoreCase("put") ? "saving" : "fetching";
+            requestFor = op + " dataset metadata";
+        }
+        else if (adr.isMetadataRequest())
         {
             requestFor = "fetching metadata";
         }

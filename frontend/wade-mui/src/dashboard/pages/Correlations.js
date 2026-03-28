@@ -263,6 +263,9 @@ export default function Correlations(props) {
     setResponseStatus,
     refreshFn: fetchHeatmapData,
     fetchMetadata,
+    sort,
+    rangeSliderValue,
+    rangeStartSliderValue,
   });
 
   const handleFormCancel = () => {

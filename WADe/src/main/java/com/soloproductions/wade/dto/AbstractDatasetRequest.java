@@ -496,6 +496,16 @@ public abstract class AbstractDatasetRequest
     }
 
     /**
+     * Indicates whether this request targets the dataset-metadata persistence endpoint.
+     *
+     * @return  {@code true} if dataset-metadata request, otherwise {@code false}
+     */
+    public boolean isDatasetMetadataRequest()
+    {
+        return false;
+    }
+
+    /**
      * Returns the requested range size for paginated operations.
      *
      * @return  range size

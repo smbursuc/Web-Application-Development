@@ -30,7 +30,7 @@ public class SiteInfoService
     private void initializeMessages()
     {
         siteMessages.put("disclaimer", "DISCLAIMER: This application is for demonstration and development purposes only. Please do NOT upload, enter, or process any sensitive, personal, or confidential data (PII). The developers assume no liability for data security.");
-        siteMessages.put("about", "IMPR - IMage PRocessing Dataset Creator.\n\nBuilt by Solo Productions.\nUsing Spring Boot, React, and Ollama.");
+        siteMessages.put("about", "IMPR - IMage PRocessing Dataset Creator.\n\nBuilt by Solo Productions.\nUsing Spring Boot, React, Ollama (if deployed locally) or Groq (if using remotely).");
         siteMessages.put("version", "1.0.0-BETA-ALPHA-GIGA-OMEGA Latest Stable Release 2026");
     }
 

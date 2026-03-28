@@ -18,6 +18,8 @@ import AboutModal from "./dashboard/components/AboutModal";
 import Settings from "./dashboard/pages/Settings";
 import Feedback from "./dashboard/pages/Feedback";
 import AppTheme from "./shared-theme/AppTheme";
+import LandingPage from "./LandingPage";
+import HowToUse from "./dashboard/pages/HowToUse";
 
 function App() {
   return (
@@ -28,8 +30,8 @@ function App() {
       </AppTheme>
       <Router>
         <Routes>
-          {/* Define your routes */}
-          <Route path="/" element={<MarketingPage />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/home" element={<MarketingPage />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/dashboard" element={<Dashboard />} />
@@ -38,6 +40,7 @@ function App() {
           <Route path="/correlations" element={<Correlations />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/feedback" element={<Feedback />} />
+          <Route path="/how-to-use" element={<HowToUse />} />
         </Routes>
       </Router>
     </AppStateProvider>

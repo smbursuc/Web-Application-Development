@@ -453,6 +453,9 @@ export default function SemanticZoom(props) {
     setResponseStatus,
     refreshFn: fetchClusterData,
     fetchMetadata,
+    sort,
+    rangeSliderValue,
+    rangeStartSliderValue,
   });
 
   const getMaxClusters = () => {

@@ -46,14 +46,4 @@ public abstract class DatasetBodyRequest extends AbstractDatasetRequest
         validateDatasetType();
         return true;
     }
-
-    /**
-     * Marks this DTO as a data-definition-like body request.
-     *
-     * @return  always {@code true}
-     */
-    public boolean isDdlRequest()
-    {
-        return true;
-    }
 }

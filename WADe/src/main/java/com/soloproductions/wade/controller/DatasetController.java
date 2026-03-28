@@ -284,4 +284,47 @@ public class DatasetController
         StandardResponse<Object> response = datasetService.handleRequest(exportRequest);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    /**
+     * Returns persisted metadata for a dynamically-created dataset.
+     * For default datasets this will return an empty object (no row exists).
+     *
+     * @param   datasetName 
+     *          name of the dataset
+     * 
+     * @return  stored metadata fields, or defaults when none are persisted yet
+     */
+    @GetMapping("/dataset-metadata/{datasetName}")
+    public ResponseEntity<StandardResponse<?>> getDatasetMetadata(
+            @PathVariable String datasetName)
+    {
+        DatasetMetadataRequest dto = new DatasetMetadataRequest();
+        dto.setDatasetName(datasetName);
+        dto.setRequestType("get");
+
+        StandardResponse<Object> response = datasetService.handleRequest(dto);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    /**
+     * Saves (creates or updates) metadata for a dynamically-created dataset.
+     *
+     * @param   datasetName 
+     *          name of the dataset
+     * @param   body         
+     *          JSON body with displayValue, summary, source fields
+     * 
+     * @return  saved metadata
+     */
+    @PutMapping("/dataset-metadata/{datasetName}")
+    public ResponseEntity<StandardResponse<?>> putDatasetMetadata(
+            @PathVariable String datasetName,
+            @RequestBody DatasetMetadataRequest body)
+    {
+        body.setDatasetName(datasetName);
+        body.setRequestType("put");
+
+        StandardResponse<Object> response = datasetService.handleRequest(body);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

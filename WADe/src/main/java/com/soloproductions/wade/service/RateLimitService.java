@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class RateLimitService {
 
-    @Value("${wade.llm.rate-limit.max-guesses:10}")
+    @Value("${wade.llm.rate-limit.max-guesses:100}")
     private int maxGuesses;
 
     @Value("${wade.llm.rate-limit.window-seconds:3600}")

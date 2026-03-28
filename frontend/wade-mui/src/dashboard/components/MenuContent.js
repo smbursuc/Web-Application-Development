@@ -12,6 +12,7 @@ import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
 import HelpRoundedIcon from "@mui/icons-material/HelpRounded";
+import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAppState } from "../../contexts/AppStateContext";
@@ -23,6 +24,7 @@ export default function MenuContent() {
   const setAboutOpen = appStateProps.setAboutOpen;
   const isDirty = appStateProps.isDirty;
   const setIsDirty = appStateProps.setIsDirty;
+  const loggedIn = appStateProps.loggedIn;
 
   const routeByOption = {
     Home: "/dashboard",
@@ -31,6 +33,7 @@ export default function MenuContent() {
     Correlations: "/correlations",
     Settings: "/settings",
     Feedback: "/feedback",
+    "How to Use": "/how-to-use",
   };
 
   // Fix: active highlight is now computed from the current URL path instead of a global selected index,
@@ -70,6 +73,9 @@ export default function MenuContent() {
       case "Feedback":
         navigate("/feedback");
         break;
+      case "How to Use":
+        navigate("/how-to-use");
+        break;
     }
   };
 
@@ -81,9 +87,10 @@ export default function MenuContent() {
   ];
 
   const secondaryListItems = [
-    { text: "Settings", icon: <SettingsRoundedIcon /> },
+    { text: "Settings", icon: <SettingsRoundedIcon />, guestDisabled: true },
+    { text: "How to Use", icon: <MenuBookRoundedIcon /> },
     { text: "About", icon: <InfoRoundedIcon /> },
-    { text: "Feedback", icon: <HelpRoundedIcon /> },
+    { text: "Feedback", icon: <HelpRoundedIcon />, guestDisabled: true },
   ];
 
   return (
@@ -103,7 +110,9 @@ export default function MenuContent() {
       </List>
 
       <List dense>
-        {secondaryListItems.map((item, index) => (
+        {secondaryListItems.map((item, index) => {
+          if (!loggedIn && item.guestDisabled) return null;
+          return (
           <ListItem key={index} disablePadding sx={{ display: "block" }}>
             <ListItemButton
               selected={isOptionSelected(item.text)}
@@ -113,7 +122,7 @@ export default function MenuContent() {
               <ListItemText primary={item.text} />
             </ListItemButton>
           </ListItem>
-        ))}
+        )})}
       </List>
     </Stack>
   );

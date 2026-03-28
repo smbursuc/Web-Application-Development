@@ -13,7 +13,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import Sitemark from "./SitemarkIcon";
 import ColorModeIconDropdown from "../../shared-theme/ColorModeIconDropdown";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppState } from "../../contexts/AppStateContext";
 import ImprLogoHeader from './ImprLogoHeader';
 
@@ -38,10 +38,7 @@ export default function AppAppBar(props) {
   const [open, setOpen] = React.useState(false);
   const loggedIn = appStateProps.loggedIn;
   const setLoggedIn = appStateProps.setLoggedIn;
-
-  React.useEffect(() => {
-    console.log(loggedIn);
-  })
+  const navigate = useNavigate();
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -102,42 +99,59 @@ export default function AppAppBar(props) {
               alignItems: "center",
             }}
           >
-            {!loggedIn ? (
-              <Box sx={{mx: 2}}>
-                <Button
-                  color="primary"
-                  variant="text"
-                  size="small"
-                  component={Link}
-                  to="/signin"
-                >
-                  Sign in
-                </Button>
-                <Button
-                  color="primary"
-                  variant="contained"
-                  size="small"
-                  component={Link}
-                  to="/signup"
-                >
-                  Sign up
-                </Button>
-                {/* <ColorModeIconDropdown /> */}
-              </Box>
-            ) : (
-              <Box>
-                <Button
-                  color="primary"
-                  variant="contained"
-                  size="small"
-                  component={Link}
-                  to="/dashboard"
-                >
-                  Dashboard
-                </Button>
-                {/* <ColorModeIconDropdown /> */}
-              </Box>
-            )}
+            <Box sx={{ mx: 2, display: 'flex', gap: 1, alignItems: 'center' }}>
+              <Button
+                color="inherit"
+                variant="text"
+                size="small"
+                onClick={() => navigate('/')}
+              >
+                Landing
+              </Button>
+              {!loggedIn ? (
+                <>
+                  <Button
+                    color="inherit"
+                    variant="text"
+                    size="small"
+                    onClick={() => navigate('/dashboard')}
+                  >
+                    Continue as Guest
+                  </Button>
+                  <Button
+                    color="primary"
+                    variant="text"
+                    size="small"
+                    component={Link}
+                    to="/signin"
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}
+                  >
+                    Sign in
+                  </Button>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    size="small"
+                    component={Link}
+                    to="/signup"
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}
+                  >
+                    Sign up
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    size="small"
+                    onClick={() => navigate('/dashboard')}
+                  >
+                    Dashboard
+                  </Button>
+                </>
+              )}
+            </Box>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" }, gap: 1 }}>
             <ColorModeIconDropdown size="medium" />
@@ -174,6 +188,19 @@ export default function AppAppBar(props) {
                 <MenuItem>Blog</MenuItem> */}
                 {/* <Divider sx={{ my: 3 }} /> */}
                 <MenuItem>
+                  <Button
+                    color="inherit"
+                    variant="text"
+                    fullWidth
+                    onClick={() => {
+                      setOpen(false);
+                      navigate('/');
+                    }}
+                  >
+                    Landing
+                  </Button>
+                </MenuItem>
+                <MenuItem>
                   <Button color="primary" variant="contained" fullWidth component={Link} to="/signup">
                     Sign up
                   </Button>
@@ -181,6 +208,19 @@ export default function AppAppBar(props) {
                 <MenuItem>
                   <Button color="primary" variant="outlined" fullWidth component={Link} to="/signin">
                     Sign in
+                  </Button>
+                </MenuItem>
+                <MenuItem>
+                  <Button
+                    color="inherit"
+                    variant="text"
+                    fullWidth
+                    onClick={() => {
+                      setOpen(false);
+                      navigate('/dashboard');
+                    }}
+                  >
+                    Continue as Guest
                   </Button>
                 </MenuItem>
               </Box>

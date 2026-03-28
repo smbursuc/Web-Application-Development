@@ -97,4 +97,23 @@ public class UserActionController
         LOG.info("Stats request resolved username='{}', payload={}", username, stats);
         return ResponseEntity.ok(stats);
     }
+
+    /**
+     * Deletes all history entries for the authenticated user.
+     *
+     * @return  {@code 204 No Content} on success, or {@code 401} when unauthenticated
+     */
+    @DeleteMapping
+    public ResponseEntity<Void> clearHistory()
+    {
+        String username = getAuthenticatedUsername();
+        if (username == null)
+        {
+            LOG.warn("Clear history request unauthorized");
+            return ResponseEntity.status(401).build();
+        }
+        actionService.clearHistory(username);
+        LOG.info("History cleared for username='{}'", username);
+        return ResponseEntity.noContent().build();
+    }
 }

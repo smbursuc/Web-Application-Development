@@ -44,20 +44,11 @@ export default function Dashboard(props) {
     checkAuth(setLoggedIn, setResponseMessage, setInitialized, setUser);
   }, [])
 
-  // on re-render after check redirect away from the page if not allowed
-  useEffect(() => {
-    if (!loggedIn && initialized) {
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
-    }
-  }, [loggedIn])
-
   return (
     
     <AppTheme {...props} themeComponents={xThemeComponents}>
       <CssBaseline enableColorScheme />
-      {loggedIn ? (<Box sx={{ display: 'flex' }}>
+      {initialized ? (<Box sx={{ display: 'flex' }}>
         <SideMenu />
         <AppNavbar />
         {/* Main content */}

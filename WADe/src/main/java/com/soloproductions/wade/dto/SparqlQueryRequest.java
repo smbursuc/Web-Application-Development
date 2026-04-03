@@ -78,7 +78,7 @@ public class SparqlQueryRequest extends AbstractDatasetRequest
     public boolean validateParams()
     {
         validateDatasetName();
-        if (isDmlQuery())
+        if (isDmlDdlQuery())
         {
             StringBuilder sb = new StringBuilder();
             sb.append("DDL operations are not allowed! Detected the usage of UPDATE/DELETE keywords!.");
@@ -89,11 +89,11 @@ public class SparqlQueryRequest extends AbstractDatasetRequest
     }
 
     /**
-     * Checks if the query contains DML keywords.
+     * Checks if the query contains DML/DDL keywords.
      * 
-     * @return   true if the query contains DML keywords, false otherwise
+     * @return   true if the query contains DML/DDL keywords, false otherwise
      */
-    public boolean isDmlQuery()
+    public boolean isDmlDdlQuery()
     {
         String query = getQuery();
         if (query == null || query.isBlank())
@@ -101,7 +101,7 @@ public class SparqlQueryRequest extends AbstractDatasetRequest
             return false;
         }
 
-        String[] ddlKeywords = {"update", "delete", "insert"};
+        String[] ddlKeywords = {"update", "delete", "insert", "create"};
         String normalized = " " + query.toLowerCase();
 
         for (String keyword : ddlKeywords)

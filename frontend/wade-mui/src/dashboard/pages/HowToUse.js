@@ -122,7 +122,7 @@ const steps = [
   },
   {
     heading: "7. SPARQL Playground",
-    body: `If, for some reason, you want to practice your SPARQL skills, you can query both default datasets in both dataset types (heatmap and clusters). No DDL operations allowed though!`,
+    body: `If, for some reason, you want to practice your SPARQL skills, you can query both default datasets in both dataset types (heatmap and clusters). No DDL/DML operations allowed though!`,
     imageLabel: "SPARQL Playground",
     imageRight: false,
     imageFile: "sparqlplayground.png",

@@ -18,7 +18,7 @@ function Copyright() {
   return (
     <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1 }}>
       {'Copyright © '}
-      <Link color="text.secondary" href="https://mui.com/">
+      <Link color="text.secondary" href="https://youtu.be/F0o1x9c4XcA?si=vWD1VDit9sJZ3d5t" target="_blank" rel="noopener">
         IMPR
       </Link>
       &nbsp;

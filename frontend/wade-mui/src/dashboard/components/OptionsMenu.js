@@ -44,7 +44,7 @@ export default function OptionsMenu() {
   };
 
   const handleReturnToMain = () => {
-    navigate('/');
+    navigate('/home');
     handleClose();
   };
 

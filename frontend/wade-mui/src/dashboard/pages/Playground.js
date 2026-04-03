@@ -13,7 +13,7 @@ import {
   datePickersCustomizations,
   treeViewCustomizations,
 } from "../theme/customizations";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   Container,
   Box,
@@ -24,6 +24,7 @@ import {
   Select,
   InputLabel,
   FormControl,
+  CircularProgress,
 } from "@mui/material";
 import PageInfo from "./PageInfo";
 import InfoModal from "./InfoModal";
@@ -37,6 +38,8 @@ const xThemeComponents = {
   ...datePickersCustomizations,
   ...treeViewCustomizations,
 };
+
+const CANCEL_AFTER_MS = 10000; // show cancel button after this many ms
 
 export default function Playground(props) {
   const [infOpen, setInfOpen] = useState(false);
@@ -80,6 +83,10 @@ export default function Playground(props) {
 
   const [dataType, setDataType] = useState("clusters");
   const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showCancel, setShowCancel] = useState(false);
+  const abortControllerRef = useRef(null);
+  const cancelTimeoutRef = useRef(null);
 
   // Predefined queries with descriptive labels
   const predefinedQueries = [
@@ -219,7 +226,23 @@ WHERE {
     setQuery(query);
   };
 
+  const handleCancelRequest = () => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+  };
+
   const handleSubmit = async () => {
+    if (cancelTimeoutRef.current) clearTimeout(cancelTimeoutRef.current);
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+    setLoading(true);
+    setShowCancel(false);
+
+    cancelTimeoutRef.current = setTimeout(() => {
+      setShowCancel(true);
+    }, CANCEL_AFTER_MS);
+
     try {
       const url = `${API_BASE_URL}/api/${selectedDataset}/${dataType}/rdf?rawResults=true`;
 
@@ -232,13 +255,20 @@ WHERE {
           query: query,
         }),
         credentials: "include",
+        signal: controller.signal,
       });
 
       const result = await response.json();
       setData(result);
     } catch (error) {
-      console.error("Error submitting query:", error);
-      alert("Failed to send query. Check console for details.");
+      if (error.name !== "AbortError") {
+        console.error("Error submitting query:", error);
+        alert("Failed to send query. Check console for details.");
+      }
+    } finally {
+      setLoading(false);
+      setShowCancel(false);
+      clearTimeout(cancelTimeoutRef.current);
     }
   };
 
@@ -405,7 +435,7 @@ WHERE {
           <Button variant="contained" color="primary" onClick={handleSubmit}>
             Submit Query
           </Button>
-          <Box sx={{ height: 400, width: "100%" }}>
+          <Box sx={{ height: 400, width: "100%", position: "relative" }}>
             <Typography variant="h6" gutterBottom>
               SPARQL Results
             </Typography>
@@ -416,6 +446,36 @@ WHERE {
               rowsPerPageOptions={[5, 10, 20]}
               disableSelectionOnClick
             />
+            {loading && (
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "rgba(0, 0, 0, 0.45)",
+                  zIndex: 10,
+                  gap: 2,
+                  borderRadius: 1,
+                }}
+              >
+                <CircularProgress size={52} />
+                {showCancel && (
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={handleCancelRequest}
+                  >
+                    Cancel Request
+                  </Button>
+                )}
+              </Box>
+            )}
           </Box>
         </Container>
       </Box>

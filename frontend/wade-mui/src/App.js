@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -8,7 +8,7 @@ import Dashboard from "./dashboard/Dashboard";
 import SignIn from "./sign-in/SignIn";
 import SignUp from "./sign-up/SignUp";
 import MarketingPage from "./marketing-page/MarketingPage";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Playground from "./dashboard/pages/Playground";
 import { AppStateProvider } from "./contexts/AppStateContext";
 import SemanticZoom from "./dashboard/pages/SemanticZoom";
@@ -21,6 +21,24 @@ import AppTheme from "./shared-theme/AppTheme";
 import LandingPage from "./LandingPage";
 import HowToUse from "./dashboard/pages/HowToUse";
 
+function RouteTitle() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const isLanding = pathname === "/";
+    const title = isLanding ? "Elphael's Apps" : "IMPR";
+    const description = isLanding
+      ? "Apps created by Elphael"
+      : "Image Processing & Representation — semantically group and explore images";
+
+    document.title = title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute("content", description);
+  }, [pathname]);
+
+  return null;
+}
+
 function App() {
   return (
     <AppStateProvider>
@@ -29,6 +47,7 @@ function App() {
         <AboutModal />
       </AppTheme>
       <Router>
+        <RouteTitle />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<MarketingPage />} />

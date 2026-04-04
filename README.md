@@ -8,6 +8,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 -->
 <div align="center">
 
+  <h1>Warning: following the recent update, this documentation is outdated! Available for archival purposes while the new one is WIP!</h1>
   <img src="frontend/wade-mui/public/assets/Fireflies_logo.webp" alt="logo" width="200" height="auto" />
   <h1>IMPR - Image Smart Processor</h1>
   
